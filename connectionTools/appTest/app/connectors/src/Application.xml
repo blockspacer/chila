@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Copyright 2011 Roberto Daniel Gimenez Gamarra
+    (C.I.: 1.439.390 - Paraguay)
+
+     This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<application name="chila.connectionTools.appTest.app.connectors.gen.Application">
+
+    <!-- Aliases -->
+    <argumentAliases>
+        <alias name="clientId"          description=""/>
+        <alias name="recvBuffer"        description=""/>
+        <alias name="sndBuffer"         description=""/>
+        <alias name="errorMsg"          description=""/>
+        <alias name="connectorName"     description=""/>
+        <alias name="procMessage"       description=""/>
+    </argumentAliases>
+
+    <connectorAliases>
+        <alias name="Network" connectorPath="chila.connectionTools.appTest.app.connectors.gen.Network">
+            <argument name="clientId"       argumentAlias="clientId"        />
+            <argument name="recvBuffer"     argumentAlias="recvBuffer"      />
+            <argument name="sndBuffer"      argumentAlias="sndBuffer"       />
+            <argument name="errorMsg"       argumentAlias="errorMsg"        />
+            <argument name="connectorName"  argumentAlias="connectorName"   />
+        </alias>
+
+        <alias name="Logging" connectorPath="chila.connectionTools.appTest.app.connectors.gen.Logging">
+            <argument name="clientId"       argumentAlias="clientId"        />
+            <argument name="recvBuffer"     argumentAlias="recvBuffer"      />
+            <argument name="sndBuffer"      argumentAlias="sndBuffer"       />
+            <argument name="errorMsg"       argumentAlias="errorMsg"        />
+            <argument name="connectorName"  argumentAlias="connectorName"   />
+        </alias>
+
+        <alias name="Processing" connectorPath="chila.connectionTools.appTest.app.connectors.gen.Processing">
+            <argument name="procMessage"    argumentAlias="procMessage"     />
+            <argument name="outBuffer"      argumentAlias="sndBuffer"       />
+            <argument name="connectorName"  argumentAlias="connectorName"   />
+        </alias>
+    </connectorAliases>
+
+    <!-- Argument generators -->
+    <argumentProviderCreators>
+        <!--<creator name="networkNamePC"
+                 requires=""
+                 provides="connectorName"/>
+
+        <creator name="processingNamePC"
+                 requires=""
+                 provides="connectorName"/>
+
+        <creator name="loggingNamePC"
+                 requires=""
+                 provides="connectorName"/>-->
+
+        <creator name="procMessageCreator"
+                 requires="clientId, recvBuffer"
+                 provides="procMessage"/>
+
+        <creator name="procMessageReaderPC"
+                 requires="procMessage"
+                 provides="clientId"/>
+    </argumentProviderCreators>
+
+    <!-- Connections -->
+    <connectors>
+
+        <!-- Network -->
+        <instance name="network" connectorAlias="Network">
+            <!-- <event name="connectorStart"         actions="logging.connectorStart[networkNamePC]"/>
+            <event name="connectorFinalizing"    actions="logging.connectorFinalizing[networkNamePC]"/> -->
+
+            <!--event name="addressAlreadyInUse"    actions="logging.addressAlreadyInUse"/>
+            <event name="connectionError"        actions="logging.connectionError"/>
+            <event name="msgRcvdError"           actions="logging.msgRcvdError"/>
+            <event name="msgSentError"           actions="logging.msgSentError"/>
+            <event name="serverCreationFailed"   actions="logging.serverCreationFailed"/-->
+
+            <event name="clientConnected"        actions="logging.clientConnected"/>
+            <event name="clientDisconnected"     actions="logging.clientDisconnected"/>
+
+            <event name="msgReceived"            aProviderCreators="procMessageCreator"
+                                                    actions="logging.msgReceived,
+                                                             processing.processMessage"/>
+        </instance>
+
+        <!-- Processing -->
+        <instance name="processing" connectorAlias="Processing">
+            <!-- <event name="connectorStart"         actions="logging.connectorStart[processingNamePC]"/>
+            <event name="connectorFinalizing"    actions="logging.connectorFinalizing[processingNamePC]"/> -->
+
+            <event name="messageProcessed"       aProviderCreators="procMessageReaderPC"
+                                                    actions="logging.msgProcessed,
+                                                             network.sendMessage"/>
+        </instance>
+
+        <!-- Logging -->
+        <instance name="logging" connectorAlias="Logging">
+        </instance>
+
+    </connectors>
+
+</application>

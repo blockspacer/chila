@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Copyright 2011 Roberto Daniel Gimenez Gamarra
+    (C.I.: 1.439.390 - Paraguay)
+
+     This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<connector name="chila.connectionTools.appTest.app.connectors.gen.Network"
+        description="Handles network connections and data transfer">
+
+    <!-- Arguments -->
+    <arguments>
+        <arg name="clientId"/>
+        <arg name="recvBuffer"/>
+        <arg name="sndBuffer"/>
+        <arg name="errorMsg"/>
+        <arg name="connectorName"/>
+    </arguments>
+
+    <!-- Actions -->
+    <actions>
+        <action name="sendMessage"              arguments="clientId, sndBuffer"
+                                                description="Sends data to a client"/>
+    </actions>
+
+    <!-- Events -->
+    <events>
+        <event name="addressAlreadyInUse"    arguments=""
+                                                description="Address already in use event"/>
+
+        <event name="connectorStart"         arguments=""
+                                                description="Connector start event"/>
+
+        <event name="connectorFinalizing"    arguments=""
+                                                description="Connector finalizing event"/>
+
+        <event name="serverCreationFailed"   arguments="errorMsg"
+                                                description="Server creation failed event"/>
+
+        <event name="clientConnected"        arguments="clientId"
+                                                description="Client connected event"/>
+
+        <event name="clientDisconnected"     arguments="clientId"
+                                                description="Client disconnected"/>
+
+        <event name="connectionError"        arguments="clientId, errorMsg"
+                                                description="Connection error"/>
+
+        <event name="msgRcvdError"           arguments="clientId, errorMsg"
+                                                description="Message received error"/>
+
+        <event name="msgSentError"           arguments="clientId, errorMsg"
+                                                description="Message sent error event"/>
+
+        <event name="msgReceived"            arguments="clientId, recvBuffer"
+                                                description="Message received event"/>
+
+        <event name="msgSent"                arguments="clientId"
+                                                description="Message sent event"/>
+    </events>
+</connector>

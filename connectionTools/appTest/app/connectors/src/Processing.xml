@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Copyright 2011 Roberto Daniel Gimenez Gamarra
+    (C.I.: 1.439.390 - Paraguay)
+
+     This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<connector name="chila.connectionTools.appTest.app.connectors.gen.Processing"
+        description="Handles processes messages">
+
+    <!-- Arguments -->
+    <arguments>
+        <arg name="procMessage"/>
+        <arg name="outBuffer"/>
+        <arg name="connectorName"/>
+    </arguments>
+
+    <!-- Actions -->
+    <actions>
+        <action name="processMessage"           arguments="procMessage"
+                                                description="Processes a message"/>
+    </actions>
+
+    <!-- Events -->
+    <events>
+        <event name="connectorStart"         arguments=""
+                                                description="Connector start event"/>
+
+        <event name="connectorFinalizing"    arguments=""
+                                                description="Connector finalizing event"/>
+
+        <event name="messageProcessed"       arguments="outBuffer, procMessage"
+                                                description="Message processed event"/>
+    </events>
+
+</connector>

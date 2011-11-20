@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Copyright 2011 Roberto Daniel Gimenez Gamarra
+    (C.I.: 1.439.390 - Paraguay)
+
+     This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<connector name="chila.connectionTools.appTest.app.connectors.gen.Logging"
+        description="Handles data logging">
+
+    <!-- Arguments -->
+    <arguments>
+        <arg name="clientId"/>
+        <arg name="recvBuffer"/>
+        <arg name="sndBuffer"/>
+        <arg name="errorMsg"/>
+        <arg name="connectorName"/>
+    </arguments>
+
+    <!-- Actions -->
+    <actions>
+        <!--action name="connectorStart"               returns="void"
+                                                    arguments="connectorName"
+                                                    description="Logs connector start event"/-->
+
+        <!--action name="connectorFinalizing"          returns="void"
+                                                    arguments="connectorName"
+                                                    description="Logs connector finalizing event"/-->
+
+        <!--action name="addressAlreadyInUse"          returns="void"
+                                                    arguments=""
+                                                    description="Logs address already in use event"/-->
+
+        <!--action name="serverCreationFailed"         returns="void"
+                                                    arguments="errorMsg"
+                                                    description="Logs server creation failed event"/-->
+
+        <action name="clientConnected"              returns="void"
+                                                    arguments="clientId"
+                                                    description="Logs a client connected event"/>
+
+        <action name="clientDisconnected"           returns="void"
+                                                    arguments="clientId"
+                                                    description="Logs a client disconnected event"/>
+
+        <!--action name="connectionError"              returns="void"
+                                                    arguments="clientId, errorMsg"
+                                                    description="Logs connection error event"/-->
+
+        <!--action name="msgRcvdError"                 returns="void"
+                                                    arguments="clientId, errorMsg"
+                                                    description="Logs message received error"/-->
+
+        <!--action name="msgSentError"                 returns="void"
+                                                    arguments="clientId, errorMsg"
+                                                    description="Logs message sent error event"/-->
+
+        <action name="msgReceived"                  returns="void"
+                                                    arguments="clientId, recvBuffer"
+                                                    description="Logs message received event"/>
+
+        <action name="msgProcessed"                 returns="void"
+                                                    arguments="clientId, sndBuffer"
+                                                    description="Logs message sent event"/>
+
+    </actions>
+
+</connector>
