@@ -12,9 +12,11 @@ way. The way to do this is by defining Modules using an easy XML format,
 and a Application that makes the Modules comunicate between each other. The 
 Application is also defined in XML. Once you've defined those, two tools will 
 generate C++ code that you can use to build the actual application.
+
     The generated code is non-intrusive, that is, you "use" the code, but you
 do not write over it. So this means no reverse engineering of any kind.
  
+
 Inside a Module, you define:
 
 - Arguments: These are the basic comunication elements betwen Modules, they 
@@ -85,9 +87,11 @@ made, and will be created by some objects called "Argument Provider
 Creators". These can be expresed the same way as the providers. So what
 we do is to declare this APCs inside the Application's definition, and then
 used in each Module's connections (if needed).
+
     APCs can be "stacked", so you can have many creators stacked for some
 connections. So the way to express a connection (links between an Event an 
 Actions) is something like: event(<apc1...apcN>, <action1...actionN>).
+
     The effect of an APC for a given connection is to "augment" the 
 provided Aliases. So if a given Event provides the arguments 'client' and 
 'message', and we stack an APC that provides the message's 'id', the 
@@ -117,7 +121,7 @@ The connector also provides the Events to be fired by the Module. The
 template parameter provided to the Connector is one that contains the 
 Argument's C++ types to be used. 
 
-- applicationTool: This tool generates the Application code. This code
+- applicationGenerator: This tool generates the Application code. This code
 connects the Connectors between themselves. Note that your Modules are
 not actually the ones connected, it's their Connectors the ones that
 are. This allows the Connector code to be separated from the Module
@@ -183,6 +187,7 @@ main thread. So, when you need to "simulate" asynchronicity, you can use
 threads, but the main application's logic remains in the main thread.
 The good thing of all this is that where whe actions are executed is 
 an actual implementation detail, not a design one.
+
     There are some exceptions to the post-event-back-to-main-thread rule.
 One of them is the release of a needed resource by the called Action, for 
 instance a database connection. If you post the event that calls this Action,
@@ -203,6 +208,7 @@ like logging, counting, etc. These Actions should be posted to the main queue
 and not ran immediately, to avoid any kind of race-condition. One more reason 
 to posts normal Actions to a main thread. Note that the processing Actions 
 are also posted, but in the worker threads' queue.
+
     So we can pretty much conclude that most Actions should be posted to some
 task queue. If we assume this to be the law, we can also assume that Events
 should be ran immediately in the caller's thread. There are thou, some 
