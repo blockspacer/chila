@@ -81,6 +81,7 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
         struct Actions
         {
             DEF_MODULE_FUNCTION(sendMessage, clientId, sndBuffer);
+            DEF_MODULE_FUNCTION(start);
         } actions;
 
         // Binds the actions to 'target'
@@ -88,6 +89,7 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
         void bindActions(Target &target)
         {
             MY_BIND_ACTION(sendMessage);
+            MY_BIND_ACTION(start);
         }
     };
 }}}}}}

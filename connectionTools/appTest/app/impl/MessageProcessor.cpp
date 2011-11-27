@@ -23,6 +23,18 @@
 
 DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
 {
+    void MessageProcessor::processMessage(const ProcMessageSCPtr &procMessage)
+    {
+        const BufferSCPtr &recvBuff = procMessage->getBuffer();
+        BufferSPtr respBuff = boost::make_shared<Buffer>(recvBuff->size());
+
+        *std::transform(recvBuff->begin(), recvBuff->end(), respBuff->begin(), &toupper);
+
+        TimerSPtr timer = boost::make_shared<boost::asio::deadline_timer>(boost::ref(ioService),
+                boost::posix_time::seconds(5));
+        timer->async_wait(boost::bind(&MessageProcessor::sendResponse, this, respBuff, procMessage, timer));
+    }
+
     connection::MessageProcessor::CProviderSPtr connection::MessageProcessor::create(boost::asio::io_service &ioService)
     {
         return boost::make_shared<app::impl::MessageProcessor>(boost::ref(ioService));

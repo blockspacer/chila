@@ -18,6 +18,7 @@
 #ifndef CHILA_CONNECTION_TOOLS_APPTEST_APP_IMPL_CONNECTION__LOGGER_HPP
 #define CHILA_CONNECTION_TOOLS_APPTEST_APP_IMPL_CONNECTION__LOGGER_HPP
 
+#include "../fwd.hpp"
 #include "../../connectors/gen/Logger.hpp"
 #include <chila/lib/misc/macrosDef.hpp>
 

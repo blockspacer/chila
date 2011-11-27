@@ -51,21 +51,10 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
                 connector.events.started();
             }
 
-            void processMessage(const ProcMessageSCPtr &procMessage)
-            {
-                const BufferSCPtr &recvBuff = procMessage->getBuffer();
-                BufferSPtr respBuff = boost::make_shared<Buffer>(recvBuff->size());
-
-                *std::transform(recvBuff->begin(), recvBuff->end(), respBuff->begin(), &toupper);
-
-                TimerSPtr timer = boost::make_shared<boost::asio::deadline_timer>(boost::ref(ioService),
-                        boost::posix_time::seconds(5));
-                timer->async_wait(boost::bind(&MessageProcessor::sendResponse, this, respBuff, procMessage, timer));
-            }
+            void processMessage(const ProcMessageSCPtr &procMessage);
 
        private:
             typedef boost::shared_ptr<boost::asio::deadline_timer> TimerSPtr;
-
             boost::asio::io_service &ioService;
 
             void sendResponse(const BufferSCPtr &buffer, const ProcMessageSCPtr &procMessage, const TimerSPtr &timer)
@@ -79,3 +68,4 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
 #undef DEF_NAMESPACE
 #include <chila/lib/misc/macrosUndef.hpp>
 #endif
+

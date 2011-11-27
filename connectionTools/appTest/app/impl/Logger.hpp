@@ -41,34 +41,11 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
 
         connection::Logger::Connector &getConnector() { return connector; }
 
-        void moduleStarted(const std::string &moduleName)
-        {
-            std::cout << "Module started: " << moduleName << std::endl;
-        }
-
-        void clientConnected(unsigned clientId)
-        {
-            std::cout << "[client " << clientId << "] Client connected. " << std::endl;
-        }
-
-        void clientDisconnected(unsigned clientId)
-        {
-            std::cout << "[client " << clientId << "] Client disconnected. " << std::endl;
-        }
-
-        void msgReceived(unsigned clientId, const BufferSCPtr &recvBuffer)
-        {
-            std::cout << "[client " << clientId << "] Message received: [";
-            std::copy(recvBuffer->begin(), recvBuffer->end(), std::ostream_iterator<char, char>(std::cout,""));
-            std::cout << "]" << std::endl;
-        }
-
-        void msgProcessed(unsigned clientId, const BufferSCPtr &sndBuffer)
-        {
-            std::cout << "[client " << clientId << "] Message processed: [";
-            std::copy(sndBuffer->begin(), sndBuffer->end(), std::ostream_iterator<char, char>(std::cout,""));
-            std::cout << "]" << std::endl;
-        }
+        void moduleStarted(const std::string &moduleName);
+        void clientConnected(unsigned clientId);
+        void clientDisconnected(unsigned clientId);
+        void msgReceived(unsigned clientId, const BufferSCPtr &recvBuffer);
+        void msgProcessed(unsigned clientId, const BufferSCPtr &sndBuffer);
     };
 
 }}}}}

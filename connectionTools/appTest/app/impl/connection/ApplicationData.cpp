@@ -15,25 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "app/Main.hpp"
-#include <boost/exception/all.hpp>
+#include "ApplicationData.hpp"
+#include <chila/lib/misc/macrosDef.hpp>
 
-using namespace chila::connectionTools::appTest;
+#define DEF_NAMESPACE   CHILA_LIB_MISC__DEF_NAMESPACE
 
-
-int main(int argc, char** argv) try
+DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,impl,connection))
 {
-    boost::asio::io_service ioService;
-
-    app::Main main(ioService, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), 1600));
-    main.start();
-
-    ioService.run();
-
-    return EXIT_SUCCESS;
-}
-catch (const std::exception &ex)
-{
-    std::cout << boost::diagnostic_information(ex) << std::endl;
-    return EXIT_FAILURE;
-}
+    void ApplicationData::connect(const AppArgs &args) const
+    {
+        Application::connect(args);
+    }
+}}}}}}

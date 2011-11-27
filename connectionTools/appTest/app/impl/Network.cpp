@@ -54,7 +54,7 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
     /** Accept's handler. */
     void Network::acceptHandler(const ClientSPtr &client, const boost::system::error_code &ec)
     {
-        if (ec) abort();
+        if (ec) BOOST_THROW_EXCEPTION(boost::system::system_error(ec));
 
         client->setId(findId());
         clients.insert(ClientMap::value_type(client->getId(), client));
@@ -72,7 +72,7 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
 
     /** Read's handler. */
     void Network::readHandler(const ClientSPtr &client, const BufferSCPtr &buffer,
-        const boost::system::error_code &ec) try
+        const boost::system::error_code &ec)
     {
         if (ec == boost::asio::error::connection_reset || ec == boost::asio::error::connection_aborted ||
                 ec == boost::asio::error::eof)
@@ -81,18 +81,14 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
             connector.events.clientDisconnected.function(client->getId());
             return;
         }
-        else if (ec) throw boost::system::system_error(ec);
+        else if (ec) BOOST_THROW_EXCEPTION(boost::system::system_error(ec));
 
 
         connector.events.msgReceived.function(client->getId(), buffer);
 
         readMessage(client);
     }
-    catch (const boost::system::system_error &error)
-    {
-        std::cerr << "Error: " << error.what() << std::endl;
-        abort();
-    }
+
 
     /** Sends a message to a client. */
     void Network::sendMessage(unsigned clientId, const BufferSCPtr &buffer)
@@ -103,15 +99,11 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
 
     /** Read's handler. */
     void Network::writeHandler(const ClientSPtr &client, const boost::system::error_code &ec,
-            unsigned bytesTransferred) try
+            unsigned bytesTransferred)
     {
-        if (ec) throw boost::system::system_error(ec);
+        if (ec) BOOST_THROW_EXCEPTION(boost::system::system_error(ec));
     }
-    catch (const boost::system::system_error &error)
-    {
-        std::cerr << "Error: " << error.what() << std::endl;
-        abort();
-    }
+
 
     /** Finds and id for a client. */
     unsigned Network::findId() const

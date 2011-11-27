@@ -32,6 +32,9 @@
 
     <!-- Actions -->
     <actions>
+        <action name="start"                    arguments=""
+                                                description="Starts the module"                 />
+
         <action name="sendMessage"              arguments="clientId, sndBuffer"
                                                 description="Sends data to a client"            />
     </actions>

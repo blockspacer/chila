@@ -23,6 +23,35 @@
 
 DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
 {
+    void Logger::moduleStarted(const std::string &moduleName)
+    {
+        std::cout << "Module started: " << moduleName << std::endl;
+    }
+
+    void Logger::clientConnected(unsigned clientId)
+    {
+        std::cout << "[client " << clientId << "] Client connected. " << std::endl;
+    }
+
+    void Logger::clientDisconnected(unsigned clientId)
+    {
+        std::cout << "[client " << clientId << "] Client disconnected. " << std::endl;
+    }
+
+    void Logger::msgReceived(unsigned clientId, const BufferSCPtr &recvBuffer)
+    {
+        std::cout << "[client " << clientId << "] Message received: [";
+        std::copy(recvBuffer->begin(), recvBuffer->end(), std::ostream_iterator<char, char>(std::cout,""));
+        std::cout << "]" << std::endl;
+    }
+
+    void Logger::msgProcessed(unsigned clientId, const BufferSCPtr &sndBuffer)
+    {
+        std::cout << "[client " << clientId << "] Message processed: [";
+        std::copy(sndBuffer->begin(), sndBuffer->end(), std::ostream_iterator<char, char>(std::cout,""));
+        std::cout << "]" << std::endl;
+    }
+
     connection::Logger::CProviderSPtr connection::Logger::create()
     {
         return boost::make_shared<app::impl::Logger>();
