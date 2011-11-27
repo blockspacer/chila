@@ -17,9 +17,9 @@
 
 #include <iostream>
 #include <chila/lib/misc/Construct.hpp>
-#include "app/impl/Logging.hpp"
+#include "app/impl/Logger.hpp"
 #include "app/impl/Network.hpp"
-#include "app/impl/Processing.hpp"
+#include "app/impl/MessageProcessor.hpp"
 #include "app/connectors/gen/Application.hpp"
 #include "app/impl/argProviderCreators.hpp"
 
@@ -28,16 +28,16 @@ namespace libMisc = chila::lib::misc;
 
 struct Connectors
 {
-    typedef appTest::app::impl::Logging::Connector Logging;
-    typedef appTest::app::impl::Network::Connector Network;
-    typedef appTest::app::impl::Processing::Connector Processing;
+    typedef appTest::app::impl::connection::Logger::Connector Logger;
+    typedef appTest::app::impl::connection::Network::Connector Network;
+    typedef appTest::app::impl::connection::MessageProcessor::Connector MessageProcessor;
 
-    Logging &logging;
+    Logger &logger;
     Network &network;
-    Processing &processing;
+    MessageProcessor &messageProcessor;
 
-    Connectors(Logging &logging, Network &network, Processing &processing) :
-        logging(logging), network(network), processing(processing) {}
+    Connectors(Logger &logger, Network &network, MessageProcessor &messageProcessor) :
+        logger(logger), network(network), messageProcessor(messageProcessor) {}
 };
 
 typedef appTest::app::connectors::gen::Application<Connectors> MyApplication;
@@ -55,7 +55,7 @@ struct Args
 
         ModuleNameProviderCreator networkNameProv, processingNameProv;
 
-        Providers() : networkNameProv("Network"), processingNameProv("Processing") {}
+        Providers() : networkNameProv("Network"), processingNameProv("MessageProcessor") {}
 
     } providers;
 
@@ -69,10 +69,10 @@ int main(int argc, char** argv)
 
     appTest::app::impl::Network network(ioService,
         boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), 1600));
-    appTest::app::impl::Logging logging;
-    appTest::app::impl::Processing processing(ioService);
+    appTest::app::impl::Logger logger;
+    appTest::app::impl::MessageProcessor messageProcessor(ioService);
 
-    Args args(Connectors(logging.connector, network.connector, processing.connector));
+    Args args(Connectors(logger.connector, network.connector, messageProcessor.connector));
 
     MyApplication::connect(args);
 

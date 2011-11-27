@@ -18,7 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<connector name="chila.connectionTools.appTest.app.connectors.gen.Logging"
+<connector name="chila.connectionTools.appTest.app.connectors.gen.Logger"
         description="Handles data logging">
 
     <!-- Arguments -->

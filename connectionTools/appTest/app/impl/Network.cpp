@@ -127,5 +127,11 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
 
         return last + 1;
     }
+
+    connection::Network::CProviderSPtr connection::Network::create(boost::asio::io_service &ioService,
+                    const boost::asio::ip::tcp::endpoint &listenEndPoint)
+    {
+        return boost::make_shared<app::impl::Network>(boost::ref(ioService), listenEndPoint);
+    }
 }}}}}
 

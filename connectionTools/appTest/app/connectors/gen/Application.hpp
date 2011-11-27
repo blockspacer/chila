@@ -1,16 +1,16 @@
 /* Copyright 2011 Roberto Daniel Gimenez Gamarra
  * (C.I.: 1.439.390 - Paraguay)
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -54,10 +54,10 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
             DEF_ARG_ALIAS(sndBuffer);
         };
 
-        // Logging
-        struct LoggingDesc
+        // Logger
+        struct LoggerDesc
         {
-            typedef typename Connectors::Logging Connector;
+            typedef typename Connectors::Logger Connector;
 
             // arg --> alias
             typedef boost::mpl::map
@@ -67,6 +67,20 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
                 DEF_ARG_ALIAS_LINK(moduleName, moduleName),
                 DEF_ARG_ALIAS_LINK(recvBuffer, recvBuffer),
                 DEF_ARG_ALIAS_LINK(sndBuffer, sndBuffer)
+            > ArgAliasLinks;
+        };
+
+        // MessageProcessor
+        struct MessageProcessorDesc
+        {
+            typedef typename Connectors::MessageProcessor Connector;
+
+            // arg --> alias
+            typedef boost::mpl::map
+            <
+                DEF_ARG_ALIAS_LINK(moduleName, moduleName),
+                DEF_ARG_ALIAS_LINK(procMessage, procMessage),
+                DEF_ARG_ALIAS_LINK(result, sndBuffer)
             > ArgAliasLinks;
         };
 
@@ -86,26 +100,12 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
             > ArgAliasLinks;
         };
 
-        // Processing
-        struct ProcessingDesc
-        {
-            typedef typename Connectors::Processing Connector;
-
-            // arg --> alias
-            typedef boost::mpl::map
-            <
-                DEF_ARG_ALIAS_LINK(moduleName, moduleName),
-                DEF_ARG_ALIAS_LINK(procMessage, procMessage),
-                DEF_ARG_ALIAS_LINK(result, sndBuffer)
-            > ArgAliasLinks;
-        };
-
         // ConnectorDescMap
         typedef boost::mpl::map
         <
-            boost::mpl::pair<typename Connectors::Logging, LoggingDesc>,
-            boost::mpl::pair<typename Connectors::Network, NetworkDesc>,
-            boost::mpl::pair<typename Connectors::Processing, ProcessingDesc>
+            boost::mpl::pair<typename Connectors::Logger, LoggerDesc>,
+            boost::mpl::pair<typename Connectors::MessageProcessor, MessageProcessorDesc>,
+            boost::mpl::pair<typename Connectors::Network, NetworkDesc>
         > ConnectorDescMap;
 
         // networkNameProv
@@ -143,7 +143,29 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
         template <typename Args>
         static void connect(const Args &args)
         {
-            // logging
+            // logger
+            // messageProcessor
+            MT_CODEGEN_NSP::bindActions<ConnectorDescMap>
+            (
+                args.connectors.messageProcessor.events.messageProcessed,
+                boost::fusion::make_vector(procMessageReaderPCDef),
+                boost::fusion::make_vector
+                (
+                    args.connectors.logger.actions.msgProcessed,
+                    args.connectors.network.actions.sendMessage
+                )
+            );
+
+            MT_CODEGEN_NSP::bindActions<ConnectorDescMap>
+            (
+                args.connectors.messageProcessor.events.started,
+                boost::fusion::make_vector(processingNameProvDef),
+                boost::fusion::make_vector
+                (
+                    args.connectors.logger.actions.moduleStarted
+                )
+            );
+
             // network
             MT_CODEGEN_NSP::bindActions<ConnectorDescMap>
             (
@@ -151,7 +173,7 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
                 boost::fusion::make_vector(),
                 boost::fusion::make_vector
                 (
-                    args.connectors.logging.actions.clientConnected
+                    args.connectors.logger.actions.clientConnected
                 )
             );
 
@@ -161,7 +183,7 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
                 boost::fusion::make_vector(),
                 boost::fusion::make_vector
                 (
-                    args.connectors.logging.actions.clientDisconnected
+                    args.connectors.logger.actions.clientDisconnected
                 )
             );
 
@@ -171,8 +193,8 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
                 boost::fusion::make_vector(procMessageCreatorDef),
                 boost::fusion::make_vector
                 (
-                    args.connectors.logging.actions.msgReceived,
-                    args.connectors.processing.actions.processMessage
+                    args.connectors.logger.actions.msgReceived,
+                    args.connectors.messageProcessor.actions.processMessage
                 )
             );
 
@@ -182,30 +204,8 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
                 boost::fusion::make_vector(networkNameProvDef),
                 boost::fusion::make_vector
                 (
-                    args.connectors.logging.actions.moduleStarted,
-                    args.connectors.processing.actions.start
-                )
-            );
-
-            // processing
-            MT_CODEGEN_NSP::bindActions<ConnectorDescMap>
-            (
-                args.connectors.processing.events.messageProcessed,
-                boost::fusion::make_vector(procMessageReaderPCDef),
-                boost::fusion::make_vector
-                (
-                    args.connectors.logging.actions.msgProcessed,
-                    args.connectors.network.actions.sendMessage
-                )
-            );
-
-            MT_CODEGEN_NSP::bindActions<ConnectorDescMap>
-            (
-                args.connectors.processing.events.started,
-                boost::fusion::make_vector(processingNameProvDef),
-                boost::fusion::make_vector
-                (
-                    args.connectors.logging.actions.moduleStarted
+                    args.connectors.logger.actions.moduleStarted,
+                    args.connectors.messageProcessor.actions.start
                 )
             );
 

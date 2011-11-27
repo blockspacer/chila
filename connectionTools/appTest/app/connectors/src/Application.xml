@@ -39,7 +39,7 @@
             <argument name="moduleName"     argumentAlias="moduleName"      />
         </alias>
 
-        <alias name="Logging" connectorPath="chila.connectionTools.appTest.app.connectors.gen.Logging">
+        <alias name="Logger" connectorPath="chila.connectionTools.appTest.app.connectors.gen.Logger">
             <argument name="clientId"       argumentAlias="clientId"        />
             <argument name="recvBuffer"     argumentAlias="recvBuffer"      />
             <argument name="sndBuffer"      argumentAlias="sndBuffer"       />
@@ -47,7 +47,7 @@
             <argument name="moduleName"     argumentAlias="moduleName"      />
         </alias>
 
-        <alias name="Processing" connectorPath="chila.connectionTools.appTest.app.connectors.gen.Processing">
+        <alias name="MessageProcessor" connectorPath="chila.connectionTools.appTest.app.connectors.gen.MessageProcessor">
             <argument name="procMessage"    argumentAlias="procMessage"     />
             <argument name="result"         argumentAlias="sndBuffer"       />
             <argument name="moduleName"     argumentAlias="moduleName"      />
@@ -82,31 +82,31 @@
         <instance name="network" connectorAlias="Network">
 
             <event name="started"                aProviderCreators="networkNameProv"
-                                                 actions="logging.moduleStarted,
-                                                          processing.start"                 />
+                                                 actions="logger.moduleStarted,
+                                                          messageProcessor.start"                 />
 
-            <event name="clientConnected"        actions="logging.clientConnected"          />
+            <event name="clientConnected"        actions="logger.clientConnected"          />
 
-            <event name="clientDisconnected"     actions="logging.clientDisconnected"       />
+            <event name="clientDisconnected"     actions="logger.clientDisconnected"       />
 
             <event name="msgReceived"            aProviderCreators="procMessageCreator"
-                                                 actions="logging.msgReceived,
-                                                          processing.processMessage"        />
+                                                 actions="logger.msgReceived,
+                                                          messageProcessor.processMessage"        />
 
         </instance>
 
-        <!-- Processing -->
-        <instance name="processing" connectorAlias="Processing">
+        <!-- MessageProcessor -->
+        <instance name="messageProcessor" connectorAlias="MessageProcessor">
             <event name="started"                aProviderCreators="processingNameProv"
-                                                 actions="logging.moduleStarted"            />
+                                                 actions="logger.moduleStarted"            />
 
             <event name="messageProcessed"       aProviderCreators="procMessageReaderPC"
-                                                 actions="logging.msgProcessed,
+                                                 actions="logger.msgProcessed,
                                                           network.sendMessage"              />
         </instance>
 
-        <!-- Logging -->
-        <instance name="logging" connectorAlias="Logging"/>
+        <!-- Logger -->
+        <instance name="logger" connectorAlias="Logger"/>
 
     </connectors>
 

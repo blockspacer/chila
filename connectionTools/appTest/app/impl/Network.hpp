@@ -20,8 +20,7 @@
 
 #define MT_CODEGEN_NSP chila::connectionTools::lib::codegen
 
-#include "fwd.hpp"
-#include "../connectors/gen/Network.hpp"
+#include "connection/Network.hpp"
 #include <boost/asio.hpp>
 #include <map>
 #include <chila/lib/misc/MemFnExecuter.hpp>
@@ -32,33 +31,11 @@
 
 DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
 {
-    class Network
+    class Network : public connection::Network::CProvider
     {
-        private:
-            typedef Network This;
-
-
         public:
-            struct DataTypes
-            {
-                typedef unsigned clientId;
-                typedef const BufferSCPtr &recvBuffer;
-                typedef const BufferSCPtr &sndBuffer;
-                typedef const std::string &errorMsg;
-                typedef const std::string &moduleName;
-            };
+            connection::Network::Connector connector;
 
-            typedef connectors::gen::Network<DataTypes> Connector;
-            Connector connector;
-
-        private:
-            typedef std::map<unsigned, ClientSPtr> ClientMap;
-            ClientMap clients;
-
-            boost::asio::ip::tcp::endpoint listenEndPoint;
-            boost::asio::ip::tcp::acceptor acceptor;
-
-        public:
             Network(boost::asio::io_service &ioService,
                     const boost::asio::ip::tcp::endpoint &listenEndPoint) :
                 acceptor(ioService), listenEndPoint(listenEndPoint)
@@ -66,9 +43,10 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
                 connector.bindActions(*this);
             }
 
+            connection::Network::Connector &getConnector() { return connector; }
+
             void init();
             void start();
-//            void finish(const CompletedFun &completedFun) {}
 
             void acceptClient();
             void acceptHandler(const ClientSPtr &client, const boost::system::error_code &ec);
@@ -80,6 +58,13 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
             void sendMessage(unsigned clientId, const BufferSCPtr &sndBuffer);
             void writeHandler(const ClientSPtr &client, const boost::system::error_code &ec,
                 unsigned bytesTransferred);
+
+        private:
+            typedef std::map<unsigned, ClientSPtr> ClientMap;
+            ClientMap clients;
+
+            boost::asio::ip::tcp::endpoint listenEndPoint;
+            boost::asio::ip::tcp::acceptor acceptor;
     };
 }}}}}
 

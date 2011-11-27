@@ -18,13 +18,13 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<connector name="chila.connectionTools.appTest.app.connectors.gen.Processing"
+<connector name="chila.connectionTools.appTest.app.connectors.gen.MessageProcessor"
         description="Handles processes messages">
 
     <!-- Arguments -->
     <arguments>
         <arg name="procMessage"                 description="Message to be processed"           />
-        <arg name="result"                      description="Processing result"                 />
+        <arg name="result"                      description="MessageProcessor result"                 />
         <arg name="moduleName"                  description="Module name"                       />
     </arguments>
 

@@ -18,7 +18,7 @@
 #ifndef CHILA_CONNECTIONTOOLS_APPTEST_ARGPROVIDERCREATORS_HPP
 #define CHILA_CONNECTIONTOOLS_APPTEST_ARGPROVIDERCREATORS_HPP
 
-//#include "../connectors/gen/Logging.hpp"
+//#include "../connectors/gen/Logger.hpp"
 #include <boost/mpl/map.hpp>
 #include <boost/make_shared.hpp>
 #include <chila/lib/misc/MemFnExecuter.hpp>
