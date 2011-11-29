@@ -21,6 +21,8 @@
 #define DEF_NAMESPACE CHILA_LIB_MISC__DEF_NAMESPACE
 #include <chila/lib/misc/macrosDef.hpp>
 
+#define cast_cprovider(Type, ptr) boost::dynamic_pointer_cast<app::impl::connection::Type::CProvider>(ptr)
+
 DEF_NAMESPACE(4, (chila,connectionTools,appTest,app))
 {
     Main::Main
@@ -32,19 +34,20 @@ DEF_NAMESPACE(4, (chila,connectionTools,appTest,app))
         logger(app::impl::connection::Logger::create()),
         messageProcessor(app::impl::connection::MessageProcessor::create(ioService))
     {
+        typedef app::impl::connection::ApplicationData::AppArgs AppArgs;
+
         app::impl::connection::ApplicationData appData;
         appData.connect(AppArgs(AppArgs::Connectors
         (
-            logger->getConnector(),
-            network->getConnector(),
-            messageProcessor->getConnector()
+            cast_cprovider(Logger, logger)->getConnector(),
+            cast_cprovider(Network, network)->getConnector(),
+            cast_cprovider(MessageProcessor, messageProcessor)->getConnector()
         )));
     }
 
     void Main::start()
     {
-        network->getConnector().actions.start();
+        cast_cprovider(Network, network)->getConnector().actions.start();
     }
-
 
 }}}}

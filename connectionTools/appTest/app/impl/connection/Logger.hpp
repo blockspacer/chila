@@ -18,6 +18,7 @@
 #ifndef CHILA_CONNECTION_TOOLS_APPTEST_APP_IMPL_CONNECTION__LOGGER_HPP
 #define CHILA_CONNECTION_TOOLS_APPTEST_APP_IMPL_CONNECTION__LOGGER_HPP
 
+#include "fwd.hpp"
 #include "../fwd.hpp"
 #include "../../connectors/gen/Logger.hpp"
 #include <chila/lib/misc/macrosDef.hpp>
@@ -40,7 +41,7 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,impl,connection))
 
         typedef connectors::gen::Logger<ArgTypes> Connector;
 
-        struct CProvider
+        struct CProvider : public connection::CProvider
         {
             virtual Connector &getConnector() = 0;
         };

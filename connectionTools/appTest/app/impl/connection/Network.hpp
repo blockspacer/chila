@@ -18,6 +18,7 @@
 #ifndef CHILA_CONNECTION_TOOLS_APPTEST_APP_IMPL_CONNECTION__NETWORK_HPP
 #define CHILA_CONNECTION_TOOLS_APPTEST_APP_IMPL_CONNECTION__NETWORK_HPP
 
+#include "fwd.hpp"
 #include "../fwd.hpp"
 #include "../../connectors/gen/Network.hpp"
 #include <boost/asio.hpp>
@@ -41,7 +42,7 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,impl,connection))
 
         typedef connectors::gen::Network<ArgTypes> Connector;
 
-        struct CProvider
+        struct CProvider : public connection::CProvider
         {
             virtual Connector &getConnector() = 0;
         };

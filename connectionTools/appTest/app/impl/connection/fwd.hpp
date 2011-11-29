@@ -15,38 +15,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CHILA_CONNECTIONTOOLS_APPTEST_APP__MAIN_HPP
-#define CHILA_CONNECTIONTOOLS_APPTEST_APP__MAIN_HPP
+#ifndef CHILA_CONNECTIONTOOLS_APPTEST_APP_CONNECTORS_IMPL_CONNECTION__FWD_HPP
+#define CHILA_CONNECTIONTOOLS_APPTEST_APP_CONNECTORS_IMPL_CONNECTION__FWD_HPP
 
-#include "impl/connection/fwd.hpp"
-#include <boost/asio.hpp>
-
-#define DEF_NAMESPACE CHILA_LIB_MISC__DEF_NAMESPACE
+#include <boost/shared_ptr.hpp>
+#include <boost/weak_ptr.hpp>
 #include <chila/lib/misc/macrosDef.hpp>
 
-DEF_NAMESPACE(4, (chila,connectionTools,appTest,app))
+#define DEF_NAMESPACE   CHILA_LIB_MISC__DEF_NAMESPACE
+#define FWDEC_TYPE      CHILA_LIB_MISC__FWDEC_TYPE
+
+DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,impl,connection))
 {
-    class Main
+    FWDEC_TYPE(CProvider);
+
+    struct CProvider
     {
-        public:
-            Main
-            (
-                boost::asio::io_service &ioService,
-                const boost::asio::ip::tcp::endpoint &listenEndPoint
-            );
-
-            void start();
-
-        private:
-            app::impl::connection::CProviderSPtr logger;
-            app::impl::connection::CProviderSPtr network;
-            app::impl::connection::CProviderSPtr messageProcessor;
+        virtual ~CProvider() {}
     };
+}}}}}}
 
-}}}}
-
-#include <chila/lib/misc/macrosUndef.hpp>
 #undef DEF_NAMESPACE
+#undef FWDEC_TYPE
+#include <chila/lib/misc/macrosUndef.hpp>
 #endif
-
-

@@ -18,6 +18,7 @@
 #ifndef CHILA_CONNECTION_TOOLS_APPTEST_APP_IMPL_CONNECTION__MESSAGEPROCESSOR_HPP
 #define CHILA_CONNECTION_TOOLS_APPTEST_APP_IMPL_CONNECTION__MESSAGEPROCESSOR_HPP
 
+#include "fwd.hpp"
 #include "../../connectors/gen/MessageProcessor.hpp"
 #include <boost/asio/io_service.hpp>
 #include "../fwd.hpp"
@@ -39,7 +40,7 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,impl,connection))
 
         typedef connectors::gen::MessageProcessor<ArgTypes> Connector;
 
-        struct CProvider
+        struct CProvider : public connection::CProvider
         {
             virtual Connector &getConnector() = 0;
         };
