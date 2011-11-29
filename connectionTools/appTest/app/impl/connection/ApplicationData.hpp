@@ -74,7 +74,10 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,impl,connection))
             AppArgs(const AppArgs::Connectors &connectors) : connectors(connectors) {}
         };
 
-        void connect(const AppArgs &args) const;
+        void connect(const AppArgs &args) const
+        {
+            Application::connect(args);
+        }
     };
 }}}}}}
 

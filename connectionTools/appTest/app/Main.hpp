@@ -18,8 +18,7 @@
 #ifndef CHILA_CONNECTIONTOOLS_APPTEST_APP__MAIN_HPP
 #define CHILA_CONNECTIONTOOLS_APPTEST_APP__MAIN_HPP
 
-#include "impl/connection/ApplicationData.hpp"
-#include <boost/asio/io_service.hpp>
+#include <boost/asio.hpp>
 
 
 #define DEF_NAMESPACE CHILA_LIB_MISC__DEF_NAMESPACE
@@ -40,7 +39,6 @@ DEF_NAMESPACE(4, (chila,connectionTools,appTest,app))
 
         private:
             typedef app::impl::connection::ApplicationData::AppArgs AppArgs;
-            app::impl::connection::ApplicationData appData;
 
             app::impl::connection::Logger::CProviderSPtr logger;
             app::impl::connection::Network::CProviderSPtr network;

@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "impl/connection/ApplicationData.hpp"
 #include "Main.hpp"
 
 #define DEF_NAMESPACE CHILA_LIB_MISC__DEF_NAMESPACE
@@ -27,10 +28,11 @@ DEF_NAMESPACE(4, (chila,connectionTools,appTest,app))
         boost::asio::io_service &ioService,
         const boost::asio::ip::tcp::endpoint &listenEndPoint
     ) :
-        logger(app::impl::connection::Logger::create()),
         network(app::impl::connection::Network::create(ioService, listenEndPoint)),
+        logger(app::impl::connection::Logger::create()),
         messageProcessor(app::impl::connection::MessageProcessor::create(ioService))
     {
+        app::impl::connection::ApplicationData appData;
         appData.connect(AppArgs(AppArgs::Connectors
         (
             logger->getConnector(),
