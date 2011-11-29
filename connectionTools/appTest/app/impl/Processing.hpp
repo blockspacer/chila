@@ -43,8 +43,8 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
             struct DataTypes
             {
                 typedef const ProcMessageSCPtr& procMessage;
-                typedef const BufferSCPtr& outBuffer;
-                typedef const std::string& connectorName;
+                typedef const BufferSCPtr& result;
+                typedef const std::string& moduleName;
             };
 
             typedef connectors::gen::Processing<DataTypes> Connector;
@@ -65,16 +65,18 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
             {
                 connector.bindActions(*this);
             }
-//            void init() {}
-//            void start(const CompletedFun &completedFun) {}
-//            void finish(const CompletedFun &completedFun) {}
+
+            void start()
+            {
+                connector.events.started();
+            }
 
             void processMessage(const ProcMessageSCPtr &procMessage)
             {
                 const BufferSCPtr &recvBuff = procMessage->getBuffer();
-                BufferSPtr respBuff = boost::make_shared<Buffer>(recvBuff->size() + 1);
+                BufferSPtr respBuff = boost::make_shared<Buffer>(recvBuff->size());
 
-                *std::transform(recvBuff->begin(), recvBuff->end(), respBuff->begin(), &toupper) = '\n';
+                *std::transform(recvBuff->begin(), recvBuff->end(), respBuff->begin(), &toupper);
 
                 TimerSPtr timer = boost::make_shared<boost::asio::deadline_timer>(boost::ref(ioService),
                         boost::posix_time::seconds(5));

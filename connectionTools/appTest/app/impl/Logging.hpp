@@ -43,7 +43,7 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
                 typedef const BufferSCPtr &recvBuffer;
                 typedef const BufferSCPtr &sndBuffer;
                 typedef const std::string &errorMsg;
-                typedef const std::string &connectorName;
+                typedef const std::string &moduleName;
             };
 
             typedef connectors::gen::Logging<DataTypes> Connector;
@@ -55,30 +55,31 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
             }
 
         public:
-//            void init() {}
-//            void start(const CompletedFun &completedFun) {}
-//            void finish(const CompletedFun &completedFun) {}
+            void moduleStarted(const std::string &moduleName)
+            {
+                std::cout << "Module started: " << moduleName << std::endl;
+            }
 
             void clientConnected(unsigned clientId)
             {
-                std::cout << "[cliente " << clientId << "] Cliente conectado. " << std::endl;
+                std::cout << "[client " << clientId << "] Client connected. " << std::endl;
             }
 
             void clientDisconnected(unsigned clientId)
             {
-                std::cout << "[cliente " << clientId << "] Cliente desconectado. " << std::endl;
+                std::cout << "[client " << clientId << "] Client disconnected. " << std::endl;
             }
 
             void msgReceived(unsigned clientId, const BufferSCPtr &recvBuffer)
             {
-                std::cout << "[cliente " << clientId << "] Mensaje recibido: [";
+                std::cout << "[client " << clientId << "] Message received: [";
                 std::copy(recvBuffer->begin(), recvBuffer->end(), std::ostream_iterator<char, char>(std::cout,""));
                 std::cout << "]" << std::endl;
             }
 
             void msgProcessed(unsigned clientId, const BufferSCPtr &sndBuffer)
             {
-                std::cout << "[cliente " << clientId << "] Mensaje procesado: [";
+                std::cout << "[client " << clientId << "] Message processed: [";
                 std::copy(sndBuffer->begin(), sndBuffer->end(), std::ostream_iterator<char, char>(std::cout,""));
                 std::cout << "]" << std::endl;
             }

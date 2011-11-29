@@ -59,6 +59,32 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
         unsigned getArgument(typename ArgAliases::clientId) const { return message->clientId; }
     };
 
+    template <typename ArgAliases>
+    struct ModuleNameProvider
+    {
+        typedef boost::mpl::map
+        <
+            boost::mpl::pair<typename ArgAliases::moduleName, const std::string&>
+        > ResultOfMap;
+
+        const std::string &moduleName;
+
+        ModuleNameProvider(const std::string &moduleName) : moduleName(moduleName) {}
+
+        const std::string &getArgument(typename ArgAliases::moduleName) const { return moduleName; }
+    };
+
+    template <typename ArgAliases>
+    struct ModuleNameProviderCreator
+    {
+        typedef ModuleNameProvider<ArgAliases> result_type;
+        std::string moduleName;
+
+        ModuleNameProviderCreator(const std::string &moduleName) : moduleName(moduleName) {}
+
+        result_type operator()() const { return ModuleNameProvider<ArgAliases>(moduleName); }
+    };
+
 }}}}}
 
 #undef DEF_NAMESPACE

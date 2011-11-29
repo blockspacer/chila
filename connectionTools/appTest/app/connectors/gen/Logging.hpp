@@ -55,8 +55,8 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
 
         // Arguments
         DEF_MODULE_ARGUMENT(clientId);
-        DEF_MODULE_ARGUMENT(connectorName);
         DEF_MODULE_ARGUMENT(errorMsg);
+        DEF_MODULE_ARGUMENT(moduleName);
         DEF_MODULE_ARGUMENT(recvBuffer);
         DEF_MODULE_ARGUMENT(sndBuffer);
 
@@ -65,6 +65,7 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
         {
             DEF_MODULE_FUNCTION(clientConnected, clientId);
             DEF_MODULE_FUNCTION(clientDisconnected, clientId);
+            DEF_MODULE_FUNCTION(moduleStarted, moduleName);
             DEF_MODULE_FUNCTION(msgProcessed, clientId, sndBuffer);
             DEF_MODULE_FUNCTION(msgReceived, clientId, recvBuffer);
         } actions;
@@ -75,6 +76,7 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
         {
             MY_BIND_ACTION(clientConnected);
             MY_BIND_ACTION(clientDisconnected);
+            MY_BIND_ACTION(moduleStarted);
             MY_BIND_ACTION(msgProcessed);
             MY_BIND_ACTION(msgReceived);
         }

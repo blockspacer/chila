@@ -40,6 +40,8 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
     void Network::start()
     {
         acceptClient();
+
+        connector.events.started();
     }
 
     /** Accepts a client. */

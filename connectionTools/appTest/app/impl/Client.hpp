@@ -68,8 +68,11 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
 
             void writeMessage(const BufferSCPtr &buffer, const WriteHandlerFun &writeHandler)
             {
-                async_write(socket, boost::asio::buffer(*buffer),
-                        boost::bind(&Client::writeHandler, this, writeHandler, _1, _2));
+                BufferSPtr sndBuffer = boost::make_shared<Buffer>(*buffer);
+                sndBuffer->push_back('\n');
+
+                async_write(socket, boost::asio::buffer(*sndBuffer),
+                        boost::bind(&Client::writeHandler, this, writeHandler, sndBuffer, _1, _2));
             }
 
             std::size_t readCompletionCond(const Buffer &buffer, const boost::system::error_code &ec,
@@ -86,11 +89,11 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
             void readHandler(const BufferSPtr &buffer, const ReadHandlerFun &readHandler,
                 const boost::system::error_code &ec, std::size_t bytes_transferred)
             {
-                if (bytes_transferred) buffer->resize(bytes_transferred - 1);
+                if (bytes_transferred) buffer->resize(bytes_transferred - 2);
                 readHandler(buffer, ec);
             }
 
-            void writeHandler(const WriteHandlerFun &writeHandler,
+            void writeHandler(const WriteHandlerFun &writeHandler, const BufferSCPtr &buffer,
                 const boost::system::error_code &ec, std::size_t bytes_transferred)
             {
                 writeHandler(ec, bytes_transferred);

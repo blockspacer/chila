@@ -45,7 +45,7 @@ DEF_NAMESPACE(5, (chila,connectionTools,appTest,app,impl))
                 typedef const BufferSCPtr &recvBuffer;
                 typedef const BufferSCPtr &sndBuffer;
                 typedef const std::string &errorMsg;
-                typedef const std::string &connectorName;
+                typedef const std::string &moduleName;
             };
 
             typedef connectors::gen::Network<DataTypes> Connector;

@@ -50,6 +50,13 @@ struct Args
     {
         libMisc::Construct<appTest::app::impl::MessageCreatorArgProvider<MyApplication::ArgAliases> > procMessageCreator;
         libMisc::Construct<appTest::app::impl::MessageReaderArgProvider<MyApplication::ArgAliases> > procMessageReaderPC;
+
+        typedef appTest::app::impl::ModuleNameProviderCreator<MyApplication::ArgAliases> ModuleNameProviderCreator;
+
+        ModuleNameProviderCreator networkNameProv, processingNameProv;
+
+        Providers() : networkNameProv("Network"), processingNameProv("Processing") {}
+
     } providers;
 
     Args(const Connectors &connectors) : connectors(connectors) {}

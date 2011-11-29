@@ -23,52 +23,55 @@
 
     <!-- Arguments -->
     <arguments>
-        <arg name="clientId"/>
-        <arg name="recvBuffer"/>
-        <arg name="sndBuffer"/>
-        <arg name="errorMsg"/>
-        <arg name="connectorName"/>
+        <arg name="clientId"                    description="Client's id"                       />
+        <arg name="recvBuffer"                  description="Receive buffer"                    />
+        <arg name="sndBuffer"                   description="Send buffer"                       />
+        <arg name="errorMsg"                    description="Error message"                     />
+        <arg name="moduleName"                  description="Module name"                       />
     </arguments>
 
     <!-- Actions -->
     <actions>
         <action name="sendMessage"              arguments="clientId, sndBuffer"
-                                                description="Sends data to a client"/>
+                                                description="Sends data to a client"            />
     </actions>
 
     <!-- Events -->
     <events>
-        <event name="addressAlreadyInUse"    arguments=""
-                                                description="Address already in use event"/>
+        <event name="started"                   arguments=""
+                                                description="Invoked after module has started"  />
 
-        <event name="connectorStart"         arguments=""
-                                                description="Connector start event"/>
+        <event name="addressAlreadyInUse"       arguments=""
+                                                description="Address already in use event"      />
 
-        <event name="connectorFinalizing"    arguments=""
-                                                description="Connector finalizing event"/>
+        <event name="connectorStart"            arguments=""
+                                                description="Connector start event"             />
 
-        <event name="serverCreationFailed"   arguments="errorMsg"
-                                                description="Server creation failed event"/>
+        <event name="connectorFinalizing"       arguments=""
+                                                description="Connector finalizing event"        />
 
-        <event name="clientConnected"        arguments="clientId"
-                                                description="Client connected event"/>
+        <event name="serverCreationFailed"      arguments="errorMsg"
+                                                description="Server creation failed event"      />
 
-        <event name="clientDisconnected"     arguments="clientId"
-                                                description="Client disconnected"/>
+        <event name="clientConnected"           arguments="clientId"
+                                                description="Client connected event"            />
 
-        <event name="connectionError"        arguments="clientId, errorMsg"
-                                                description="Connection error"/>
+        <event name="clientDisconnected"        arguments="clientId"
+                                                description="Client disconnected"               />
 
-        <event name="msgRcvdError"           arguments="clientId, errorMsg"
-                                                description="Message received error"/>
+        <event name="connectionError"           arguments="clientId, errorMsg"
+                                                description="Connection error"                  />
 
-        <event name="msgSentError"           arguments="clientId, errorMsg"
-                                                description="Message sent error event"/>
+        <event name="msgRcvdError"              arguments="clientId, errorMsg"
+                                                description="Message received error"            />
 
-        <event name="msgReceived"            arguments="clientId, recvBuffer"
-                                                description="Message received event"/>
+        <event name="msgSentError"              arguments="clientId, errorMsg"
+                                                description="Message sent error event"          />
 
-        <event name="msgSent"                arguments="clientId"
-                                                description="Message sent event"/>
+        <event name="msgReceived"               arguments="clientId, recvBuffer"
+                                                description="Message received event"            />
+
+        <event name="msgSent"                   arguments="clientId"
+                                                description="Message sent event"                />
     </events>
 </connector>

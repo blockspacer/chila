@@ -55,8 +55,8 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
 
         // Arguments
         DEF_MODULE_ARGUMENT(clientId);
-        DEF_MODULE_ARGUMENT(connectorName);
         DEF_MODULE_ARGUMENT(errorMsg);
+        DEF_MODULE_ARGUMENT(moduleName);
         DEF_MODULE_ARGUMENT(recvBuffer);
         DEF_MODULE_ARGUMENT(sndBuffer);
 
@@ -74,6 +74,7 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
             DEF_MODULE_FUNCTION(msgSent, clientId);
             DEF_MODULE_FUNCTION(msgSentError, clientId, errorMsg);
             DEF_MODULE_FUNCTION(serverCreationFailed, errorMsg);
+            DEF_MODULE_FUNCTION(started);
         } events;
 
         // Actions

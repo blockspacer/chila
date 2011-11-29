@@ -47,8 +47,8 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
         struct ArgAliases
         {
             DEF_ARG_ALIAS(clientId);
-            DEF_ARG_ALIAS(connectorName);
             DEF_ARG_ALIAS(errorMsg);
+            DEF_ARG_ALIAS(moduleName);
             DEF_ARG_ALIAS(procMessage);
             DEF_ARG_ALIAS(recvBuffer);
             DEF_ARG_ALIAS(sndBuffer);
@@ -63,8 +63,8 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
             typedef boost::mpl::map
             <
                 DEF_ARG_ALIAS_LINK(clientId, clientId),
-                DEF_ARG_ALIAS_LINK(connectorName, connectorName),
                 DEF_ARG_ALIAS_LINK(errorMsg, errorMsg),
+                DEF_ARG_ALIAS_LINK(moduleName, moduleName),
                 DEF_ARG_ALIAS_LINK(recvBuffer, recvBuffer),
                 DEF_ARG_ALIAS_LINK(sndBuffer, sndBuffer)
             > ArgAliasLinks;
@@ -79,8 +79,8 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
             typedef boost::mpl::map
             <
                 DEF_ARG_ALIAS_LINK(clientId, clientId),
-                DEF_ARG_ALIAS_LINK(connectorName, connectorName),
                 DEF_ARG_ALIAS_LINK(errorMsg, errorMsg),
+                DEF_ARG_ALIAS_LINK(moduleName, moduleName),
                 DEF_ARG_ALIAS_LINK(recvBuffer, recvBuffer),
                 DEF_ARG_ALIAS_LINK(sndBuffer, sndBuffer)
             > ArgAliasLinks;
@@ -94,9 +94,9 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
             // arg --> alias
             typedef boost::mpl::map
             <
-                DEF_ARG_ALIAS_LINK(connectorName, connectorName),
-                DEF_ARG_ALIAS_LINK(outBuffer, sndBuffer),
-                DEF_ARG_ALIAS_LINK(procMessage, procMessage)
+                DEF_ARG_ALIAS_LINK(moduleName, moduleName),
+                DEF_ARG_ALIAS_LINK(procMessage, procMessage),
+                DEF_ARG_ALIAS_LINK(result, sndBuffer)
             > ArgAliasLinks;
         };
 
@@ -107,6 +107,14 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
             boost::mpl::pair<typename Connectors::Network, NetworkDesc>,
             boost::mpl::pair<typename Connectors::Processing, ProcessingDesc>
         > ConnectorDescMap;
+
+        // networkNameProv
+        #define networkNameProvDef APROVIDER_CREATOR \
+        (                                                             \
+            args.providers.networkNameProv,                                          \
+            ,                                                         \
+            (moduleName)                                              \
+        )
 
         // procMessageCreator
         #define procMessageCreatorDef APROVIDER_CREATOR \
@@ -122,6 +130,14 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
             args.providers.procMessageReaderPC,                                      \
             (procMessage),                                            \
             (clientId)                                                \
+        )
+
+        // processingNameProv
+        #define processingNameProvDef APROVIDER_CREATOR \
+        (                                                             \
+            args.providers.processingNameProv,                                       \
+            ,                                                         \
+            (moduleName)                                              \
         )
 
         template <typename Args>
@@ -160,6 +176,17 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
                 )
             );
 
+            MT_CODEGEN_NSP::bindActions<ConnectorDescMap>
+            (
+                args.connectors.network.events.started,
+                boost::fusion::make_vector(networkNameProvDef),
+                boost::fusion::make_vector
+                (
+                    args.connectors.logging.actions.moduleStarted,
+                    args.connectors.processing.actions.start
+                )
+            );
+
             // processing
             MT_CODEGEN_NSP::bindActions<ConnectorDescMap>
             (
@@ -172,9 +199,21 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
                 )
             );
 
+            MT_CODEGEN_NSP::bindActions<ConnectorDescMap>
+            (
+                args.connectors.processing.events.started,
+                boost::fusion::make_vector(processingNameProvDef),
+                boost::fusion::make_vector
+                (
+                    args.connectors.logging.actions.moduleStarted
+                )
+            );
+
         }
+        #undef networkNameProvDef
         #undef procMessageCreatorDef
         #undef procMessageReaderPCDef
+        #undef processingNameProvDef
     };
 }}}}}}
 

@@ -23,27 +23,33 @@
 
     <!-- Arguments -->
     <arguments>
-        <arg name="procMessage"/>
-        <arg name="outBuffer"/>
-        <arg name="connectorName"/>
+        <arg name="procMessage"                 description="Message to be processed"           />
+        <arg name="result"                      description="Processing result"                 />
+        <arg name="moduleName"                  description="Module name"                       />
     </arguments>
 
     <!-- Actions -->
     <actions>
+        <action name="start"                    arguments=""
+                                                description="Starts the module"                 />
+
         <action name="processMessage"           arguments="procMessage"
-                                                description="Processes a message"/>
+                                                description="Processes a message"               />
     </actions>
 
     <!-- Events -->
     <events>
-        <event name="connectorStart"         arguments=""
-                                                description="Connector start event"/>
+        <event name="started"                   arguments=""
+                                                description="Invoked after module has started"  />
 
-        <event name="connectorFinalizing"    arguments=""
-                                                description="Connector finalizing event"/>
+        <event name="connectorStart"            arguments=""
+                                                description="Connector start event"             />
 
-        <event name="messageProcessed"       arguments="outBuffer, procMessage"
-                                                description="Message processed event"/>
+        <event name="connectorFinalizing"       arguments=""
+                                                description="Connector finalizing event"        />
+
+        <event name="messageProcessed"          arguments="result, procMessage"
+                                                description="Message processed event"           />
     </events>
 
 </connector>

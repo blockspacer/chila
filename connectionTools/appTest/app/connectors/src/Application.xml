@@ -26,7 +26,7 @@
         <alias name="recvBuffer"        description=""/>
         <alias name="sndBuffer"         description=""/>
         <alias name="errorMsg"          description=""/>
-        <alias name="connectorName"     description=""/>
+        <alias name="moduleName"        description=""/>
         <alias name="procMessage"       description=""/>
     </argumentAliases>
 
@@ -36,7 +36,7 @@
             <argument name="recvBuffer"     argumentAlias="recvBuffer"      />
             <argument name="sndBuffer"      argumentAlias="sndBuffer"       />
             <argument name="errorMsg"       argumentAlias="errorMsg"        />
-            <argument name="connectorName"  argumentAlias="connectorName"   />
+            <argument name="moduleName"     argumentAlias="moduleName"      />
         </alias>
 
         <alias name="Logging" connectorPath="chila.connectionTools.appTest.app.connectors.gen.Logging">
@@ -44,37 +44,35 @@
             <argument name="recvBuffer"     argumentAlias="recvBuffer"      />
             <argument name="sndBuffer"      argumentAlias="sndBuffer"       />
             <argument name="errorMsg"       argumentAlias="errorMsg"        />
-            <argument name="connectorName"  argumentAlias="connectorName"   />
+            <argument name="moduleName"     argumentAlias="moduleName"      />
         </alias>
 
         <alias name="Processing" connectorPath="chila.connectionTools.appTest.app.connectors.gen.Processing">
             <argument name="procMessage"    argumentAlias="procMessage"     />
-            <argument name="outBuffer"      argumentAlias="sndBuffer"       />
-            <argument name="connectorName"  argumentAlias="connectorName"   />
+            <argument name="result"         argumentAlias="sndBuffer"       />
+            <argument name="moduleName"     argumentAlias="moduleName"      />
         </alias>
     </connectorAliases>
 
     <!-- Argument generators -->
     <argumentProviderCreators>
-        <!--<creator name="networkNamePC"
-                 requires=""
-                 provides="connectorName"/>
 
-        <creator name="processingNamePC"
+        <creator name="networkNameProv"
                  requires=""
-                 provides="connectorName"/>
+                 provides="moduleName"              />
 
-        <creator name="loggingNamePC"
+        <creator name="processingNameProv"
                  requires=""
-                 provides="connectorName"/>-->
+                 provides="moduleName"              />
 
         <creator name="procMessageCreator"
                  requires="clientId, recvBuffer"
-                 provides="procMessage"/>
+                 provides="procMessage"             />
 
         <creator name="procMessageReaderPC"
                  requires="procMessage"
-                 provides="clientId"/>
+                 provides="clientId"                />
+
     </argumentProviderCreators>
 
     <!-- Connections -->
@@ -82,36 +80,33 @@
 
         <!-- Network -->
         <instance name="network" connectorAlias="Network">
-            <!-- <event name="connectorStart"         actions="logging.connectorStart[networkNamePC]"/>
-            <event name="connectorFinalizing"    actions="logging.connectorFinalizing[networkNamePC]"/> -->
 
-            <!--event name="addressAlreadyInUse"    actions="logging.addressAlreadyInUse"/>
-            <event name="connectionError"        actions="logging.connectionError"/>
-            <event name="msgRcvdError"           actions="logging.msgRcvdError"/>
-            <event name="msgSentError"           actions="logging.msgSentError"/>
-            <event name="serverCreationFailed"   actions="logging.serverCreationFailed"/-->
+            <event name="started"                aProviderCreators="networkNameProv"
+                                                 actions="logging.moduleStarted,
+                                                          processing.start"                 />
 
-            <event name="clientConnected"        actions="logging.clientConnected"/>
-            <event name="clientDisconnected"     actions="logging.clientDisconnected"/>
+            <event name="clientConnected"        actions="logging.clientConnected"          />
+
+            <event name="clientDisconnected"     actions="logging.clientDisconnected"       />
 
             <event name="msgReceived"            aProviderCreators="procMessageCreator"
-                                                    actions="logging.msgReceived,
-                                                             processing.processMessage"/>
+                                                 actions="logging.msgReceived,
+                                                          processing.processMessage"        />
+
         </instance>
 
         <!-- Processing -->
         <instance name="processing" connectorAlias="Processing">
-            <!-- <event name="connectorStart"         actions="logging.connectorStart[processingNamePC]"/>
-            <event name="connectorFinalizing"    actions="logging.connectorFinalizing[processingNamePC]"/> -->
+            <event name="started"                aProviderCreators="processingNameProv"
+                                                 actions="logging.moduleStarted"            />
 
             <event name="messageProcessed"       aProviderCreators="procMessageReaderPC"
-                                                    actions="logging.msgProcessed,
-                                                             network.sendMessage"/>
+                                                 actions="logging.msgProcessed,
+                                                          network.sendMessage"              />
         </instance>
 
         <!-- Logging -->
-        <instance name="logging" connectorAlias="Logging">
-        </instance>
+        <instance name="logging" connectorAlias="Logging"/>
 
     </connectors>
 

@@ -54,22 +54,24 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
         typedef Processing Connector; 
 
         // Arguments
-        DEF_MODULE_ARGUMENT(connectorName);
-        DEF_MODULE_ARGUMENT(outBuffer);
+        DEF_MODULE_ARGUMENT(moduleName);
         DEF_MODULE_ARGUMENT(procMessage);
+        DEF_MODULE_ARGUMENT(result);
 
         // Events
         struct Events
         {
             DEF_MODULE_FUNCTION(connectorFinalizing);
             DEF_MODULE_FUNCTION(connectorStart);
-            DEF_MODULE_FUNCTION(messageProcessed, outBuffer, procMessage);
+            DEF_MODULE_FUNCTION(messageProcessed, result, procMessage);
+            DEF_MODULE_FUNCTION(started);
         } events;
 
         // Actions
         struct Actions
         {
             DEF_MODULE_FUNCTION(processMessage, procMessage);
+            DEF_MODULE_FUNCTION(start);
         } actions;
 
         // Binds the actions to 'target'
@@ -77,6 +79,7 @@ DEF_NAMESPACE(6, (chila,connectionTools,appTest,app,connectors,gen))
         void bindActions(Target &target)
         {
             MY_BIND_ACTION(processMessage);
+            MY_BIND_ACTION(start);
         }
     };
 }}}}}}
