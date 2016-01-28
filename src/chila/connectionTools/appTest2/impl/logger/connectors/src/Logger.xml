@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2011-2015 Roberto Daniel Gimenez Gamarra
+    (C.I.: 1.439.390 - Paraguay)
+
+    This file is part of 'chila.connectionTools.appTest'
+
+    'chila.connectionTools.appTest' is free software: you can redistribute it
+    and/or modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    'chila.connectionTools.appTest' is distributed in the hope that
+    it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with 'chila.connectionTools.appTest'. If not, see <http://www.gnu.org/licenses/>.
+-->
+<connector name="chila.connectionTools.appTest2.impl.logger.connectors.gen.Logger" description="Handles data logging">
+
+    <!-- Arguments -->
+    <arguments>
+        <arg name="clientId" description="Client's id"/>
+        <arg name="recvBuffer" description="Receive buffer"/>
+        <arg name="sndBuffer" description="Send buffer"/>
+        <arg name="errorMsg" description="Error message"/>
+        <arg name="moduleName" description="Module name"/>
+    </arguments>
+
+    <!-- Events -->
+    <events>
+        <event name="dummy" arguments=""/>
+
+        <event name="starting" arguments=""/>
+        <event name="started" arguments=""/>
+        <event name="deactivating" arguments=""/>
+        <event name="deactivated" arguments=""/>
+        <event name="finishing" arguments=""/>
+        <event name="finished" arguments=""/>
+    </events>
+
+    <!-- Actions -->
+    <actions>
+        <action name="start" arguments="" description="Starts the module" events="started"/>
+        <action name="deactivate" arguments="" description="Deactivates the module" events="deactivated"/>
+        <action name="finish" arguments="" description="Finishes the module" events="finished"/>
+
+
+        <action name="moduleStarted" arguments="moduleName" description="Logs that a Module has started"/>
+
+        <action name="clientConnected" arguments="clientId" description="Logs a client connected event"/>
+
+        <action name="clientDisconnected" arguments="clientId" description="Logs a client disconnected event"/>
+
+        <action name="connectionError" arguments="clientId, errorMsg" description="Logs a connection error event"/>
+
+        <action name="msgReceived" arguments="clientId, recvBuffer" description="Logs a message received event"/>
+
+        <action name="msgProcessed" arguments="clientId, sndBuffer" description="Logs a message sent event"/>
+    </actions>
+
+</connector>

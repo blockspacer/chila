@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connector name="chila.codex.text.app.connectors.gen.FindReplace" description="Find and replace dialog.">
+    <!-- Arguments -->
+    <arguments>
+        <arg name="findText" description=""/>
+        <arg name="replaceText" description=""/>
+        <arg name="checks" description=""/>
+        <arg name="errorMsg" description=""/>
+    </arguments>
+    <!--  Events  -->
+    <events>
+        <group name="launcher" description="">
+            <event name="starting" arguments="" description=""/>
+            <event name="started" arguments="" description=""/>
+            <event name="deactivating" arguments="" description=""/>
+            <event name="deactivated" arguments="" description=""/>
+            <event name="finishing" arguments="" description=""/>
+            <event name="finished" arguments="" description=""/>
+        </group>
+        <event name="fatalError" arguments="errorMsg" description=""/>
+        <event name="findPrevious" arguments="" description=""/>
+        <event name="findNext" arguments="" description=""/>
+        <event name="replace" arguments="replaceText" description=""/>
+        <event name="replaceAll" arguments="replaceText" description=""/>
+        <event name="closed" arguments="" description=""/>
+        <event name="stateChanged" arguments="findText, checks" description=""/>
+    </events>
+    <!--  Actions  -->
+    <actions>
+        <group name="launcher" description="">
+            <action name="start" arguments="" description="Starts the module" events="fatalError, launcher:started, findPrevious, findNext, replace, replaceAll, closed, stateChanged"/>
+            <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated"/>
+            <action name="finish" arguments="" description="Finishes the module" events="launcher:finished"/>
+        </group>
+        <action name="open" arguments="" description="" events="fatalError"/>
+        <action name="setTexts" arguments="findText" description="" events="fatalError"/>
+    </actions>
+</connector>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ccLoaderConfig
+    xsi:schemaLocation="http://chilabot.github/config/chila.connectionTools.loader ../loader/config.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://chilabot.github/config/chila.connectionTools.loader"
+
+    runner="chila.codex.base"
+>
+    <preLoaderConnect>
+        <provider name="chila.codex.base"/>
+        <provider name="chila.codex.text"/>
+    </preLoaderConnect>
+
+    <posLoaderConnect>
+        <provider name="chila.codex.base"/>
+        <provider name="chila.codex.text"/>
+    </posLoaderConnect>
+
+</ccLoaderConfig>

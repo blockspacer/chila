@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Copyright 2005-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
+    (C.I.: 1.439.390 - Paraguay)
+-->
+
+<connector name="chila.codex.base.app.connectors.gen.MainWindow" description="Manages the main window.">
+    <!-- Arguments -->
+    <arguments>
+        <group name="notebook" description="">
+            <arg name="tabId" description=""/>
+            <arg name="tabName" description=""/>
+            <arg name="tabTooltip" description=""/>
+            <arg name="tabWidget" description="Widget for a tab in the notebook."/>
+        </group>
+        <arg name="actionPath" description=""/>
+        <arg name="actionData" description=""/>
+        <arg name="actionPathDataList" description=""/>
+        <arg name="errorMsg" description=""/>
+    </arguments>
+    <!--  Events  -->
+    <events>
+        <group name="launcher" description="">
+            <event name="starting" arguments="" description=""/>
+            <event name="started" arguments="" description=""/>
+            <event name="deactivating" arguments="" description=""/>
+            <event name="deactivated" arguments="" description=""/>
+            <event name="finishing" arguments="" description=""/>
+            <event name="finished" arguments="" description=""/>
+        </group>
+        <event name="exitActionActivated" arguments="" description=""/>
+        <event name="projectButtonPressed" arguments="" description=""/>
+        <event name="fatalError" arguments="errorMsg" description=""/>
+        <event name="actionExecuted" arguments="actionPath" description=""/>
+        <group name="notebook" description="">
+            <event name="closingTab" arguments="notebook:tabId" description=""/>
+            <event name="tabSelected" arguments="notebook:tabId" description=""/>
+            <event name="tabAdded" arguments="notebook:tabId, notebook:tabWidget" description=""/>
+        </group>
+    </events>
+    <!--  Actions  -->
+    <actions>
+        <group name="launcher" description="">
+            <action name="start" arguments="" description="Starts the module" events="launcher:started, exitActionActivated, projectButtonPressed, actionExecuted, notebook:tabSelected, fatalError"/>
+            <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated, fatalError"/>
+            <action name="finish" arguments="" description="Finishes the module" events="launcher:finished, fatalError"/>
+        </group>
+        <group name="notebook" description="">
+            <action name="openNewTab" arguments="notebook:tabId, notebook:tabName, notebook:tabTooltip, notebook:tabWidget" description="Opens a new tab in the notebook." events="notebook:closingTab, notebook:tabSelected, notebook:tabAdded, fatalError"/>
+            <action name="selectTab" arguments="notebook:tabId" description="" events="fatalError"/>
+            <action name="tabContentsModified" arguments="notebook:tabId" description="" events="fatalError"/>
+            <action name="tabContentsAreOriginal" arguments="notebook:tabId" description="" events="fatalError"/>
+            <action name="tabDataChanged" arguments="notebook:tabId, notebook:tabName, notebook:tabTooltip" description="" events="fatalError"/>
+            <action name="closeTab" arguments="notebook:tabId" description="" events="fatalError"/>
+        </group>
+        <action name="setPresent" arguments="" description="" events="fatalError"/>
+        <action name="addAction" arguments="actionPathDataList, actionData" description="" events="fatalError, actionExecuted"/>
+        <action name="addSeparator" arguments="actionPathDataList" description=""/>
+        <action name="clearActions" arguments="" description="" events="fatalError"/>
+    </actions>
+</connector>

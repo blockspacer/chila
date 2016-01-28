@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    targetNamespace="http://chilabot.github/config/chila.connectionTools.loader"
+    xmlns="http://chilabot.github/config/chila.connectionTools.loader"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified"
+>
+    <xs:element name="ccLoaderConfig">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="provider">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="data" minOccurs="0">
+                                <xs:annotation>
+                                    <xs:documentation>Name of the provider.</xs:documentation>
+                                </xs:annotation>
+
+                                <xs:complexType>
+                                    <xs:attribute name="name" type="xs:string" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>Name of the attribute.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                    <xs:attribute name="xpath" type="xs:string" use="required">
+                                        <xs:annotation>
+                                            <xs:documentation>XPath to the data.</xs:documentation>
+                                        </xs:annotation>
+                                    </xs:attribute>
+                                </xs:complexType>
+
+                            </xs:element>
+                        </xs:sequence>
+
+                        <xs:attribute name="name" type="xs:string" use="required">
+                            <xs:annotation>
+                                <xs:documentation>Name of the provider. It will be looked up in the lookup paths as 'lib&gt;name&lt;.so'</xs:documentation>
+                            </xs:annotation>
+                        </xs:attribute>
+                    </xs:complexType>
+
+
+                </xs:element>
+            </xs:sequence>
+
+            <xs:attribute name="runner" type="xs:string" use="required">
+                <xs:annotation>
+                    <xs:documentation>The application runner. It will be looked up in the lookup paths as 'lib&gt;name&lt;.so'</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+

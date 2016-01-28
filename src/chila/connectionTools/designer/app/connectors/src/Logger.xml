@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2011-2015 Roberto Daniel Gimenez Gamarra
+    (C.I.: 1.439.390 - Paraguay)
+
+    This file is part of 'chila.connectionTools.designer'
+
+    'chila.connectionTools.designer' is free software: you can redistribute it
+    and/or modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    'chila.connectionTools.designer' is distributed in the hope that
+    it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with 'chila.connectionTools.designer'. If not, see <http://www.gnu.org/licenses/>.
+-->
+<connector name="chila.connectionTools.designer.app.connectors.gen.Logger" description="Handles data logging">
+
+    <!-- Arguments -->
+    <arguments>
+        <arg name="moduleName" description="Module name"/>
+        <arg name="cToolsPath" description="ConnectionTools Path"/>
+    </arguments>
+
+    <events>
+        <group name="launcher" description="">
+            <event name="starting" arguments="" description=""/>
+            <event name="started" arguments="" description=""/>
+            <event name="deactivating" arguments="" description=""/>
+            <event name="deactivated" arguments="" description=""/>
+            <event name="finishing" arguments="" description=""/>
+            <event name="finished" arguments="" description=""/>
+        </group>
+
+    </events>
+
+    <!-- Actions -->
+    <actions>
+        <group name="launcher" description="">
+            <action name="start" arguments="" description="Starts the module" events="launcher:started"/>
+            <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated"/>
+            <action name="finish" arguments="" description="Finishes the module" events="launcher:finished"/>
+        </group>
+
+        <action name="moduleStarted" arguments="moduleName" description="Logs that a Module has started"/>
+
+        <action name="moduleFinished" arguments="moduleName" description="Logs that a Module has finished"/>
+
+        <action name="connectorLoaded" arguments="cToolsPath" description="Logs that a Connector has been loaded"/>
+
+        <action name="cPerformerLoaded" arguments="cToolsPath" description="Logs that a ConnectionPerfomer has been loaded"/>
+
+    </actions>
+
+</connector>

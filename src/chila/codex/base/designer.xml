@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Copyright 2005-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
+    (C.I.: 1.439.390 - Paraguay)
+-->
+
+<project name="chila.codex.base">
+
+    <connectors>
+        <connector path="app/connectors/src/Application.xml"/>
+        <connector path="app/connectors/src/MainWindow.xml"/>
+        <connector path="app/connectors/src/FileChooser.xml"/>
+        <connector path="app/connectors/src/ActionExecuter.xml"/>
+    </connectors>
+
+    <cPerformers>
+        <cPerformer path="app/connectors/src/ConnectionPerformer.xml"/>
+    </cPerformers>
+
+    <flowCInstances prefix="chila.codex.base.app.connectors.gen.ConnectionPerformer">
+        <start>
+            <flowCInstance path="application"/>
+        </start>
+
+        <dim>
+        </dim>
+    </flowCInstances>
+
+</project>

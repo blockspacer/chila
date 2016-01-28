@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connector name="chila.codex.text.app.connectors.gen.TextEditor" description="Manages the main window.">
+    <!-- Arguments -->
+    <arguments>
+        <arg name="fileName" description=""/>
+        <group name="notebook" description="">
+            <arg name="tabName" description=""/>
+            <arg name="tabTooltip" description=""/>
+            <arg name="tabWidget" description=""/>
+        </group>
+        <arg name="errorMsg" description=""/>
+        <arg name="fileId" description=""/>
+        <arg name="textBuffer" description=""/>
+        <arg name="tags" description=""/>
+        <arg name="parserId" description=""/>
+        <arg name="tagsToApply" description=""/>
+        <group name="findReplace" description="">
+            <arg name="findText" description=""/>
+            <arg name="replaceText" description=""/>
+            <arg name="checks" description=""/>
+        </group>
+        <group name="action" description="">
+            <arg name="path" description=""/>
+            <arg name="pathDataList" description=""/>
+            <arg name="data" description=""/>
+        </group>
+    </arguments>
+    <!--  Events  -->
+    <events>
+        <group name="launcher" description="">
+            <event name="starting" arguments="" description=""/>
+            <event name="started" arguments="" description=""/>
+            <event name="deactivating" arguments="" description=""/>
+            <event name="deactivated" arguments="" description=""/>
+            <event name="finishing" arguments="" description=""/>
+            <event name="finished" arguments="" description=""/>
+        </group>
+        <event name="newTBTabRequested" arguments="fileId, notebook:tabName, notebook:tabTooltip, notebook:tabWidget" description=""/>
+        <event name="parseText" arguments="fileId, parserId, textBuffer" description=""/>
+        <event name="fatalError" arguments="errorMsg" description=""/>
+        <group name="saveEditorContents" description="">
+            <event name="current" arguments="fileId, textBuffer" description=""/>
+            <event name="as" arguments="fileId, fileName, textBuffer" description=""/>
+        </group>
+        <event name="contentsModified" arguments="fileId" description=""/>
+        <event name="contentsAreOriginal" arguments="fileId" description=""/>
+        <event name="fileSelected" arguments="fileId, fileName" description=""/>
+        <event name="tabDataChanged" arguments="fileId, notebook:tabName, notebook:tabTooltip" description=""/>
+        <event name="editorClosed" arguments="fileId" description=""/>
+        <group name="findReplace" description="">
+            <event name="setFindText" arguments="findReplace:findText" description=""/>
+        </group>
+        <event name="registerAction" arguments="action:pathDataList, action:data" description=""/>
+        <event name="clearActions" arguments="" description=""/>
+        <event name="addSeparator" arguments="action:pathDataList" description=""/>
+        <event name="selectFile" arguments="fileId" description=""/>
+    </events>
+    <!--  Actions  -->
+    <actions>
+        <group name="launcher" description="">
+            <action name="start" arguments="" description="Starts the module" events="launcher:started, registerAction, addSeparator"/>
+            <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated"/>
+            <action name="finish" arguments="" description="Finishes the module" events="launcher:finished"/>
+        </group>
+        <action name="newEditor" arguments="" description="" events="newTBTabRequested, fatalError, parseText"/>
+        <action name="openEditor" arguments="fileId, fileName, parserId" description="" events="newTBTabRequested, parseText, fatalError, contentsModified, contentsAreOriginal"/>
+        <action name="addText" arguments="fileId, textBuffer" description="" events="fatalError"/>
+        <action name="applyTags" arguments="fileId, tags, tagsToApply" description="" events="fatalError"/>
+        <group name="saveEditorContents" description="">
+            <action name="current" arguments="" description="" events="saveEditorContents:current, fatalError"/>
+            <action name="as" arguments="fileName" description="" events="saveEditorContents:as, tabDataChanged, fatalError"/>
+        </group>
+        <action name="openingDone" arguments="fileId" description="" events="contentsAreOriginal, parseText, fatalError"/>
+        <action name="savingDone" arguments="fileId" description="" events="fatalError, editorClosed, contentsAreOriginal, saveEditorContents:current"/>
+        <action name="undo" arguments="" description="" events="fatalError, parseText, contentsModified, contentsAreOriginal"/>
+        <action name="redo" arguments="" description="" events="fatalError, parseText, contentsModified, contentsAreOriginal"/>
+        <action name="fileSelected" arguments="fileId" description=""/>
+        <action name="editorTypeChanged" arguments="fileId, parserId" description="" events="parseText, fatalError"/>
+        <action name="closingEditor" arguments="fileId" description="" events="fatalError, saveEditorContents:current, editorClosed"/>
+        <action name="closingSelectedEditor" arguments="" description="" events="fatalError, saveEditorContents:current, editorClosed"/>
+        <group name="findReplace" description="">
+            <action name="start" arguments="" description="" events="fatalError, findReplace:setFindText"/>
+            <action name="findPrevious" arguments="" description="" events="fatalError"/>
+            <action name="findNext" arguments="" description="" events="fatalError"/>
+            <action name="replace" arguments="findReplace:replaceText" description="" events="fatalError, contentsModified, contentsAreOriginal, parseText"/>
+            <action name="replaceAll" arguments="findReplace:replaceText" description="" events="fatalError, contentsModified, contentsAreOriginal, parseText"/>
+            <action name="restoreFind" arguments="" description="" events="fatalError"/>
+            <action name="stateChanged" arguments="findReplace:findText, findReplace:checks" description=""/>
+        </group>
+        <action name="saveAll" arguments="" description="" events="fatalError, saveEditorContents:current"/>
+        <action name="tabAdded" arguments="fileId, notebook:tabWidget" description="" events="fatalError, selectFile, contentsModified, contentsAreOriginal"/>
+    </actions>
+</connector>

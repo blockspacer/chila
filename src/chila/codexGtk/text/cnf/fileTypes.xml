@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<fileTypes>
+    <type name="cpp" extensions="h, hpp, cpp, cxx, cc"/>
+    <type name="xml" extensions="xml, xhtml"/>
+    <type name="python" extensions="py"/>
+</fileTypes>

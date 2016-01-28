@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connector name="chila.codex.text.app.connectors.gen.FileOpener" description="Manages the main window.">
+    <!-- Arguments -->
+    <arguments>
+        <arg name="fileId" description=""/>
+        <arg name="fileName" description=""/>
+        <arg name="errorMsg" description=""/>
+        <arg name="textBuffer" description=""/>
+        <arg name="fileType" description=""/>
+    </arguments>
+    <!--  Events  -->
+    <events>
+        <group name="launcher" description="">
+            <event name="starting" arguments="" description=""/>
+            <event name="started" arguments="" description=""/>
+            <event name="deactivating" arguments="" description=""/>
+            <event name="deactivated" arguments="" description=""/>
+            <event name="finishing" arguments="" description=""/>
+            <event name="finished" arguments="" description=""/>
+        </group>
+        <event name="fatalError" arguments="errorMsg" description=""/>
+        <event name="openingNewFile" arguments="fileId, fileName, fileType" description=""/>
+        <event name="textFound" arguments="fileId, textBuffer" description=""/>
+        <event name="fileAlreadyOpened" arguments="fileId" description=""/>
+        <event name="fileSaved" arguments="fileId, fileType" description=""/>
+        <event name="fileOpened" arguments="fileId" description=""/>
+        <event name="fileSelected" arguments="fileId, fileName" description=""/>
+        <event name="savingUnnamedFile" arguments="fileId" description=""/>
+    </events>
+    <!--  Actions  -->
+    <actions>
+        <group name="launcher" description="">
+            <action name="start" arguments="" description="Starts the module" events="launcher:started"/>
+            <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated"/>
+            <action name="finish" arguments="" description="Finishes the module" events="launcher:finished"/>
+        </group>
+        <action name="openFile" arguments="fileName" description="" events="openingNewFile, fileAlreadyOpened, textFound, fileOpened, fatalError"/>
+        <action name="fileClosed" arguments="fileId" description="" events="fatalError"/>
+        <group name="saveFile" description="">
+            <action name="current" arguments="fileId, textBuffer" description="" events="fatalError, fileSaved, savingUnnamedFile, fileSelected"/>
+            <action name="as" arguments="fileId, fileName, textBuffer" description="" events="fileSaved, fatalError"/>
+        </group>
+        <action name="fileSelected" arguments="fileId" description="" events="fileSelected, fatalError"/>
+    </actions>
+</connector>

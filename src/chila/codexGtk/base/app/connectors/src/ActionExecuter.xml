@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connector name="chila.codex.base.app.connectors.gen.ActionExecuter" description="Manages the main window.">
+    <!-- Arguments -->
+    <arguments>
+        <arg name="actionPath" description=""/>
+        <arg name="errorMsg" description=""/>
+    </arguments>
+    <!--  Events  -->
+    <events>
+        <group name="launcher" description="">
+            <event name="starting" arguments="" description=""/>
+            <event name="started" arguments="" description=""/>
+            <event name="deactivating" arguments="" description=""/>
+            <event name="deactivated" arguments="" description=""/>
+            <event name="finishing" arguments="" description=""/>
+            <event name="finished" arguments="" description=""/>
+        </group>
+        <event name="fatalError" arguments="errorMsg" description=""/>
+        <group name="file" description="">
+            <event name="new" arguments="" description=""/>
+            <event name="open" arguments="" description=""/>
+            <event name="save" arguments="" description=""/>
+            <event name="saveAs" arguments="" description=""/>
+            <event name="saveAll" arguments="" description=""/>
+            <event name="close" arguments="" description=""/>
+            <event name="closeAll" arguments="" description=""/>
+            <event name="quit" arguments="" description=""/>
+        </group>
+    </events>
+    <!--  Actions  -->
+    <actions>
+        <group name="launcher" description="">
+            <action name="start" arguments="" description="Starts the module" events="launcher:started, fatalError"/>
+            <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated, fatalError"/>
+            <action name="finish" arguments="" description="Finishes the module" events="launcher:finished, fatalError"/>
+        </group>
+        <action name="execute" arguments="actionPath" description="" events="file:new, file:open, file:save, file:saveAll, file:saveAs, file:quit, fatalError, file:close, file:closeAll"/>
+    </actions>
+</connector>

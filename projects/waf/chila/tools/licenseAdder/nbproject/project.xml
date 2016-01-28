@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.cnd.makeproject</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/make-project/1">
+            <name>chila.tools.licenseAdder</name>
+            <c-extensions/>
+            <cpp-extensions>cpp</cpp-extensions>
+            <header-extensions>hpp,ii,py</header-extensions>
+            <sourceEncoding>UTF-8</sourceEncoding>
+            <make-dep-projects>
+                <make-dep-project>../buildsys/task</make-dep-project>
+                <make-dep-project>../buildsys/file</make-dep-project>
+            </make-dep-projects>
+            <sourceRootList>
+                <sourceRootElem>../../../../../src/chila/tools/licenseAdder</sourceRootElem>
+                <sourceRootElem>../../../../../src/chila/lib</sourceRootElem>
+            </sourceRootList>
+            <confList>
+                <confElem>
+                    <name>all</name>
+                    <type>0</type>
+                </confElem>
+                <confElem>
+                    <name>debug</name>
+                    <type>0</type>
+                </confElem>
+                <confElem>
+                    <name>release</name>
+                    <type>0</type>
+                </confElem>
+            </confList>
+            <formatting>
+                <project-formatting-style>false</project-formatting-style>
+            </formatting>
+        </data>
+    </configuration>
+</project>

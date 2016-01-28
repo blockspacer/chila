@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connector name="chila.codex.text.app.connectors.gen.TextHighlighter" description="Manages the main window.">
+    <!-- Arguments -->
+    <arguments>
+        <arg name="fileId" description=""/>
+        <arg name="parserId" description=""/>
+        <arg name="textBuffer" description=""/>
+        <arg name="tags" description=""/>
+        <arg name="errorMsg" description=""/>
+        <arg name="tagsToApply" description=""/>
+    </arguments>
+    <!--  Events  -->
+    <events>
+        <group name="launcher" description="">
+            <event name="starting" arguments="" description=""/>
+            <event name="started" arguments="" description=""/>
+            <event name="deactivating" arguments="" description=""/>
+            <event name="deactivated" arguments="" description=""/>
+            <event name="finishing" arguments="" description=""/>
+            <event name="finished" arguments="" description=""/>
+        </group>
+        <event name="fatalError" arguments="errorMsg" description=""/>
+        <event name="applyTags" arguments="fileId, tags, tagsToApply" description=""/>
+    </events>
+    <!--  Actions  -->
+    <actions>
+        <group name="launcher" description="">
+            <action name="start" arguments="" description="Starts the module" events="launcher:started"/>
+            <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated"/>
+            <action name="finish" arguments="" description="Finishes the module" events="launcher:finished"/>
+        </group>
+        <action name="parseText" arguments="fileId, parserId, textBuffer" description="" events="applyTags, fatalError"/>
+    </actions>
+</connector>

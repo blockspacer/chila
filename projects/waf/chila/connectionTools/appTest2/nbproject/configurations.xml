@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="../../../../../src/chila/connectionTools/appTest2" name="0">
+      <df name="base">
+        <in>fwd.hpp</in>
+        <in>loader.cpp</in>
+        <in>nspDef.hpp</in>
+        <in>nspUndef.hpp</in>
+      </df>
+      <df name="impl">
+        <df name="logger">
+          <df name="connectors">
+            <df name="gen">
+              <in>Logger.hpp</in>
+            </df>
+          </df>
+          <df name="impl">
+            <df name="connection">
+              <in>Logger.hpp</in>
+              <in>fwd.hpp</in>
+              <in>nspDef.hpp</in>
+              <in>nspUndef.hpp</in>
+            </df>
+            <in>Logger.cpp</in>
+            <in>Logger.hpp</in>
+            <in>fwd.hpp</in>
+            <in>nspDef.hpp</in>
+            <in>nspUndef.hpp</in>
+          </df>
+          <in>loader.cpp</in>
+          <in>nspDef.hpp</in>
+          <in>nspUndef.hpp</in>
+        </df>
+        <df name="msgProcessor">
+          <df name="connectors">
+            <df name="gen">
+              <in>MessageProcessor.hpp</in>
+            </df>
+          </df>
+          <df name="impl">
+            <df name="connection">
+              <in>MessageProcessor.hpp</in>
+              <in>fwd.hpp</in>
+              <in>nspDef.hpp</in>
+              <in>nspUndef.hpp</in>
+            </df>
+            <in>MessageProcessor.cpp</in>
+            <in>MessageProcessor.hpp</in>
+            <in>fwd.hpp</in>
+            <in>nspDef.hpp</in>
+            <in>nspUndef.hpp</in>
+          </df>
+          <in>loader.cpp</in>
+          <in>nspDef.hpp</in>
+          <in>nspUndef.hpp</in>
+        </df>
+        <df name="network">
+          <df name="connectors">
+            <df name="gen">
+              <in>Network.hpp</in>
+            </df>
+          </df>
+          <df name="impl">
+            <df name="connection">
+              <in>Network.hpp</in>
+              <in>fwd.hpp</in>
+              <in>nspDef.hpp</in>
+              <in>nspUndef.hpp</in>
+            </df>
+            <in>Client.hpp</in>
+            <in>Network.cpp</in>
+            <in>Network.hpp</in>
+            <in>fwd.hpp</in>
+            <in>nspDef.hpp</in>
+            <in>nspUndef.hpp</in>
+          </df>
+          <in>loader.cpp</in>
+          <in>nspDef.hpp</in>
+          <in>nspUndef.hpp</in>
+        </df>
+      </df>
+      <in>fwd.hpp</in>
+      <in>nspDef.hpp</in>
+      <in>nspUndef.hpp</in>
+    </df>
+    <logicalFolder name="chila"
+                   displayName="chila"
+                   projectFiles="true"
+                   root="../../../../../src/chila">
+      <logicalFolder name="connectionTools"
+                     displayName="connectionTools"
+                     projectFiles="true">
+        <logicalFolder name="lib" displayName="lib" projectFiles="true">
+          <logicalFolder name="codegen" displayName="codegen" projectFiles="true">
+            <itemPath>../../../../../src/chila/connectionTools/lib/codegen/ActionExecuter.hpp</itemPath>
+            <itemPath>../../../../../src/chila/connectionTools/lib/codegen/ActionImplExecuter.hpp</itemPath>
+            <itemPath>../../../../../src/chila/connectionTools/lib/codegen/Connector.hpp</itemPath>
+            <itemPath>../../../../../src/chila/connectionTools/lib/codegen/ConnectorMap.cpp</itemPath>
+            <itemPath>../../../../../src/chila/connectionTools/lib/codegen/ConnectorMap.hpp</itemPath>
+            <itemPath>../../../../../src/chila/connectionTools/lib/codegen/EventExecuter.hpp</itemPath>
+            <itemPath>../../../../../src/chila/connectionTools/lib/codegen/FunctionSigCreator.hpp</itemPath>
+            <itemPath>../../../../../src/chila/connectionTools/lib/codegen/convert.hpp</itemPath>
+            <itemPath>../../../../../src/chila/connectionTools/lib/codegen/exceptions.hpp</itemPath>
+            <itemPath>../../../../../src/chila/connectionTools/lib/codegen/fwd.hpp</itemPath>
+            <itemPath>../../../../../src/chila/connectionTools/lib/codegen/macrosDef.hpp</itemPath>
+            <itemPath>../../../../../src/chila/connectionTools/lib/codegen/nspDef.hpp</itemPath>
+            <itemPath>../../../../../src/chila/connectionTools/lib/codegen/nspUndef.hpp</itemPath>
+          </logicalFolder>
+        </logicalFolder>
+      </logicalFolder>
+      <logicalFolder name="lib" displayName="lib" projectFiles="true">
+        <logicalFolder name="misc" displayName="misc" projectFiles="true">
+          <itemPath>../../../../../src/chila/lib/misc/AnyPrinter.hpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/Construct.hpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/DynamicLibrary.cpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/FunExecSequence.hpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/MemFnExecuter.hpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/Path.cpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/Path.hpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/PrintExp.hpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/Watch.cpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/Watch.hpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/XMLAccessor.cpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/XMLAccessor.hpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/exceptions.hpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/fwd.hpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/macrosExp.hpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/nspDef.hpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/nspUndef.hpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/util.cpp</itemPath>
+          <itemPath>../../../../../src/chila/lib/misc/util.hpp</itemPath>
+        </logicalFolder>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="other"
+                   displayName="other"
+                   projectFiles="true"
+                   root="../../../../../src/chila/connectionTools/lib/other">
+      <itemPath>../../../../../src/chila/connectionTools/lib/other/CScannerGrammar.cpp</itemPath>
+      <itemPath>../../../../../src/chila/connectionTools/lib/other/CompletionScanner.cpp</itemPath>
+      <itemPath>../../../../../src/chila/connectionTools/lib/other/FunExecSequence.hpp</itemPath>
+      <itemPath>../../../../../src/chila/connectionTools/lib/other/Launcher.cpp</itemPath>
+      <itemPath>../../../../../src/chila/connectionTools/lib/other/Launcher.hpp</itemPath>
+      <itemPath>../../../../../src/chila/connectionTools/lib/other/fwd.hpp</itemPath>
+      <itemPath>../../../../../src/chila/connectionTools/lib/other/macrosExp.hpp</itemPath>
+      <itemPath>../../../../../src/chila/connectionTools/lib/other/nspDef.hpp</itemPath>
+      <itemPath>../../../../../src/chila/connectionTools/lib/other/nspUndef.hpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>../../../../../src/chila/connectionTools/appTest2/loaderConfig.xml</itemPath>
+      <itemPath>base/wscript</itemPath>
+      <itemPath>impl/logger/wscript</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>../../../../../src/chila/connectionTools/appTest2</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="install_debug" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <flagsDictionary>
+        <element flagsID="0" commonFlags="-fPIC -fPIC -std=c++11"/>
+      </flagsDictionary>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>../../..</buildCommandWorkingDir>
+          <buildCommand>waf install_debug PROJECTS="chila/connectionTools/appTest2/base chila/connectionTools/appTest2/impl/logger chila/connectionTools/appTest2/impl/network chila/connectionTools/appTest2/impl/msgProcessor" </buildCommand>
+          <cleanCommand>waf clean_debug PROJECTS="chila/connectionTools/appTest2/base"</cleanCommand>
+          <executablePath></executablePath>
+          <ccTool>
+            <standard>8</standard>
+            <incDir>
+              <pElem>../../../build/debug/src</pElem>
+              <pElem>../../../../../src</pElem>
+            </incDir>
+            <preprocessorList>
+              <Elem>BOOST_PP_VARIADICS=1</Elem>
+            </preprocessorList>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+      <item path="../../../../../src/chila/connectionTools/appTest2/base/loader.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/impl/Logger.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/loader.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/impl/MessageProcessor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/loader.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/impl/Network.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/loader.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/lib/codegen/ConnectorMap.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/lib/other/CScannerGrammar.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/lib/other/CompletionScanner.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/lib/other/Launcher.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/misc/DynamicLibrary.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Path.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Watch.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/misc/XMLAccessor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/misc/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <folder path="0">
+        <ccTool>
+          <incDir>
+            <pElem>../../../../../../applib/boost/include/1.57</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.57</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="0/base">
+        <ccTool>
+          <incDir>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../build/debug</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="0/impl">
+        <ccTool>
+          <incDir>
+            <pElem>../../../build/debug</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="chila/connectionTools">
+        <ccTool>
+          <incDir>
+            <pElem>../../../../../../applib/boost/include/1.57</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.57</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../build/debug</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="chila/lib">
+        <ccTool>
+          <incDir>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.57</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.57</pElem>
+            <pElem>../../../build/debug</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="other">
+        <ccTool>
+          <incDir>
+            <pElem>../../../../../../applib/boost/include/1.57</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.57</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../build/debug</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+    </conf>
+    <conf name="install_release" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>../../..</buildCommandWorkingDir>
+          <buildCommand>waf install_release PROJECTS="chila/connectionTools/appTest"</buildCommand>
+          <cleanCommand>waf clean_release PROJECTS="chila/connectionTools/appTest"</cleanCommand>
+          <executablePath></executablePath>
+        </makeTool>
+      </makefileType>
+      <item path="../../../../../src/chila/connectionTools/appTest2/base/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/base/loader.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/base/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/base/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/connectors/gen/Logger.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/impl/Logger.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/impl/Logger.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/impl/connection/Logger.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/impl/connection/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/impl/connection/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/impl/connection/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/impl/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/impl/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/impl/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/loader.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/logger/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/connectors/gen/MessageProcessor.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/impl/MessageProcessor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/impl/MessageProcessor.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/impl/connection/MessageProcessor.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/impl/connection/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/impl/connection/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/impl/connection/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/impl/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/impl/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/impl/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/loader.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/msgProcessor/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/connectors/gen/Network.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/impl/Client.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/impl/Network.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/impl/Network.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/impl/connection/Network.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/impl/connection/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/impl/connection/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/impl/connection/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/impl/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/impl/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/impl/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/loader.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/impl/network/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/connectionTools/appTest2/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

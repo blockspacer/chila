@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2011-2015 Roberto Daniel Gimenez Gamarra
+    (C.I.: 1.439.390 - Paraguay)
+
+    This file is part of 'chila.connectionTools.appTest'
+
+    'chila.connectionTools.appTest' is free software: you can redistribute it
+    and/or modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    'chila.connectionTools.appTest' is distributed in the hope that
+    it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with 'chila.connectionTools.appTest'. If not, see <http://www.gnu.org/licenses/>.
+-->
+<connector name="chila.connectionTools.appTest.app.connectors.gen.Network" description="Handles network connections and data transfer">
+
+    <!-- Arguments -->
+    <arguments>
+        <arg name="clientId" description="Client's id"/>
+        <arg name="recvBuffer" description="Receive buffer"/>
+        <arg name="sndBuffer" description="Send buffer"/>
+        <arg name="errorMsg" description="Error message"/>
+        <arg name="moduleName" description="Module name"/>
+    </arguments>
+
+    <!-- Events -->
+    <events>
+        <event name="started" arguments="" description="Invoked after module has started"/>
+
+        <event name="clientConnected" arguments="clientId" description="Client connected event"/>
+
+        <event name="clientDisconnected" arguments="clientId" description="Client disconnected event."/>
+
+        <event name="connectionError" arguments="clientId, errorMsg" description="Connection error"/>
+
+        <event name="msgReceived" arguments="clientId, recvBuffer" description="Message received event"/>
+
+    </events>
+
+    <!-- Actions -->
+    <actions>
+        <action name="start" arguments="" description="Starts the module" events="started"/>
+
+        <action name="acceptClient" arguments="" description="Accepts a client" events="clientConnected"/>
+
+        <action name="readMessage" arguments="clientId" description="Reads from a client" events="msgReceived, clientDisconnected, connectionError"/>
+
+        <action name="sendMessage" arguments="clientId, sndBuffer" description="Sends data to a client" events="connectionError"/>
+    </actions>
+
+
+</connector>

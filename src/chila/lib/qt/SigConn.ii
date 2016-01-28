@@ -1,0 +1,2056 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'SigConn.fgen.hpp'
+**
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.5.0)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#include <QtCore/qbytearray.h>
+#include <QtCore/qmetatype.h>
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'SigConn.fgen.hpp' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 67
+#error "This file was generated using the moc from 5.5.0. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+struct qt_meta_stringdata_SigConn0_t {
+    QByteArrayData data[3];
+    char stringdata0[15];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn0_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn0_t qt_meta_stringdata_SigConn0 = {
+    {
+QT_MOC_LITERAL(0, 0, 8), // "SigConn0"
+QT_MOC_LITERAL(1, 9, 4), // "slot"
+QT_MOC_LITERAL(2, 14, 0) // ""
+
+    },
+    "SigConn0\0slot\0"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn0[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    0,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void,
+
+       0        // eod
+};
+
+void SigConn0::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn0 *_t = static_cast<SigConn0 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot(); break;
+        default: ;
+        }
+    }
+    Q_UNUSED(_a);
+}
+
+const QMetaObject SigConn0::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn0.data,
+      qt_meta_data_SigConn0,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn0::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn0::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn0.stringdata0))
+        return static_cast<void*>(const_cast< SigConn0*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn0*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn0::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn1_t {
+    QByteArrayData data[4];
+    char stringdata0[20];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn1_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn1_t qt_meta_stringdata_SigConn1 = {
+    {
+QT_MOC_LITERAL(0, 0, 8), // "SigConn1"
+QT_MOC_LITERAL(1, 9, 4), // "slot"
+QT_MOC_LITERAL(2, 14, 0), // ""
+QT_MOC_LITERAL(3, 15, 4) // "arg0"
+
+    },
+    "SigConn1\0slot\0\0arg0"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn1[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    1,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant,    3,
+
+       0        // eod
+};
+
+void SigConn1::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn1 *_t = static_cast<SigConn1 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn1::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn1.data,
+      qt_meta_data_SigConn1,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn1::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn1::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn1.stringdata0))
+        return static_cast<void*>(const_cast< SigConn1*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn1*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn1::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn2_t {
+    QByteArrayData data[5];
+    char stringdata0[25];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn2_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn2_t qt_meta_stringdata_SigConn2 = {
+    {
+QT_MOC_LITERAL(0, 0, 8), // "SigConn2"
+QT_MOC_LITERAL(1, 9, 4), // "slot"
+QT_MOC_LITERAL(2, 14, 0), // ""
+QT_MOC_LITERAL(3, 15, 4), // "arg0"
+QT_MOC_LITERAL(4, 20, 4) // "arg1"
+
+    },
+    "SigConn2\0slot\0\0arg0\0arg1"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn2[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    2,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant,    3,    4,
+
+       0        // eod
+};
+
+void SigConn2::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn2 *_t = static_cast<SigConn2 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn2::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn2.data,
+      qt_meta_data_SigConn2,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn2::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn2::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn2.stringdata0))
+        return static_cast<void*>(const_cast< SigConn2*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn2*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn2::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn3_t {
+    QByteArrayData data[6];
+    char stringdata0[30];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn3_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn3_t qt_meta_stringdata_SigConn3 = {
+    {
+QT_MOC_LITERAL(0, 0, 8), // "SigConn3"
+QT_MOC_LITERAL(1, 9, 4), // "slot"
+QT_MOC_LITERAL(2, 14, 0), // ""
+QT_MOC_LITERAL(3, 15, 4), // "arg0"
+QT_MOC_LITERAL(4, 20, 4), // "arg1"
+QT_MOC_LITERAL(5, 25, 4) // "arg2"
+
+    },
+    "SigConn3\0slot\0\0arg0\0arg1\0arg2"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn3[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    3,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,
+
+       0        // eod
+};
+
+void SigConn3::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn3 *_t = static_cast<SigConn3 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn3::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn3.data,
+      qt_meta_data_SigConn3,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn3::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn3::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn3.stringdata0))
+        return static_cast<void*>(const_cast< SigConn3*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn3*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn3::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn4_t {
+    QByteArrayData data[7];
+    char stringdata0[35];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn4_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn4_t qt_meta_stringdata_SigConn4 = {
+    {
+QT_MOC_LITERAL(0, 0, 8), // "SigConn4"
+QT_MOC_LITERAL(1, 9, 4), // "slot"
+QT_MOC_LITERAL(2, 14, 0), // ""
+QT_MOC_LITERAL(3, 15, 4), // "arg0"
+QT_MOC_LITERAL(4, 20, 4), // "arg1"
+QT_MOC_LITERAL(5, 25, 4), // "arg2"
+QT_MOC_LITERAL(6, 30, 4) // "arg3"
+
+    },
+    "SigConn4\0slot\0\0arg0\0arg1\0arg2\0arg3"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn4[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    4,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,
+
+       0        // eod
+};
+
+void SigConn4::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn4 *_t = static_cast<SigConn4 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn4::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn4.data,
+      qt_meta_data_SigConn4,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn4::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn4::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn4.stringdata0))
+        return static_cast<void*>(const_cast< SigConn4*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn4*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn4::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn5_t {
+    QByteArrayData data[8];
+    char stringdata0[40];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn5_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn5_t qt_meta_stringdata_SigConn5 = {
+    {
+QT_MOC_LITERAL(0, 0, 8), // "SigConn5"
+QT_MOC_LITERAL(1, 9, 4), // "slot"
+QT_MOC_LITERAL(2, 14, 0), // ""
+QT_MOC_LITERAL(3, 15, 4), // "arg0"
+QT_MOC_LITERAL(4, 20, 4), // "arg1"
+QT_MOC_LITERAL(5, 25, 4), // "arg2"
+QT_MOC_LITERAL(6, 30, 4), // "arg3"
+QT_MOC_LITERAL(7, 35, 4) // "arg4"
+
+    },
+    "SigConn5\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn5[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    5,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,
+
+       0        // eod
+};
+
+void SigConn5::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn5 *_t = static_cast<SigConn5 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn5::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn5.data,
+      qt_meta_data_SigConn5,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn5::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn5::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn5.stringdata0))
+        return static_cast<void*>(const_cast< SigConn5*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn5*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn5::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn6_t {
+    QByteArrayData data[9];
+    char stringdata0[45];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn6_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn6_t qt_meta_stringdata_SigConn6 = {
+    {
+QT_MOC_LITERAL(0, 0, 8), // "SigConn6"
+QT_MOC_LITERAL(1, 9, 4), // "slot"
+QT_MOC_LITERAL(2, 14, 0), // ""
+QT_MOC_LITERAL(3, 15, 4), // "arg0"
+QT_MOC_LITERAL(4, 20, 4), // "arg1"
+QT_MOC_LITERAL(5, 25, 4), // "arg2"
+QT_MOC_LITERAL(6, 30, 4), // "arg3"
+QT_MOC_LITERAL(7, 35, 4), // "arg4"
+QT_MOC_LITERAL(8, 40, 4) // "arg5"
+
+    },
+    "SigConn6\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4\0arg5"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn6[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    6,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,    8,
+
+       0        // eod
+};
+
+void SigConn6::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn6 *_t = static_cast<SigConn6 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5])),(*reinterpret_cast< const QVariant(*)>(_a[6]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn6::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn6.data,
+      qt_meta_data_SigConn6,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn6::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn6::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn6.stringdata0))
+        return static_cast<void*>(const_cast< SigConn6*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn6*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn6::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn7_t {
+    QByteArrayData data[10];
+    char stringdata0[50];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn7_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn7_t qt_meta_stringdata_SigConn7 = {
+    {
+QT_MOC_LITERAL(0, 0, 8), // "SigConn7"
+QT_MOC_LITERAL(1, 9, 4), // "slot"
+QT_MOC_LITERAL(2, 14, 0), // ""
+QT_MOC_LITERAL(3, 15, 4), // "arg0"
+QT_MOC_LITERAL(4, 20, 4), // "arg1"
+QT_MOC_LITERAL(5, 25, 4), // "arg2"
+QT_MOC_LITERAL(6, 30, 4), // "arg3"
+QT_MOC_LITERAL(7, 35, 4), // "arg4"
+QT_MOC_LITERAL(8, 40, 4), // "arg5"
+QT_MOC_LITERAL(9, 45, 4) // "arg6"
+
+    },
+    "SigConn7\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4\0arg5\0arg6"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn7[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    7,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,    8,    9,
+
+       0        // eod
+};
+
+void SigConn7::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn7 *_t = static_cast<SigConn7 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5])),(*reinterpret_cast< const QVariant(*)>(_a[6])),(*reinterpret_cast< const QVariant(*)>(_a[7]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn7::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn7.data,
+      qt_meta_data_SigConn7,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn7::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn7::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn7.stringdata0))
+        return static_cast<void*>(const_cast< SigConn7*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn7*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn7::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn8_t {
+    QByteArrayData data[11];
+    char stringdata0[55];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn8_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn8_t qt_meta_stringdata_SigConn8 = {
+    {
+QT_MOC_LITERAL(0, 0, 8), // "SigConn8"
+QT_MOC_LITERAL(1, 9, 4), // "slot"
+QT_MOC_LITERAL(2, 14, 0), // ""
+QT_MOC_LITERAL(3, 15, 4), // "arg0"
+QT_MOC_LITERAL(4, 20, 4), // "arg1"
+QT_MOC_LITERAL(5, 25, 4), // "arg2"
+QT_MOC_LITERAL(6, 30, 4), // "arg3"
+QT_MOC_LITERAL(7, 35, 4), // "arg4"
+QT_MOC_LITERAL(8, 40, 4), // "arg5"
+QT_MOC_LITERAL(9, 45, 4), // "arg6"
+QT_MOC_LITERAL(10, 50, 4) // "arg7"
+
+    },
+    "SigConn8\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4\0arg5\0arg6\0arg7"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn8[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    8,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,    8,    9,   10,
+
+       0        // eod
+};
+
+void SigConn8::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn8 *_t = static_cast<SigConn8 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5])),(*reinterpret_cast< const QVariant(*)>(_a[6])),(*reinterpret_cast< const QVariant(*)>(_a[7])),(*reinterpret_cast< const QVariant(*)>(_a[8]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn8::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn8.data,
+      qt_meta_data_SigConn8,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn8::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn8::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn8.stringdata0))
+        return static_cast<void*>(const_cast< SigConn8*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn8*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn8::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn9_t {
+    QByteArrayData data[12];
+    char stringdata0[60];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn9_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn9_t qt_meta_stringdata_SigConn9 = {
+    {
+QT_MOC_LITERAL(0, 0, 8), // "SigConn9"
+QT_MOC_LITERAL(1, 9, 4), // "slot"
+QT_MOC_LITERAL(2, 14, 0), // ""
+QT_MOC_LITERAL(3, 15, 4), // "arg0"
+QT_MOC_LITERAL(4, 20, 4), // "arg1"
+QT_MOC_LITERAL(5, 25, 4), // "arg2"
+QT_MOC_LITERAL(6, 30, 4), // "arg3"
+QT_MOC_LITERAL(7, 35, 4), // "arg4"
+QT_MOC_LITERAL(8, 40, 4), // "arg5"
+QT_MOC_LITERAL(9, 45, 4), // "arg6"
+QT_MOC_LITERAL(10, 50, 4), // "arg7"
+QT_MOC_LITERAL(11, 55, 4) // "arg8"
+
+    },
+    "SigConn9\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4\0arg5\0arg6\0arg7\0arg8"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn9[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,    9,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,    8,    9,   10,   11,
+
+       0        // eod
+};
+
+void SigConn9::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn9 *_t = static_cast<SigConn9 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5])),(*reinterpret_cast< const QVariant(*)>(_a[6])),(*reinterpret_cast< const QVariant(*)>(_a[7])),(*reinterpret_cast< const QVariant(*)>(_a[8])),(*reinterpret_cast< const QVariant(*)>(_a[9]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn9::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn9.data,
+      qt_meta_data_SigConn9,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn9::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn9::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn9.stringdata0))
+        return static_cast<void*>(const_cast< SigConn9*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn9*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn9::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn10_t {
+    QByteArrayData data[13];
+    char stringdata0[66];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn10_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn10_t qt_meta_stringdata_SigConn10 = {
+    {
+QT_MOC_LITERAL(0, 0, 9), // "SigConn10"
+QT_MOC_LITERAL(1, 10, 4), // "slot"
+QT_MOC_LITERAL(2, 15, 0), // ""
+QT_MOC_LITERAL(3, 16, 4), // "arg0"
+QT_MOC_LITERAL(4, 21, 4), // "arg1"
+QT_MOC_LITERAL(5, 26, 4), // "arg2"
+QT_MOC_LITERAL(6, 31, 4), // "arg3"
+QT_MOC_LITERAL(7, 36, 4), // "arg4"
+QT_MOC_LITERAL(8, 41, 4), // "arg5"
+QT_MOC_LITERAL(9, 46, 4), // "arg6"
+QT_MOC_LITERAL(10, 51, 4), // "arg7"
+QT_MOC_LITERAL(11, 56, 4), // "arg8"
+QT_MOC_LITERAL(12, 61, 4) // "arg9"
+
+    },
+    "SigConn10\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4\0arg5\0arg6\0arg7\0arg8\0arg9"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn10[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,   10,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,
+
+       0        // eod
+};
+
+void SigConn10::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn10 *_t = static_cast<SigConn10 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5])),(*reinterpret_cast< const QVariant(*)>(_a[6])),(*reinterpret_cast< const QVariant(*)>(_a[7])),(*reinterpret_cast< const QVariant(*)>(_a[8])),(*reinterpret_cast< const QVariant(*)>(_a[9])),(*reinterpret_cast< const QVariant(*)>(_a[10]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn10::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn10.data,
+      qt_meta_data_SigConn10,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn10::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn10::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn10.stringdata0))
+        return static_cast<void*>(const_cast< SigConn10*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn10*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn10::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn11_t {
+    QByteArrayData data[14];
+    char stringdata0[72];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn11_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn11_t qt_meta_stringdata_SigConn11 = {
+    {
+QT_MOC_LITERAL(0, 0, 9), // "SigConn11"
+QT_MOC_LITERAL(1, 10, 4), // "slot"
+QT_MOC_LITERAL(2, 15, 0), // ""
+QT_MOC_LITERAL(3, 16, 4), // "arg0"
+QT_MOC_LITERAL(4, 21, 4), // "arg1"
+QT_MOC_LITERAL(5, 26, 4), // "arg2"
+QT_MOC_LITERAL(6, 31, 4), // "arg3"
+QT_MOC_LITERAL(7, 36, 4), // "arg4"
+QT_MOC_LITERAL(8, 41, 4), // "arg5"
+QT_MOC_LITERAL(9, 46, 4), // "arg6"
+QT_MOC_LITERAL(10, 51, 4), // "arg7"
+QT_MOC_LITERAL(11, 56, 4), // "arg8"
+QT_MOC_LITERAL(12, 61, 4), // "arg9"
+QT_MOC_LITERAL(13, 66, 5) // "arg10"
+
+    },
+    "SigConn11\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4\0arg5\0arg6\0arg7\0arg8\0arg9\0arg10"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn11[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,   11,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
+
+       0        // eod
+};
+
+void SigConn11::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn11 *_t = static_cast<SigConn11 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5])),(*reinterpret_cast< const QVariant(*)>(_a[6])),(*reinterpret_cast< const QVariant(*)>(_a[7])),(*reinterpret_cast< const QVariant(*)>(_a[8])),(*reinterpret_cast< const QVariant(*)>(_a[9])),(*reinterpret_cast< const QVariant(*)>(_a[10])),(*reinterpret_cast< const QVariant(*)>(_a[11]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn11::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn11.data,
+      qt_meta_data_SigConn11,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn11::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn11::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn11.stringdata0))
+        return static_cast<void*>(const_cast< SigConn11*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn11*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn11::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn12_t {
+    QByteArrayData data[15];
+    char stringdata0[78];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn12_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn12_t qt_meta_stringdata_SigConn12 = {
+    {
+QT_MOC_LITERAL(0, 0, 9), // "SigConn12"
+QT_MOC_LITERAL(1, 10, 4), // "slot"
+QT_MOC_LITERAL(2, 15, 0), // ""
+QT_MOC_LITERAL(3, 16, 4), // "arg0"
+QT_MOC_LITERAL(4, 21, 4), // "arg1"
+QT_MOC_LITERAL(5, 26, 4), // "arg2"
+QT_MOC_LITERAL(6, 31, 4), // "arg3"
+QT_MOC_LITERAL(7, 36, 4), // "arg4"
+QT_MOC_LITERAL(8, 41, 4), // "arg5"
+QT_MOC_LITERAL(9, 46, 4), // "arg6"
+QT_MOC_LITERAL(10, 51, 4), // "arg7"
+QT_MOC_LITERAL(11, 56, 4), // "arg8"
+QT_MOC_LITERAL(12, 61, 4), // "arg9"
+QT_MOC_LITERAL(13, 66, 5), // "arg10"
+QT_MOC_LITERAL(14, 72, 5) // "arg11"
+
+    },
+    "SigConn12\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4\0arg5\0arg6\0arg7\0arg8\0arg9\0arg10\0"
+    "arg11"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn12[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,   12,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,
+
+       0        // eod
+};
+
+void SigConn12::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn12 *_t = static_cast<SigConn12 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5])),(*reinterpret_cast< const QVariant(*)>(_a[6])),(*reinterpret_cast< const QVariant(*)>(_a[7])),(*reinterpret_cast< const QVariant(*)>(_a[8])),(*reinterpret_cast< const QVariant(*)>(_a[9])),(*reinterpret_cast< const QVariant(*)>(_a[10])),(*reinterpret_cast< const QVariant(*)>(_a[11])),(*reinterpret_cast< const QVariant(*)>(_a[12]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn12::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn12.data,
+      qt_meta_data_SigConn12,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn12::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn12::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn12.stringdata0))
+        return static_cast<void*>(const_cast< SigConn12*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn12*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn12::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn13_t {
+    QByteArrayData data[16];
+    char stringdata0[84];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn13_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn13_t qt_meta_stringdata_SigConn13 = {
+    {
+QT_MOC_LITERAL(0, 0, 9), // "SigConn13"
+QT_MOC_LITERAL(1, 10, 4), // "slot"
+QT_MOC_LITERAL(2, 15, 0), // ""
+QT_MOC_LITERAL(3, 16, 4), // "arg0"
+QT_MOC_LITERAL(4, 21, 4), // "arg1"
+QT_MOC_LITERAL(5, 26, 4), // "arg2"
+QT_MOC_LITERAL(6, 31, 4), // "arg3"
+QT_MOC_LITERAL(7, 36, 4), // "arg4"
+QT_MOC_LITERAL(8, 41, 4), // "arg5"
+QT_MOC_LITERAL(9, 46, 4), // "arg6"
+QT_MOC_LITERAL(10, 51, 4), // "arg7"
+QT_MOC_LITERAL(11, 56, 4), // "arg8"
+QT_MOC_LITERAL(12, 61, 4), // "arg9"
+QT_MOC_LITERAL(13, 66, 5), // "arg10"
+QT_MOC_LITERAL(14, 72, 5), // "arg11"
+QT_MOC_LITERAL(15, 78, 5) // "arg12"
+
+    },
+    "SigConn13\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4\0arg5\0arg6\0arg7\0arg8\0arg9\0arg10\0"
+    "arg11\0arg12"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn13[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,   13,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,
+
+       0        // eod
+};
+
+void SigConn13::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn13 *_t = static_cast<SigConn13 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5])),(*reinterpret_cast< const QVariant(*)>(_a[6])),(*reinterpret_cast< const QVariant(*)>(_a[7])),(*reinterpret_cast< const QVariant(*)>(_a[8])),(*reinterpret_cast< const QVariant(*)>(_a[9])),(*reinterpret_cast< const QVariant(*)>(_a[10])),(*reinterpret_cast< const QVariant(*)>(_a[11])),(*reinterpret_cast< const QVariant(*)>(_a[12])),(*reinterpret_cast< const QVariant(*)>(_a[13]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn13::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn13.data,
+      qt_meta_data_SigConn13,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn13::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn13::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn13.stringdata0))
+        return static_cast<void*>(const_cast< SigConn13*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn13*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn13::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn14_t {
+    QByteArrayData data[17];
+    char stringdata0[90];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn14_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn14_t qt_meta_stringdata_SigConn14 = {
+    {
+QT_MOC_LITERAL(0, 0, 9), // "SigConn14"
+QT_MOC_LITERAL(1, 10, 4), // "slot"
+QT_MOC_LITERAL(2, 15, 0), // ""
+QT_MOC_LITERAL(3, 16, 4), // "arg0"
+QT_MOC_LITERAL(4, 21, 4), // "arg1"
+QT_MOC_LITERAL(5, 26, 4), // "arg2"
+QT_MOC_LITERAL(6, 31, 4), // "arg3"
+QT_MOC_LITERAL(7, 36, 4), // "arg4"
+QT_MOC_LITERAL(8, 41, 4), // "arg5"
+QT_MOC_LITERAL(9, 46, 4), // "arg6"
+QT_MOC_LITERAL(10, 51, 4), // "arg7"
+QT_MOC_LITERAL(11, 56, 4), // "arg8"
+QT_MOC_LITERAL(12, 61, 4), // "arg9"
+QT_MOC_LITERAL(13, 66, 5), // "arg10"
+QT_MOC_LITERAL(14, 72, 5), // "arg11"
+QT_MOC_LITERAL(15, 78, 5), // "arg12"
+QT_MOC_LITERAL(16, 84, 5) // "arg13"
+
+    },
+    "SigConn14\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4\0arg5\0arg6\0arg7\0arg8\0arg9\0arg10\0"
+    "arg11\0arg12\0arg13"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn14[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,   14,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,   16,
+
+       0        // eod
+};
+
+void SigConn14::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn14 *_t = static_cast<SigConn14 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5])),(*reinterpret_cast< const QVariant(*)>(_a[6])),(*reinterpret_cast< const QVariant(*)>(_a[7])),(*reinterpret_cast< const QVariant(*)>(_a[8])),(*reinterpret_cast< const QVariant(*)>(_a[9])),(*reinterpret_cast< const QVariant(*)>(_a[10])),(*reinterpret_cast< const QVariant(*)>(_a[11])),(*reinterpret_cast< const QVariant(*)>(_a[12])),(*reinterpret_cast< const QVariant(*)>(_a[13])),(*reinterpret_cast< const QVariant(*)>(_a[14]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn14::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn14.data,
+      qt_meta_data_SigConn14,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn14::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn14::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn14.stringdata0))
+        return static_cast<void*>(const_cast< SigConn14*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn14*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn14::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn15_t {
+    QByteArrayData data[18];
+    char stringdata0[96];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn15_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn15_t qt_meta_stringdata_SigConn15 = {
+    {
+QT_MOC_LITERAL(0, 0, 9), // "SigConn15"
+QT_MOC_LITERAL(1, 10, 4), // "slot"
+QT_MOC_LITERAL(2, 15, 0), // ""
+QT_MOC_LITERAL(3, 16, 4), // "arg0"
+QT_MOC_LITERAL(4, 21, 4), // "arg1"
+QT_MOC_LITERAL(5, 26, 4), // "arg2"
+QT_MOC_LITERAL(6, 31, 4), // "arg3"
+QT_MOC_LITERAL(7, 36, 4), // "arg4"
+QT_MOC_LITERAL(8, 41, 4), // "arg5"
+QT_MOC_LITERAL(9, 46, 4), // "arg6"
+QT_MOC_LITERAL(10, 51, 4), // "arg7"
+QT_MOC_LITERAL(11, 56, 4), // "arg8"
+QT_MOC_LITERAL(12, 61, 4), // "arg9"
+QT_MOC_LITERAL(13, 66, 5), // "arg10"
+QT_MOC_LITERAL(14, 72, 5), // "arg11"
+QT_MOC_LITERAL(15, 78, 5), // "arg12"
+QT_MOC_LITERAL(16, 84, 5), // "arg13"
+QT_MOC_LITERAL(17, 90, 5) // "arg14"
+
+    },
+    "SigConn15\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4\0arg5\0arg6\0arg7\0arg8\0arg9\0arg10\0"
+    "arg11\0arg12\0arg13\0arg14"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn15[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,   15,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,   16,   17,
+
+       0        // eod
+};
+
+void SigConn15::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn15 *_t = static_cast<SigConn15 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5])),(*reinterpret_cast< const QVariant(*)>(_a[6])),(*reinterpret_cast< const QVariant(*)>(_a[7])),(*reinterpret_cast< const QVariant(*)>(_a[8])),(*reinterpret_cast< const QVariant(*)>(_a[9])),(*reinterpret_cast< const QVariant(*)>(_a[10])),(*reinterpret_cast< const QVariant(*)>(_a[11])),(*reinterpret_cast< const QVariant(*)>(_a[12])),(*reinterpret_cast< const QVariant(*)>(_a[13])),(*reinterpret_cast< const QVariant(*)>(_a[14])),(*reinterpret_cast< const QVariant(*)>(_a[15]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn15::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn15.data,
+      qt_meta_data_SigConn15,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn15::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn15::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn15.stringdata0))
+        return static_cast<void*>(const_cast< SigConn15*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn15*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn15::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn16_t {
+    QByteArrayData data[19];
+    char stringdata0[102];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn16_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn16_t qt_meta_stringdata_SigConn16 = {
+    {
+QT_MOC_LITERAL(0, 0, 9), // "SigConn16"
+QT_MOC_LITERAL(1, 10, 4), // "slot"
+QT_MOC_LITERAL(2, 15, 0), // ""
+QT_MOC_LITERAL(3, 16, 4), // "arg0"
+QT_MOC_LITERAL(4, 21, 4), // "arg1"
+QT_MOC_LITERAL(5, 26, 4), // "arg2"
+QT_MOC_LITERAL(6, 31, 4), // "arg3"
+QT_MOC_LITERAL(7, 36, 4), // "arg4"
+QT_MOC_LITERAL(8, 41, 4), // "arg5"
+QT_MOC_LITERAL(9, 46, 4), // "arg6"
+QT_MOC_LITERAL(10, 51, 4), // "arg7"
+QT_MOC_LITERAL(11, 56, 4), // "arg8"
+QT_MOC_LITERAL(12, 61, 4), // "arg9"
+QT_MOC_LITERAL(13, 66, 5), // "arg10"
+QT_MOC_LITERAL(14, 72, 5), // "arg11"
+QT_MOC_LITERAL(15, 78, 5), // "arg12"
+QT_MOC_LITERAL(16, 84, 5), // "arg13"
+QT_MOC_LITERAL(17, 90, 5), // "arg14"
+QT_MOC_LITERAL(18, 96, 5) // "arg15"
+
+    },
+    "SigConn16\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4\0arg5\0arg6\0arg7\0arg8\0arg9\0arg10\0"
+    "arg11\0arg12\0arg13\0arg14\0arg15"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn16[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,   16,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,   16,   17,   18,
+
+       0        // eod
+};
+
+void SigConn16::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn16 *_t = static_cast<SigConn16 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5])),(*reinterpret_cast< const QVariant(*)>(_a[6])),(*reinterpret_cast< const QVariant(*)>(_a[7])),(*reinterpret_cast< const QVariant(*)>(_a[8])),(*reinterpret_cast< const QVariant(*)>(_a[9])),(*reinterpret_cast< const QVariant(*)>(_a[10])),(*reinterpret_cast< const QVariant(*)>(_a[11])),(*reinterpret_cast< const QVariant(*)>(_a[12])),(*reinterpret_cast< const QVariant(*)>(_a[13])),(*reinterpret_cast< const QVariant(*)>(_a[14])),(*reinterpret_cast< const QVariant(*)>(_a[15])),(*reinterpret_cast< const QVariant(*)>(_a[16]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn16::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn16.data,
+      qt_meta_data_SigConn16,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn16::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn16::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn16.stringdata0))
+        return static_cast<void*>(const_cast< SigConn16*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn16*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn16::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn17_t {
+    QByteArrayData data[20];
+    char stringdata0[108];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn17_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn17_t qt_meta_stringdata_SigConn17 = {
+    {
+QT_MOC_LITERAL(0, 0, 9), // "SigConn17"
+QT_MOC_LITERAL(1, 10, 4), // "slot"
+QT_MOC_LITERAL(2, 15, 0), // ""
+QT_MOC_LITERAL(3, 16, 4), // "arg0"
+QT_MOC_LITERAL(4, 21, 4), // "arg1"
+QT_MOC_LITERAL(5, 26, 4), // "arg2"
+QT_MOC_LITERAL(6, 31, 4), // "arg3"
+QT_MOC_LITERAL(7, 36, 4), // "arg4"
+QT_MOC_LITERAL(8, 41, 4), // "arg5"
+QT_MOC_LITERAL(9, 46, 4), // "arg6"
+QT_MOC_LITERAL(10, 51, 4), // "arg7"
+QT_MOC_LITERAL(11, 56, 4), // "arg8"
+QT_MOC_LITERAL(12, 61, 4), // "arg9"
+QT_MOC_LITERAL(13, 66, 5), // "arg10"
+QT_MOC_LITERAL(14, 72, 5), // "arg11"
+QT_MOC_LITERAL(15, 78, 5), // "arg12"
+QT_MOC_LITERAL(16, 84, 5), // "arg13"
+QT_MOC_LITERAL(17, 90, 5), // "arg14"
+QT_MOC_LITERAL(18, 96, 5), // "arg15"
+QT_MOC_LITERAL(19, 102, 5) // "arg16"
+
+    },
+    "SigConn17\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4\0arg5\0arg6\0arg7\0arg8\0arg9\0arg10\0"
+    "arg11\0arg12\0arg13\0arg14\0arg15\0arg16"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn17[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,   17,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,   16,   17,   18,   19,
+
+       0        // eod
+};
+
+void SigConn17::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn17 *_t = static_cast<SigConn17 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5])),(*reinterpret_cast< const QVariant(*)>(_a[6])),(*reinterpret_cast< const QVariant(*)>(_a[7])),(*reinterpret_cast< const QVariant(*)>(_a[8])),(*reinterpret_cast< const QVariant(*)>(_a[9])),(*reinterpret_cast< const QVariant(*)>(_a[10])),(*reinterpret_cast< const QVariant(*)>(_a[11])),(*reinterpret_cast< const QVariant(*)>(_a[12])),(*reinterpret_cast< const QVariant(*)>(_a[13])),(*reinterpret_cast< const QVariant(*)>(_a[14])),(*reinterpret_cast< const QVariant(*)>(_a[15])),(*reinterpret_cast< const QVariant(*)>(_a[16])),(*reinterpret_cast< const QVariant(*)>(_a[17]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn17::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn17.data,
+      qt_meta_data_SigConn17,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn17::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn17::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn17.stringdata0))
+        return static_cast<void*>(const_cast< SigConn17*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn17*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn17::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn18_t {
+    QByteArrayData data[21];
+    char stringdata0[114];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn18_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn18_t qt_meta_stringdata_SigConn18 = {
+    {
+QT_MOC_LITERAL(0, 0, 9), // "SigConn18"
+QT_MOC_LITERAL(1, 10, 4), // "slot"
+QT_MOC_LITERAL(2, 15, 0), // ""
+QT_MOC_LITERAL(3, 16, 4), // "arg0"
+QT_MOC_LITERAL(4, 21, 4), // "arg1"
+QT_MOC_LITERAL(5, 26, 4), // "arg2"
+QT_MOC_LITERAL(6, 31, 4), // "arg3"
+QT_MOC_LITERAL(7, 36, 4), // "arg4"
+QT_MOC_LITERAL(8, 41, 4), // "arg5"
+QT_MOC_LITERAL(9, 46, 4), // "arg6"
+QT_MOC_LITERAL(10, 51, 4), // "arg7"
+QT_MOC_LITERAL(11, 56, 4), // "arg8"
+QT_MOC_LITERAL(12, 61, 4), // "arg9"
+QT_MOC_LITERAL(13, 66, 5), // "arg10"
+QT_MOC_LITERAL(14, 72, 5), // "arg11"
+QT_MOC_LITERAL(15, 78, 5), // "arg12"
+QT_MOC_LITERAL(16, 84, 5), // "arg13"
+QT_MOC_LITERAL(17, 90, 5), // "arg14"
+QT_MOC_LITERAL(18, 96, 5), // "arg15"
+QT_MOC_LITERAL(19, 102, 5), // "arg16"
+QT_MOC_LITERAL(20, 108, 5) // "arg17"
+
+    },
+    "SigConn18\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4\0arg5\0arg6\0arg7\0arg8\0arg9\0arg10\0"
+    "arg11\0arg12\0arg13\0arg14\0arg15\0arg16\0"
+    "arg17"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn18[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,   18,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,   16,   17,   18,   19,   20,
+
+       0        // eod
+};
+
+void SigConn18::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn18 *_t = static_cast<SigConn18 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5])),(*reinterpret_cast< const QVariant(*)>(_a[6])),(*reinterpret_cast< const QVariant(*)>(_a[7])),(*reinterpret_cast< const QVariant(*)>(_a[8])),(*reinterpret_cast< const QVariant(*)>(_a[9])),(*reinterpret_cast< const QVariant(*)>(_a[10])),(*reinterpret_cast< const QVariant(*)>(_a[11])),(*reinterpret_cast< const QVariant(*)>(_a[12])),(*reinterpret_cast< const QVariant(*)>(_a[13])),(*reinterpret_cast< const QVariant(*)>(_a[14])),(*reinterpret_cast< const QVariant(*)>(_a[15])),(*reinterpret_cast< const QVariant(*)>(_a[16])),(*reinterpret_cast< const QVariant(*)>(_a[17])),(*reinterpret_cast< const QVariant(*)>(_a[18]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn18::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn18.data,
+      qt_meta_data_SigConn18,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn18::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn18::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn18.stringdata0))
+        return static_cast<void*>(const_cast< SigConn18*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn18*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn18::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+struct qt_meta_stringdata_SigConn19_t {
+    QByteArrayData data[22];
+    char stringdata0[120];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_SigConn19_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_SigConn19_t qt_meta_stringdata_SigConn19 = {
+    {
+QT_MOC_LITERAL(0, 0, 9), // "SigConn19"
+QT_MOC_LITERAL(1, 10, 4), // "slot"
+QT_MOC_LITERAL(2, 15, 0), // ""
+QT_MOC_LITERAL(3, 16, 4), // "arg0"
+QT_MOC_LITERAL(4, 21, 4), // "arg1"
+QT_MOC_LITERAL(5, 26, 4), // "arg2"
+QT_MOC_LITERAL(6, 31, 4), // "arg3"
+QT_MOC_LITERAL(7, 36, 4), // "arg4"
+QT_MOC_LITERAL(8, 41, 4), // "arg5"
+QT_MOC_LITERAL(9, 46, 4), // "arg6"
+QT_MOC_LITERAL(10, 51, 4), // "arg7"
+QT_MOC_LITERAL(11, 56, 4), // "arg8"
+QT_MOC_LITERAL(12, 61, 4), // "arg9"
+QT_MOC_LITERAL(13, 66, 5), // "arg10"
+QT_MOC_LITERAL(14, 72, 5), // "arg11"
+QT_MOC_LITERAL(15, 78, 5), // "arg12"
+QT_MOC_LITERAL(16, 84, 5), // "arg13"
+QT_MOC_LITERAL(17, 90, 5), // "arg14"
+QT_MOC_LITERAL(18, 96, 5), // "arg15"
+QT_MOC_LITERAL(19, 102, 5), // "arg16"
+QT_MOC_LITERAL(20, 108, 5), // "arg17"
+QT_MOC_LITERAL(21, 114, 5) // "arg18"
+
+    },
+    "SigConn19\0slot\0\0arg0\0arg1\0arg2\0arg3\0"
+    "arg4\0arg5\0arg6\0arg7\0arg8\0arg9\0arg10\0"
+    "arg11\0arg12\0arg13\0arg14\0arg15\0arg16\0"
+    "arg17\0arg18"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_SigConn19[] = {
+
+ // content:
+       7,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: name, argc, parameters, tag, flags
+       1,   19,   19,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant, QMetaType::QVariant,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,   16,   17,   18,   19,   20,   21,
+
+       0        // eod
+};
+
+void SigConn19::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        SigConn19 *_t = static_cast<SigConn19 *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->slot((*reinterpret_cast< const QVariant(*)>(_a[1])),(*reinterpret_cast< const QVariant(*)>(_a[2])),(*reinterpret_cast< const QVariant(*)>(_a[3])),(*reinterpret_cast< const QVariant(*)>(_a[4])),(*reinterpret_cast< const QVariant(*)>(_a[5])),(*reinterpret_cast< const QVariant(*)>(_a[6])),(*reinterpret_cast< const QVariant(*)>(_a[7])),(*reinterpret_cast< const QVariant(*)>(_a[8])),(*reinterpret_cast< const QVariant(*)>(_a[9])),(*reinterpret_cast< const QVariant(*)>(_a[10])),(*reinterpret_cast< const QVariant(*)>(_a[11])),(*reinterpret_cast< const QVariant(*)>(_a[12])),(*reinterpret_cast< const QVariant(*)>(_a[13])),(*reinterpret_cast< const QVariant(*)>(_a[14])),(*reinterpret_cast< const QVariant(*)>(_a[15])),(*reinterpret_cast< const QVariant(*)>(_a[16])),(*reinterpret_cast< const QVariant(*)>(_a[17])),(*reinterpret_cast< const QVariant(*)>(_a[18])),(*reinterpret_cast< const QVariant(*)>(_a[19]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObject SigConn19::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SigConn19.data,
+      qt_meta_data_SigConn19,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+};
+
+
+const QMetaObject *SigConn19::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *SigConn19::qt_metacast(const char *_clname)
+{
+    if (!_clname) return Q_NULLPTR;
+    if (!strcmp(_clname, qt_meta_stringdata_SigConn19.stringdata0))
+        return static_cast<void*>(const_cast< SigConn19*>(this));
+    if (!strcmp(_clname, "SigConn"))
+        return static_cast< SigConn*>(const_cast< SigConn19*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SigConn19::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 1)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 1;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

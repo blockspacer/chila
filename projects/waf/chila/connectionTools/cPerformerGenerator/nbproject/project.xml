@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.cnd.makeproject</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/make-project/1">
+            <name>chila.connectionTools.cPerformerGenerator</name>
+            <c-extensions/>
+            <cpp-extensions>cpp</cpp-extensions>
+            <header-extensions>hpp,py</header-extensions>
+            <sourceEncoding>UTF-8</sourceEncoding>
+            <make-dep-projects/>
+            <sourceRootList>
+                <sourceRootElem>../../../../../src/chila/connectionTools/cPerformerGenerator</sourceRootElem>
+                <sourceRootElem>../../../../../src/chila/connectionTools/lib</sourceRootElem>
+                <sourceRootElem>../../../../../src/chila/lib/misc</sourceRootElem>
+                <sourceRootElem>../../../../../src/chila/lib/node</sourceRootElem>
+                <sourceRootElem>../../../../../src/chila/lib/xmlppUtils</sourceRootElem>
+            </sourceRootList>
+            <confList>
+                <confElem>
+                    <name>build_debug</name>
+                    <type>0</type>
+                </confElem>
+                <confElem>
+                    <name>install_release</name>
+                    <type>0</type>
+                </confElem>
+            </confList>
+            <formatting>
+                <project-formatting-style>false</project-formatting-style>
+            </formatting>
+        </data>
+    </configuration>
+</project>

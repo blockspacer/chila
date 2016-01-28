@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2011-2015 Roberto Daniel Gimenez Gamarra
+    (C.I.: 1.439.390 - Paraguay)
+
+    This file is part of 'chila.connectionTools.appTest'
+
+    'chila.connectionTools.appTest' is free software: you can redistribute it
+    and/or modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    'chila.connectionTools.appTest' is distributed in the hope that
+    it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with 'chila.connectionTools.appTest'. If not, see <http://www.gnu.org/licenses/>.
+-->
+<cPerformer name="chila.connectionTools.appTest.app.connectors.gen.ConnectionPerformer">
+
+    <!-- Aliases -->
+    <arguments>
+        <argument name="clientId" description=""/>
+        <argument name="recvBuffer" description=""/>
+        <argument name="sndBuffer" description=""/>
+        <argument name="errorMsg" description=""/>
+        <argument name="moduleName" description=""/>
+        <argument name="procMessage" description=""/>
+    </arguments>
+
+    <connectorAliases>
+        <alias name="Network" connectorPath="chila.connectionTools.appTest.app.connectors.gen.Network">
+            <arguments>
+                <argument name="clientId" cpName="clientId"/>
+                <argument name="recvBuffer" cpName="recvBuffer"/>
+                <argument name="sndBuffer" cpName="sndBuffer"/>
+                <argument name="errorMsg" cpName="errorMsg"/>
+                <argument name="moduleName" cpName="moduleName"/>
+            </arguments>
+            <actions/>
+            <events/>
+        </alias>
+
+        <alias name="Logger" connectorPath="chila.connectionTools.appTest.app.connectors.gen.Logger">
+            <arguments>
+                <argument name="clientId" cpName="clientId"/>
+                <argument name="recvBuffer" cpName="recvBuffer"/>
+                <argument name="sndBuffer" cpName="sndBuffer"/>
+                <argument name="errorMsg" cpName="errorMsg"/>
+                <argument name="moduleName" cpName="moduleName"/>
+            </arguments>
+            <actions/>
+            <events/>
+        </alias>
+
+        <alias name="MessageProcessor" connectorPath="chila.connectionTools.appTest.app.connectors.gen.MessageProcessor">
+            <arguments>
+                <argument name="procMessage" cpName="procMessage"/>
+                <argument name="result" cpName="sndBuffer"/>
+                <argument name="moduleName" cpName="moduleName"/>
+            </arguments>
+            <actions/>
+            <events/>
+        </alias>
+    </connectorAliases>
+
+    <!-- Argument generators -->
+    <argumentProviderCreators>
+
+        <creator name="networkNameProv" requires="" provides="moduleName"/>
+
+        <creator name="processingNameProv" requires="" provides="moduleName"/>
+
+        <creator name="procMessageCreator" requires="clientId, recvBuffer" provides="procMessage"/>
+
+        <creator name="procMessageReaderPC" requires="procMessage" provides="clientId"/>
+
+    </argumentProviderCreators>
+
+    <!-- Connections -->
+    <connectors>
+
+        <!-- Network -->
+        <instance name="network" connectorAlias="Network">
+
+            <event name="started" description="">
+                <aProviderCreators>
+                    <apc name="networkNameProv"/>
+                </aProviderCreators>
+
+                <actions>
+                    <action connector="logger" name="moduleStarted" determinesOrder="false"/>
+                    <action connector="messageProcessor" name="start" determinesOrder="false"/>
+                    <action connector="network" name="acceptClient" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="clientConnected" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="logger" name="clientConnected" determinesOrder="false"/>
+                    <action connector="network" name="acceptClient" determinesOrder="false"/>
+                    <action connector="network" name="readMessage" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="clientDisconnected" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="logger" name="clientDisconnected" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="connectionError" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="logger" name="connectionError" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="msgReceived" description="">
+                <aProviderCreators>
+                    <apc name="procMessageCreator"/>
+                </aProviderCreators>
+                <actions>
+                    <action connector="logger" name="msgReceived" determinesOrder="false"/>
+                    <action connector="messageProcessor" name="processMessage" determinesOrder="false"/>
+                    <action connector="network" name="readMessage" determinesOrder="false"/>
+                </actions>
+            </event>
+        </instance>
+
+        <!-- MessageProcessor -->
+        <instance name="messageProcessor" connectorAlias="MessageProcessor" description="">
+            <event name="started" actions="logger.moduleStarted">
+                <aProviderCreators>
+                    <apc name="processingNameProv"/>
+                </aProviderCreators>
+                <actions>
+                    <action connector="logger" name="moduleStarted" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="messageProcessed" description="">
+                <aProviderCreators>
+                    <apc name="procMessageReaderPC"/>
+                </aProviderCreators>
+                <actions>
+                    <action connector="logger" name="msgProcessed" determinesOrder="false"/>
+                    <action connector="network" name="sendMessage" determinesOrder="false"/>
+                </actions>
+            </event>
+        </instance>
+
+        <!-- Logger -->
+        <instance name="logger" connectorAlias="Logger"/>
+
+    </connectors>
+
+</cPerformer>

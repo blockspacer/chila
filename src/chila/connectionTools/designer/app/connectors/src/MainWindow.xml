@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2011-2015 Roberto Daniel Gimenez Gamarra
+    (C.I.: 1.439.390 - Paraguay)
+
+    This file is part of 'chila.connectionTools.designer'
+
+    'chila.connectionTools.designer' is free software: you can redistribute it
+    and/or modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    'chila.connectionTools.designer' is distributed in the hope that
+    it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with 'chila.connectionTools.designer'. If not, see <http://www.gnu.org/licenses/>.
+-->
+<connector name="chila.connectionTools.designer.app.connectors.gen.MainWindow" description="Handles processes messages">
+
+    <!-- Arguments -->
+    <arguments>
+        <arg name="moduleName" description="Module name"/>
+        <arg name="nodePath" description="A node's path"/>
+        <arg name="nodeId" description="A node's name"/>
+        <arg name="value" description="A node's value"/>
+        <arg name="action" description="A node's action"/>
+        <arg name="actionList" description="A node's action list"/>
+        <arg name="errorText" description="An error message"/>
+        <arg name="outputText" description="An output message"/>
+        <arg name="openNode" description="Flag that indicates that the node should be opened"/>
+        <arg name="isExpandable" description="Wheter the flow node is further expandable"/>
+        <arg name="textProperties" description="An output text's property"/>
+    </arguments>
+
+    <!-- Actions -->
+    <actions>
+
+        <group name="launcher" description="">
+            <action name="start" arguments="" description="Starts the module" events="launcher:started, flowNodesRequired, actionListRequired, saveRequest, flowNodeSelected, checkNodes,                                                         expandFlowNode, moveUpRequest, moveDownRequest"/>
+            <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated"/>
+            <action name="finish" arguments="" description="Finishes the module" events="launcher:finished"/>
+        </group>
+
+        <action name="waitEvent" arguments="" description="Waits for events" events="actionListRequired, actionRequest, saveRequest, undoRequest, redoRequest"/>
+
+        <action name="addNode" arguments="nodePath, value" description="Adds a node"/>
+
+        <action name="setNodeValue" arguments="nodePath, value" description="Adds a node"/>
+
+        <action name="addOutputText" arguments="textProperties, outputText" description="Adds an error text"/>
+
+        <action name="clearOutput" arguments="" description="Clear the error message"/>
+
+        <action name="actionNotPerformed" arguments="errorText" description="The requested action was not performed"/>
+
+        <action name="removeNode" arguments="nodePath" description="Remove a node"/>
+
+        <action name="removeChildren" arguments="nodePath" description="Remove all children of a node"/>
+
+        <action name="selectNode" arguments="nodePath, openNode" description="Selects a node"/>
+
+        <action name="showActions" arguments="nodePath, actionList" description="Shows the list of actions for a node" events="actionRequest"/>
+
+        <action name="renameNode" arguments="nodePath, nodeId" description="Renames a node"/>
+
+        <action name="addFlowNode" arguments="nodePath, value, isExpandable" description="Adds a flow node"/>
+
+        <action name="noMoreFlowNodes" arguments="" events="flowNodeSelected"/>
+
+        <action name="saveDesignTreeState" arguments="" events=""/>
+        <action name="restoreDesignTreeState" arguments="" events=""/>
+
+    </actions>
+
+    <!-- Events -->
+    <events>
+        <group name="launcher" description="">
+            <event name="starting" arguments="" description=""/>
+            <event name="started" arguments="" description=""/>
+            <event name="deactivating" arguments="" description=""/>
+            <event name="deactivated" arguments="" description=""/>
+            <event name="finishing" arguments="" description=""/>
+            <event name="finished" arguments="" description=""/>
+        </group>
+
+        <event name="actionRequest" arguments="nodePath, action, value" description="An action request"/>
+
+        <event name="undoRequest" arguments="" description="An undo operation request"/>
+
+        <event name="redoRequest" arguments="" description="An redo operation request"/>
+
+        <event name="saveRequest" arguments="" description="An save operation request"/>
+
+        <event name="moveUpRequest" arguments="nodePath" description="An move up operation request"/>
+
+        <event name="moveDownRequest" arguments="nodePath" description="An move down operation request"/>
+
+        <event name="actionListRequired" arguments="nodePath" description="The node's action list is required"/>
+
+        <event name="flowNodesRequired" arguments="" description="Requests the flow nodes"/>
+
+        <event name="flowNodeSelected" arguments="nodePath" description="Flow node selected"/>
+
+        <event name="checkNodes" arguments="" description="Check the design nodes"/>
+
+        <event name="expandFlowNode" arguments="nodePath" description="Mark this flow node for exansion, and not the others"/>
+    </events>
+
+</connector>
+

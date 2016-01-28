@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="chila.codex.base">
+
+    <connectors>
+        <connector path="../base/app/connectors/src/Application.xml"/>
+        <connector path="../base/app/connectors/src/MainWindow.xml"/>
+        <connector path="../base/app/connectors/src/FileChooser.xml"/>
+        <connector path="../base/app/connectors/src/ActionExecuter.xml"/>
+        <connector path="../../connectionTools/lib/other/common/connectors/src/Forwarder.xml"/>
+        <connector path="../../connectionTools/lib/other/common/connectors/src/FunDynExecuter.xml"/>
+        <connector path="../../connectionTools/lib/other/common/connectors/src/Network.xml"/>
+        <connector path="../../connectionTools/lib/other/common/connectors/src/TextMessageCreator.xml"/>
+        <connector path="../../connectionTools/lib/other/common/connectors/src/FunDynXMLParser.xml"/>
+        <connector path="app/connectors/src/TextEditor.xml"/>
+        <connector path="app/connectors/src/TextHighlighter.xml"/>
+        <connector path="app/connectors/src/FileOpener.xml"/>
+        <connector path="app/connectors/src/FindReplace.xml"/>
+        <connector path="app/connectors/src/ActionExecuter.xml"/>
+    </connectors>
+
+    <cPerformers>
+        <cPerformer path="../base/app/connectors/src/ConnectionPerformer.xml"/>
+        <cPerformer path="app/connectors/src/ConnectionPerformer.xml"/>
+    </cPerformers>
+
+    <flowCInstances prefix="chila.codex.text.app.connectors.gen.ConnectionPerformer">
+        <start>
+            <flowCInstance path="application"/>
+        </start>
+
+        <dim>
+        </dim>
+    </flowCInstances>
+
+</project>

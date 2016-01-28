@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connector name="chila.codex.base.app.connectors.gen.Application" description="Coordinates the events between the modules.">
+    <!-- Arguments -->
+    <arguments>
+        <group name="notebook" description="">
+            <arg name="tabWidget" description="Widget for a tab in the notebook."/>
+            <arg name="tabName" description="Name for a notebook tab."/>
+        </group>
+        <arg name="menuItemPath" description=""/>
+        <arg name="errorMsg" description=""/>
+    </arguments>
+    <!--  Events  -->
+    <events>
+        <group name="launcher" description="">
+            <event name="starting" arguments="" description=""/>
+            <event name="started" arguments="" description=""/>
+            <event name="deactivating" arguments="" description=""/>
+            <event name="deactivated" arguments="" description=""/>
+            <event name="finishing" arguments="" description=""/>
+            <event name="finished" arguments="" description=""/>
+        </group>
+        <event name="fatalError" arguments="errorMsg" description=""/>
+    </events>
+    <!--  Actions  -->
+    <actions>
+        <group name="launcher" description="">
+            <action name="start" arguments="" description="Starts the module" events="launcher:started, fatalError"/>
+            <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated, fatalError"/>
+            <action name="finish" arguments="" description="Finishes the module" events="launcher:finished, fatalError"/>
+        </group>
+    </actions>
+</connector>

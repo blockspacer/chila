@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<formats>
+    <format name="c"
+            header=""
+            start="/* Copyright"
+            lineStart=" * "
+            emptyLineStart=" *"
+            end="\n */\n\n"
+            patterns="*.h, *.hpp, *.c, *.cpp, *.cxx, *.hh, *.qml"/>
+
+    <format name="sh"
+            header="#!/usr/bin/env sh\n\n"
+            start="# Copyright"
+            lineStart="# "
+            emptyLineStart="#"
+            end="\n\n"
+            patterns="*.sg"/>
+
+    <format name="bash"
+            header="#!/usr/bin/env bash\n\n"
+            start="# Copyright"
+            lineStart="# "
+            emptyLineStart="#"
+            end="\n\n"
+            patterns="*.bash"/>
+
+    <format name="wscript"
+            start="# Copyright"
+            lineStart="# "
+            emptyLineStart="#"
+            end="\n\n"
+            patterns="wscript"/>
+
+    <format name="python"
+            header="#!/usr/bin/env python\n\n"
+            start="# Copyright"
+            lineStart="# "
+            emptyLineStart="#"
+            end="\n\n"
+            patterns="*.py"/>
+
+
+    <format name="xml"
+            header="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;\n"
+            start="\n&lt;!--\n    Copyright"
+            lineStart="    "
+            emptyLineStart=""
+            end="\n--&gt;\n\n"
+            patterns="*.xml, *.qrc"/>
+</formats>

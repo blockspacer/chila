@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2011-2015 Roberto Daniel Gimenez Gamarra
+    (C.I.: 1.439.390 - Paraguay)
+
+    This file is part of 'chila.connectionTools.designer'
+
+    'chila.connectionTools.designer' is free software: you can redistribute it
+    and/or modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    'chila.connectionTools.designer' is distributed in the hope that
+    it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with 'chila.connectionTools.designer'. If not, see <http://www.gnu.org/licenses/>.
+-->
+<connector name="chila.connectionTools.designer.app.connectors.gen.FileLoader" description="Handles processes messages">
+
+    <!-- Arguments -->
+    <arguments>
+        <arg name="moduleName" description="Module name"/>
+        <arg name="filePath" description="The path to the file"/>
+        <arg name="nodePath" description="A tree node's path"/>
+        <arg name="nodeId" description="A node id"/>
+        <arg name="value" description="A node's value"/>
+        <arg name="cToolsPath" description="ConnectionTools Path"/>
+        <arg name="action" description="A node's action"/>
+        <arg name="actionList" description="A node's action list"/>
+        <arg name="outputText" description="An output message"/>
+        <arg name="errorText" description="An error message"/>
+        <arg name="openNode" description="Flag that indicates that the node should be opened"/>
+        <arg name="isExpandable" description="Wheter the flow node is further expandable"/>
+        <arg name="textProperties" description="An output text's property"/>
+    </arguments>
+
+    <!-- Actions -->
+    <actions>
+        <group name="launcher" description="">
+            <action name="start" arguments="" description="Starts the module" events="launcher:started"/>
+            <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated"/>
+            <action name="finish" arguments="" description="Finishes the module" events="launcher:finished"/>
+        </group>
+
+        <action name="loadCPerformer" arguments="filePath" description="Loads a ConnectionPerformer"/>
+
+        <action name="loadConnector" arguments="filePath" description="Loads a Connector"/>
+
+        <action name="performAction" arguments="nodePath, action, value" events="saveDesignTreeState, restoreDesignTreeState, clearOutput, outputText, nodeFound, nodeSelected, nodeRemoved, removeChildren, actionNotPerformed, valueFound"/>
+
+
+        <action name="undo" arguments=""/>
+
+        <action name="redo" arguments=""/>
+
+        <action name="save" arguments=""/>
+
+        <action name="moveUp" arguments="nodePath" events="saveDesignTreeState, restoreDesignTreeState, nodeFound, nodeRemoved, removeChildren, valueFound, nodeSelected, clearOutput, outputText"/>
+
+        <action name="moveDown" arguments="nodePath" events="saveDesignTreeState, restoreDesignTreeState, nodeFound, nodeRemoved, removeChildren, valueFound, nodeSelected, clearOutput, outputText"/>
+
+        <action name="giveActionList" arguments="nodePath" events="actionListFound"/>
+
+        <action name="refreshTree" arguments="" events="nodeFound, valueFound, clearOutput, outputText"/>
+
+        <action name="requestFlowNodes" arguments="" events="flowNodeFound, noMoreFlowNodes"/>
+
+        <action name="showFNodeInfo" arguments="nodePath" events="clearOutput, outputText"/>
+
+        <action name="checkNodes" arguments="" events="clearOutput, outputText"/>
+
+        <action name="expandFlowNode" arguments="nodePath" events=""/>
+
+
+<!--        <action name="nextNode"                 arguments=""
+                                                events="nodeFound, valueFound"     />-->
+
+    </actions>
+
+    <!-- Events -->
+    <events>
+        <group name="launcher" description="">
+            <event name="starting" arguments="" description=""/>
+            <event name="started" arguments="" description=""/>
+            <event name="deactivating" arguments="" description=""/>
+            <event name="deactivated" arguments="" description=""/>
+            <event name="finishing" arguments="" description=""/>
+            <event name="finished" arguments="" description=""/>
+        </group>
+
+        <event name="nodeFound" arguments="nodePath, value" description="A node has been found"/>
+
+        <event name="noMoreFlowNodes" arguments="" description="No more nodes"/>
+
+        <event name="valueFound" arguments="nodePath, value" description="A value has been found"/>
+
+        <event name="connectorLoaded" arguments="cToolsPath" description="A Connector has been loaded"/>
+
+        <event name="cPerformerLoaded" arguments="cToolsPath" description="A Connector has been loaded"/>
+
+        <event name="outputText" arguments="textProperties, outputText" description="Error text emmited"/>
+
+        <event name="clearOutput" arguments="" description="Clears error messages"/>
+
+        <event name="actionNotPerformed" arguments="errorText" description="The requested action was not performed"/>
+
+        <event name="nodeRemoved" arguments="nodePath" description="A node has been removed"/>
+
+        <event name="nodeSelected" arguments="nodePath, openNode" description="A node has been selected"/>
+
+        <event name="removeChildren" arguments="nodePath" description="Remove the node's children."/>
+
+        <event name="actionListFound" arguments="nodePath, actionList" description="Two nodes has been switched"/>
+
+        <event name="nodeRenamed" arguments="nodePath, nodeId" description="A node has been renamed"/>
+
+        <event name="flowNodeFound" arguments="nodePath, value, isExpandable" description="A flow node has been found"/>
+
+        <event name="flowNodeNotFound" arguments="nodePath" description="A flow node has not been found"/>
+
+        <event name="saveDesignTreeState" arguments=""/>
+
+        <event name="restoreDesignTreeState" arguments=""/>
+
+
+    </events>
+
+</connector>

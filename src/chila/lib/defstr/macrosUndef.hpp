@@ -1,0 +1,13 @@
+/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
+ * (C.I.: 1.439.390 - Paraguay)
+ */
+
+#undef CHILA_LIB_DEFSTR__ELEM
+#undef CHILA_LIB_DEFSTR__DEF_FIELD
+#undef CHILA_LIB_DEFSTR__PRINT_FIELD
+#undef CHILA_LIB_DEFSTR__DEF_STRUCT
+#undef CHILA_LIB_DEFSTR__DEC_PRINT
+#undef CHILA_LIB_DEFSTR__DEF_PRINT
+#undef CHILA_LIB_DEFSTR__DEF_COMP
+#undef CHILA_LIB_DEFSTR__EQ_FIELD
+#undef CHILA_LIB_DEFSTR__NEQ_FIELD

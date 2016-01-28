@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<highlight>
+    <element name="keyword" red="0" green="0" blue="80"/>
+    <element name="string" red="70" green="30" blue="0"/>
+    <element name="type" red="0" green="0" blue="80"/>
+    <element name="comment" red="50" green="50" blue="50"/>
+    <element name="symbol" red="50" green="0" blue="0"/>
+    <element name="number" red="0" green="0" blue="0"/>
+    <element name="preproc" red="0" green="50" blue="0"/>
+</highlight>

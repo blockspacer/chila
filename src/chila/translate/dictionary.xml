@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dictionary>
+    <words>
+        <word value="ésto" type="pronoun" gender="male" card="singular"/>
+        <word value="ésta" type="pronoun" gender="female" card="singular"/>
+        <word value="éste" type="pronoun" gender="male" card="singular"/>
+        <word value="es" type="verb" card="singular" time="present"/>
+        <word value="está" type="verb" card="singular" time="present"/>
+        <word value="un" type="article" gender="male" card="singular"/>
+        <word value="una" type="article" gender="female" card="singular"/>
+        <word value="prueba" type="noun" gender="female" card="singular"/>
+        <word value="probar" type="verb" card="singular"/>
+        <word value="el" type="article" gender="male" card="singular"/>
+        <word value="la" type="article" gender="female" card="singular"/>
+        <word value="los" type="article" gender="male" card="plural"/>
+        <word value="las" type="article" gender="female" card="plural"/>
+        <word value="cuando" type="adverb" gender="none" card="singular"/>
+        <word value="falla" type="noun" gender="female" card="singular"/>
+        <word value="perro" type="noun" gender="male" card="singular"/>
+        <word value="vaca" type="noun" gender="female" card="singular"/>
+        <word value="gato" type="noun" gender="male" card="singular"/>
+    </words>
+
+    <entries>
+        <entry value="this" options="ésto, ésta, éste"/>
+        <entry value="is" options="es, está"/>
+        <entry value="a" options="un, una"/>
+        <entry value="test" options="prueba, probar"/>
+        <entry value="the" options="el, la, los, las, cuando"/>
+        <entry value="failure" options="falla"/>
+        <entry value="dog" options="perro"/>
+        <entry value="cow" options="vaca"/>
+        <entry value="cat" options="gato"/>
+    </entries>
+</dictionary>

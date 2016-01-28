@@ -1,0 +1,1895 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="../../../../../src/chila/lib" name="0">
+      <df name="defstr">
+        <in>defstr.hpp</in>
+        <in>macrosDef.hpp</in>
+        <in>macrosUndef.hpp</in>
+      </df>
+      <df name="dsv">
+        <in>dsv.cpp</in>
+        <in>dsv.hpp</in>
+        <in>macrosDef.hpp</in>
+        <in>macrosUndef.hpp</in>
+      </df>
+      <df name="dynMplFusion">
+        <df name="fusion">
+          <in>map.hpp</in>
+          <in>vector.hpp</in>
+        </df>
+        <in>util.hpp</in>
+      </df>
+      <df name="evaluator">
+        <df name="common">
+          <in>basic.hpp</in>
+          <in>date_time.hpp</in>
+          <in>defMacros.hpp</in>
+          <in>fwd.hpp</in>
+          <in>nspDef.hpp</in>
+          <in>nspUndef.hpp</in>
+          <in>set.hpp</in>
+          <in>undefMacros.hpp</in>
+          <in>util.hpp</in>
+        </df>
+        <df name="example">
+          <in>main.cpp</in>
+        </df>
+        <df name="expression">
+          <in>FunctionAdapter.hpp</in>
+          <in>FunctorExecuterOperation.hpp</in>
+          <in>OpAdder.hpp</in>
+          <in>OperationProviderMap.hpp</in>
+          <in>ValueMap.hpp</in>
+          <in>VariableProviderMap.hpp</in>
+          <in>defMacros.hpp</in>
+          <in>evaluable_vector.hpp</in>
+          <in>expression.hpp</in>
+          <in>fwd.hpp</in>
+          <in>nspDef.hpp</in>
+          <in>nspUndef.hpp</in>
+          <in>undefMacros.hpp</in>
+          <in>util.cpp</in>
+          <in>util.hpp</in>
+        </df>
+        <df name="parser">
+          <in>Grammar.hpp</in>
+          <in>Parser.hpp</in>
+          <in>SymbolTable.hpp</in>
+          <in>fwd.hpp</in>
+          <in>interfaces.hpp</in>
+          <in>nspDef.hpp</in>
+          <in>nspUndef.hpp</in>
+          <in>util.cpp</in>
+          <in>util.hpp</in>
+        </df>
+      </df>
+      <df name="git">
+        <in>exceptions.cpp</in>
+        <in>exceptions.hpp</in>
+        <in>fwd.hpp</in>
+        <in>nspDef.hpp</in>
+        <in>nspUndef.hpp</in>
+        <in>util.cpp</in>
+        <in>util.hpp</in>
+      </df>
+      <df name="misc">
+        <df name="fusion">
+          <in>FunSeqExecuter.hpp</in>
+          <in>MakeSet.hpp</in>
+          <in>MakeVector.hpp</in>
+          <in>macrosDef.hpp</in>
+          <in>macrosUndef.hpp</in>
+          <in>nspDef.hpp</in>
+          <in>nspUndef.hpp</in>
+        </df>
+        <df name="tests">
+          <in>Construct.cpp</in>
+          <in>MemFnExecuter.cpp</in>
+          <in>Path.cpp</in>
+          <in>RepeatText.cpp</in>
+          <in>SimplePrinter.cpp</in>
+          <in>SinkInserter.cpp</in>
+          <in>common.hpp</in>
+          <in>main.cpp</in>
+          <in>util.cpp</in>
+        </df>
+        <in>AddressFilter.cpp</in>
+        <in>AnyPrinter.cpp</in>
+        <in>AnyPrinter.hpp</in>
+        <in>Construct.hpp</in>
+        <in>ContainerSinkInserter.hpp</in>
+        <in>DynamicLibrary.cpp</in>
+        <in>FunExecSequence.hpp</in>
+        <in>InPlaceStrStream.hpp</in>
+        <in>MemFnExecuter.hpp</in>
+        <in>MemoryPool.hpp</in>
+        <in>Path.cpp</in>
+        <in>Path.hpp</in>
+        <in>PolyAllocator.hpp</in>
+        <in>PrintExp.hpp</in>
+        <in>QueuePoster.hpp</in>
+        <in>RepeatText.hpp</in>
+        <in>SignalsLight.hpp</in>
+        <in>SimplePrinter.hpp</in>
+        <in>SinkInserter.hpp</in>
+        <in>String.hpp</in>
+        <in>ThreadPool.cpp</in>
+        <in>Watch.cpp</in>
+        <in>Watch.hpp</in>
+        <in>XMLAccessor.cpp</in>
+        <in>XMLAccessor.hpp</in>
+        <in>anyPrinterUtil.hpp</in>
+        <in>exceptions.hpp</in>
+        <in>fwd.hpp</in>
+        <in>iit.hpp</in>
+        <in>iter_iterator.hpp</in>
+        <in>macrosDef.hpp</in>
+        <in>macrosUndef.hpp</in>
+        <in>printer.hpp</in>
+        <in>ptr_iterator.hpp</in>
+        <in>util.cpp</in>
+        <in>util.hpp</in>
+      </df>
+      <df name="tut">
+        <in>Visualizator.hpp</in>
+        <in>defMacros.hpp</in>
+        <in>defMacrosWA.hpp</in>
+        <in>nspDef.hpp</in>
+        <in>nspUndef.hpp</in>
+        <in>util.hpp</in>
+      </df>
+      <df name="xmlppUtils">
+        <in>exceptions.hpp</in>
+        <in>nspDef.hpp</in>
+        <in>nspUndef.hpp</in>
+        <in>util.cpp</in>
+        <in>util.hpp</in>
+      </df>
+    </df>
+    <df root="../../../../../src/chila/tools/licenseAdder" name="1">
+      <in>Formats.cpp</in>
+      <in>Formats.hpp</in>
+      <in>Grammar.hpp</in>
+      <in>exceptions.hpp</in>
+      <in>formats.xml</in>
+      <in>fwd.hpp</in>
+      <in>license.py</in>
+      <in>main.cpp</in>
+      <in>test.hpp</in>
+      <in>util.cpp</in>
+      <in>util.hpp</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>wscript</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>../../../../../src/chila/tools/licenseAdder</Elem>
+    <Elem>../../../../../src/chila/lib</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="all" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+        <buildAnalyzer>false</buildAnalyzer>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>../../..</buildCommandWorkingDir>
+          <buildCommand>waf build_debug PROJECTS="chila/tools/licenseAdder"</buildCommand>
+          <cleanCommand>waf clean_debug PROJECTS="chila/tools/licenseAdder"</cleanCommand>
+          <executablePath>../../../build/debug/projects/waf/chila/tools/licenseAdder/chila.tools.licenseAdder.bin</executablePath>
+          <ccTool>
+            <standard>8</standard>
+            <preprocessorList>
+              <Elem>BOOST_PP_VARIADICS=1</Elem>
+              <Elem>linux</Elem>
+            </preprocessorList>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+      <item path="../../../../../src/chila/lib/defstr/defstr.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/defstr/macrosDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/defstr/macrosUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/dsv/dsv.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/dsv/dsv.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/dsv/macrosDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/dsv/macrosUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/dynMplFusion/fusion/map.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/dynMplFusion/fusion/vector.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/dynMplFusion/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/basic.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/date_time.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/defMacros.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/set.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/undefMacros.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/example/main.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/FunctionAdapter.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/FunctorExecuterOperation.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/OpAdder.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/OperationProviderMap.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/ValueMap.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/VariableProviderMap.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/defMacros.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/evaluable_vector.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/expression.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/undefMacros.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/Grammar.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/Parser.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/SymbolTable.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/interfaces.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/git/exceptions.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/git/exceptions.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/git/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/git/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/git/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/git/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/git/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/AnyPrinter.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Construct.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/ContainerSinkInserter.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/FunExecSequence.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/InPlaceStrStream.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/MemFnExecuter.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/MemoryPool.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Path.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Path.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/PolyAllocator.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/PrintExp.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/QueuePoster.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/RepeatText.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/SignalsLight.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/SimplePrinter.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/SinkInserter.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/String.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Watch.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Watch.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/XMLAccessor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/XMLAccessor.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/anyPrinterUtil.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/exceptions.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fusion/FunSeqExecuter.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fusion/MakeSet.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fusion/MakeVector.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fusion/macrosDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fusion/macrosUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fusion/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fusion/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/iit.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/iter_iterator.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/macrosDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/macrosUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/printer.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/ptr_iterator.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/Construct.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/MemFnExecuter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/Path.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/RepeatText.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/SimplePrinter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/SinkInserter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/common.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/main.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/tut/Visualizator.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/tut/defMacros.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/tut/defMacrosWA.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/tut/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/tut/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/tut/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/xmlppUtils/exceptions.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/xmlppUtils/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/xmlppUtils/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/xmlppUtils/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/xmlppUtils/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/Formats.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/Formats.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/Grammar.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/exceptions.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/formats.xml"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/license.py"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/main.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/test.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+    </conf>
+    <conf name="debug" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+        <buildAnalyzer>false</buildAnalyzer>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>../../..</buildCommandWorkingDir>
+          <buildCommand>waf install_debug PROJECTS="chila/tools/licenseAdder"</buildCommand>
+          <cleanCommand>waf clean_debug PROJECTS="chila/tools/licenseAdder"</cleanCommand>
+          <executablePath>../../../build/debug/projects/waf/chila/tools/licenseAdder/chila.tools.licenseAdder.bin</executablePath>
+          <ccTool>
+            <standard>8</standard>
+            <incDir>
+              <pElem>../../../../../../../../applib/diameter/imsdia-ga-5.7.1/api/include</pElem>
+              <pElem>../../../../../../../../applib/diameter/imsdia-ga-5.7.1/include</pElem>
+              <pElem>../../../../../../../../applib/diameter/imsdia-ga-5.7.1/AcceleroCore/include</pElem>
+            </incDir>
+            <preprocessorList>
+              <Elem>BOOST_PP_VARIADICS=1</Elem>
+              <Elem>linux</Elem>
+            </preprocessorList>
+          </ccTool>
+        </makeTool>
+        <requiredProjects>
+          <makeArtifact PL="../buildsys/file"
+                        CT="0"
+                        CN="debug"
+                        AC="false"
+                        BL="false"
+                        WD="../.."
+                        BC="myBuilder --src ../.. --dest . py.com.personal/buildsys/file/debug"
+                        CC="myBuilder --src ../.. --dest . py.com.personal/buildsys/file/debug/clean"
+                        OP="">
+          </makeArtifact>
+          <makeArtifact PL="../buildsys/task"
+                        CT="0"
+                        CN="debug"
+                        AC="false"
+                        BL="false"
+                        WD="../.."
+                        BC="myBuilder --src ../.. --dest . py.com.personal/buildsys/task/debug"
+                        CC="myBuilder --src ../.. --dest . py.com.personal/buildsys/task/debug/clean"
+                        OP="">
+          </makeArtifact>
+        </requiredProjects>
+      </makefileType>
+      <item path="../../../../../src/chila/lib/defstr/defstr.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/defstr/macrosDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/defstr/macrosUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/dsv/dsv.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/dsv/dsv.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/dsv/macrosDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/dsv/macrosUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/dynMplFusion/fusion/map.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/dynMplFusion/fusion/vector.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/dynMplFusion/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/basic.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/date_time.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/defMacros.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/set.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/undefMacros.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/common/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/example/main.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/FunctionAdapter.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/FunctorExecuterOperation.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/OpAdder.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/OperationProviderMap.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/ValueMap.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/VariableProviderMap.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/defMacros.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/evaluable_vector.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/expression.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/undefMacros.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/Grammar.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/Parser.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/SymbolTable.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/interfaces.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/git/exceptions.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/git/exceptions.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/git/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/git/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/git/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/git/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/git/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/AnyPrinter.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Construct.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/ContainerSinkInserter.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/FunExecSequence.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/InPlaceStrStream.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/MemFnExecuter.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/MemoryPool.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Path.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Path.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/PolyAllocator.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/PrintExp.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/QueuePoster.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/RepeatText.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/SignalsLight.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/SimplePrinter.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/SinkInserter.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/String.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Watch.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Watch.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/XMLAccessor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/XMLAccessor.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/anyPrinterUtil.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/exceptions.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fusion/FunSeqExecuter.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fusion/MakeSet.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fusion/MakeVector.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fusion/macrosDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fusion/macrosUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fusion/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fusion/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/iit.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/iter_iterator.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/macrosDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/macrosUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/printer.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/ptr_iterator.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/Construct.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/MemFnExecuter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/Path.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/RepeatText.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/SimplePrinter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/SinkInserter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/common.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/main.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/tut/Visualizator.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/tut/defMacros.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/tut/defMacrosWA.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/tut/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/tut/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/tut/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/xmlppUtils/exceptions.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/xmlppUtils/nspDef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/xmlppUtils/nspUndef.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/xmlppUtils/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/lib/xmlppUtils/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/Formats.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/Formats.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/Grammar.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/exceptions.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/formats.xml"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/fwd.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/license.py"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/main.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/test.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+    </conf>
+    <conf name="release" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <flagsDictionary>
+        <element flagsID="0" commonFlags="-O3 -fPIC -O3 -fPIC -std=c++11"/>
+      </flagsDictionary>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>../../..</buildCommandWorkingDir>
+          <buildCommand>waf install_release PROJECTS="chila/tools/licenseAdder"</buildCommand>
+          <cleanCommand>waf build_release PROJECTS="chila/tools/licenseAdder"</cleanCommand>
+          <executablePath>main/bsys/bin/ocsGprsServer.release.bin</executablePath>
+          <ccTool>
+            <preprocessorList>
+              <Elem>BOOST_PP_VARIADICS=1</Elem>
+            </preprocessorList>
+          </ccTool>
+        </makeTool>
+        <requiredProjects>
+          <makeArtifact PL="../buildsys/file"
+                        CT="0"
+                        CN="release"
+                        AC="false"
+                        BL="false"
+                        WD="../.."
+                        BC="myBuilder --src ../.. --dest . py.com.personal/buildsys/file/release"
+                        CC="myBuilder --src ../.. --dest . py.com.personal/buildsys/file/release/clean"
+                        OP="">
+          </makeArtifact>
+          <makeArtifact PL="../buildsys/task"
+                        CT="0"
+                        CN="release"
+                        AC="false"
+                        BL="false"
+                        WD="../.."
+                        BC="myBuilder --src ../.. --dest . py.com.personal/buildsys/task/release"
+                        CC="myBuilder --src ../.. --dest . py.com.personal/buildsys/task/release/clean"
+                        OP="">
+          </makeArtifact>
+        </requiredProjects>
+      </makefileType>
+      <item path="../../../../../src/chila/lib/dsv/dsv.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/example/main.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/expression/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/evaluator/parser/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/git/exceptions.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/git/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/AddressFilter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>../../../build/release/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../build/release</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>NDEBUG</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/misc/AnyPrinter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>../../../build/release/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../build/release</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>NDEBUG</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/misc/DynamicLibrary.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>../../../build/release/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../build/release</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>NDEBUG</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Path.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>../../../build/release/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../build/release</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>NDEBUG</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/misc/ThreadPool.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>../../../build/release/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../build/release</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>NDEBUG</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Watch.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/XMLAccessor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>../../../build/release/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../build/release</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>NDEBUG</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/Construct.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/MemFnExecuter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/Path.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/RepeatText.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/SimplePrinter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/SinkInserter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/main.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/tests/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/lib/misc/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+          <incDir>
+            <pElem>../../../build/release/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../build/release</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>NDEBUG</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/xmlppUtils/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="4">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/Formats.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/license.py"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/main.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/tools/licenseAdder/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <folder path="1">
+        <ccTool>
+          <incDir>
+            <pElem>../../../build/release/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../build/release</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>NDEBUG</Elem>
+          </preprocessorList>
+        </ccTool>
+      </folder>
+    </conf>
+  </confs>
+</configurationDescriptor>

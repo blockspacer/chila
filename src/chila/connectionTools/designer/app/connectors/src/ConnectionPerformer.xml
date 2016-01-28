@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright 2011-2015 Roberto Daniel Gimenez Gamarra
+    (C.I.: 1.439.390 - Paraguay)
+
+    This file is part of 'chila.connectionTools.designer'
+
+    'chila.connectionTools.designer' is free software: you can redistribute it
+    and/or modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    'chila.connectionTools.designer' is distributed in the hope that
+    it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with 'chila.connectionTools.designer'. If not, see <http://www.gnu.org/licenses/>.
+-->
+<cPerformer name="chila.connectionTools.designer.app.connectors.gen.ConnectionPerformer">
+
+    <!-- Aliases -->
+    <arguments>
+        <argument name="moduleName" description=""/>
+        <argument name="filePath" description=""/>
+        <argument name="nodePath" description=""/>
+        <argument name="nodeId" description=""/>
+        <argument name="name" description=""/>
+        <argument name="value" description=""/>
+        <argument name="cToolsPath" description=""/>
+        <argument name="action" description=""/>
+        <argument name="actionList" description=""/>
+        <argument name="errorText" description=""/>
+        <argument name="outputText" description=""/>
+        <argument name="nodePathPair" description=""/>
+        <argument name="openNode" description=""/>
+        <argument name="isExpandable" description=""/>
+        <argument name="textProperties" description=""/>
+    </arguments>
+
+    <connectorAliases>
+        <alias name="Logger" connectorPath="chila.connectionTools.designer.app.connectors.gen.Logger">
+            <arguments>
+                <argument name="moduleName" cpName="moduleName"/>
+                <argument name="cToolsPath" cpName="cToolsPath"/>
+            </arguments>
+            <actions/>
+            <events/>
+        </alias>
+
+        <alias name="MainWindow" connectorPath="chila.connectionTools.designer.app.connectors.gen.MainWindow">
+            <arguments>
+                <argument name="moduleName" cpName="moduleName"/>
+                <argument name="nodePath" cpName="nodePath"/>
+                <argument name="nodeId" cpName="nodeId"/>
+                <argument name="value" cpName="value"/>
+                <argument name="action" cpName="action"/>
+                <argument name="actionList" cpName="actionList"/>
+                <argument name="errorText" cpName="errorText"/>
+                <argument name="outputText" cpName="outputText"/>
+                <argument name="textProperties" cpName="textProperties"/>
+                <argument name="openNode" cpName="openNode"/>
+                <argument name="isExpandable" cpName="isExpandable"/>
+            </arguments>
+            <actions/>
+            <events/>
+        </alias>
+
+        <alias name="FileLoader" connectorPath="chila.connectionTools.designer.app.connectors.gen.FileLoader">
+            <arguments>
+                <argument name="moduleName" cpName="moduleName"/>
+                <argument name="filePath" cpName="filePath"/>
+                <argument name="nodePath" cpName="nodePath"/>
+                <argument name="nodeId" cpName="nodeId"/>
+                <argument name="value" cpName="value"/>
+                <argument name="cToolsPath" cpName="cToolsPath"/>
+                <argument name="action" cpName="action"/>
+                <argument name="actionList" cpName="actionList"/>
+                <argument name="errorText" cpName="errorText"/>
+                <argument name="outputText" cpName="outputText"/>
+                <argument name="textProperties" cpName="textProperties"/>
+                <argument name="openNode" cpName="openNode"/>
+                <argument name="isExpandable" cpName="isExpandable"/>
+            </arguments>
+            <actions/>
+            <events/>
+        </alias>
+
+    </connectorAliases>
+
+    <!-- Argument generators -->
+    <argumentProviderCreators>
+
+        <creator name="fileLoaderNameProv" requires="" provides="moduleName"/>
+
+        <creator name="mainWindowNameProv" requires="" provides="moduleName"/>
+
+
+    </argumentProviderCreators>
+
+    <!-- Connections -->
+    <connectors>
+
+        <!-- Logger -->
+        <instance name="logger" connectorAlias="Logger"/>
+
+        <!-- MainWindow -->
+        <instance name="mainWindow" connectorAlias="MainWindow">
+            <event name="launcher:started" description="">
+                <aProviderCreators>
+                    <apc name="mainWindowNameProv"/>
+                </aProviderCreators>
+                <actions>
+                    <action connector="logger" name="moduleStarted" determinesOrder="false"/>
+                    <action connector="mainWindow" name="waitEvent" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="launcher:finished" description="">
+                <aProviderCreators>
+                    <apc name="mainWindowNameProv"/>
+                </aProviderCreators>
+                <actions>
+                    <action connector="logger" name="moduleFinished" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="actionRequest" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="fileLoader" name="performAction" determinesOrder="false"/>
+                    <action connector="mainWindow" name="waitEvent" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="undoRequest" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="fileLoader" name="undo" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="redoRequest" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="fileLoader" name="redo" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="saveRequest" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="fileLoader" name="save" determinesOrder="false"/>
+                    <action connector="mainWindow" name="waitEvent" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="actionListRequired" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="fileLoader" name="giveActionList" determinesOrder="false"/>
+                    <action connector="mainWindow" name="waitEvent" determinesOrder="false"/>
+                </actions>
+            </event>
+
+
+            <event name="flowNodesRequired" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="fileLoader" name="requestFlowNodes" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="flowNodeSelected" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="fileLoader" name="showFNodeInfo" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="checkNodes" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="fileLoader" name="checkNodes" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="expandFlowNode" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="fileLoader" name="expandFlowNode" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="moveUpRequest" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="fileLoader" name="moveUp" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="moveDownRequest" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="fileLoader" name="moveDown" determinesOrder="false"/>
+                </actions>
+            </event>
+        </instance>
+
+        <!-- FileLoader -->
+        <instance name="fileLoader" connectorAlias="FileLoader">
+            <event name="launcher:started" description="">
+                <aProviderCreators>
+                    <apc name="fileLoaderNameProv"/>
+                </aProviderCreators>
+                <actions>
+                    <action connector="logger" name="moduleStarted" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="launcher:finished" description="">
+                <aProviderCreators>
+                    <apc name="fileLoaderNameProv"/>
+                </aProviderCreators>
+                <actions>
+                    <action connector="logger" name="moduleFinished" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="connectorLoaded" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="logger" name="connectorLoaded" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="cPerformerLoaded" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="logger" name="cPerformerLoaded" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="nodeFound" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="addNode" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="valueFound" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="setNodeValue" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="outputText" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="addOutputText" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="clearOutput" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="clearOutput" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="actionNotPerformed" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="actionNotPerformed" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="nodeRemoved" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="removeNode" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="nodeSelected" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="selectNode" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="actionListFound" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="showActions" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="nodeRenamed" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="renameNode" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="flowNodeFound" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="addFlowNode" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="noMoreFlowNodes" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="noMoreFlowNodes" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="removeChildren" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="removeChildren" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="saveDesignTreeState" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="saveDesignTreeState" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="restoreDesignTreeState" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="restoreDesignTreeState" determinesOrder="false"/>
+                </actions>
+            </event>
+
+        </instance>
+
+
+
+    </connectors>
+
+</cPerformer>

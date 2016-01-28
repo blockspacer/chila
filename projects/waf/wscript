@@ -1,0 +1,20 @@
+# Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
+# (C.I.: 1.439.390 - Paraguay)
+
+import wafmod.chilaws
+
+
+top = "../.."
+
+# ------------------------------------------------------------------------------------------------------
+def options(opt):
+    wafmod.chilaws.options(opt)
+
+def configure(ctx):
+    wafmod.chilaws.configure(ctx)
+
+def build(bld):
+    wafmod.chilaws.build(bld)
+ 
+
+

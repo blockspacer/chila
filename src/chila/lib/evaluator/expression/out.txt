@@ -1,0 +1,259 @@
+    struct no_arg {};
+    namespace py { namespace com { namespace personal { namespace lib { namespace evaluator { namespace expression
+    {
+        template <typename Function , typename Arg0 = no_arg , typename Arg1 = no_arg , typename Arg2 = no_arg , typename Arg3 = no_arg , typename Arg4 = no_arg , typename Arg5 = no_arg , typename Arg6 = no_arg , typename Arg7 = no_arg , typename Arg8 = no_arg , typename Arg9 = no_arg , typename Arg10 = no_arg>
+        struct FunctionAdapter {};
+    }}}}}}
+    namespace py { namespace com { namespace personal { namespace lib { namespace evaluator { namespace expression
+    {
+        template <typename Function >
+        struct FunctionAdapter<Function
+            , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg>
+        {
+            typedef typename Function::result_type result_type;
+            typedef boost::mpl::vector<> argument_types;
+            Function fun;
+            FunctionAdapter(Function fun) : fun(fun) {}
+            result_type operator()() const
+            {
+                return fun();
+            }
+        };
+        template < typename Function>
+        inline FunctionAdapter<Function >
+            functionAdapter(Function fun)
+        {
+            return FunctionAdapter<
+                Function >(fun);
+        }
+    }}}}}}
+    namespace py { namespace com { namespace personal { namespace lib { namespace evaluator { namespace expression
+    {
+        template <typename Function , typename Arg0>
+        struct FunctionAdapter<Function , Arg0
+            , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg>
+        {
+            typedef typename Function::result_type result_type;
+            typedef boost::mpl::vector< Arg0> argument_types;
+            Function fun;
+            FunctionAdapter(Function fun) : fun(fun) {}
+            result_type operator()( const Arg0 &arg0) const
+            {
+                return fun( arg0);
+            }
+        };
+        template < typename Arg0 , typename Function>
+        inline FunctionAdapter<Function , Arg0>
+            functionAdapter(Function fun)
+        {
+            return FunctionAdapter<
+                Function , Arg0>(fun);
+        }
+    }}}}}}
+    namespace py { namespace com { namespace personal { namespace lib { namespace evaluator { namespace expression
+    {
+        template <typename Function , typename Arg0 , typename Arg1>
+        struct FunctionAdapter<Function , Arg0 , Arg1
+            , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg>
+        {
+            typedef typename Function::result_type result_type;
+            typedef boost::mpl::vector< Arg0 , Arg1> argument_types;
+            Function fun;
+            FunctionAdapter(Function fun) : fun(fun) {}
+            result_type operator()( const Arg0 &arg0 , const Arg1 &arg1) const
+            {
+                return fun( arg0 , arg1);
+            }
+        };
+        template < typename Arg0 , typename Arg1 , typename Function>
+        inline FunctionAdapter<Function , Arg0 , Arg1>
+            functionAdapter(Function fun)
+        {
+            return FunctionAdapter<
+                Function , Arg0 , Arg1>(fun);
+        }
+    }}}}}}
+    namespace py { namespace com { namespace personal { namespace lib { namespace evaluator { namespace expression
+    {
+        template <typename Function , typename Arg0 , typename Arg1 , typename Arg2>
+        struct FunctionAdapter<Function , Arg0 , Arg1 , Arg2
+            , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg>
+        {
+            typedef typename Function::result_type result_type;
+            typedef boost::mpl::vector< Arg0 , Arg1 , Arg2> argument_types;
+            Function fun;
+            FunctionAdapter(Function fun) : fun(fun) {}
+            result_type operator()( const Arg0 &arg0 , const Arg1 &arg1 , const Arg2 &arg2) const
+            {
+                return fun( arg0 , arg1 , arg2);
+            }
+        };
+        template < typename Arg0 , typename Arg1 , typename Arg2 , typename Function>
+        inline FunctionAdapter<Function , Arg0 , Arg1 , Arg2>
+            functionAdapter(Function fun)
+        {
+            return FunctionAdapter<
+                Function , Arg0 , Arg1 , Arg2>(fun);
+        }
+    }}}}}}
+    namespace py { namespace com { namespace personal { namespace lib { namespace evaluator { namespace expression
+    {
+        template <typename Function , typename Arg0 , typename Arg1 , typename Arg2 , typename Arg3>
+        struct FunctionAdapter<Function , Arg0 , Arg1 , Arg2 , Arg3
+            , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg>
+        {
+            typedef typename Function::result_type result_type;
+            typedef boost::mpl::vector< Arg0 , Arg1 , Arg2 , Arg3> argument_types;
+            Function fun;
+            FunctionAdapter(Function fun) : fun(fun) {}
+            result_type operator()( const Arg0 &arg0 , const Arg1 &arg1 , const Arg2 &arg2 , const Arg3 &arg3) const
+            {
+                return fun( arg0 , arg1 , arg2 , arg3);
+            }
+        };
+        template < typename Arg0 , typename Arg1 , typename Arg2 , typename Arg3 , typename Function>
+        inline FunctionAdapter<Function , Arg0 , Arg1 , Arg2 , Arg3>
+            functionAdapter(Function fun)
+        {
+            return FunctionAdapter<
+                Function , Arg0 , Arg1 , Arg2 , Arg3>(fun);
+        }
+    }}}}}}
+    namespace py { namespace com { namespace personal { namespace lib { namespace evaluator { namespace expression
+    {
+        template <typename Function , typename Arg0 , typename Arg1 , typename Arg2 , typename Arg3 , typename Arg4>
+        struct FunctionAdapter<Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4
+            , no_arg , no_arg , no_arg , no_arg , no_arg , no_arg>
+        {
+            typedef typename Function::result_type result_type;
+            typedef boost::mpl::vector< Arg0 , Arg1 , Arg2 , Arg3 , Arg4> argument_types;
+            Function fun;
+            FunctionAdapter(Function fun) : fun(fun) {}
+            result_type operator()( const Arg0 &arg0 , const Arg1 &arg1 , const Arg2 &arg2 , const Arg3 &arg3 , const Arg4 &arg4) const
+            {
+                return fun( arg0 , arg1 , arg2 , arg3 , arg4);
+            }
+        };
+        template < typename Arg0 , typename Arg1 , typename Arg2 , typename Arg3 , typename Arg4 , typename Function>
+        inline FunctionAdapter<Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4>
+            functionAdapter(Function fun)
+        {
+            return FunctionAdapter<
+                Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4>(fun);
+        }
+    }}}}}}
+    namespace py { namespace com { namespace personal { namespace lib { namespace evaluator { namespace expression
+    {
+        template <typename Function , typename Arg0 , typename Arg1 , typename Arg2 , typename Arg3 , typename Arg4 , typename Arg5>
+        struct FunctionAdapter<Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5
+            , no_arg , no_arg , no_arg , no_arg , no_arg>
+        {
+            typedef typename Function::result_type result_type;
+            typedef boost::mpl::vector< Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5> argument_types;
+            Function fun;
+            FunctionAdapter(Function fun) : fun(fun) {}
+            result_type operator()( const Arg0 &arg0 , const Arg1 &arg1 , const Arg2 &arg2 , const Arg3 &arg3 , const Arg4 &arg4 , const Arg5 &arg5) const
+            {
+                return fun( arg0 , arg1 , arg2 , arg3 , arg4 , arg5);
+            }
+        };
+        template < typename Arg0 , typename Arg1 , typename Arg2 , typename Arg3 , typename Arg4 , typename Arg5 , typename Function>
+        inline FunctionAdapter<Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5>
+            functionAdapter(Function fun)
+        {
+            return FunctionAdapter<
+                Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5>(fun);
+        }
+    }}}}}}
+    namespace py { namespace com { namespace personal { namespace lib { namespace evaluator { namespace expression
+    {
+        template <typename Function , typename Arg0 , typename Arg1 , typename Arg2 , typename Arg3 , typename Arg4 , typename Arg5 , typename Arg6>
+        struct FunctionAdapter<Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6
+            , no_arg , no_arg , no_arg , no_arg>
+        {
+            typedef typename Function::result_type result_type;
+            typedef boost::mpl::vector< Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6> argument_types;
+            Function fun;
+            FunctionAdapter(Function fun) : fun(fun) {}
+            result_type operator()( const Arg0 &arg0 , const Arg1 &arg1 , const Arg2 &arg2 , const Arg3 &arg3 , const Arg4 &arg4 , const Arg5 &arg5 , const Arg6 &arg6) const
+            {
+                return fun( arg0 , arg1 , arg2 , arg3 , arg4 , arg5 , arg6);
+            }
+        };
+        template < typename Arg0 , typename Arg1 , typename Arg2 , typename Arg3 , typename Arg4 , typename Arg5 , typename Arg6 , typename Function>
+        inline FunctionAdapter<Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6>
+            functionAdapter(Function fun)
+        {
+            return FunctionAdapter<
+                Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6>(fun);
+        }
+    }}}}}}
+    namespace py { namespace com { namespace personal { namespace lib { namespace evaluator { namespace expression
+    {
+        template <typename Function , typename Arg0 , typename Arg1 , typename Arg2 , typename Arg3 , typename Arg4 , typename Arg5 , typename Arg6 , typename Arg7>
+        struct FunctionAdapter<Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7
+            , no_arg , no_arg , no_arg>
+        {
+            typedef typename Function::result_type result_type;
+            typedef boost::mpl::vector< Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7> argument_types;
+            Function fun;
+            FunctionAdapter(Function fun) : fun(fun) {}
+            result_type operator()( const Arg0 &arg0 , const Arg1 &arg1 , const Arg2 &arg2 , const Arg3 &arg3 , const Arg4 &arg4 , const Arg5 &arg5 , const Arg6 &arg6 , const Arg7 &arg7) const
+            {
+                return fun( arg0 , arg1 , arg2 , arg3 , arg4 , arg5 , arg6 , arg7);
+            }
+        };
+        template < typename Arg0 , typename Arg1 , typename Arg2 , typename Arg3 , typename Arg4 , typename Arg5 , typename Arg6 , typename Arg7 , typename Function>
+        inline FunctionAdapter<Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7>
+            functionAdapter(Function fun)
+        {
+            return FunctionAdapter<
+                Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7>(fun);
+        }
+    }}}}}}
+    namespace py { namespace com { namespace personal { namespace lib { namespace evaluator { namespace expression
+    {
+        template <typename Function , typename Arg0 , typename Arg1 , typename Arg2 , typename Arg3 , typename Arg4 , typename Arg5 , typename Arg6 , typename Arg7 , typename Arg8>
+        struct FunctionAdapter<Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8
+            , no_arg , no_arg>
+        {
+            typedef typename Function::result_type result_type;
+            typedef boost::mpl::vector< Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8> argument_types;
+            Function fun;
+            FunctionAdapter(Function fun) : fun(fun) {}
+            result_type operator()( const Arg0 &arg0 , const Arg1 &arg1 , const Arg2 &arg2 , const Arg3 &arg3 , const Arg4 &arg4 , const Arg5 &arg5 , const Arg6 &arg6 , const Arg7 &arg7 , const Arg8 &arg8) const
+            {
+                return fun( arg0 , arg1 , arg2 , arg3 , arg4 , arg5 , arg6 , arg7 , arg8);
+            }
+        };
+        template < typename Arg0 , typename Arg1 , typename Arg2 , typename Arg3 , typename Arg4 , typename Arg5 , typename Arg6 , typename Arg7 , typename Arg8 , typename Function>
+        inline FunctionAdapter<Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8>
+            functionAdapter(Function fun)
+        {
+            return FunctionAdapter<
+                Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8>(fun);
+        }
+    }}}}}}
+    namespace py { namespace com { namespace personal { namespace lib { namespace evaluator { namespace expression
+    {
+        template <typename Function , typename Arg0 , typename Arg1 , typename Arg2 , typename Arg3 , typename Arg4 , typename Arg5 , typename Arg6 , typename Arg7 , typename Arg8 , typename Arg9>
+        struct FunctionAdapter<Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9
+            , no_arg>
+        {
+            typedef typename Function::result_type result_type;
+            typedef boost::mpl::vector< Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9> argument_types;
+            Function fun;
+            FunctionAdapter(Function fun) : fun(fun) {}
+            result_type operator()( const Arg0 &arg0 , const Arg1 &arg1 , const Arg2 &arg2 , const Arg3 &arg3 , const Arg4 &arg4 , const Arg5 &arg5 , const Arg6 &arg6 , const Arg7 &arg7 , const Arg8 &arg8 , const Arg9 &arg9) const
+            {
+                return fun( arg0 , arg1 , arg2 , arg3 , arg4 , arg5 , arg6 , arg7 , arg8 , arg9);
+            }
+        };
+        template < typename Arg0 , typename Arg1 , typename Arg2 , typename Arg3 , typename Arg4 , typename Arg5 , typename Arg6 , typename Arg7 , typename Arg8 , typename Arg9 , typename Function>
+        inline FunctionAdapter<Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9>
+            functionAdapter(Function fun)
+        {
+            return FunctionAdapter<
+                Function , Arg0 , Arg1 , Arg2 , Arg3 , Arg4 , Arg5 , Arg6 , Arg7 , Arg8 , Arg9>(fun);
+        }
+    }}}}}}

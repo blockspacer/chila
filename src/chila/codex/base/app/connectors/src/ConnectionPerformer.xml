@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Copyright 2005-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
+    (C.I.: 1.439.390 - Paraguay)
+-->
+
+<cPerformer name="chila.codex.base.app.connectors.gen.ConnectionPerformer" description="">
+    <!-- Arguments -->
+    <arguments>
+        <group name="notebook" description="">
+            <argument name="tabName" description="" unique="false"/>
+            <argument name="tabTooltip" description="" unique="false"/>
+            <argument name="tabWidget" description="" unique="false"/>
+        </group>
+        <argument name="nullObject" description="" unique="false"/>
+        <group name="cmdNetServer" description="">
+            <argument name="clientId" description="" unique="false"/>
+            <argument name="rcvBuffer" description="" unique="false"/>
+            <argument name="sndBuffer" description="" unique="false"/>
+            <argument name="endpoint" description="" unique="false"/>
+            <argument name="address" description="" unique="false"/>
+            <argument name="host" description="" unique="false"/>
+            <argument name="msgId" description="" unique="false"/>
+            <argument name="funPath" description="" unique="false"/>
+            <argument name="funArgs" description="" unique="false"/>
+            <argument name="message" description="" unique="false"/>
+            <argument name="msgBuffer" description="" unique="false"/>
+        </group>
+        <argument name="errorMsg" description="" unique="false"/>
+        <argument name="actionPath" description="" unique="false"/>
+    </arguments>
+
+    <!-- Connector Aliases -->
+    <connectorAliases>
+        <alias name="Application" connectorPath="chila.codex.base.app.connectors.gen.Application" description="">
+            <arguments>
+                <argument name="notebook:tabName" cpName="notebook:tabName" description=""/>
+                <argument name="notebook:tabWidget" cpName="notebook:tabWidget" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="MainWindow" connectorPath="chila.codex.base.app.connectors.gen.MainWindow" description="">
+            <arguments>
+                <argument name="notebook:tabName" cpName="notebook:tabName" description=""/>
+                <argument name="notebook:tabWidget" cpName="notebook:tabWidget" description=""/>
+                <argument name="actionPath" cpName="actionPath" description=""/>
+                <argument name="notebook:tabTooltip" cpName="notebook:tabTooltip" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="CmdNetServer" connectorPath="chila.connectionTools.lib.other.common.connectors.gen.Network" description="">
+            <arguments>
+                <argument name="clientId" cpName="cmdNetServer:clientId" description=""/>
+                <argument name="recvBuffer" cpName="cmdNetServer:rcvBuffer" description=""/>
+                <argument name="sndBuffer" cpName="cmdNetServer:sndBuffer" description=""/>
+                <argument name="errorMsg" cpName="errorMsg" description=""/>
+                <argument name="endpoint" cpName="cmdNetServer:endpoint" description=""/>
+                <argument name="address" cpName="cmdNetServer:address" description=""/>
+                <argument name="host" cpName="cmdNetServer:host" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="CmdNetTextMsgCreator" connectorPath="chila.connectionTools.lib.other.common.connectors.gen.TextMessageCreator" description="">
+            <arguments>
+                <argument name="sessionId" cpName="cmdNetServer:clientId" description=""/>
+                <argument name="buffer" cpName="cmdNetServer:rcvBuffer" description=""/>
+                <argument name="msgId" cpName="cmdNetServer:msgId" description=""/>
+                <argument name="errorMsg" cpName="errorMsg" description=""/>
+                <argument name="message" cpName="cmdNetServer:msgBuffer" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="FunDynExecuter" connectorPath="chila.connectionTools.lib.other.common.connectors.gen.FunDynExecuter" description="">
+            <arguments>
+                <argument name="funPath" cpName="cmdNetServer:funPath" description=""/>
+                <argument name="arguments" cpName="cmdNetServer:funArgs" description=""/>
+                <argument name="errorMsg" cpName="errorMsg" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="FunDynXMLParser" connectorPath="chila.connectionTools.lib.other.common.connectors.gen.FunDynXMLParser" description="">
+            <arguments>
+                <argument name="text" cpName="cmdNetServer:message" description=""/>
+                <argument name="funPath" cpName="cmdNetServer:funPath" description=""/>
+                <argument name="arguments" cpName="cmdNetServer:funArgs" description=""/>
+                <argument name="errorMsg" cpName="errorMsg" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="FileChooser" connectorPath="chila.codex.base.app.connectors.gen.FileChooser" description="">
+            <arguments>
+                <argument name="errorMsg" cpName="errorMsg" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="ActionExecuter" connectorPath="chila.codex.base.app.connectors.gen.ActionExecuter" description="">
+            <arguments>
+                <argument name="actionPath" cpName="actionPath" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+    </connectorAliases>
+
+    <!-- Argument Provider Creators -->
+    <argumentProviderCreators>
+        <creator name="nullObjectCreator" requires="" provides="nullObject"/>
+        <group name="cmdNetServer" description="">
+            <creator name="msgCreatorFromBuff" requires="cmdNetServer:msgBuffer" provides="cmdNetServer:message"/>
+        </group>
+    </argumentProviderCreators>
+
+    <!-- Connector Instances -->
+    <connectors>
+        <group name="base" description="">
+            <instance name="application" connectorAlias="Application" description=""/>
+            <instance name="mainWindow" connectorAlias="MainWindow" description="">
+                <event name="projectButtonPressed" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions/>
+                </event>
+                <event name="actionExecuted" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="actionExecuter" name="execute" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+            </instance>
+            <group name="appCommand" description="">
+                <instance name="funDynExecuter" connectorAlias="FunDynExecuter" description=""/>
+                <instance name="funDynXMLParser" connectorAlias="FunDynXMLParser" description="">
+                    <event name="parsed" connectorAlias="">
+                        <aProviderCreators/>
+                        <actions>
+                            <action connector="funDynExecuter" name="execute" description="" determinesOrder="false"/>
+                        </actions>
+                    </event>
+                </instance>
+                <instance name="msgCreator" connectorAlias="CmdNetTextMsgCreator" description="">
+                    <event name="messageObtained" connectorAlias="">
+                        <aProviderCreators>
+                            <apc name="cmdNetServer:msgCreatorFromBuff"/>
+                        </aProviderCreators>
+                        <actions>
+                            <action connector="funDynXMLParser" name="take" description="" determinesOrder="false"/>
+                        </actions>
+                    </event>
+                </instance>
+                <instance name="netServer" connectorAlias="CmdNetServer" description="">
+                    <event name="msgRead" connectorAlias="">
+                        <aProviderCreators/>
+                        <actions>
+                            <action connector="msgCreator" name="takeBuffer" description="" determinesOrder="false"/>
+                        </actions>
+                    </event>
+                </instance>
+            </group>
+            <instance name="actionExecuter" connectorAlias="ActionExecuter" description="">
+                <event name="file:open" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="fileChooser:open" name="open" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="file:saveAs" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="fileChooser:saveAs" name="open" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+            </instance>
+            <group name="fileChooser" description="">
+                <instance name="open" connectorAlias="FileChooser" description=""/>
+                <instance name="saveAs" connectorAlias="FileChooser" description=""/>
+            </group>
+        </group>
+    </connectors>
+</cPerformer>

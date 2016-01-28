@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cPerformer name="chila.codex.text.app.connectors.gen.ConnectionPerformer" description="">
+    <!-- Arguments -->
+    <arguments>
+        <argument name="fileId" description="" unique="false"/>
+        <argument name="fileName" description="" unique="false"/>
+        <group name="notebook" description="">
+            <argument name="tabName" description="" unique="false"/>
+            <argument name="tabWidget" description="" unique="false"/>
+            <argument name="tabTooltip" description="" unique="false"/>
+        </group>
+        <argument name="textBuffer" description="" unique="false"/>
+        <argument name="tagId" description="" unique="false"/>
+        <argument name="errorMsg" description="" unique="false"/>
+        <argument name="tags" description="" unique="false"/>
+        <argument name="tagsToApply" description="" unique="false"/>
+        <argument name="parserId" description="" unique="false"/>
+        <group name="findReplace" description="">
+            <argument name="findText" description="" unique="false"/>
+            <argument name="replaceText" description="" unique="false"/>
+            <argument name="checks" description="" unique="false"/>
+        </group>
+        <group name="action" description="">
+            <argument name="path" description="" unique="false"/>
+            <argument name="pathDataList" description="" unique="false"/>
+            <argument name="data" description="" unique="false"/>
+        </group>
+    </arguments>
+
+    <!-- Connector Aliases -->
+    <connectorAliases>
+        <alias name="Application" connectorPath="chila.codex.base.app.connectors.gen.Application" description="">
+            <arguments>
+                <argument name="notebook:tabName" cpName="notebook:tabName" description=""/>
+                <argument name="notebook:tabWidget" cpName="notebook:tabWidget" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="MainWindow" connectorPath="chila.codex.base.app.connectors.gen.MainWindow" description="">
+            <arguments>
+                <argument name="notebook:tabName" cpName="notebook:tabName" description=""/>
+                <argument name="notebook:tabWidget" cpName="notebook:tabWidget" description=""/>
+                <argument name="notebook:tabTooltip" cpName="notebook:tabTooltip" description=""/>
+                <argument name="notebook:tabId" cpName="fileId" description=""/>
+                <argument name="actionPath" cpName="action:path" description=""/>
+                <argument name="actionData" cpName="action:data" description=""/>
+                <argument name="actionPathDataList" cpName="action:pathDataList" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="TextEditor" connectorPath="chila.codex.text.app.connectors.gen.TextEditor" description="">
+            <arguments>
+                <argument name="fileName" cpName="fileName" description=""/>
+                <argument name="notebook:tabName" cpName="notebook:tabName" description=""/>
+                <argument name="notebook:tabWidget" cpName="notebook:tabWidget" description=""/>
+                <argument name="fileId" cpName="fileId" description=""/>
+                <argument name="textBuffer" cpName="textBuffer" description=""/>
+                <argument name="errorMsg" cpName="errorMsg" description=""/>
+                <argument name="tags" cpName="tags" description=""/>
+                <argument name="parserId" cpName="parserId" description=""/>
+                <argument name="tagsToApply" cpName="tagsToApply" description=""/>
+                <argument name="notebook:tabTooltip" cpName="notebook:tabTooltip" description=""/>
+                <argument name="findReplace:findText" cpName="findReplace:findText" description=""/>
+                <argument name="findReplace:replaceText" cpName="findReplace:replaceText" description=""/>
+                <argument name="findReplace:checks" cpName="findReplace:checks" description=""/>
+                <argument name="action:path" cpName="action:path" description=""/>
+                <argument name="action:data" cpName="action:data" description=""/>
+                <argument name="action:pathDataList" cpName="action:pathDataList" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="TextHighlighter" connectorPath="chila.codex.text.app.connectors.gen.TextHighlighter" description="">
+            <arguments>
+                <argument name="fileId" cpName="fileId" description=""/>
+                <argument name="tags" cpName="tags" description=""/>
+                <argument name="errorMsg" cpName="errorMsg" description=""/>
+                <argument name="textBuffer" cpName="textBuffer" description=""/>
+                <argument name="parserId" cpName="parserId" description=""/>
+                <argument name="tagsToApply" cpName="tagsToApply" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="FileOpener" connectorPath="chila.codex.text.app.connectors.gen.FileOpener" description="">
+            <arguments>
+                <argument name="fileName" cpName="fileName" description=""/>
+                <argument name="fileId" cpName="fileId" description=""/>
+                <argument name="textBuffer" cpName="textBuffer" description=""/>
+                <argument name="errorMsg" cpName="errorMsg" description=""/>
+                <argument name="fileType" cpName="parserId" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="FindReplace" connectorPath="chila.codex.text.app.connectors.gen.FindReplace" description="">
+            <arguments>
+                <argument name="findText" cpName="findReplace:findText" description=""/>
+                <argument name="replaceText" cpName="findReplace:replaceText" description=""/>
+                <argument name="checks" cpName="findReplace:checks" description=""/>
+                <argument name="errorMsg" cpName="errorMsg" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="FileChooser" connectorPath="chila.codex.base.app.connectors.gen.FileChooser" description="">
+            <arguments>
+                <argument name="fileName" cpName="fileName" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="BaseActionExecuter" connectorPath="chila.codex.base.app.connectors.gen.ActionExecuter" description="">
+            <arguments>
+                <argument name="actionPath" cpName="action:path" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+        <alias name="TextActionExecuter" connectorPath="chila.codex.text.app.connectors.gen.ActionExecuter" description="">
+            <arguments>
+                <argument name="actionPath" cpName="action:path" description=""/>
+            </arguments>
+            <events/>
+            <actions/>
+        </alias>
+    </connectorAliases>
+
+    <!-- Argument Provider Creators -->
+    <argumentProviderCreators/>
+
+    <!-- Connector Instances -->
+    <connectors>
+        <group name="base" description="">
+            <instance name="actionExecuter" connectorAlias="BaseActionExecuter" description="">
+                <event name="file:new" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="text:textEditor" name="newEditor" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="file:save" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="text:textEditor" name="saveEditorContents:current" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="file:saveAll" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="text:textEditor" name="saveAll" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="file:close" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="text:textEditor" name="closingSelectedEditor" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+            </instance>
+            <instance name="mainWindow" connectorAlias="MainWindow" description="">
+                <event name="notebook:closingTab" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="text:textEditor" name="closingEditor" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="notebook:tabSelected" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="text:fileOpener" name="fileSelected" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="fileSelected" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="actionExecuted" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="text:actionExecuter" name="execute" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="notebook:tabAdded" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="text:textEditor" name="tabAdded" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+            </instance>
+            <group name="fileChooser" description="">
+                <instance name="open" connectorAlias="FileChooser" description="">
+                    <event name="fileChosen" connectorAlias="">
+                        <aProviderCreators/>
+                        <actions>
+                            <action connector="text:fileOpener" name="openFile" description="" determinesOrder="false"/>
+                        </actions>
+                    </event>
+                </instance>
+                <instance name="saveAs" connectorAlias="FileChooser" description="">
+                    <event name="fileChosen" connectorAlias="">
+                        <aProviderCreators/>
+                        <actions>
+                            <action connector="text:textEditor" name="saveEditorContents:as" description="" determinesOrder="false"/>
+                        </actions>
+                    </event>
+                </instance>
+            </group>
+        </group>
+        <group name="text" description="">
+            <instance name="actionExecuter" connectorAlias="TextActionExecuter" description="">
+                <event name="edit:undo" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textEditor" name="undo" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="edit:redo" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textEditor" name="redo" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="edit:findReplace" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textEditor" name="findReplace:start" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+            </instance>
+            <instance name="findReplace" connectorAlias="FindReplace" description="">
+                <event name="findPrevious" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textEditor" name="findReplace:findPrevious" description="" determinesOrder="false"/>
+                        <action connector="base:mainWindow" name="setPresent" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="findNext" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textEditor" name="findReplace:findNext" description="" determinesOrder="false"/>
+                        <action connector="base:mainWindow" name="setPresent" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="replace" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textEditor" name="findReplace:replace" description="" determinesOrder="false"/>
+                        <action connector="base:mainWindow" name="setPresent" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="replaceAll" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textEditor" name="findReplace:replaceAll" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="closed" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textEditor" name="findReplace:restoreFind" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="stateChanged" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textEditor" name="findReplace:stateChanged" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+            </instance>
+            <instance name="textEditor" connectorAlias="TextEditor" description="">
+                <event name="newTBTabRequested" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="base:mainWindow" name="notebook:openNewTab" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="parseText" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textHighlighter" name="parseText" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="saveEditorContents:current" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="fileOpener" name="saveFile:current" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="saveEditorContents:as" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="fileOpener" name="saveFile:as" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="contentsModified" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="base:mainWindow" name="notebook:tabContentsModified" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="contentsAreOriginal" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="base:mainWindow" name="notebook:tabContentsAreOriginal" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="tabDataChanged" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="base:mainWindow" name="notebook:tabDataChanged" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="editorClosed" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="fileOpener" name="fileClosed" description="" determinesOrder="false"/>
+                        <action connector="base:mainWindow" name="notebook:closeTab" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="findReplace:setFindText" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="findReplace" name="setTexts" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="registerAction" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="base:mainWindow" name="addAction" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="clearActions" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="base:mainWindow" name="clearActions" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="addSeparator" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="base:mainWindow" name="addSeparator" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="selectFile" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="base:mainWindow" name="notebook:selectTab" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+            </instance>
+            <instance name="textHighlighter" connectorAlias="TextHighlighter" description="">
+                <event name="applyTags" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textEditor" name="applyTags" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+            </instance>
+            <instance name="fileOpener" connectorAlias="FileOpener" description="">
+                <event name="openingNewFile" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textEditor" name="openEditor" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="textFound" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textEditor" name="addText" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="fileAlreadyOpened" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="base:mainWindow" name="notebook:selectTab" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="fileSaved" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textEditor" name="editorTypeChanged" description="" determinesOrder="false"/>
+                        <action connector="textEditor" name="savingDone" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="fileOpened" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="textEditor" name="openingDone" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="fileSelected" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="base:fileChooser:saveAs" name="setFileName" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+                <event name="savingUnnamedFile" connectorAlias="">
+                    <aProviderCreators/>
+                    <actions>
+                        <action connector="base:fileChooser:saveAs" name="open" description="" determinesOrder="false"/>
+                    </actions>
+                </event>
+            </instance>
+        </group>
+    </connectors>
+</cPerformer>

@@ -1,0 +1,98 @@
+# Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
+# (C.I.: 1.439.390 - Paraguay)
+
+#! /usr/bin/env python
+# encoding: utf-8
+
+import wafmod.generators
+import os.path
+
+def options(opt):
+    pass
+
+def configure(ctx):
+    pass
+
+def build(ctx):
+    glob = ctx.GLOBAL
+
+    project = glob.sharedLib()
+    project.compilationArg("{target.comp_args}")
+    project.includePath("{boost.include}")
+
+    project.archiveLib("chila/connectionTools/lib/codegen")
+    project.archiveLib("chila/connectionTools/lib/other")
+    project.archiveLib("chila/codex/common")
+    project.archiveLib("chila/lib/qt")
+    project.archiveLib("chila/lib/misc")
+
+    project.pkgConfigVars("libxml++-2.6")
+
+    project.compilationArg("{qt5.include}")
+
+    project.compilationArg("-D_REENTRANT")
+    project.compilationArg("-DQT_QML_DEBUG")
+    project.compilationArg("-DQT_DECLARATIVE_DEBUG")
+    project.compilationArg("-DQT_QUICK_LIB")
+    project.compilationArg("-DQT_WIDGETS_LIB")
+    project.compilationArg("-DQT_GUI_LIB")
+    project.compilationArg("-DQT_QML_LIB")
+    project.compilationArg("-DQT_NETWORK_LIB")
+    project.compilationArg("-DQT_CORE_LIB")
+
+    project.pkgConfigVars("Qt5Widgets")
+    project.pkgConfigVars("Qt5Quick")
+    project.pkgConfigVars("Qt5Gui")
+    project.pkgConfigVars("Qt5Qml")
+
+    project.targetArg("{qt5.lib}")
+    project.libPath("{boost.lib}")
+    project.lib("boost_program_options")
+    project.lib("boost_filesystem")
+    project.lib("boost_thread")
+    project.lib("boost_system")
+    project.lib("pthread")
+    project.targetArg("{target.link_args}")
+
+    cpGen = project.addGenerator(wafmod.generators.ConnectionToolsGenerator(srcDir="app/connectors/src", destDir="app/connectors/gen"))
+
+    cpGen.addCPerformer("ConnectionPerformer.xml")
+    cpGen.addConnector("Application.xml")
+    cpGen.addConnector("MainWindow.xml")
+    cpGen.addConnector("FileChooser.xml")
+    cpGen.addConnector("ActionExecuter.xml")
+    cpGen.addConnector("../../../../../connectionTools/lib/other/common/connectors/src/Forwarder.xml", True)
+    cpGen.addConnector("../../../../../connectionTools/lib/other/common/connectors/src/TextMessageCreator.xml", True)
+    cpGen.addConnector("../../../../../connectionTools/lib/other/common/connectors/src/Network.xml", True)
+    cpGen.addConnector("../../../../../connectionTools/lib/other/common/connectors/src/FunDynExecuter.xml", True)
+    cpGen.addConnector("../../../../../connectionTools/lib/other/common/connectors/src/FunDynXMLParser.xml", True)
+
+#    globals = { }
+#    execfile(project.srcDir + "/../license.py", globals)
+
+#    sourceFiles = glob.getFilesRecursive(project.srcDir, project.srcDir)
+#    sourceFiles = cpGen.getOutConnFiles() + cpGen.getOutCPFiles()
+
+#    modFiles = []
+#    for file in sourceFiles:
+#        modFiles.append([file, os.path.splitext(file)[0]])
+
+#    print modFiles
+
+#    project.addGenerator(wafmod.generators.ModifyFilesGenerator(
+#        command="licenseAdder.sh " + globals['program'] + " " + globals['permission'],
+#        files=modFiles))
+
+    project.addGenerator(wafmod.generators.QMLRccGenerator(
+        name="qml",
+        rccPath=glob.env["qt5.home"] + "/gcc_64/bin/rcc",
+        srcFile="qml.qrc",
+        destFile="qml.cpp"))
+
+    project.installFile('../loaderConfig.xml')
+
+    project.generate()
+
+
+
+
