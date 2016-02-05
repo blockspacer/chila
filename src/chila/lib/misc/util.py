@@ -21,7 +21,10 @@ def printMulti(text, prefix, suffix):
         else:
             print suffix
 
-        sys.stdout.write(prefix + line)
+        if line == '':
+            sys.stdout.write(line)
+        else:
+            sys.stdout.write(prefix + line)
 
     print
 
