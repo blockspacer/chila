@@ -25,384 +25,384 @@
         CHILA_LIB_MISC__ADD_DEFAULT_ANYPRINTER_SPTR_GET(valueStreamer, Type)
 
     #define ADD_DFF_AND_POST(provsOwner) \
-            if (debugLogFile)  \
-            {  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:application", "action",  \
-                    provsOwner.base_application->connector.actions.list(), showArguments);  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:application", "event",  \
-                    provsOwner.base_application->connector.events.list(), showArguments);  \
-            }  \
-            provsOwner.base_application->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_application->connector.action##s.launcher_start.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_application->connector.action##s.launcher_start)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:application", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_application->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_application->connector.action##s.launcher_deactivate.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_application->connector.action##s.launcher_deactivate)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:application", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_application->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_application->connector.action##s.launcher_finish.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_application->connector.action##s.launcher_finish)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:application", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            if (debugLogFile)  \
-            {  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:mainWindow", "action",  \
-                    provsOwner.base_mainWindow->connector.actions.list(), showArguments);  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:mainWindow", "event",  \
-                    provsOwner.base_mainWindow->connector.events.list(), showArguments);  \
-            }  \
-            provsOwner.base_mainWindow->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_mainWindow->connector.action##s.launcher_start.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_mainWindow->connector.action##s.launcher_start)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:mainWindow", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_mainWindow->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_mainWindow->connector.action##s.launcher_deactivate.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_mainWindow->connector.action##s.launcher_deactivate)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:mainWindow", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_mainWindow->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_mainWindow->connector.action##s.launcher_finish.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_mainWindow->connector.action##s.launcher_finish)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:mainWindow", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            if (debugLogFile)  \
-            {  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:fileChooser:open", "action",  \
-                    provsOwner.base_fileChooser_open->connector.actions.list(), showArguments);  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:fileChooser:open", "event",  \
-                    provsOwner.base_fileChooser_open->connector.events.list(), showArguments);  \
-            }  \
-            provsOwner.base_fileChooser_open->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_fileChooser_open->connector.action##s.launcher_start.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_open->connector.action##s.launcher_start)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:fileChooser:open", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_fileChooser_open->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_fileChooser_open->connector.action##s.launcher_deactivate.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_open->connector.action##s.launcher_deactivate)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:fileChooser:open", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_fileChooser_open->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_fileChooser_open->connector.action##s.launcher_finish.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_open->connector.action##s.launcher_finish)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:fileChooser:open", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            if (debugLogFile)  \
-            {  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:fileChooser:saveAs", "action",  \
-                    provsOwner.base_fileChooser_saveAs->connector.actions.list(), showArguments);  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:fileChooser:saveAs", "event",  \
-                    provsOwner.base_fileChooser_saveAs->connector.events.list(), showArguments);  \
-            }  \
-            provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_start.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_start)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:fileChooser:saveAs", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_deactivate.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_deactivate)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:fileChooser:saveAs", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_finish.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_finish)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:fileChooser:saveAs", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            if (debugLogFile)  \
-            {  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:actionExecuter", "action",  \
-                    provsOwner.base_actionExecuter->connector.actions.list(), showArguments);  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:actionExecuter", "event",  \
-                    provsOwner.base_actionExecuter->connector.events.list(), showArguments);  \
-            }  \
-            provsOwner.base_actionExecuter->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_actionExecuter->connector.action##s.launcher_start.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_actionExecuter->connector.action##s.launcher_start)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:actionExecuter", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_actionExecuter->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_actionExecuter->connector.action##s.launcher_deactivate.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_actionExecuter->connector.action##s.launcher_deactivate)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:actionExecuter", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_actionExecuter->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_actionExecuter->connector.action##s.launcher_finish.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_actionExecuter->connector.action##s.launcher_finish)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:actionExecuter", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            if (debugLogFile)  \
-            {  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:appCommand:netServer", "action",  \
-                    provsOwner.base_appCommand_netServer->connector.actions.list(), showArguments);  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:appCommand:netServer", "event",  \
-                    provsOwner.base_appCommand_netServer->connector.events.list(), showArguments);  \
-            }  \
-            provsOwner.base_appCommand_netServer->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_appCommand_netServer->connector.action##s.launcher_start.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_netServer->connector.action##s.launcher_start)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:appCommand:netServer", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_appCommand_netServer->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_appCommand_netServer->connector.action##s.launcher_deactivate.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_netServer->connector.action##s.launcher_deactivate)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:appCommand:netServer", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_appCommand_netServer->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_appCommand_netServer->connector.action##s.launcher_finish.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_netServer->connector.action##s.launcher_finish)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:appCommand:netServer", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            if (debugLogFile)  \
-            {  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:appCommand:funDynExecuter", "action",  \
-                    provsOwner.base_appCommand_funDynExecuter->connector.actions.list(), showArguments);  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:appCommand:funDynExecuter", "event",  \
-                    provsOwner.base_appCommand_funDynExecuter->connector.events.list(), showArguments);  \
-            }  \
-            provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_start.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_start)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:appCommand:funDynExecuter", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_deactivate.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_deactivate)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:appCommand:funDynExecuter", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_finish.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_finish)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:appCommand:funDynExecuter", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            if (debugLogFile)  \
-            {  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:appCommand:funDynXMLParser", "action",  \
-                    provsOwner.base_appCommand_funDynXMLParser->connector.actions.list(), showArguments);  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:appCommand:funDynXMLParser", "event",  \
-                    provsOwner.base_appCommand_funDynXMLParser->connector.events.list(), showArguments);  \
-            }  \
-            provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_start.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_start)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:appCommand:funDynXMLParser", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_deactivate.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_deactivate)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:appCommand:funDynXMLParser", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_finish.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_finish)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:appCommand:funDynXMLParser", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            if (debugLogFile)  \
-            {  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:appCommand:msgCreator", "action",  \
-                    provsOwner.base_appCommand_msgCreator->connector.actions.list(), showArguments);  \
-                chila::connectionTools::lib::other::addDebugFileFunToFunctions(  \
-                    *debugLogFile, valueStreamer, "base:appCommand:msgCreator", "event",  \
-                    provsOwner.base_appCommand_msgCreator->connector.events.list(), showArguments);  \
-            }  \
-            provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_start.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_start)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:appCommand:msgCreator", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_deactivate.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_deactivate)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:appCommand:msgCreator", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
-            provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService));  \
-            if (debugLogFile)  \
-            {  \
-                provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_finish.passFunAndSet  \
-                (  \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_finish)>  \
-                    (  \
-                        *debugLogFile, valueStreamer, "base:appCommand:msgCreator", "action", showArguments, "posted in 'events'"  \
-                    )  \
-                );  \
-            }  \
+            if (debugLogFile) \
+            { \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:application", "action", \
+                    provsOwner.base_application->connector.actions.list(), showArguments); \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:application", "event", \
+                    provsOwner.base_application->connector.events.list(), showArguments); \
+            } \
+            provsOwner.base_application->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_application->connector.action##s.launcher_start.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_application->connector.action##s.launcher_start)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:application", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_application->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_application->connector.action##s.launcher_deactivate.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_application->connector.action##s.launcher_deactivate)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:application", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_application->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_application->connector.action##s.launcher_finish.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_application->connector.action##s.launcher_finish)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:application", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            if (debugLogFile) \
+            { \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:mainWindow", "action", \
+                    provsOwner.base_mainWindow->connector.actions.list(), showArguments); \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:mainWindow", "event", \
+                    provsOwner.base_mainWindow->connector.events.list(), showArguments); \
+            } \
+            provsOwner.base_mainWindow->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_mainWindow->connector.action##s.launcher_start.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_mainWindow->connector.action##s.launcher_start)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:mainWindow", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_mainWindow->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_mainWindow->connector.action##s.launcher_deactivate.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_mainWindow->connector.action##s.launcher_deactivate)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:mainWindow", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_mainWindow->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_mainWindow->connector.action##s.launcher_finish.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_mainWindow->connector.action##s.launcher_finish)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:mainWindow", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            if (debugLogFile) \
+            { \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:fileChooser:open", "action", \
+                    provsOwner.base_fileChooser_open->connector.actions.list(), showArguments); \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:fileChooser:open", "event", \
+                    provsOwner.base_fileChooser_open->connector.events.list(), showArguments); \
+            } \
+            provsOwner.base_fileChooser_open->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_fileChooser_open->connector.action##s.launcher_start.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_open->connector.action##s.launcher_start)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:fileChooser:open", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_fileChooser_open->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_fileChooser_open->connector.action##s.launcher_deactivate.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_open->connector.action##s.launcher_deactivate)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:fileChooser:open", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_fileChooser_open->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_fileChooser_open->connector.action##s.launcher_finish.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_open->connector.action##s.launcher_finish)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:fileChooser:open", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            if (debugLogFile) \
+            { \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:fileChooser:saveAs", "action", \
+                    provsOwner.base_fileChooser_saveAs->connector.actions.list(), showArguments); \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:fileChooser:saveAs", "event", \
+                    provsOwner.base_fileChooser_saveAs->connector.events.list(), showArguments); \
+            } \
+            provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_start.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_start)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:fileChooser:saveAs", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_deactivate.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_deactivate)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:fileChooser:saveAs", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_finish.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_finish)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:fileChooser:saveAs", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            if (debugLogFile) \
+            { \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:actionExecuter", "action", \
+                    provsOwner.base_actionExecuter->connector.actions.list(), showArguments); \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:actionExecuter", "event", \
+                    provsOwner.base_actionExecuter->connector.events.list(), showArguments); \
+            } \
+            provsOwner.base_actionExecuter->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_actionExecuter->connector.action##s.launcher_start.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_actionExecuter->connector.action##s.launcher_start)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:actionExecuter", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_actionExecuter->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_actionExecuter->connector.action##s.launcher_deactivate.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_actionExecuter->connector.action##s.launcher_deactivate)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:actionExecuter", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_actionExecuter->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_actionExecuter->connector.action##s.launcher_finish.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_actionExecuter->connector.action##s.launcher_finish)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:actionExecuter", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            if (debugLogFile) \
+            { \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:appCommand:netServer", "action", \
+                    provsOwner.base_appCommand_netServer->connector.actions.list(), showArguments); \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:appCommand:netServer", "event", \
+                    provsOwner.base_appCommand_netServer->connector.events.list(), showArguments); \
+            } \
+            provsOwner.base_appCommand_netServer->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_appCommand_netServer->connector.action##s.launcher_start.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_netServer->connector.action##s.launcher_start)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:appCommand:netServer", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_appCommand_netServer->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_appCommand_netServer->connector.action##s.launcher_deactivate.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_netServer->connector.action##s.launcher_deactivate)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:appCommand:netServer", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_appCommand_netServer->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_appCommand_netServer->connector.action##s.launcher_finish.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_netServer->connector.action##s.launcher_finish)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:appCommand:netServer", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            if (debugLogFile) \
+            { \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:appCommand:funDynExecuter", "action", \
+                    provsOwner.base_appCommand_funDynExecuter->connector.actions.list(), showArguments); \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:appCommand:funDynExecuter", "event", \
+                    provsOwner.base_appCommand_funDynExecuter->connector.events.list(), showArguments); \
+            } \
+            provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_start.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_start)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:appCommand:funDynExecuter", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_deactivate.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_deactivate)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:appCommand:funDynExecuter", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_finish.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_finish)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:appCommand:funDynExecuter", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            if (debugLogFile) \
+            { \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:appCommand:funDynXMLParser", "action", \
+                    provsOwner.base_appCommand_funDynXMLParser->connector.actions.list(), showArguments); \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:appCommand:funDynXMLParser", "event", \
+                    provsOwner.base_appCommand_funDynXMLParser->connector.events.list(), showArguments); \
+            } \
+            provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_start.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_start)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:appCommand:funDynXMLParser", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_deactivate.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_deactivate)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:appCommand:funDynXMLParser", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_finish.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_finish)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:appCommand:funDynXMLParser", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            if (debugLogFile) \
+            { \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:appCommand:msgCreator", "action", \
+                    provsOwner.base_appCommand_msgCreator->connector.actions.list(), showArguments); \
+                chila::connectionTools::lib::other::addDebugFileFunToFunctions( \
+                    *debugLogFile, valueStreamer, "base:appCommand:msgCreator", "event", \
+                    provsOwner.base_appCommand_msgCreator->connector.events.list(), showArguments); \
+            } \
+            provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_start.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_start.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_start)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:appCommand:msgCreator", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_deactivate.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_deactivate.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_deactivate)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:appCommand:msgCreator", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
+            provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_finish.passFunAndSet(chila::lib::misc::SetPostFun(ioService)); \
+            if (debugLogFile) \
+            { \
+                provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_finish.passFunAndSet \
+                ( \
+                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_finish)> \
+                    ( \
+                        *debugLogFile, valueStreamer, "base:appCommand:msgCreator", "action", showArguments, "posted in 'events'" \
+                    ) \
+                ); \
+            } \
 
 
     #define create_module_wa(name, ...) \
