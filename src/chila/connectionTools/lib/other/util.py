@@ -13,39 +13,39 @@ def addDFF(indent, valueStreamer, provsOwner, object, objectName, type, function
     fun = provsOwner + '.' + getVarName(object) + '->connector.{type}##s.{function}'.format(**locals())
 
     return(\
-        '{ind}{fun}.passFunAndSet \n'
-        '{ind}( \n'
-        '{ind}    chila::connectionTools::lib::other::DebugFileFunPFS<decltype({fun})> \n'
-        '{ind}    ( \n'
-        '{ind}        *debugLogFile, valueStreamer, "{objectName}", "{type}", showArguments, {msg} \n'
-        '{ind}    ) \n'
-        '{ind}); \n'
+        '{ind}{fun}.passFunAndSet\n'
+        '{ind}(\n'
+        '{ind}    chila::connectionTools::lib::other::DebugFileFunPFS<decltype({fun})>\n'
+        '{ind}    (\n'
+        '{ind}        *debugLogFile, valueStreamer, "{objectName}", "{type}", showArguments, {msg}\n'
+        '{ind}    )\n'
+        '{ind});\n'
         ).format(**locals())
 
 def setPostFunction(indent, valueStreamer, provsOwner, object, objectName, type, function, queue, queueName):
     ind = clmUtil.indent(indent)
 
     return (
-        '{ind}' + provsOwner + '.' + getVarName(object) + '->connector.{type}##s.{function}.passFunAndSet(chila::lib::misc::SetPostFun({queue})); \n'
-        '{ind}if (debugLogFile) \n'
-        '{ind}{{ \n'
+        '{ind}' + provsOwner + '.' + getVarName(object) + '->connector.{type}##s.{function}.passFunAndSet(chila::lib::misc::SetPostFun({queue}));\n'
+        '{ind}if (debugLogFile)\n'
+        '{ind}{{\n'
                   + addDFF(indent + 1, valueStreamer, provsOwner, object, objectName, type, function, '"posted in \'{queueName}\'"') +
-        '{ind}}} \n'
+        '{ind}}}\n'
         ).format(**locals())
 
 
 def addDebugFFToConnector(indent, valueStreamer, provsOwner, object, objectName):
     ind = clmUtil.indent(indent)
     return (\
-        '{ind}if (debugLogFile) \n'
-        '{ind}{{ \n'
-        '{ind}    chila::connectionTools::lib::other::addDebugFileFunToFunctions( \n'
-        '{ind}        *debugLogFile, valueStreamer, "{objectName}", "action", \n'
-        '{ind}        ' + provsOwner + '.' + getVarName(object) + '->connector.actions.list(), showArguments); \n'
-        '{ind}    chila::connectionTools::lib::other::addDebugFileFunToFunctions( \n'
-        '{ind}        *debugLogFile, valueStreamer, "{objectName}", "event", \n'
-        '{ind}        ' + provsOwner + '.' + getVarName(object) + '->connector.events.list(), showArguments); \n'
-        '{ind}}} \n').format(**locals())
+        '{ind}if (debugLogFile)\n'
+        '{ind}{{\n'
+        '{ind}    chila::connectionTools::lib::other::addDebugFileFunToFunctions(\n'
+        '{ind}        *debugLogFile, valueStreamer, "{objectName}", "action",\n'
+        '{ind}        ' + provsOwner + '.' + getVarName(object) + '->connector.actions.list(), showArguments);\n'
+        '{ind}    chila::connectionTools::lib::other::addDebugFileFunToFunctions(\n'
+        '{ind}        *debugLogFile, valueStreamer, "{objectName}", "event",\n'
+        '{ind}        ' + provsOwner + '.' + getVarName(object) + '->connector.events.list(), showArguments);\n'
+        '{ind}}}\n').format(**locals())
 
 def postInitFinishFunsToConnector(indent, valueStreamer, provsOwner, object, objectName, queue, queueName):
     ind = clmUtil.indent(indent)
