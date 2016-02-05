@@ -11,9 +11,15 @@ def genIndent(indent):
 def repeatText(text, argCount, cutCount, indent, addIndex):
     ret = "\n" + genIndent(indent) + "(";
     for i in range(0, argCount):
-        ret += (", " if i else "") + \
-               (("\n" + genIndent(indent + 1)) if i % cutCount == 0 else "") + \
-                text + (`i` if addIndex else "");
+        if i:
+            if i % cutCount == 0:
+                ret += "," + ("\n" + genIndent(indent + 1))
+            else:
+                ret += ", "
+        else:
+            ret += ("\n" + genIndent(indent + 1))
+
+        ret += text + (`i` if addIndex else "");
 
     return ret + "\n" + genIndent(indent) + ")"
 
