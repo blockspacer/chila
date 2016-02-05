@@ -28,8 +28,8 @@ def genClass(argCount):
         "            using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(" + `argCount` + ", const QVariant &arg))>;\n" + \
         "\n" + \
         "            Fun fun;\n" + \
-        "            QMetaObject::Connection connection; \n" + \
-        "            QQmlProperty property; \n" + \
+        "            QMetaObject::Connection connection;\n" + \
+        "            QQmlProperty property;\n" + \
         "\n" + \
         "            SigConn" + `argCount` + "(QQmlProperty property, Fun fun = Fun()) :\n" + \
         "                property(rvalue_cast(property)),\n" + \
@@ -39,10 +39,10 @@ def genClass(argCount):
         "                    slot(BOOST_PP_REPEAT(" + `argCount` + ", CHILA_LIB_MISC__TEXTREP, QVariant)))));\n" + \
         "            }\n" + \
         "\n" + \
-        "            SigConn" + `argCount` + "(QObject &object, const char *signal, Fun fun = Fun()) : \n" + \
-        "                fun(rvalue_cast(fun)), \n" + \
+        "            SigConn" + `argCount` + "(QObject &object, const char *signal, Fun fun = Fun()) :\n" + \
+        "                fun(rvalue_cast(fun)),\n" + \
         "                connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(\n" + \
-        "                    slot(BOOST_PP_REPEAT(" + `argCount` + ", CHILA_LIB_MISC__TEXTREP, QVariant))))) {} \n" + \
+        "                    slot(BOOST_PP_REPEAT(" + `argCount` + ", CHILA_LIB_MISC__TEXTREP, QVariant))))) {}\n" + \
         "\n" + \
         "        public slots:\n" + \
         "            void slot" + repeatText("const QVariant &arg", argCount, 5, 3, True) + " const\n" + \
