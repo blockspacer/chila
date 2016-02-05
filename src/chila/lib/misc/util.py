@@ -37,7 +37,7 @@ def generateMacrosDefUndef(macros, macrosDef = [], macrosUnd = []):
         printMulti(value, indent(2), ' \\')
         print
 
-    print '#else \n'
+    print '#else\n'
 
     for name,value in macros:
         print '    #undef ' + name.split('(')[0]
