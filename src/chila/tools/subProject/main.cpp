@@ -55,7 +55,7 @@ int main(int argc, char **argv) try
 
     clg::check(git_diff_foreach(diff, file_cb, hunk_cb, line_cb, nullptr));
 
-    
+
 
     return EXIT_SUCCESS;
 }

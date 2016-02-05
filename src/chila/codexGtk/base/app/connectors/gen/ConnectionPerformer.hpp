@@ -174,7 +174,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,base,app,connectors,gen))
 
             Ex_base_mainWindow_projectButtonPressed
             (
-            ) 
+            )
             {}
 
             void operator()

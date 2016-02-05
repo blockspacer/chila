@@ -15,7 +15,7 @@
     #define app_assert \
         CHILA_LIB_MISC__APP_ASSERT
 
-#else 
+#else
 
     #undef MY_NSP_START
     #undef MY_NSP_END

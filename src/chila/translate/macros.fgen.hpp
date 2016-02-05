@@ -21,7 +21,7 @@
     #define ct_apperror_element_nf_ref(exp, msg) \
         CHILA_LIB_MISC__CATCHTHROW_APPERROR_REF(chila::lib::misc::ElementNotFound, msg, exp)
 
-#else 
+#else
 
     #undef MY_NSP_START
     #undef MY_NSP_END

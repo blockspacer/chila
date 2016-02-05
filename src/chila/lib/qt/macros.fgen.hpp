@@ -27,7 +27,7 @@
     #define DEF_RUNTIME_ERROR \
         CHILA_LIB_MISC__DEF_RUNTIME_ERROR
 
-#else 
+#else
 
     #undef MY_NSP_START
     #undef MY_NSP_END

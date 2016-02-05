@@ -26,12 +26,12 @@
             else \
                 connector.events.launcher_##name = action; \
         } \
-        
+
 
     #define LAUNCHER_ADD_TO_EVENT_VIRTUAL(Name, name) \
         virtual void addTo##Name##Event(const Function &action) = 0;
 
-#else 
+#else
 
     #undef MY_NSP_START
     #undef MY_NSP_END

@@ -105,7 +105,7 @@
     #define my_get_connector(Type) \
         Type::CProvider::Connector
 
-#else 
+#else
 
     #undef MY_NSP_START
     #undef MY_NSP_END

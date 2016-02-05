@@ -18,7 +18,7 @@
     #define ipss_end \
         CHILA_LIB_MISC__IPSS_END
 
-#else 
+#else
 
     #undef MY_NSP_START
     #undef MY_NSP_END

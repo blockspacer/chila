@@ -244,9 +244,9 @@
                     )  \
                 );  \
             }  \
-        
 
-#else 
+
+#else
 
     #undef MY_NSP_START
     #undef MY_NSP_END

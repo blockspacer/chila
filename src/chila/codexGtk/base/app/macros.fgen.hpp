@@ -403,7 +403,7 @@
                     )  \
                 );  \
             }  \
-        
+
 
     #define create_module_wa(name, ...) \
         CHILA_CONNECTIONTOOLS_LIB_OTHER__CREATE_MODULE_WA(CPModTypes, CHILA_CODEX_BASE_APP_CONNECTORS_GEN, name, __VA_ARGS__)
@@ -420,7 +420,7 @@
     #define add_to_event(module, event) \
         cclOther::addToConnFunction(module->connector.events.event,
 
-#else 
+#else
 
     #undef MY_NSP_START
     #undef MY_NSP_END

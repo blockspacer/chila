@@ -101,7 +101,7 @@
     #define add_to_event(module, event) \
         cclOther::addToConnFunction(module->connector.events.event,
 
-#else 
+#else
 
     #undef MY_NSP_START
     #undef MY_NSP_END

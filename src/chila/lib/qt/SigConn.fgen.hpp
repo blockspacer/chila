@@ -28,8 +28,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(0, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn0(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -39,10 +39,10 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(0, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn0(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn0(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(0, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(0, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
@@ -64,8 +64,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(1, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn1(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -75,10 +75,10 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(1, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn1(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn1(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(1, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(1, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
@@ -101,8 +101,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(2, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn2(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -112,10 +112,10 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(2, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn2(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn2(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(2, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(2, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
@@ -138,8 +138,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(3, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn3(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -149,10 +149,10 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(3, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn3(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn3(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(3, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(3, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
@@ -175,8 +175,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(4, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn4(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -186,10 +186,10 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(4, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn4(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn4(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(4, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(4, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
@@ -212,8 +212,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(5, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn5(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -223,10 +223,10 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(5, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn5(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn5(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(5, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(5, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
@@ -249,8 +249,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(6, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn6(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -260,15 +260,15 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(6, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn6(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn6(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(6, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(6, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
             (
-                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4, 
+                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4,
                 const QVariant &arg5
             ) const
             {
@@ -287,8 +287,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(7, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn7(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -298,15 +298,15 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(7, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn7(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn7(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(7, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(7, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
             (
-                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4, 
+                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4,
                 const QVariant &arg5, const QVariant &arg6
             ) const
             {
@@ -325,8 +325,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(8, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn8(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -336,15 +336,15 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(8, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn8(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn8(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(8, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(8, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
             (
-                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4, 
+                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4,
                 const QVariant &arg5, const QVariant &arg6, const QVariant &arg7
             ) const
             {
@@ -363,8 +363,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(9, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn9(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -374,15 +374,15 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(9, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn9(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn9(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(9, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(9, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
             (
-                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4, 
+                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4,
                 const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8
             ) const
             {
@@ -401,8 +401,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(10, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn10(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -412,15 +412,15 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(10, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn10(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn10(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(10, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(10, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
             (
-                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4, 
+                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4,
                 const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9
             ) const
             {
@@ -439,8 +439,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(11, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn11(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -450,16 +450,16 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(11, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn11(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn11(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(11, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(11, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
             (
-                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4, 
-                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9, 
+                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4,
+                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9,
                 const QVariant &arg10
             ) const
             {
@@ -478,8 +478,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(12, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn12(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -489,16 +489,16 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(12, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn12(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn12(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(12, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(12, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
             (
-                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4, 
-                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9, 
+                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4,
+                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9,
                 const QVariant &arg10, const QVariant &arg11
             ) const
             {
@@ -517,8 +517,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(13, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn13(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -528,16 +528,16 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(13, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn13(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn13(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(13, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(13, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
             (
-                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4, 
-                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9, 
+                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4,
+                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9,
                 const QVariant &arg10, const QVariant &arg11, const QVariant &arg12
             ) const
             {
@@ -556,8 +556,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(14, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn14(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -567,16 +567,16 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(14, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn14(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn14(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(14, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(14, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
             (
-                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4, 
-                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9, 
+                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4,
+                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9,
                 const QVariant &arg10, const QVariant &arg11, const QVariant &arg12, const QVariant &arg13
             ) const
             {
@@ -595,8 +595,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(15, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn15(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -606,16 +606,16 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(15, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn15(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn15(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(15, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(15, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
             (
-                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4, 
-                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9, 
+                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4,
+                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9,
                 const QVariant &arg10, const QVariant &arg11, const QVariant &arg12, const QVariant &arg13, const QVariant &arg14
             ) const
             {
@@ -634,8 +634,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(16, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn16(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -645,17 +645,17 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(16, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn16(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn16(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(16, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(16, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
             (
-                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4, 
-                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9, 
-                const QVariant &arg10, const QVariant &arg11, const QVariant &arg12, const QVariant &arg13, const QVariant &arg14, 
+                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4,
+                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9,
+                const QVariant &arg10, const QVariant &arg11, const QVariant &arg12, const QVariant &arg13, const QVariant &arg14,
                 const QVariant &arg15
             ) const
             {
@@ -674,8 +674,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(17, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn17(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -685,17 +685,17 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(17, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn17(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn17(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(17, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(17, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
             (
-                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4, 
-                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9, 
-                const QVariant &arg10, const QVariant &arg11, const QVariant &arg12, const QVariant &arg13, const QVariant &arg14, 
+                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4,
+                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9,
+                const QVariant &arg10, const QVariant &arg11, const QVariant &arg12, const QVariant &arg13, const QVariant &arg14,
                 const QVariant &arg15, const QVariant &arg16
             ) const
             {
@@ -714,8 +714,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(18, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn18(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -725,17 +725,17 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(18, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn18(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn18(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(18, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(18, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
             (
-                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4, 
-                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9, 
-                const QVariant &arg10, const QVariant &arg11, const QVariant &arg12, const QVariant &arg13, const QVariant &arg14, 
+                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4,
+                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9,
+                const QVariant &arg10, const QVariant &arg11, const QVariant &arg12, const QVariant &arg13, const QVariant &arg14,
                 const QVariant &arg15, const QVariant &arg16, const QVariant &arg17
             ) const
             {
@@ -754,8 +754,8 @@ MY_NSP_START
             using Fun = std::function<void(BOOST_PP_ENUM_PARAMS(19, const QVariant &arg))>;
 
             Fun fun;
-            QMetaObject::Connection connection; 
-            QQmlProperty property; 
+            QMetaObject::Connection connection;
+            QQmlProperty property;
 
             SigConn19(QQmlProperty property, Fun fun = Fun()) :
                 property(rvalue_cast(property)),
@@ -765,17 +765,17 @@ MY_NSP_START
                     slot(BOOST_PP_REPEAT(19, CHILA_LIB_MISC__TEXTREP, QVariant)))));
             }
 
-            SigConn19(QObject &object, const char *signal, Fun fun = Fun()) : 
-                fun(rvalue_cast(fun)), 
+            SigConn19(QObject &object, const char *signal, Fun fun = Fun()) :
+                fun(rvalue_cast(fun)),
                 connection(QObject::connect(&object, signal, this, CHILA_LIB_QT__SLOT(
-                    slot(BOOST_PP_REPEAT(19, CHILA_LIB_MISC__TEXTREP, QVariant))))) {} 
+                    slot(BOOST_PP_REPEAT(19, CHILA_LIB_MISC__TEXTREP, QVariant))))) {}
 
         public slots:
             void slot
             (
-                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4, 
-                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9, 
-                const QVariant &arg10, const QVariant &arg11, const QVariant &arg12, const QVariant &arg13, const QVariant &arg14, 
+                const QVariant &arg0, const QVariant &arg1, const QVariant &arg2, const QVariant &arg3, const QVariant &arg4,
+                const QVariant &arg5, const QVariant &arg6, const QVariant &arg7, const QVariant &arg8, const QVariant &arg9,
+                const QVariant &arg10, const QVariant &arg11, const QVariant &arg12, const QVariant &arg13, const QVariant &arg14,
                 const QVariant &arg15, const QVariant &arg16, const QVariant &arg17, const QVariant &arg18
             ) const
             {

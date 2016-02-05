@@ -221,7 +221,7 @@
     #define add_toolbar_button(name) \
         {                         Gtk::ToolButton *button = Gtk::manage(new Gtk::ToolButton(actions.name->get_stock_id()));                         button->signal_clicked().connect_notify([this, eventExecuter]{ actions.name->activate(); });                         widgets.toolbar->append(*button);                      }
 
-#else 
+#else
 
     #undef MY_NSP_START
     #undef MY_NSP_END

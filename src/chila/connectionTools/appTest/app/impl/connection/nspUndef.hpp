@@ -7,5 +7,5 @@
 #undef MY_NSP
 #undef FWDEC_TYPE
 #undef FWDEC_SPTR
-#undef my_assert           
+#undef my_assert
 

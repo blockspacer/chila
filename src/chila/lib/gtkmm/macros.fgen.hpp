@@ -12,7 +12,7 @@
     #define my_assert \
         CHILA_LIB_MISC__ASSERT
 
-#else 
+#else
 
     #undef MY_NSP_START
     #undef MY_NSP_END

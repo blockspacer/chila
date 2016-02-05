@@ -84,7 +84,7 @@
     #define ct_assert \
         CHILA_CONNECTIONTOOLS_LIB_OTHER__ASSERT
 
-#else 
+#else
 
     #undef MY_NSP_START
     #undef MY_NSP_END

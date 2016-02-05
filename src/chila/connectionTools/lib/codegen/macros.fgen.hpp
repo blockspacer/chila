@@ -24,7 +24,7 @@
     #define DEF_RUNTIME_ERROR_FROM_BASE \
         CHILA_LIB_MISC__DEF_RUNTIME_ERROR_FROM_BASE
 
-#else 
+#else
 
     #undef MY_NSP_START
     #undef MY_NSP_END
