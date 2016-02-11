@@ -577,6 +577,28 @@ MY_NSP_START
     };
 
     bool wildMatch(const char *pat, const char *str);
+
+    template <typename Range>
+    void parseNumbers(const std::string &text, Range &range)
+    {
+        std::size_t start = 0, cur = 0;
+        typename boost::range_iterator<Range>::type it = boost::begin(range);
+
+        while (cur != std::string::npos)
+        {
+            struct tag_text_info {};
+
+            if (it == boost::end(range))
+                BOOST_THROW_EXCEPTION(std::range_error("range"));
+
+            cur = text.find('.', start);
+            *it++ = boost::lexical_cast<unsigned>(text.substr(start,
+                cur == std::string::npos ? std::string::npos : cur - start));
+
+            start = cur + 1;
+        }
+    }
+
 }
 MY_NSP_END
 
