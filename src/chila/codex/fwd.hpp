@@ -26,8 +26,8 @@ MY_NSP_START
 {
     namespace ccLoader = chila::connectionTools::loader;
     namespace cclOther = chila::connectionTools::lib::other;
-    namespace ccCommon = chila::connectionTools::common;
-    namespace ccloCIConn = ccCommon::impl::connection;
+    namespace cctCommon = chila::connectionTools::common;
+    namespace ccloCIConn = cctCommon::impl::connection;
     namespace clMisc = chila::lib::misc;
     namespace clQt = chila::lib::qt;
     namespace bfs = boost::filesystem;

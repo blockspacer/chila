@@ -14,7 +14,7 @@ MY_NSP_START
     CHILA_LIB_MISC__FWDEC_TYPE(NullObject);
     CHILA_LIB_MISC__FWDEC_TYPE(TabId);
 
-    struct NullObject final : public cclOther::common::impl::connection::Forwarder::Object
+    struct NullObject final : public cctCommon::impl::connection::Forwarder::Object
     {
     };
 }

@@ -31,10 +31,10 @@ MY_NSP_START
             ((connection::MainWindow)(MainWindow))
             ((connection::FileChooser)(FileChooser))
             ((connection::ActionExecuter)(ActionExecuter))
-            ((ccCommon::impl::connection::Network)(CmdNetServer))
-            ((ccCommon::impl::connection::FunDynExecuter)(FunDynExecuter))
-            ((ccCommon::impl::connection::FunDynXMLParser)(FunDynXMLParser))
-            ((ccCommon::impl::connection::TextMessageCreator)(CmdNetTextMsgCreator)),
+            ((cctCommon::impl::connection::Network)(CmdNetServer))
+            ((cctCommon::impl::connection::FunDynExecuter)(FunDynExecuter))
+            ((cctCommon::impl::connection::FunDynXMLParser)(FunDynXMLParser))
+            ((cctCommon::impl::connection::TextMessageCreator)(CmdNetTextMsgCreator)),
             CHILA_CODEX_BASE_APP_CONNECTORS_GEN__CONN_INSTANCE_SEQ,
             my_get_connector
         )
