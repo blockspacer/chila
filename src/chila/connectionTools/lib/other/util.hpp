@@ -8,7 +8,6 @@
 #include "fwd.hpp"
 #include <chila/connectionTools/lib/codegen/ConnectorMap.hpp>
 #include "Launcher.hpp"
-#include "common/impl/connection/Forwarder.hpp"
 #include <boost/asio.hpp>
 #include "exceptions.hpp"
 #include "../codegen/fwd.hpp"
@@ -75,23 +74,6 @@ MY_NSP_START
 
     template <>
     chila::lib::misc::StringVec toString(const chila::lib::misc::StringSet &set);
-
-    struct ForwarderQPoster
-    {
-        using result_type = void;
-        boost::asio::io_service &queue;
-
-        ForwarderQPoster(boost::asio::io_service &queue) : queue(queue) {}
-
-        template <typename EventExecuter, typename Object>
-        void operator()(const EventExecuter &eventExecuter, const Object &object) const
-        {
-            queue.post([eventExecuter, object]
-            {
-                eventExecuter.template execute<common::impl::connection::Forwarder::CProvider::Connector::Events::MData_forwarded>(object);
-            });
-        }
-    };
 }
 MY_NSP_END
 
