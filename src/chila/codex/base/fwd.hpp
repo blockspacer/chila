@@ -7,7 +7,6 @@
 
 #include "../common/fwd.hpp"
 
-
 #include "macros.fgen.hpp"
 
 MY_NSP_START

@@ -254,7 +254,7 @@
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir>../..</buildCommandWorkingDir>
-          <buildCommand>waf install_debug PROJECTS="chila/codex/base chila/codex/text  chila/connectionTools/loader"</buildCommand>
+          <buildCommand>waf install_debug PROJECTS="chila/codex/base chila/codex/text  chila/connectionTools/loader" -v</buildCommand>
           <cleanCommand>waf clean_debug PROJECTS="chila/codex/base chila/codex/text chila/connectionTools/loader" </cleanCommand>
           <executablePath>../../build/debug/projects/waf/chila/connectionTools/loader/chila.connectionTools.loader.bin</executablePath>
           <ccTool>
@@ -505,36 +505,6 @@
             tool="1"
             flavor2="11">
         <ccTool flags="1">
-          <incDir>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include</pElem>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtCore</pElem>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/mkspecs/linux-clang</pElem>
-            <pElem>/usr/include/gtkmm-3.0</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/gtkmm-3.0/include</pElem>
-            <pElem>../../build/debug/src</pElem>
-            <pElem>../../../../src</pElem>
-            <pElem>../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../usr/include/libxml2</pElem>
-            <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../usr/include/glibmm-2.4</pElem>
-            <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../usr/include/sigc++-2.0</pElem>
-            <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../usr/include/glib-2.0</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>../../../../../../../usr/include/libxml++-2.6</pElem>
-            <pElem>/usr/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../usr/lib/libxml++-2.6/include</pElem>
-            <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../build/debug</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="../../../../src/chila/connectionTools/common/impl/FunDynExecuter.cpp"
@@ -542,31 +512,6 @@
             tool="1"
             flavor2="11">
         <ccTool flags="1">
-          <incDir>
-            <pElem>../../build/debug/src</pElem>
-            <pElem>../../../../src</pElem>
-            <pElem>../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../usr/include/libxml2</pElem>
-            <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../usr/include/glibmm-2.4</pElem>
-            <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../usr/include/sigc++-2.0</pElem>
-            <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../usr/include/glib-2.0</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>../../../../../../../usr/include/libxml++-2.6</pElem>
-            <pElem>/usr/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../usr/lib/libxml++-2.6/include</pElem>
-            <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../build/debug</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="../../../../src/chila/connectionTools/common/impl/FunDynXMLParser.cpp"
@@ -574,36 +519,6 @@
             tool="1"
             flavor2="11">
         <ccTool flags="1">
-          <incDir>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include</pElem>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtCore</pElem>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/mkspecs/linux-clang</pElem>
-            <pElem>/usr/include/gtkmm-3.0</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/gtkmm-3.0/include</pElem>
-            <pElem>../../build/debug/src</pElem>
-            <pElem>../../../../src</pElem>
-            <pElem>../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../usr/include/libxml2</pElem>
-            <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../usr/include/glibmm-2.4</pElem>
-            <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../usr/include/sigc++-2.0</pElem>
-            <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../usr/include/glib-2.0</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>../../../../../../../usr/include/libxml++-2.6</pElem>
-            <pElem>/usr/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../usr/lib/libxml++-2.6/include</pElem>
-            <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../build/debug</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="../../../../src/chila/connectionTools/common/impl/Network.cpp"
@@ -611,36 +526,6 @@
             tool="1"
             flavor2="11">
         <ccTool flags="1">
-          <incDir>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include</pElem>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtCore</pElem>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/mkspecs/linux-clang</pElem>
-            <pElem>/usr/include/gtkmm-3.0</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/gtkmm-3.0/include</pElem>
-            <pElem>../../build/debug/src</pElem>
-            <pElem>../../../../src</pElem>
-            <pElem>../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../usr/include/libxml2</pElem>
-            <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../usr/include/glibmm-2.4</pElem>
-            <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../usr/include/sigc++-2.0</pElem>
-            <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../usr/include/glib-2.0</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>../../../../../../../usr/include/libxml++-2.6</pElem>
-            <pElem>/usr/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../usr/lib/libxml++-2.6/include</pElem>
-            <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../build/debug</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="../../../../src/chila/connectionTools/common/impl/TextMessageCreator.cpp"
@@ -648,36 +533,6 @@
             tool="1"
             flavor2="11">
         <ccTool flags="1">
-          <incDir>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include</pElem>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtCore</pElem>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/mkspecs/linux-clang</pElem>
-            <pElem>/usr/include/gtkmm-3.0</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/gtkmm-3.0/include</pElem>
-            <pElem>../../build/debug/src</pElem>
-            <pElem>../../../../src</pElem>
-            <pElem>../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../usr/include/libxml2</pElem>
-            <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../usr/include/glibmm-2.4</pElem>
-            <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../usr/include/sigc++-2.0</pElem>
-            <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../usr/include/glib-2.0</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>../../../../../../../usr/include/libxml++-2.6</pElem>
-            <pElem>/usr/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../usr/lib/libxml++-2.6/include</pElem>
-            <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../build/debug</pElem>
-          </incDir>
         </ccTool>
       </item>
       <item path="../../../../src/chila/connectionTools/completionGenerator/main.cpp"
@@ -888,6 +743,48 @@
             tool="1"
             flavor2="11">
         <ccTool flags="1">
+          <incDir>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include</pElem>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtCore</pElem>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/mkspecs/linux-clang</pElem>
+            <pElem>/usr/include/gtkmm-3.0</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/gtkmm-3.0/include</pElem>
+            <pElem>../../build/debug/src</pElem>
+            <pElem>../../../../src</pElem>
+            <pElem>../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtWidgets</pElem>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtWidgets</pElem>
+            <pElem>../../../../../applib/Qt/5.5/gcc_64/include</pElem>
+            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtCore</pElem>
+            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtGui</pElem>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtGui</pElem>
+            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtQuick</pElem>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtQuick</pElem>
+            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtQml</pElem>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtQml</pElem>
+            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtNetwork</pElem>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtNetwork</pElem>
+            <pElem>../../build/debug</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="../../../../src/chila/connectionTools/loader/main.cpp"
@@ -895,6 +792,45 @@
             tool="1"
             flavor2="11">
         <ccTool flags="1">
+          <incDir>
+            <pElem>../../build/debug/src</pElem>
+            <pElem>../../../../src</pElem>
+            <pElem>../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtWidgets</pElem>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtWidgets</pElem>
+            <pElem>../../../../../applib/Qt/5.5/gcc_64/include</pElem>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include</pElem>
+            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtCore</pElem>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtCore</pElem>
+            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtGui</pElem>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtGui</pElem>
+            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtQuick</pElem>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtQuick</pElem>
+            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtQml</pElem>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtQml</pElem>
+            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtNetwork</pElem>
+            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtNetwork</pElem>
+            <pElem>../../build/debug</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="../../../../src/chila/lib/dsv/dsv.cpp"
@@ -1733,47 +1669,6 @@
           <incDir>
             <pElem>../../../build/debug/src</pElem>
             <pElem>../..</pElem>
-          </incDir>
-        </ccTool>
-      </folder>
-      <folder path="1/loader">
-        <ccTool>
-          <incDir>
-            <pElem>../../build/debug/src</pElem>
-            <pElem>../../../../src</pElem>
-            <pElem>../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../usr/include/libxml2</pElem>
-            <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../usr/include/glibmm-2.4</pElem>
-            <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../usr/include/sigc++-2.0</pElem>
-            <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../usr/include/glib-2.0</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>../../../../../../../usr/include/libxml++-2.6</pElem>
-            <pElem>/usr/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../usr/lib/libxml++-2.6/include</pElem>
-            <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtWidgets</pElem>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtWidgets</pElem>
-            <pElem>../../../../../applib/Qt/5.5/gcc_64/include</pElem>
-            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtCore</pElem>
-            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtGui</pElem>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtGui</pElem>
-            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtQuick</pElem>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtQuick</pElem>
-            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtQml</pElem>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtQml</pElem>
-            <pElem>../../../../../applib/Qt/5.5/gcc_64/include/QtNetwork</pElem>
-            <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtNetwork</pElem>
-            <pElem>../../build/debug</pElem>
           </incDir>
         </ccTool>
       </folder>
