@@ -37,13 +37,13 @@
 #define DEF_ARG_ALIAS_LINK CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_ARG_ALIAS_LINK
 
 // Arguments defines
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_ARGS_FunDynExecuter \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ARGS_FunDynExecuter \
     (funPath) \
     (arguments) \
     (errorMsg)
 
 // Event defines
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_EVENTS_FunDynExecuter \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENTS_FunDynExecuter \
     (launcher_starting) \
     (launcher_started) \
     (launcher_deactivating) \
@@ -52,52 +52,52 @@
     (launcher_finished) \
     (fatalError)
 
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynExecuter_launcher_starting \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynExecuter_launcher_starting \
 
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynExecuter_launcher_started \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynExecuter_launcher_started \
 
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynExecuter_launcher_deactivating \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynExecuter_launcher_deactivating \
 
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynExecuter_launcher_deactivated \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynExecuter_launcher_deactivated \
 
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynExecuter_launcher_finishing \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynExecuter_launcher_finishing \
 
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynExecuter_launcher_finished \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynExecuter_launcher_finished \
 
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynExecuter_fatalError \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynExecuter_fatalError \
     (errorMsg)
 
 // Action defines
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_ACTIONS_FunDynExecuter \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTIONS_FunDynExecuter \
     (launcher_start) \
     (launcher_deactivate) \
     (launcher_finish) \
     (execute)
 
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FunDynExecuter_launcher_start \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FunDynExecuter_launcher_start \
 
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FunDynExecuter_launcher_deactivate \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FunDynExecuter_launcher_deactivate \
 
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FunDynExecuter_launcher_finish \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FunDynExecuter_launcher_finish \
 
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FunDynExecuter_execute \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FunDynExecuter_execute \
     (funPath)(arguments)
 
 // Actions' called events
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FunDynExecuter_launcher_start \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FunDynExecuter_launcher_start \
     (launcher_started)(fatalError)
 
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FunDynExecuter_launcher_deactivate \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FunDynExecuter_launcher_deactivate \
     (launcher_deactivated)(fatalError)
 
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FunDynExecuter_launcher_finish \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FunDynExecuter_launcher_finish \
     (launcher_finished)(fatalError)
 
-#define CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FunDynExecuter_execute \
+#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FunDynExecuter_execute \
     (fatalError)
 
 
-CHILA_LIB_MISC__DEF_NAMESPACE(7, (chila,connectionTools,lib,other,common,connectors,gen))
+CHILA_LIB_MISC__DEF_NAMESPACE(5, (chila,connectionTools,common,connectors,gen))
 {
     /** This class serves as a event and action connector for the connector.
       * Connectors should hold an instance of this class and connect their actions
@@ -106,37 +106,37 @@ CHILA_LIB_MISC__DEF_NAMESPACE(7, (chila,connectionTools,lib,other,common,connect
     template <typename _ArgTypes>
     struct FunDynExecuter final: public chila::connectionTools::lib::codegen::ConnectorImpl<FunDynExecuter<_ArgTypes>>
     {
-        static chila::lib::misc::Path path() { return "chila.connectionTools.lib.other.common.connectors.gen.FunDynExecuter"; }
+        static chila::lib::misc::Path path() { return "chila.connectionTools.common.connectors.gen.FunDynExecuter"; }
 
         typedef FunDynExecuter Connector;
         typedef _ArgTypes ArgTypes;
 
         // Arguments
         CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ARGUMENTS( \
-            CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN, FunDynExecuter)
+            CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN, FunDynExecuter)
 
         // Events
         struct Events
         {
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUNCTIONS(
-                CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN, EVENT, FunDynExecuter)
+                CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN, EVENT, FunDynExecuter)
 
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUN_FUSIONSEQ(
-                CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN, EVENT, FunDynExecuter)
+                CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN, EVENT, FunDynExecuter)
         } events;
 
         // Actions
         struct Actions
         {
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUNCTIONS(
-                CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN, ACTION, FunDynExecuter)
+                CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN, ACTION, FunDynExecuter)
 
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUN_FUSIONSEQ(
-                CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN, ACTION, FunDynExecuter)
+                CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN, ACTION, FunDynExecuter)
 
             Actions(Connector &connector) :
                 CHILA_CONNECTIONTOOLS_LIB_CODEGEN__ACTIONS_INIT(
-                    CHILA_CONNECTIONTOOLS_LIB_OTHER_COMMON_CONNECTORS_GEN, FunDynExecuter) {}
+                    CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN, FunDynExecuter) {}
         } actions;
 
 
@@ -152,7 +152,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(7, (chila,connectionTools,lib,other,common,connect
             MY_BIND_ACTION(execute);
         }
     };
-}}}}}}}
+}}}}}
 
 
 #undef MY_BIND_ACTION

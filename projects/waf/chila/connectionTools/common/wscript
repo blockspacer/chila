@@ -22,7 +22,7 @@ def build(ctx):
 
 #    project.pkgConfigVars("libxml++-2.6")
 
-    cpGen = project.addGenerator(wafmod.generators.ConnectionToolsGenerator(srcDir="common/connectors/src", destDir="common/connectors/gen"))
+    cpGen = project.addGenerator(wafmod.generators.ConnectionToolsGenerator(srcDir="connectors/src", destDir="connectors/gen"))
 
     cpGen.addConnector("Forwarder.xml")
     cpGen.addConnector("Network.xml")
