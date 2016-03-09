@@ -105,7 +105,7 @@ def setVariables(glob):
                      value = "{CFLAGS}")
 
     glob.setVariable(name  = "comp_args.cxx",
-                     value = "{CXXFLAGS} -std=c++11 -Wno-deprecated-register")
+                     value = "{CXXFLAGS} -std=c++" + glob.env["cpp.version"] + " -Wno-deprecated-register")
 
     glob.setVariable(name  = "global.comp_args",
                      value = "-g -DBOOST_PP_VARIADICS=1 -fPIC {max_errors_flag} -Wreturn-type -Wno-mismatched-tags",
@@ -172,6 +172,7 @@ def options(opt):
     wafmod.util.loadOption(opt, "tut-include",          "string",  None, "the include path for the TUT unit-testing library")
     wafmod.util.loadOption(opt, "errors-max",           "int",     None, "maximum number of compilation errors")
     wafmod.util.loadOption(opt, "qt5-home",             "string",  None, "maximum number of compilation errors")
+    wafmod.util.loadOption(opt, "cpp-version",          "string",  None, "version of c++")
     
 
 def configure(ctx):
@@ -189,6 +190,7 @@ def configure(ctx):
     wafmod.util.saveOption(ctx, "tut-include")
     wafmod.util.saveOption(ctx, "errors-max", True)
     wafmod.util.saveOption(ctx, "qt5-home", True)
+    wafmod.util.saveOption(ctx, "cpp-version", True)
 
 def build(bld):
     env = bld.env
