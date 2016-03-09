@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="95">
+<configurationDescriptor version="97">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="../../../../../src/chila/connectionTools/connectorGenerator" name="0">
       <in>CodeGenerator.cpp</in>
@@ -10,15 +10,6 @@
         <in>ConnectorMap.cpp</in>
       </df>
       <df name="other">
-        <df name="common">
-          <df name="impl">
-            <in>Forwarder.cpp</in>
-            <in>FunDynExecuter.cpp</in>
-            <in>FunDynXMLParser.cpp</in>
-            <in>Network.cpp</in>
-            <in>TextMessageCreator.cpp</in>
-          </df>
-        </df>
         <df name="dynFunExecuter">
           <in>ExecuterMap.cpp</in>
           <in>util.cpp</in>
@@ -26,7 +17,6 @@
         <df name="fileDebug">
           <in>LogFile.cpp</in>
         </df>
-        <in>CPerformerFiles.cpp</in>
         <in>CScannerGrammar.cpp</in>
         <in>CompletionScanner.cpp</in>
         <in>Launcher.cpp</in>
@@ -57,6 +47,7 @@
       <in>DynamicLibrary.cpp</in>
       <in>Path.cpp</in>
       <in>ThreadPool.cpp</in>
+      <in>Version.cpp</in>
       <in>Watch.cpp</in>
       <in>XMLAccessor.cpp</in>
       <in>util.cpp</in>
@@ -81,6 +72,8 @@
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>wscript</itemPath>
+      <itemPath>../../../wscript</itemPath>
+      <itemPath>../lib/other/wscript</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
@@ -100,13 +93,14 @@
       </toolsSet>
       <flagsDictionary>
         <element flagsID="0" commonFlags="-fPIC -fPIC -std=c++11"/>
+        <element flagsID="1" commonFlags="-fPIC -fPIC -std=c++14"/>
       </flagsDictionary>
       <codeAssistance>
       </codeAssistance>
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir>../../..</buildCommandWorkingDir>
-          <buildCommand>waf install_debug PROJECTS="chila/connectionTools/connectorGenerator"</buildCommand>
+          <buildCommand>waf install_debug PROJECTS="chila/connectionTools/connectorGenerator" </buildCommand>
           <cleanCommand>waf clean_debug PROJECTS="chila/connectionTools/connectorGenerator"</cleanCommand>
           <executablePath></executablePath>
           <ccTool>
@@ -115,19 +109,23 @@
             </preprocessorList>
           </ccTool>
         </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
       </makefileType>
       <item path="../../../../../src/chila/connectionTools/connectorGenerator/CodeGenerator.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/connectorGenerator/main.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/codegen/ConnectorMap.cpp"
@@ -137,318 +135,197 @@
         <ccTool flags="0">
         </ccTool>
       </item>
-      <item path="../../../../../src/chila/connectionTools/lib/other/CPerformerFiles.cpp"
-            ex="false"
-            tool="1"
-            flavor2="8">
-        <ccTool flags="0">
-        </ccTool>
-      </item>
       <item path="../../../../../src/chila/connectionTools/lib/other/CScannerGrammar.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
+          <incDir>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../build/debug</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/other/CompletionScanner.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
+          <incDir>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../build/debug</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/other/Launcher.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
           <incDir>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../build/debug</pElem>
           </incDir>
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/lib/other/dynFunExecuter/ExecuterMap.cpp"
+            ex="false"
+            tool="1"
+            flavor2="11">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/lib/other/dynFunExecuter/util.cpp"
+            ex="false"
+            tool="1"
+            flavor2="11">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/other/fileDebug/LogFile.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/other/util.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
           <incDir>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../build/debug</pElem>
           </incDir>
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/tree/CPerformerCreator.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
-          <incDir>
-            <pElem>../../../../../applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
-            <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
-            <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
-            <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
-            <pElem>../../../build/debug</pElem>
-          </incDir>
+            flavor2="11">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/tree/ConnectorCreator.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
-          <incDir>
-            <pElem>../../../../../../applib/boost/include/1.57</pElem>
-            <pElem>/applib/boost/include/1.57</pElem>
-            <pElem>../../../../../../../../usr/include/libxml2</pElem>
-            <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
-            <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
-            <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
-            <pElem>/usr/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
-            <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../build/debug</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
-          </incDir>
+            flavor2="11">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/tree/CreatorBase.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
-          <incDir>
-            <pElem>../../../../../../applib/boost/include/1.57</pElem>
-            <pElem>/applib/boost/include/1.57</pElem>
-            <pElem>../../../../../../../../usr/include/libxml2</pElem>
-            <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
-            <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
-            <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
-            <pElem>/usr/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
-            <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../build/debug</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
-          </incDir>
+            flavor2="11">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/tree/InsertProxy.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
-          <incDir>
-            <pElem>../../../../../../applib/boost/include/1.57</pElem>
-            <pElem>/applib/boost/include/1.57</pElem>
-            <pElem>../../../../../../../../usr/include/libxml2</pElem>
-            <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
-            <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
-            <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
-            <pElem>/usr/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
-            <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../build/debug</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
-          </incDir>
+            flavor2="11">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/tree/types.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
-          <incDir>
-            <pElem>../../../../../../applib/boost/include/1.57</pElem>
-            <pElem>/applib/boost/include/1.57</pElem>
-            <pElem>../../../../../../../../usr/include/libxml2</pElem>
-            <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
-            <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
-            <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
-            <pElem>/usr/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
-            <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../build/debug</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
-          </incDir>
+            flavor2="11">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/tree/util.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/misc/AddressFilter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="11">
+        <ccTool flags="1">
           <incDir>
-            <pElem>../../../../../../applib/boost/include/1.57</pElem>
-            <pElem>/applib/boost/include/1.57</pElem>
+            <pElem>../../../build/debug/src</pElem>
+            <pElem>../../../../../src</pElem>
             <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
             <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
@@ -467,56 +344,40 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
             <pElem>../../../build/debug</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
           </incDir>
         </ccTool>
       </item>
       <item path="../../../../../src/chila/lib/misc/AnyPrinter.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
           <incDir>
             <pElem>../../../build/debug/src</pElem>
             <pElem>../../../../../src</pElem>
-            <pElem>../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
             <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
             <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
             <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
-            <pElem>../../../../../applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
             <pElem>../../../build/debug</pElem>
           </incDir>
         </ccTool>
@@ -524,31 +385,31 @@
       <item path="../../../../../src/chila/lib/misc/DynamicLibrary.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
           <incDir>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
+            <pElem>../../../build/debug/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
             <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
             <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
             <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
             <pElem>../../../build/debug</pElem>
           </incDir>
         </ccTool>
@@ -556,31 +417,31 @@
       <item path="../../../../../src/chila/lib/misc/Path.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
           <incDir>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
+            <pElem>../../../build/debug/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
             <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
             <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
             <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
             <pElem>../../../build/debug</pElem>
           </incDir>
         </ccTool>
@@ -588,31 +449,63 @@
       <item path="../../../../../src/chila/lib/misc/ThreadPool.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
           <incDir>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
+            <pElem>../../../build/debug/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
             <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
             <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
             <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../build/debug</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/misc/Version.cpp"
+            ex="false"
+            tool="1"
+            flavor2="11">
+        <ccTool flags="1">
+          <incDir>
+            <pElem>../../../build/debug/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
             <pElem>../../../build/debug</pElem>
           </incDir>
         </ccTool>
@@ -652,31 +545,31 @@
       <item path="../../../../../src/chila/lib/misc/XMLAccessor.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
           <incDir>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
+            <pElem>../../../build/debug/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
             <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
             <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
             <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
             <pElem>../../../build/debug</pElem>
           </incDir>
         </ccTool>
@@ -724,31 +617,31 @@
       <item path="../../../../../src/chila/lib/misc/util.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
           <incDir>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
+            <pElem>../../../build/debug/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
             <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
             <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
             <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
             <pElem>../../../build/debug</pElem>
           </incDir>
         </ccTool>
@@ -756,29 +649,29 @@
       <item path="../../../../../src/chila/lib/node/Node.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <item path="../../../../../src/chila/lib/node/NodeWithChildren.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <item path="../../../../../src/chila/lib/node/util.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <item path="../../../../../src/chila/lib/xmlppUtils/util.cpp"
             ex="false"
             tool="1"
-            flavor2="8">
-        <ccTool flags="0">
+            flavor2="11">
+        <ccTool flags="1">
         </ccTool>
       </item>
       <folder path="0">
@@ -845,11 +738,11 @@
           </incDir>
         </ccTool>
       </folder>
-      <folder path="1/other">
+      <folder path="1/other/dynFunExecuter">
         <ccTool>
           <incDir>
-            <pElem>../../../../../../applib/boost/include/1.57</pElem>
-            <pElem>/applib/boost/include/1.57</pElem>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
             <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
             <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
@@ -875,24 +768,54 @@
       <folder path="1/other/fileDebug">
         <ccTool>
           <incDir>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../build/debug</pElem>
+          </incDir>
+        </ccTool>
+      </folder>
+      <folder path="1/tree">
+        <ccTool>
+          <incDir>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../build/debug</pElem>
           </incDir>
         </ccTool>
       </folder>
@@ -908,10 +831,10 @@
       <folder path="3">
         <ccTool>
           <incDir>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../build/debug/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
             <pElem>../../../build/debug</pElem>
           </incDir>
         </ccTool>
@@ -919,28 +842,28 @@
       <folder path="xmlppUtils">
         <ccTool>
           <incDir>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/projects/waf/build/debug/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/src</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../applib/libxml++/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../applib/libxml++/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/libxml2</pElem>
+            <pElem>../../../build/debug/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
             <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib64/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
             <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib64/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
             <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/usr/lib64/glib-2.0/include</pElem>
-            <pElem>/usr/lib64/glib-2.0/include</pElem>
-            <pElem>../../../../../../../../gimenero/gitRepos/wt/src/applib/boost/include/1.58</pElem>
-            <pElem>../../../../../../../../applib/boost/include/1.58</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
             <pElem>../../../build/debug</pElem>
           </incDir>
         </ccTool>
@@ -965,6 +888,10 @@
           <cleanCommand>waf clean_release PROJECTS="chila/connectionTools/connectorGenerator"</cleanCommand>
           <executablePath>../../../build/debug/projects/waf/chila/connectionTools/cPerformerGenerator/chila.connectionTools.cPerformerGenerator.bin</executablePath>
         </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
       </makefileType>
       <item path="../../../../../src/chila/connectionTools/connectorGenerator/CodeGenerator.cpp"
             ex="false"
@@ -985,33 +912,6 @@
             tool="1"
             flavor2="8">
         <ccTool flags="0">
-        </ccTool>
-      </item>
-      <item path="../../../../../src/chila/connectionTools/lib/other/CPerformerFiles.cpp"
-            ex="false"
-            tool="1"
-            flavor2="8">
-        <ccTool>
-          <incDir>
-            <pElem>..</pElem>
-            <pElem>/applib/boost/include/1.55</pElem>
-          </incDir>
-          <undefinedList>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-          </undefinedList>
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/other/CScannerGrammar.cpp"
@@ -1108,41 +1008,6 @@
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
-        </ccTool>
-      </item>
-      <item path="../../../../../src/chila/connectionTools/lib/other/common/impl/Forwarder.cpp"
-            ex="false"
-            tool="1"
-            flavor2="8">
-        <ccTool flags="0">
-        </ccTool>
-      </item>
-      <item path="../../../../../src/chila/connectionTools/lib/other/common/impl/FunDynExecuter.cpp"
-            ex="false"
-            tool="1"
-            flavor2="8">
-        <ccTool flags="0">
-        </ccTool>
-      </item>
-      <item path="../../../../../src/chila/connectionTools/lib/other/common/impl/FunDynXMLParser.cpp"
-            ex="false"
-            tool="1"
-            flavor2="8">
-        <ccTool flags="0">
-        </ccTool>
-      </item>
-      <item path="../../../../../src/chila/connectionTools/lib/other/common/impl/Network.cpp"
-            ex="false"
-            tool="1"
-            flavor2="8">
-        <ccTool flags="0">
-        </ccTool>
-      </item>
-      <item path="../../../../../src/chila/connectionTools/lib/other/common/impl/TextMessageCreator.cpp"
-            ex="false"
-            tool="1"
-            flavor2="8">
-        <ccTool flags="0">
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/other/dynFunExecuter/ExecuterMap.cpp"
@@ -1657,35 +1522,6 @@
             <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
-            <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../build/release</pElem>
-          </incDir>
-        </ccTool>
-      </folder>
-      <folder path="1/other/common">
-        <ccTool>
-          <incDir>
-            <pElem>../../../build/release/src</pElem>
-            <pElem>../../../../../src</pElem>
-            <pElem>../../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../usr/include/libxml2</pElem>
-            <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../../usr/include/glibmm-2.4</pElem>
-            <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../../usr/include/sigc++-2.0</pElem>
-            <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../../usr/include/glib-2.0</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>../../../../../../../../../usr/include/libxml++-2.6</pElem>
-            <pElem>/usr/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
