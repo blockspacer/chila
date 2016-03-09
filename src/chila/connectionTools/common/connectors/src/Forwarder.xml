@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<connector name="chila.connectionTools.lib.other.common.connectors.gen.Forwarder" description="Forwards an 'object', useful for converging actions, or to post to queues">
+<connector name="chila.connectionTools.common.connectors.gen.Forwarder" description="Forwards an 'object', useful for converging actions, or to post to queues">
     <!-- Arguments -->
     <arguments>
         <arg name="object" description=""/>
