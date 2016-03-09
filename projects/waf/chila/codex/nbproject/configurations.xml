@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="95">
+<configurationDescriptor version="97">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="../../../../src/chila/codex" name="0">
       <df name="base">
@@ -80,6 +80,9 @@
             <in>loader.cpp</in>
           </df>
         </df>
+      </df>
+      <df name="common">
+        <in>util.hpp</in>
       </df>
       <df name="completionGenerator">
         <in>main.cpp</in>
@@ -259,6 +262,10 @@
             </preprocessorList>
           </ccTool>
         </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
       </makefileType>
       <item path="../../../../src/chila/codex/base/app/App.cpp"
             ex="false"
@@ -462,6 +469,11 @@
             ex="false"
             tool="1"
             flavor2="8">
+      </item>
+      <item path="../../../../src/chila/connectionTools/common/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="../../../../src/chila/connectionTools/completionGenerator/main.cpp"
             ex="false"
@@ -2196,6 +2208,10 @@
           <cleanCommand>waf clean_release PROJECTS="chila/codex/base chila/codex/text chila/connectionTools/loader" </cleanCommand>
           <executablePath>../../build/release/projects/waf/chila/connectionTools/loader/chila.connectionTools.loader.bin</executablePath>
         </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
       </makefileType>
       <item path="../../../../src/chila/codex/base/app/App.cpp"
             ex="false"
@@ -2382,6 +2398,11 @@
             ex="false"
             tool="1"
             flavor2="4">
+      </item>
+      <item path="../../../../src/chila/connectionTools/common/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="../../../../src/chila/connectionTools/completionGenerator/main.cpp"
             ex="false"
@@ -3343,6 +3364,10 @@
             </preprocessorList>
           </ccTool>
         </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
       </makefileType>
       <item path="../../../../src/chila/codex/base/app/App.cpp"
             ex="false"
@@ -3534,6 +3559,11 @@
             ex="false"
             tool="1"
             flavor2="8">
+      </item>
+      <item path="../../../../src/chila/connectionTools/common/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="../../../../src/chila/connectionTools/completionGenerator/main.cpp"
             ex="false"
@@ -4714,6 +4744,10 @@
             </preprocessorList>
           </ccTool>
         </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
       </makefileType>
       <item path="../../../../src/chila/codex/base/app/App.cpp"
             ex="false"
@@ -4905,6 +4939,11 @@
             ex="false"
             tool="1"
             flavor2="8">
+      </item>
+      <item path="../../../../src/chila/connectionTools/common/util.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
       </item>
       <item path="../../../../src/chila/connectionTools/completionGenerator/main.cpp"
             ex="false"
