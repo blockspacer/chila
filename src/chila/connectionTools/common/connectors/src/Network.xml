@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connector name="chila.connectionTools.lib.other.common.connectors.gen.Network" description="Network server">
+    <!-- Arguments -->
+    <arguments>
+        <arg name="clientId" description=""/>
+        <arg name="recvBuffer" description=""/>
+        <arg name="sndBuffer" description=""/>
+        <arg name="errorMsg" description=""/>
+        <arg name="endpoint" description=""/>
+        <arg name="address" description=""/>
+        <arg name="host" description=""/>
+    </arguments>
+    <!--  Events  -->
+    <events>
+        <group name="launcher" description="">
+            <event name="starting" arguments="" description=""/>
+            <event name="started" arguments="" description=""/>
+            <event name="deactivating" arguments="" description=""/>
+            <event name="deactivated" arguments="" description=""/>
+            <event name="finishing" arguments="" description=""/>
+            <event name="finished" arguments="" description=""/>
+        </group>
+        <event name="clientAccepted" arguments="clientId, endpoint" description=""/>
+        <event name="msgRead" arguments="clientId, recvBuffer" description=""/>
+        <event name="msgWritten" arguments="clientId, sndBuffer" description=""/>
+        <event name="responseDiscarded" arguments="clientId, sndBuffer" description=""/>
+        <event name="clientError" arguments="clientId, errorMsg" description=""/>
+        <event name="clientDisconnected" arguments="clientId" description=""/>
+        <event name="endpointResolved" arguments="endpoint" description=""/>
+        <event name="fatalError" arguments="errorMsg" description=""/>
+        <event name="resolvedAllowedAddress" arguments="address" description=""/>
+        <event name="clientHostResolved" arguments="clientId, host" description=""/>
+    </events>
+    <!--  Actions  -->
+    <actions>
+        <group name="launcher" description="">
+            <action name="start" arguments="" description="Starts the module" events="launcher:started, resolvedAllowedAddress, fatalError, endpointResolved, clientHostResolved, clientAccepted, clientDisconnected, clientError, msgRead"/>
+            <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated, fatalError"/>
+            <action name="finish" arguments="" description="" events="launcher:finished, fatalError"/>
+        </group>
+        <action name="write" arguments="clientId, sndBuffer" description="" events="msgWritten, responseDiscarded, clientDisconnected, clientError, fatalError"/>
+        <action name="closeSession" arguments="clientId" description="" events="fatalError"/>
+    </actions>
+</connector>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connector name="chila.connectionTools.lib.other.common.connectors.gen.Forwarder" description="Forwards an 'object', useful for converging actions, or to post to queues">
+    <!-- Arguments -->
+    <arguments>
+        <arg name="object" description=""/>
+        <arg name="errorMsg" description=""/>
+    </arguments>
+
+    <!--  Events  -->
+    <events>
+        <group name="launcher">
+            <event name="starting" arguments="" description=""/>
+            <event name="started" arguments="" description=""/>
+            <event name="deactivating" arguments="" description=""/>
+            <event name="deactivated" arguments="" description=""/>
+            <event name="finishing" arguments="" description=""/>
+            <event name="finished" arguments="" description=""/>
+        </group>
+
+        <event name="fatalError" arguments="errorMsg" description=""/>
+        <event name="forwarded" arguments="object" description="Forwards the 'object'"/>
+    </events>
+
+    <!--  Actions  -->
+    <actions>
+        <group name="launcher" description="">
+            <action name="start" arguments="" description="Starts the module" events="launcher:started, fatalError"/>
+            <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated, fatalError"/>
+            <action name="finish" arguments="" description="" events="launcher:finished, fatalError"/>
+        </group>
+        <action name="take" arguments="object" description="Takes the 'object'" events="forwarded, fatalError"/>
+    </actions>
+</connector>
