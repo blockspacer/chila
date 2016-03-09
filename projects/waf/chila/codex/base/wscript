@@ -22,6 +22,7 @@ def build(ctx):
 
     project.archiveLib("chila/connectionTools/lib/codegen")
     project.archiveLib("chila/connectionTools/lib/other")
+    project.archiveLib("chila/connectionTools/common")
     project.archiveLib("chila/codex/common")
     project.archiveLib("chila/lib/qt")
     project.archiveLib("chila/lib/misc")

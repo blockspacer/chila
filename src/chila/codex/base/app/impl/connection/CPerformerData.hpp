@@ -6,11 +6,11 @@
 #define CHILA_CODEX_BASE_APP_IMPL_CONNECTION__CPERFORMERDATA_HPP
 
 #include "../../connectors/gen/ConnectionPerformer.hpp"
-#include <chila/connectionTools/lib/other/common/impl/connection/Forwarder.hpp>
-#include <chila/connectionTools/lib/other/common/impl/connection/FunDynExecuter.hpp>
-#include <chila/connectionTools/lib/other/common/impl/connection/Network.hpp>
-#include <chila/connectionTools/lib/other/common/impl/connection/TextMessageCreator.hpp>
-#include <chila/connectionTools/lib/other/common/impl/connection/FunDynXMLParser.hpp>
+#include <chila/connectionTools/common/impl/connection/Forwarder.hpp>
+#include <chila/connectionTools/common/impl/connection/FunDynExecuter.hpp>
+#include <chila/connectionTools/common/impl/connection/Network.hpp>
+#include <chila/connectionTools/common/impl/connection/TextMessageCreator.hpp>
+#include <chila/connectionTools/common/impl/connection/FunDynXMLParser.hpp>
 #include "CPDataTypes.hpp"
 #include <chila/lib/misc/Construct.hpp>
 #include "MainWindow.hpp"
@@ -31,10 +31,10 @@ MY_NSP_START
             ((connection::MainWindow)(MainWindow))
             ((connection::FileChooser)(FileChooser))
             ((connection::ActionExecuter)(ActionExecuter))
-            ((cclOther::common::impl::connection::Network)(CmdNetServer))
-            ((cclOther::common::impl::connection::FunDynExecuter)(FunDynExecuter))
-            ((cclOther::common::impl::connection::FunDynXMLParser)(FunDynXMLParser))
-            ((cclOther::common::impl::connection::TextMessageCreator)(CmdNetTextMsgCreator)),
+            ((ccCommon::impl::connection::Network)(CmdNetServer))
+            ((ccCommon::impl::connection::FunDynExecuter)(FunDynExecuter))
+            ((ccCommon::impl::connection::FunDynXMLParser)(FunDynXMLParser))
+            ((ccCommon::impl::connection::TextMessageCreator)(CmdNetTextMsgCreator)),
             CHILA_CODEX_BASE_APP_CONNECTORS_GEN__CONN_INSTANCE_SEQ,
             my_get_connector
         )

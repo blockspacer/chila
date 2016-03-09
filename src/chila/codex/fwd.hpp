@@ -7,7 +7,7 @@
 
 #include <chila/connectionTools/loader/fwd.hpp>
 #include <chila/connectionTools/lib/other/fwd.hpp>
-#include <chila/connectionTools/lib/other/common/impl/connection/fwd.hpp>
+#include <chila/connectionTools/common/impl/connection/fwd.hpp>
 #include <chila/lib/misc/util.hpp>
 #include <boost/filesystem/path.hpp>
 #include <chila/lib/xmlppUtils/fwd.hpp>
@@ -26,7 +26,8 @@ MY_NSP_START
 {
     namespace ccLoader = chila::connectionTools::loader;
     namespace cclOther = chila::connectionTools::lib::other;
-    namespace ccloCIConn = cclOther::common::impl::connection;
+    namespace ccCommon = chila::connectionTools::common;
+    namespace ccloCIConn = ccCommon::impl::connection;
     namespace clMisc = chila::lib::misc;
     namespace clQt = chila::lib::qt;
     namespace bfs = boost::filesystem;

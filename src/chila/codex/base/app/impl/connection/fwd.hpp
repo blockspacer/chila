@@ -6,7 +6,7 @@
 #define CHILA_CODEX_BASE_APP_IMPL_CONNECTION__FWD_HPP
 
 #include "../fwd.hpp"
-#include <chila/connectionTools/lib/other/common/impl/connection/Forwarder.hpp>
+#include <chila/connectionTools/common/impl/connection/Forwarder.hpp>
 #include "macros.fgen.hpp"
 
 MY_NSP_START
