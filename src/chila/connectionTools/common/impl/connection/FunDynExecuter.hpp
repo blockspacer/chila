@@ -9,7 +9,7 @@
 #include <chila/connectionTools/lib/other/Module.hpp>
 #include "../../connectors/gen/FunDynExecuter.hpp"
 #include <chila/lib/misc/Path.hpp>
-#include "../../../dynFunExecuter/fwd.hpp"
+#include <chila/connectionTools/lib/other/dynFunExecuter/fwd.hpp>
 
 #include <chila/lib/misc/macrosExp.hpp>
 
@@ -22,13 +22,13 @@ MY_NSP_START
         struct ArgTypes
         {
             using funPath   = chila::lib::misc::Path;
-            using arguments = dynFunExecuter::ArgumentStrMap;
+            using arguments = lib::other::dynFunExecuter::ArgumentStrMap;
             using errorMsg  = std::string;
         };
 
         DEF_CPROVIDER(FunDynExecuter);
 
-        static CProviderUPtr create(const std::string &instanceName, const dynFunExecuter::ExecuterMap &executerMap);
+        static CProviderUPtr create(const std::string &instanceName, const lib::other::dynFunExecuter::ExecuterMap &executerMap);
     };
 
 }

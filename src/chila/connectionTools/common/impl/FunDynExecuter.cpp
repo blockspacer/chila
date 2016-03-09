@@ -19,7 +19,8 @@ MY_NSP_START
         executerMap.execute(funPath, arguments);
     }
 
-    connection::FunDynExecuter::CProviderUPtr connection::FunDynExecuter::create(const std::string &instanceName, const dynFunExecuter::ExecuterMap &executerMap)
+    connection::FunDynExecuter::CProviderUPtr connection::FunDynExecuter::create(
+        const std::string &instanceName, const lib::other::dynFunExecuter::ExecuterMap &executerMap)
     {
         return boost::make_unique<impl::FunDynExecuter>(instanceName, executerMap);
     }

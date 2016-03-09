@@ -20,7 +20,7 @@ def build(ctx):
     project.compilationArg("{target.comp_args}")
     project.includePath("{boost.include}/{boost.version}")
 
-#    project.pkgConfigVars("libxml++-2.6")
+    project.pkgConfigVars("libxml++-2.6")
 
     cpGen = project.addGenerator(wafmod.generators.ConnectionToolsGenerator(srcDir="connectors/src", destDir="connectors/gen"))
 

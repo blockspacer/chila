@@ -9,7 +9,7 @@
 #include <chila/connectionTools/lib/other/Module.hpp>
 #include "../../connectors/gen/FunDynXMLParser.hpp"
 #include <chila/lib/misc/Path.hpp>
-#include "../../../dynFunExecuter/fwd.hpp"
+#include <chila/connectionTools/lib/other/dynFunExecuter/fwd.hpp>
 
 #include <chila/lib/misc/macrosExp.hpp>
 
@@ -23,7 +23,7 @@ MY_NSP_START
         {
             using text      = std::string;
             using funPath   = chila::lib::misc::Path;
-            using arguments = dynFunExecuter::ArgumentStrMap;
+            using arguments = lib::other::dynFunExecuter::ArgumentStrMap;
             using errorMsg  = std::string;
         };
 

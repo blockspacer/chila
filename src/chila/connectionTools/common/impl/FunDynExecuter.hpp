@@ -6,7 +6,7 @@
 #define CHILA_CONNECTIONTOOLS_COMMON_IMPL__FUNDYNEXECUTER_HPP
 
 #include "connection/FunDynExecuter.hpp"
-#include "../../dynFunExecuter/ExecuterMap.hpp"
+#include <chila/connectionTools/lib/other/dynFunExecuter/ExecuterMap.hpp>
 
 #include <chila/connectionTools/lib/other/util.hpp>
 
@@ -20,7 +20,7 @@ MY_NSP_START
     class FunDynExecuter final: public connection::FunDynExecuter::CProvider
     {
         public:
-            FunDynExecuter(const std::string &instanceName, const dynFunExecuter::ExecuterMap &executerMap) :
+            FunDynExecuter(const std::string &instanceName, const lib::other::dynFunExecuter::ExecuterMap &executerMap) :
                 connection::FunDynExecuter::CProvider(instanceName), executerMap(executerMap)
             {
                 connector.bindActions(*this);
@@ -35,7 +35,7 @@ MY_NSP_START
 
         private:
             boost::mutex mutex;
-            const dynFunExecuter::ExecuterMap &executerMap;
+            const lib::other::dynFunExecuter::ExecuterMap &executerMap;
     };
 }
 MY_NSP_END

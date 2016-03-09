@@ -3,7 +3,7 @@
  */
 
 #include "FunDynXMLParser.hpp"
-#include "../../dynFunExecuter/util.hpp"
+#include <chila/connectionTools/lib/other/dynFunExecuter/util.hpp>
 #include <sstream>
 
 #include <chila/lib/misc/macrosExp.hpp>
@@ -23,7 +23,7 @@ MY_NSP_START
 
         parser.parse_stream(str);
 
-        auto ret = dynFunExecuter::parseXML(chila::lib::misc::deref(parser.get_document()->get_root_node()));
+        auto ret = lib::other::dynFunExecuter::parseXML(chila::lib::misc::deref(parser.get_document()->get_root_node()));
 
         execute_event(parsed)(ret.path, ret.arguments);
     }
