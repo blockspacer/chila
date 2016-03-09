@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="95">
+<configurationDescriptor version="97">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="../../../../../src/chila/connectionTools/cPerformerGenerator"
         name="0">
@@ -113,6 +113,10 @@
             </preprocessorList>
           </ccTool>
         </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
       </makefileType>
       <item path="../../../../../src/chila/connectionTools/cPerformerGenerator/CodeGenerator.cpp"
             ex="false"
@@ -962,6 +966,10 @@
           <cleanCommand>waf clean_release PROJECTS="chila/connectionTools/cPerformerGenerator"</cleanCommand>
           <executablePath></executablePath>
         </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
       </makefileType>
       <item path="../../../../../src/chila/connectionTools/cPerformerGenerator/CodeGenerator.cpp"
             ex="false"
