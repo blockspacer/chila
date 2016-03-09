@@ -51,7 +51,7 @@
             <events/>
             <actions/>
         </alias>
-        <alias name="CmdNetServer" connectorPath="chila.connectionTools.lib.other.common.connectors.gen.Network" description="">
+        <alias name="CmdNetServer" connectorPath="chila.connectionTools.common.connectors.gen.Network" description="">
             <arguments>
                 <argument name="clientId" cpName="cmdNetServer:clientId" description=""/>
                 <argument name="recvBuffer" cpName="cmdNetServer:rcvBuffer" description=""/>
@@ -64,7 +64,7 @@
             <events/>
             <actions/>
         </alias>
-        <alias name="CmdNetTextMsgCreator" connectorPath="chila.connectionTools.lib.other.common.connectors.gen.TextMessageCreator" description="">
+        <alias name="CmdNetTextMsgCreator" connectorPath="chila.connectionTools.common.connectors.gen.TextMessageCreator" description="">
             <arguments>
                 <argument name="sessionId" cpName="cmdNetServer:clientId" description=""/>
                 <argument name="buffer" cpName="cmdNetServer:rcvBuffer" description=""/>
@@ -75,7 +75,7 @@
             <events/>
             <actions/>
         </alias>
-        <alias name="FunDynExecuter" connectorPath="chila.connectionTools.lib.other.common.connectors.gen.FunDynExecuter" description="">
+        <alias name="FunDynExecuter" connectorPath="chila.connectionTools.common.connectors.gen.FunDynExecuter" description="">
             <arguments>
                 <argument name="funPath" cpName="cmdNetServer:funPath" description=""/>
                 <argument name="arguments" cpName="cmdNetServer:funArgs" description=""/>
@@ -84,7 +84,7 @@
             <events/>
             <actions/>
         </alias>
-        <alias name="FunDynXMLParser" connectorPath="chila.connectionTools.lib.other.common.connectors.gen.FunDynXMLParser" description="">
+        <alias name="FunDynXMLParser" connectorPath="chila.connectionTools.common.connectors.gen.FunDynXMLParser" description="">
             <arguments>
                 <argument name="text" cpName="cmdNetServer:message" description=""/>
                 <argument name="funPath" cpName="cmdNetServer:funPath" description=""/>

@@ -61,11 +61,11 @@ def build(ctx):
     cpGen.addConnector("MainWindow.xml")
     cpGen.addConnector("FileChooser.xml")
     cpGen.addConnector("ActionExecuter.xml")
-    cpGen.addConnector("../../../../../connectionTools/lib/other/common/connectors/src/Forwarder.xml", True)
-    cpGen.addConnector("../../../../../connectionTools/lib/other/common/connectors/src/TextMessageCreator.xml", True)
-    cpGen.addConnector("../../../../../connectionTools/lib/other/common/connectors/src/Network.xml", True)
-    cpGen.addConnector("../../../../../connectionTools/lib/other/common/connectors/src/FunDynExecuter.xml", True)
-    cpGen.addConnector("../../../../../connectionTools/lib/other/common/connectors/src/FunDynXMLParser.xml", True)
+    cpGen.addConnector("../../../../../connectionTools/common/connectors/src/Forwarder.xml", True)
+    cpGen.addConnector("../../../../../connectionTools/common/connectors/src/TextMessageCreator.xml", True)
+    cpGen.addConnector("../../../../../connectionTools/common/connectors/src/Network.xml", True)
+    cpGen.addConnector("../../../../../connectionTools/common/connectors/src/FunDynExecuter.xml", True)
+    cpGen.addConnector("../../../../../connectionTools/common/connectors/src/FunDynXMLParser.xml", True)
 
 #    globals = { }
 #    execfile(project.srcDir + "/../license.py", globals)
