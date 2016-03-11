@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<connector name="chila.connectionTools.common.connectors.gen.FunDynExecuter" description="Executes events and actions dynamically.">
+<connector name="chila.connectionTools.lib.common.connectors.gen.Forwarder" description="Forwards an 'object', useful for converging actions, or to post to queues">
     <!-- Arguments -->
     <arguments>
-        <arg name="funPath" description="Path to the function."/>
-        <arg name="arguments" description="Map of arguments."/>
-        <arg name="errorMsg" description="Error message."/>
+        <arg name="object" description=""/>
+        <arg name="errorMsg" description=""/>
     </arguments>
 
     <!--  Events  -->
@@ -19,6 +18,7 @@
         </group>
 
         <event name="fatalError" arguments="errorMsg" description=""/>
+        <event name="forwarded" arguments="object" description="Forwards the 'object'"/>
     </events>
 
     <!--  Actions  -->
@@ -28,7 +28,6 @@
             <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated, fatalError"/>
             <action name="finish" arguments="" description="" events="launcher:finished, fatalError"/>
         </group>
-        <action name="execute" arguments="funPath, arguments" description="Executes the function" events="fatalError"/>
+        <action name="take" arguments="object" description="Takes the 'object'" events="forwarded, fatalError"/>
     </actions>
 </connector>
-

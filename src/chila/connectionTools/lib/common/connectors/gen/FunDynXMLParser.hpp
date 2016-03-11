@@ -3,8 +3,8 @@
 // *                    - DO NOT MODIFY -                           *
 // ******************************************************************
 
-#ifndef CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__FORWARDER_HPP
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__FORWARDER_HPP
+#ifndef CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__FUNDYNXMLPARSER_HPP
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__FUNDYNXMLPARSER_HPP
 
 #define BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS
 #undef FUSION_MAX_VECTOR_SIZE
@@ -37,112 +37,114 @@
 #define DEF_ARG_ALIAS_LINK CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_ARG_ALIAS_LINK
 
 // Arguments defines
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ARGS_Forwarder \
-    (object) \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_ARGS_FunDynXMLParser \
+    (text) \
+    (funPath) \
+    (arguments) \
     (errorMsg)
 
 // Event defines
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENTS_Forwarder \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_EVENTS_FunDynXMLParser \
     (launcher_starting) \
     (launcher_started) \
     (launcher_deactivating) \
     (launcher_deactivated) \
     (launcher_finishing) \
     (launcher_finished) \
-    (fatalError) \
-    (forwarded)
+    (parsed) \
+    (fatalError)
 
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_Forwarder_launcher_starting \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynXMLParser_launcher_starting \
 
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_Forwarder_launcher_started \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynXMLParser_launcher_started \
 
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_Forwarder_launcher_deactivating \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynXMLParser_launcher_deactivating \
 
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_Forwarder_launcher_deactivated \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynXMLParser_launcher_deactivated \
 
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_Forwarder_launcher_finishing \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynXMLParser_launcher_finishing \
 
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_Forwarder_launcher_finished \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynXMLParser_launcher_finished \
 
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_Forwarder_fatalError \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynXMLParser_parsed \
+    (funPath)(arguments)
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FunDynXMLParser_fatalError \
     (errorMsg)
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_Forwarder_forwarded \
-    (object)
 
 // Action defines
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTIONS_Forwarder \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_ACTIONS_FunDynXMLParser \
     (launcher_start) \
     (launcher_deactivate) \
     (launcher_finish) \
     (take)
 
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_Forwarder_launcher_start \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FunDynXMLParser_launcher_start \
 
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_Forwarder_launcher_deactivate \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FunDynXMLParser_launcher_deactivate \
 
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_Forwarder_launcher_finish \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FunDynXMLParser_launcher_finish \
 
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_Forwarder_take \
-    (object)
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FunDynXMLParser_take \
+    (text)
 
 // Actions' called events
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_Forwarder_launcher_start \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FunDynXMLParser_launcher_start \
     (launcher_started)(fatalError)
 
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_Forwarder_launcher_deactivate \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FunDynXMLParser_launcher_deactivate \
     (launcher_deactivated)(fatalError)
 
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_Forwarder_launcher_finish \
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FunDynXMLParser_launcher_finish \
     (launcher_finished)(fatalError)
 
-#define CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_Forwarder_take \
-    (forwarded)(fatalError)
+#define CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FunDynXMLParser_take \
+    (parsed)(fatalError)
 
 
-CHILA_LIB_MISC__DEF_NAMESPACE(5, (chila,connectionTools,common,connectors,gen))
+CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,lib,common,connectors,gen))
 {
     /** This class serves as a event and action connector for the connector.
       * Connectors should hold an instance of this class and connect their actions
       * in the constructor.
       */
     template <typename _ArgTypes>
-    struct Forwarder final: public chila::connectionTools::lib::codegen::ConnectorImpl<Forwarder<_ArgTypes>>
+    struct FunDynXMLParser final: public chila::connectionTools::lib::codegen::ConnectorImpl<FunDynXMLParser<_ArgTypes>>
     {
-        static chila::lib::misc::Path path() { return "chila.connectionTools.common.connectors.gen.Forwarder"; }
+        static chila::lib::misc::Path path() { return "chila.connectionTools.lib.common.connectors.gen.FunDynXMLParser"; }
 
-        typedef Forwarder Connector;
+        typedef FunDynXMLParser Connector;
         typedef _ArgTypes ArgTypes;
 
         // Arguments
         CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ARGUMENTS( \
-            CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN, Forwarder)
+            CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN, FunDynXMLParser)
 
         // Events
         struct Events
         {
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUNCTIONS(
-                CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN, EVENT, Forwarder)
+                CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN, EVENT, FunDynXMLParser)
 
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUN_FUSIONSEQ(
-                CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN, EVENT, Forwarder)
+                CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN, EVENT, FunDynXMLParser)
         } events;
 
         // Actions
         struct Actions
         {
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUNCTIONS(
-                CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN, ACTION, Forwarder)
+                CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN, ACTION, FunDynXMLParser)
 
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUN_FUSIONSEQ(
-                CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN, ACTION, Forwarder)
+                CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN, ACTION, FunDynXMLParser)
 
             Actions(Connector &connector) :
                 CHILA_CONNECTIONTOOLS_LIB_CODEGEN__ACTIONS_INIT(
-                    CHILA_CONNECTIONTOOLS_COMMON_CONNECTORS_GEN, Forwarder) {}
+                    CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN, FunDynXMLParser) {}
         } actions;
 
 
-        Forwarder() : actions(*this) {}
+        FunDynXMLParser() : actions(*this) {}
 
         // Binds the actions to 'target'
         template <typename Target>
@@ -154,7 +156,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(5, (chila,connectionTools,common,connectors,gen))
             MY_BIND_ACTION(take);
         }
     };
-}}}}}
+}}}}}}
 
 
 #undef MY_BIND_ACTION
