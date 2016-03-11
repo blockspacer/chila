@@ -20,7 +20,7 @@ def build(ctx):
     project.compilationArg("{target.comp_args}")
     project.includePath("{boost.include}")
 
-    project.archiveLib("chila/connectionTools/common")
+    project.archiveLib("chila/connectionTools/lib/common")
     project.archiveLib("chila/connectionTools/lib/codegen")
     project.archiveLib("chila/connectionTools/lib/other")
     project.archiveLib("chila/codex/common")
@@ -62,11 +62,11 @@ def build(ctx):
     cpGen.addConnector("MainWindow.xml")
     cpGen.addConnector("FileChooser.xml")
     cpGen.addConnector("ActionExecuter.xml")
-    cpGen.addConnector("../../../../../connectionTools/common/connectors/src/Forwarder.xml", True)
-    cpGen.addConnector("../../../../../connectionTools/common/connectors/src/TextMessageCreator.xml", True)
-    cpGen.addConnector("../../../../../connectionTools/common/connectors/src/Network.xml", True)
-    cpGen.addConnector("../../../../../connectionTools/common/connectors/src/FunDynExecuter.xml", True)
-    cpGen.addConnector("../../../../../connectionTools/common/connectors/src/FunDynXMLParser.xml", True)
+    cpGen.addConnector("../../../../../connectionTools/lib/common/connectors/src/Forwarder.xml", True)
+    cpGen.addConnector("../../../../../connectionTools/lib/common/connectors/src/TextMessageCreator.xml", True)
+    cpGen.addConnector("../../../../../connectionTools/lib/common/connectors/src/Network.xml", True)
+    cpGen.addConnector("../../../../../connectionTools/lib/common/connectors/src/FunDynExecuter.xml", True)
+    cpGen.addConnector("../../../../../connectionTools/lib/common/connectors/src/FunDynXMLParser.xml", True)
 
 #    globals = { }
 #    execfile(project.srcDir + "/../license.py", globals)

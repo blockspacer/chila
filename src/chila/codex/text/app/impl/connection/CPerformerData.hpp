@@ -17,7 +17,7 @@
 #include "chila/codex/base/app/impl/connection/MainWindow.hpp"
 #include "chila/codex/base/app/impl/connection/FileChooser.hpp"
 #include "chila/codex/base/app/impl/connection/ActionExecuter.hpp"
-#include <chila/connectionTools/common/impl/connection/Forwarder.hpp>
+#include <chila/connectionTools/lib/common/impl/connection/Forwarder.hpp>
 #include "argProviders.hpp"
 
 #include "macros.fgen.hpp"

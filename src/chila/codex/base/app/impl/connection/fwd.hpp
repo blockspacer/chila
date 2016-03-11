@@ -6,7 +6,7 @@
 #define CHILA_CODEX_BASE_APP_IMPL_CONNECTION__FWD_HPP
 
 #include "../fwd.hpp"
-#include <chila/connectionTools/common/impl/connection/Forwarder.hpp>
+#include <chila/connectionTools/lib/common/impl/connection/Forwarder.hpp>
 #include "macros.fgen.hpp"
 
 MY_NSP_START
@@ -14,7 +14,7 @@ MY_NSP_START
     CHILA_LIB_MISC__FWDEC_TYPE(NullObject);
     CHILA_LIB_MISC__FWDEC_TYPE(TabId);
 
-    struct NullObject final : public cctCommon::impl::connection::Forwarder::Object
+    struct NullObject final : public cclCommon::impl::connection::Forwarder::Object
     {
     };
 }
