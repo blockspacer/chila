@@ -19,7 +19,6 @@
 #include <errno.h>
 #include <boost/range/algorithm/find_if.hpp>
 #include <boost/iostreams/device/array.hpp>
-#include <boost/iostreams/stream.hpp>
 #include <boost/tokenizer.hpp>
 #include <boost/function_types/result_type.hpp>
 
