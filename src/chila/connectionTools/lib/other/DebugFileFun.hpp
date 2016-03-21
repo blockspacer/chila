@@ -13,6 +13,7 @@
 #include <chila/lib/misc/ValueStreamer.hpp>
 #include <chila/lib/misc/InPlaceStrStream.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/hana/ext/boost/mpl/vector.hpp>
 #include <chila/lib/misc/SinkInserter.hpp>
 
 #include "macros.fgen.hpp"
@@ -51,7 +52,7 @@ MY_NSP_START
             showArguments(showArguments),
             comments(comments) {}
 
-            #define ARG_AT(pos) boost::mpl::at_c<typename FunctionMData::Arguments, pos>::type
+            #define ARG_AT(pos) decltype(boost::hana::at(typename FunctionMData::Arguments{}, boost::hana::integral_constant<int, pos>{}))::type
 
             #define STREAM_PARAM(z, n, data) \
                     file << prefix << "  |--- " << ARG_AT(n)::getName() << ": [" << valueStreamer.inserter(BOOST_PP_CAT(arg, n)) << "]" << std::endl;

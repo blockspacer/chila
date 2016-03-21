@@ -8,12 +8,11 @@
     #define CHILA_CONNECTIONTOOLS_LIB_OTHER_DYNFUNEXECUTER__EXECUTERFUN_HPP
 
 
-    #include <boost/mpl/size.hpp>
     #include <boost/lexical_cast.hpp>
     #include <chila/lib/misc/exceptions.hpp>
     #include <boost/hana/ext/boost/mpl/vector.hpp>
 
-    #define EX_SIZE boost::mpl::size<typename FunctionMData::Arguments>::value
+    #define EX_SIZE decltype(boost::hana::length(typename FunctionMData::Arguments{}))::value
     #include "macros.fgen.hpp"
 
     MY_NSP_START
