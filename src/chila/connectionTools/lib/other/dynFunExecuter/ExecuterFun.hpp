@@ -11,6 +11,7 @@
     #include <boost/mpl/size.hpp>
     #include <boost/lexical_cast.hpp>
     #include <chila/lib/misc/exceptions.hpp>
+    #include <boost/hana/ext/boost/mpl/vector.hpp>
 
     #define EX_SIZE boost::mpl::size<typename FunctionMData::Arguments>::value
     #include "macros.fgen.hpp"
@@ -51,7 +52,7 @@
 
     #define argCount BOOST_PP_ITERATION()
 
-    #define ARG_AT(pos) boost::mpl::at_c<typename FunctionMData::Arguments, pos>::type
+    #define ARG_AT(pos) decltype(boost::hana::at(typename FunctionMData::Arguments{}, boost::hana::integral_constant<int, pos>{}))::type
     #define ARG_AT_ELEM(z, n, data) BOOST_PP_COMMA_IF(n) getArg<typename ARG_AT(n)>(arguments)
 
     #include "macros.fgen.hpp"
