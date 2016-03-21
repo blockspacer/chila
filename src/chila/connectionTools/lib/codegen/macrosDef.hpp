@@ -52,7 +52,8 @@
     typename boost::call_traits<typename ArgTypes::elem>::param_type elem
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ACTION_SIG_ARG(r, name, i, elem) \
-    BOOST_PP_COMMA_IF(i) typename boost::mpl::at_c<typename BOOST_PP_CAT(MData_, name)::Arguments, i>::type::ParamType
+    BOOST_PP_COMMA_IF(i) typename decltype(typename boost::hana::at(\
+        typename BOOST_PP_CAT(MData_, name)::Arguments{}, boost::hana::integral_constant<int, i>)::type::ParamType
 
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ACTION(NSP, Connector, name, args) \
