@@ -5,8 +5,6 @@
 #ifndef CHILA_CONNECTIONTOOLS_LIB_CODEGEN__FUNCTIONSIGCREATOR_HPP
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__FUNCTIONSIGCREATOR_HPP
 
-#include <boost/mpl/at.hpp>
-#include <boost/mpl/size.hpp>
 #include <boost/preprocessor/repetition/repeat.hpp>
 #include <boost/function.hpp>
 #include <boost/hana/ext/boost/mpl/vector.hpp>
@@ -19,7 +17,7 @@ MY_NSP_START
     struct FunctionSigCreatorImpl {};
 
     template <typename Arguments>
-    struct FunctionSigCreator : FunctionSigCreatorImpl<Arguments, boost::mpl::size<Arguments>::value>
+    struct FunctionSigCreator : FunctionSigCreatorImpl<Arguments, decltype(boost::hana::length(Arguments{}))::value>
     {
     };
 
