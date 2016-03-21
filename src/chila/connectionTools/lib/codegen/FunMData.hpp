@@ -5,7 +5,6 @@
 #ifndef CHILA_CONNECTIONTOOLS_LIB_CODEGEN__FUNMDATA_HPP
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__FUNMDATA_HPP
 
-#include <boost/mpl/vector.hpp>
 #include "exceptions.hpp"
 #include <chila/lib/misc/exceptions.hpp>
 #include "FunctionSigCreator.hpp"
