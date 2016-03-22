@@ -8,6 +8,7 @@
 #include <chila/lib/misc/fwd.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
+#include <boost/hana.hpp>
 #include <map>
 
 #include "macros.fgen.hpp"

@@ -7,6 +7,7 @@
 
 #include <boost/preprocessor/repetition/repeat.hpp>
 #include <boost/function.hpp>
+#include <boost/hana.hpp>
 #include <boost/hana/ext/boost/mpl/vector.hpp>
 #include "macros.fgen.hpp"
 
@@ -22,7 +23,7 @@ MY_NSP_START
     };
 
     #define DEF_ARG(z, n, data) \
-        typename decltype(boost::hana::at(Arguments{}, boost::hana::integral_constant<int, n>{}))::type::ParamType
+        typename decltype(boost::hana::traits::remove_reference(boost::hana::at(Arguments{}, boost::hana::int_c<n>)))::type::ParamType
 
     #define DEF_FUN_CREATOR(z, argCount, data)                                                  \
         template <typename Arguments>                                                         \

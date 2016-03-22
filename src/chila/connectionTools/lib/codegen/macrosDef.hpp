@@ -56,7 +56,7 @@
 
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ACTION(NSP, Connector, name, args) \
-        struct MData_##name final: public chila::connectionTools::lib::codegen::FunMData<MData_##name, Connector, boost::mpl::vector<BOOST_PP_SEQ_ENUM(args)>> \
+        struct MData_##name final: public chila::connectionTools::lib::codegen::FunMData<MData_##name, Connector, decltype(boost::hana::tuple_t<BOOST_PP_SEQ_ENUM(args)>)> \
         { \
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_TYPE( \
                 CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONNECTOR_ACTION_EVCALLED_NAME(NSP, Connector, name)); \
@@ -78,7 +78,7 @@
         } name
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_EVENT(NSP, Connector, name, args) \
-        class MData_##name final: public chila::connectionTools::lib::codegen::FunMData<MData_##name, Connector, boost::mpl::vector<BOOST_PP_SEQ_ENUM(args)>> \
+        class MData_##name final: public chila::connectionTools::lib::codegen::FunMData<MData_##name, Connector, decltype(boost::hana::tuple_t<BOOST_PP_SEQ_ENUM(args)>)> \
         { \
             public: \
                 template <typename EventFSeq> \
