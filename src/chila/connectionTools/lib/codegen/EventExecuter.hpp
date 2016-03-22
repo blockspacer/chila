@@ -18,21 +18,21 @@
 
 MY_NSP_START
 {
-    template <typename _EventFSeq>
+    template <typename _EventFSet>
     class EventExecuter
     {
         public:
             using result_type = void;
-            using EventFSeq = _EventFSeq;
+            using EventFSet = _EventFSet;
 
-            EventExecuter(const EventFSeq &eventFSeq) : eventFSeq(eventFSeq), executed(false) {}
+            EventExecuter(const EventFSet &eventFSet) : eventFSet(eventFSet), executed(false) {}
 
-            EventExecuter(const EventExecuter &rhs) : eventFSeq(rhs.eventFSeq), executed(false)
+            EventExecuter(const EventExecuter &rhs) : eventFSet(rhs.eventFSet), executed(false)
             {
                 rhs.executed = true; // just to render it unusable
             }
 
-//            EventExecuter(EventExecuter &&rhs) : eventFSeq(rhs.eventFSeq), executed(false)
+//            EventExecuter(EventExecuter &&rhs) : eventFSet(rhs.eventFSet), executed(false)
 //            {
 //                my_assert(!rhs.executed);
 //                rhs.executed = true; // just to render it unusable
@@ -44,23 +44,25 @@ MY_NSP_START
 //                my_assert(!executed); // the whole "execute once" should be rethinked, maybe an execution order is preferable
 //                executed = true;
 
-                static_assert(boost::fusion::result_of::has_key<EventFSeq, Event&>::type::value, "event not found");
-
-                auto &ev = boost::fusion::at_key<Event&>(eventFSeq);
-
-                if (ev) ev(args...);
+                abort();
+                
+//                static_assert(boost::fusion::result_of::has_key<EventFSet, Event&>::type::value, "event not found");
+//
+//                auto &ev = boost::fusion::at_key<Event&>(eventFSet);
+//
+//                if (ev) ev(args...);
             }
 
         protected:
-            const EventFSeq &eventFSeq;
+            const EventFSet &eventFSet;
             mutable bool executed;
     };
 
 
-    template <typename EventFSeq>
-    inline EventExecuter<EventFSeq> eventExecuter(const EventFSeq &eventFSeq)
+    template <typename EventFSet>
+    inline EventExecuter<EventFSet> eventExecuter(const EventFSet &eventFSet)
     {
-        return EventExecuter<EventFSeq>(eventFSeq);
+        return EventExecuter<EventFSet>(eventFSet);
     }
 
 }

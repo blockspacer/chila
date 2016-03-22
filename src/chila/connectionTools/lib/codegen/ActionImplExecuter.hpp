@@ -12,7 +12,7 @@
 
 MY_NSP_START
 {
-    template <typename MemFn, typename Object, typename EventFSeq>
+    template <typename MemFn, typename Object, typename EventFSet>
     struct ActionImplExecuter
     {
         public:
@@ -20,26 +20,26 @@ MY_NSP_START
 
             ActionImplExecuter(const ActionImplExecuter&) = default;
 
-            ActionImplExecuter(const MemFn &fun, Object &object, const EventFSeq &eventFSeq) :
-                eventFSeq(eventFSeq), object(object), fun(fun) {}
+            ActionImplExecuter(const MemFn &fun, Object &object, const EventFSet &eventFSet) :
+                eventFSet(eventFSet), object(object), fun(fun) {}
 
             template <typename ...Args>
             void operator()(const Args&... arg)
             {
-                this->fun(this->object, arg..., eventExecuter(eventFSeq));
+                this->fun(this->object, arg..., eventExecuter(eventFSet));
             }
 
 
         private:
-            const EventFSeq &eventFSeq;
+            const EventFSet &eventFSet;
             MemFn fun;
             Object &object;
     };
 
-    template <typename MemFn, typename Object, typename EventFSeq>
-    inline ActionImplExecuter<MemFn, Object, EventFSeq> actionImplExecuter(const MemFn &fun, Object &object, const EventFSeq &eventFSeq)
+    template <typename MemFn, typename Object, typename EventFSet>
+    inline ActionImplExecuter<MemFn, Object, EventFSet> actionImplExecuter(const MemFn &fun, Object &object, const EventFSet &eventFSet)
     {
-        return ActionImplExecuter<MemFn, Object, EventFSeq>(fun, object, eventFSeq);
+        return ActionImplExecuter<MemFn, Object, EventFSet>(fun, object, eventFSet);
     }
 
 }

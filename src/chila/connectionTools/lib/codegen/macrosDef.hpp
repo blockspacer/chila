@@ -60,9 +60,9 @@
         { \
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_TYPE( \
                 CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONNECTOR_ACTION_EVCALLED_NAME(NSP, Connector, name)); \
-            typename EventExecuter::EventFSeq eventFSeq; \
+            typename EventExecuter::EventFSet eventFSet; \
             \
-            MData_##name(Connector &connector) : eventFSeq(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_INIT( \
+            MData_##name(Connector &connector) : eventFSet(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_INIT( \
                 CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONNECTOR_ACTION_EVCALLED_NAME(NSP, Connector, name))) {} \
             \
             template <typename Fun> \
@@ -81,7 +81,7 @@
         class MData_##name final: public chila::connectionTools::lib::codegen::FunMData<MData_##name, Connector, decltype(boost::hana::tuple_t<BOOST_PP_SEQ_ENUM(args)>)> \
         { \
             public: \
-                template <typename EventFSeq> \
+                template <typename EventFSet> \
                 friend class chila::connectionTools::lib::codegen::EventExecuter; \
                 \
                 public: \
@@ -161,7 +161,7 @@
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__BIND_ACTION_ARG(z, n, data) , BOOST_PP_CAT(_, BOOST_PP_INC(n))
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__BIND_ACTION(Target, target, name) \
-        this->actions.name = actionImplExecuter(std::mem_fn(&Target::name), target, this->actions.name.eventFSeq)
+        this->actions.name = actionImplExecuter(std::mem_fn(&Target::name), target, this->actions.name.eventFSet)
 
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_CREATE_APROVIDER(name, ...) \
@@ -187,12 +187,12 @@
 // CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER --------------------------------------------------------------------------------
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_TYPE_EV(r, data, i, elem) \
-        BOOST_PP_COMMA_IF(i) typename boost::add_reference<BOOST_PP_CAT(typename Events::MData_, elem)>::type
+        BOOST_PP_COMMA_IF(i) typename boost::reference_wrapper<BOOST_PP_CAT(typename Events::MData_, elem)>
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_TYPE(eventList) \
         typedef chila::connectionTools::lib::codegen::EventExecuter \
         < \
-            boost::fusion::set<BOOST_PP_SEQ_FOR_EACH_I( \
+            boost::hana::set<BOOST_PP_SEQ_FOR_EACH_I( \
                 CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_TYPE_EV,, eventList)> \
         > EventExecuter\
 
@@ -200,7 +200,7 @@
         BOOST_PP_COMMA_IF(i) boost::ref(connector.events.elem)
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_INIT(eventList) \
-        boost::fusion::make_set(BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_INIT_EV,, eventList))
+        boost::hana::make_set(BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_INIT_EV,, eventList))
 
 
 
