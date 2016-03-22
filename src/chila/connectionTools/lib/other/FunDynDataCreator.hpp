@@ -8,7 +8,7 @@
     #define CHILA_CONNECTIONTOOLS_LIB_OTHER__FUNDYNDATACREATOR_HPP
 
     #include "FunDynData.hpp"
-    #include <boost/hana/ext/boost/mpl/vector.hpp>
+    #include <boost/hana.hpp>
 
     #include "macrosExp.hpp"
 

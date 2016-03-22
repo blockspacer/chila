@@ -13,7 +13,7 @@
 #include <chila/lib/misc/ValueStreamer.hpp>
 #include <chila/lib/misc/InPlaceStrStream.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/hana/ext/boost/mpl/vector.hpp>
+#include <boost/hana.hpp>
 #include <chila/lib/misc/SinkInserter.hpp>
 
 #include "macros.fgen.hpp"
