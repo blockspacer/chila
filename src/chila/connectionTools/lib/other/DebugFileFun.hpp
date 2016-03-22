@@ -6,7 +6,6 @@
 #define CHILA_CONNECTIONTOOLS_LIB_OTHER__DEBUGFILEFUN_HPP
 
 #include "fwd.hpp"
-#include <boost/fusion/algorithm/iteration/for_each.hpp>
 #include "FunDynDataCreator.hpp"
 #include <chila/connectionTools/lib/other/fileDebug/LogFile.hpp>
 #include <chila/lib/misc/QueuePoster.hpp>
