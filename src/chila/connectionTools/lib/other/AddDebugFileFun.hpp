@@ -15,38 +15,6 @@
 
 MY_NSP_START
 {
-    struct AddDebugFileFun
-    {
-        fileDebug::LogFile &logFile;
-        const std::string &connInstanceName;
-        const std::string &funType;
-        const chila::lib::misc::ValueStreamer &valueStreamer;
-        bool showArguments;
-
-        AddDebugFileFun(
-                fileDebug::LogFile &logFile,
-                const chila::lib::misc::ValueStreamer &valueStreamer,
-                const std::string &connInstanceName,
-                const std::string &funType,
-                bool showArguments) :
-            connInstanceName(connInstanceName),
-            valueStreamer(valueStreamer),
-            funType(funType),
-            logFile(logFile),
-            showArguments(showArguments)
-        {
-        }
-
-        template <typename FunctionMData>
-        void operator()(FunctionMData &funMData) const
-        {
-            if (funMData)
-                funMData.passFunAndSet(DebugFileFunPFS<FunctionMData>(logFile, valueStreamer, connInstanceName, funType, showArguments, ""));
-            else
-                funMData = DebugFileFun<FunctionMData>(logFile, valueStreamer, connInstanceName, funType, typename FunctionMData::Function(), showArguments, "");
-        }
-    };
-
     template <typename FunctionsFSeq>
     void addDebugFileFunToFunctions(
         fileDebug::LogFile &logFile,
@@ -56,7 +24,15 @@ MY_NSP_START
         const FunctionsFSeq &functions,
         bool showArguments)
     {
-        boost::fusion::for_each(functions, AddDebugFileFun(logFile, valueStreamer, connInstanceName, funType, showArguments));
+        boost::hana::for_each(functions, [&](auto &funMData)
+        {
+            using FunctionMData = typename std::remove_reference<decltype(funMData)>::type;
+
+            if (funMData)
+                funMData.passFunAndSet(DebugFileFunPFS<FunctionMData>(logFile, valueStreamer, connInstanceName, funType, showArguments, ""));
+            else
+                funMData = DebugFileFun<FunctionMData>(logFile, valueStreamer, connInstanceName, funType, typename FunctionMData::Function(), showArguments, "");
+        });
     }
 
 }
