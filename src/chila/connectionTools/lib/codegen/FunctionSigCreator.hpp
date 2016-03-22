@@ -22,7 +22,7 @@ MY_NSP_START
     };
 
     #define DEF_ARG(z, n, data) \
-        typename decltype(boost::hana::traits::remove_reference(boost::hana::at(Arguments{}, boost::hana::int_c<n>)))::type::ParamType
+        typename decltype(+boost::hana::at(Arguments{}, boost::hana::int_c<n>))::type::ParamType
 
     #define DEF_FUN_CREATOR(z, argCount, data)                                                  \
         template <typename Arguments>                                                         \
