@@ -11,15 +11,8 @@
 #undef BOOST_MPL_LIMIT_VECTOR_SIZE
 #define FUSION_MAX_VECTOR_SIZE 50
 #define BOOST_MPL_LIMIT_VECTOR_SIZE 50
-#include <boost/mpl/set.hpp>
-#include <boost/mpl/map.hpp>
-#include <boost/mpl/vector.hpp>
-#include <boost/mpl/at.hpp>
-#include <boost/fusion/sequence/intrinsic/at_c.hpp>
 #include <boost/call_traits.hpp>
-#include <boost/fusion/container/vector.hpp>
 #include <chila/lib/misc/Path.hpp>
-#include <boost/fusion/include/make_vector.hpp>
 #include <chila/connectionTools/lib/codegen/ActionExecuter.hpp>
 #include <chila/connectionTools/lib/codegen/ConnectorMap.hpp>
 #include <chila/connectionTools/lib/codegen/convert.hpp>
