@@ -49,7 +49,7 @@
 
     #include <chila/lib/misc/macrosExp.hpp>
 
-    #define ARG_AT(pos) decltype(boost::hana::traits::remove_reference(boost::hana::at(typename FunctionMData::Arguments{}, boost::hana::int_c<pos>)))::type
+    #define ARG_AT(pos) decltype(+boost::hana::at(typename FunctionMData::Arguments{}, boost::hana::int_c<pos>))::type
     #define ARG_AT_ELEM(z, n, data) BOOST_PP_COMMA_IF(n) typename ARG_AT(n)::ParamType BOOST_PP_CAT(arg, n)
     #define ADD_TO_MAP(z, n, data) \
         ret.push(ARG_AT(n)::getName(), chila::lib::misc::refValHolder<typename ARG_AT(n)::ParamType>(BOOST_PP_CAT(arg, n)));

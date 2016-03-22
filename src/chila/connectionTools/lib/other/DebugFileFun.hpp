@@ -52,7 +52,7 @@ MY_NSP_START
             showArguments(showArguments),
             comments(comments) {}
 
-            #define ARG_AT(pos) decltype(boost::hana::traits::remove_reference(boost::hana::at(typename FunctionMData::Arguments{}, boost::hana::int_c<pos>)))::type
+            #define ARG_AT(pos) decltype(+boost::hana::at(typename FunctionMData::Arguments{}, boost::hana::int_c<pos>))::type
 
             #define STREAM_PARAM(z, n, data) \
                     file << prefix << "  |--- " << ARG_AT(n)::getName() << ": [" << valueStreamer.inserter(BOOST_PP_CAT(arg, n)) << "]" << std::endl;
