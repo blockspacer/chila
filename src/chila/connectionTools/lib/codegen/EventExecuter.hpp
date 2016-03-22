@@ -5,9 +5,9 @@
 #ifndef CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EVENTEXECUTER_HPP
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EVENTEXECUTER_HPP
 
-#include <boost/fusion/include/make_set.hpp>
-#include <boost/fusion/include/has_key.hpp>
-#include <boost/fusion/include/at_key.hpp>
+//#include <boost/fusion/include/make_set.hpp>
+//#include <boost/fusion/include/has_key.hpp>
+//#include <boost/fusion/include/at_key.hpp>
 #include <chila/lib/misc/exceptions.hpp>
 
 #define my_assert       CHILA_LIB_MISC__ASSERT
@@ -45,7 +45,7 @@ MY_NSP_START
 //                executed = true;
 
                 abort();
-                
+
 //                static_assert(boost::fusion::result_of::has_key<EventFSet, Event&>::type::value, "event not found");
 //
 //                auto &ev = boost::fusion::at_key<Event&>(eventFSet);
