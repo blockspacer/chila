@@ -8,7 +8,6 @@
 #include <boost/preprocessor/repetition/repeat.hpp>
 #include <boost/function.hpp>
 #include <boost/hana.hpp>
-#include <boost/hana/ext/boost/mpl/vector.hpp>
 #include "macros.fgen.hpp"
 
 MY_NSP_START

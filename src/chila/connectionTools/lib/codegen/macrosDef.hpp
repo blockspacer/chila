@@ -143,16 +143,16 @@
     BOOST_PP_COMMA_IF(i) ref(function)
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUN_FUSIONSEQ(NSP, FNAME, Connector) \
-    typedef boost::fusion::vector< \
+    typedef boost::hana::tuple< \
     BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUN_FUSIONSEQ_TYPE_ELEM,, \
         CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONNECTOR_FUNCTIONS_NAME(NSP, FNAME, Connector)) > List; \
-    typedef boost::fusion::vector< \
+    typedef boost::hana::tuple< \
     BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUN_FUSIONSEQ_TYPE_ELEM, const, \
         CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONNECTOR_FUNCTIONS_NAME(NSP, FNAME, Connector)) > CList; \
-    List list() { return boost::fusion::make_vector(\
+    List list() { return boost::hana::make_tuple(\
         BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUN_FUSIONSEQ_RET_ELEM, boost::ref, \
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONNECTOR_FUNCTIONS_NAME(NSP, FNAME, Connector))); } \
-    CList list() const { return boost::fusion::make_vector(\
+    CList list() const { return boost::hana::make_tuple(\
         BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUN_FUSIONSEQ_RET_ELEM, boost::cref, \
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONNECTOR_FUNCTIONS_NAME(NSP, FNAME, Connector))); }
 
