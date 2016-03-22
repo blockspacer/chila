@@ -10,7 +10,7 @@
 
     #include <boost/lexical_cast.hpp>
     #include <chila/lib/misc/exceptions.hpp>
-    #include <boost/hana/ext/boost/mpl/vector.hpp>
+    #include <boost/hana.hpp>
 
     #define EX_SIZE decltype(boost::hana::length(typename FunctionMData::Arguments{}))::value
     #include "macros.fgen.hpp"
