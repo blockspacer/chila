@@ -1391,8 +1391,8 @@
           <incDir>
             <pElem>../../../build/release/src</pElem>
             <pElem>../../../../../src</pElem>
-            <pElem>../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
             <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
             <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
@@ -1424,6 +1424,8 @@
           <incDir>
             <pElem>..</pElem>
             <pElem>/applib/boost/include/1.55</pElem>
+            <pElem>../../../build/release/src</pElem>
+            <pElem>../../../../../src</pElem>
           </incDir>
           <preprocessorList>
             <Elem>BOOST_PP_VARIADICS=1</Elem>
@@ -1438,8 +1440,6 @@
       <folder path="1/codegen">
         <ccTool>
           <incDir>
-            <pElem>../../../build/release/src</pElem>
-            <pElem>../../../../../src</pElem>
             <pElem>../../../../../../applib/boost/include/1.57</pElem>
             <pElem>/applib/boost/include/1.57</pElem>
             <pElem>../../../../../../../../usr/include/libxml2</pElem>
@@ -1467,8 +1467,6 @@
       <folder path="1/other">
         <ccTool>
           <incDir>
-            <pElem>../../../build/release/src</pElem>
-            <pElem>../../../../../src</pElem>
             <pElem>../../../../../../applib/boost/include/1.59</pElem>
             <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
             <pElem>../../../../../../../../usr/include/libxml2</pElem>
@@ -1496,8 +1494,6 @@
       <folder path="1/tree">
         <ccTool>
           <incDir>
-            <pElem>../../../build/release/src</pElem>
-            <pElem>../../../../../src</pElem>
             <pElem>../../../../../../applib/boost/include/1.59</pElem>
             <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
             <pElem>../../../../../../../../usr/include/libxml2</pElem>
