@@ -161,7 +161,7 @@
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__BIND_ACTION_ARG(z, n, data) , BOOST_PP_CAT(_, BOOST_PP_INC(n))
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__BIND_ACTION(Target, target, name) \
-        this->actions.name = actionImplExecuter(std::mem_fn(&Target::name), target, this->actions.name.eventHMap)
+        this->actions.name = [this, &target](auto ...arg) { target.name(arg..., this->actions.name.eventHMap); };
 
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_CREATE_APROVIDER(name, ...) \
