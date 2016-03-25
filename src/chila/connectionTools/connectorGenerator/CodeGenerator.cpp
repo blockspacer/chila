@@ -178,7 +178,6 @@ MY_NSP_START
             << "#include <chila/lib/misc/MemFnExecuter.hpp>\n"
             << "#include <chila/lib/misc/Path.hpp>\n"
             << "#include <string>\n\n"
-            << "#include <chila/connectionTools/lib/codegen/ActionImplExecuter.hpp>\n"
             << "#include <chila/connectionTools/lib/codegen/FunctionSigCreator.hpp>\n"
             << "#include <chila/connectionTools/lib/codegen/EventExecuter.hpp>\n"
             << "#include <chila/connectionTools/lib/codegen/Connector.hpp>\n"
