@@ -13,7 +13,6 @@
 #define BOOST_MPL_LIMIT_VECTOR_SIZE 50
 #include <boost/call_traits.hpp>
 #include <chila/lib/misc/Path.hpp>
-#include <chila/connectionTools/lib/codegen/ActionExecuter.hpp>
 #include <chila/connectionTools/lib/codegen/ConnectorMap.hpp>
 #include <chila/connectionTools/lib/codegen/convert.hpp>
 #include <chila/connectionTools/lib/codegen/macrosDef.hpp>
@@ -140,7 +139,6 @@
 
 CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,base,app,connectors,gen))
 {
-    using chila::connectionTools::lib::codegen::actionExecuter;
 
     template <typename ArgTypes, typename Connectors>
     struct ConnectionPerformer
@@ -198,7 +196,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,base,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_actionExecuter_execute act_base_actionExecuter_execute;
+            const Action_base_actionExecuter_execute &act_base_actionExecuter_execute;
 
             Ex_base_mainWindow_actionExecuted
             (
@@ -264,7 +262,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,base,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_appCommand_funDynExecuter_execute act_base_appCommand_funDynExecuter_execute;
+            const Action_base_appCommand_funDynExecuter_execute &act_base_appCommand_funDynExecuter_execute;
 
             Ex_base_appCommand_funDynXMLParser_parsed
             (
@@ -336,7 +334,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,base,app,connectors,gen))
             typedef void result_type;
 
             APC_cmdNetServer_msgCreatorFromBuff apc_cmdNetServer_msgCreatorFromBuff;
-            Action_base_appCommand_funDynXMLParser_take act_base_appCommand_funDynXMLParser_take;
+            const Action_base_appCommand_funDynXMLParser_take &act_base_appCommand_funDynXMLParser_take;
 
             Ex_base_appCommand_msgCreator_messageObtained
             (
@@ -419,7 +417,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,base,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_appCommand_msgCreator_takeBuffer act_base_appCommand_msgCreator_takeBuffer;
+            const Action_base_appCommand_msgCreator_takeBuffer &act_base_appCommand_msgCreator_takeBuffer;
 
             Ex_base_appCommand_netServer_msgRead
             (
@@ -489,7 +487,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,base,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_fileChooser_open_open act_base_fileChooser_open_open;
+            const Action_base_fileChooser_open_open &act_base_fileChooser_open_open;
 
             Ex_base_actionExecuter_file_open
             (
@@ -548,7 +546,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,base,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_fileChooser_saveAs_open act_base_fileChooser_saveAs_open;
+            const Action_base_fileChooser_saveAs_open &act_base_fileChooser_saveAs_open;
 
             Ex_base_actionExecuter_file_saveAs
             (
@@ -637,7 +635,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,base,app,connectors,gen))
             ));
             cInstances.base_mainWindow.events.actionExecuted.addFun(ex_base_mainWindow_actionExecuted
             (
-                actionExecuter<Tag_base_mainWindow_actionExecuted, 0>(cInstances.base_actionExecuter.actions.execute)
+                cInstances.base_actionExecuter.actions.execute
             ));
         }
 
@@ -653,7 +651,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,base,app,connectors,gen))
         {
             cInstances.base_appCommand_funDynXMLParser.events.parsed.addFun(ex_base_appCommand_funDynXMLParser_parsed
             (
-                actionExecuter<Tag_base_appCommand_funDynXMLParser_parsed, 0>(cInstances.base_appCommand_funDynExecuter.actions.execute)
+                cInstances.base_appCommand_funDynExecuter.actions.execute
             ));
         }
 
@@ -665,7 +663,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,base,app,connectors,gen))
             (
                 providers.cmdNetServer_msgCreatorFromBuff
                 ,
-                actionExecuter<Tag_base_appCommand_msgCreator_messageObtained, 0>(cInstances.base_appCommand_funDynXMLParser.actions.take)
+                cInstances.base_appCommand_funDynXMLParser.actions.take
             ));
         }
 
@@ -675,7 +673,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,base,app,connectors,gen))
         {
             cInstances.base_appCommand_netServer.events.msgRead.addFun(ex_base_appCommand_netServer_msgRead
             (
-                actionExecuter<Tag_base_appCommand_netServer_msgRead, 0>(cInstances.base_appCommand_msgCreator.actions.takeBuffer)
+                cInstances.base_appCommand_msgCreator.actions.takeBuffer
             ));
         }
 
@@ -685,11 +683,11 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,base,app,connectors,gen))
         {
             cInstances.base_actionExecuter.events.file_open.addFun(ex_base_actionExecuter_file_open
             (
-                actionExecuter<Tag_base_actionExecuter_file_open, 0>(cInstances.base_fileChooser_open.actions.open)
+                cInstances.base_fileChooser_open.actions.open
             ));
             cInstances.base_actionExecuter.events.file_saveAs.addFun(ex_base_actionExecuter_file_saveAs
             (
-                actionExecuter<Tag_base_actionExecuter_file_saveAs, 0>(cInstances.base_fileChooser_saveAs.actions.open)
+                cInstances.base_fileChooser_saveAs.actions.open
             ));
         }
 

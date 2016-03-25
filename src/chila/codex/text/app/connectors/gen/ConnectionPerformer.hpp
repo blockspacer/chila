@@ -13,7 +13,6 @@
 #define BOOST_MPL_LIMIT_VECTOR_SIZE 50
 #include <boost/call_traits.hpp>
 #include <chila/lib/misc/Path.hpp>
-#include <chila/connectionTools/lib/codegen/ActionExecuter.hpp>
 #include <chila/connectionTools/lib/codegen/ConnectorMap.hpp>
 #include <chila/connectionTools/lib/codegen/convert.hpp>
 #include <chila/connectionTools/lib/codegen/macrosDef.hpp>
@@ -143,7 +142,6 @@
 
 CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
 {
-    using chila::connectionTools::lib::codegen::actionExecuter;
 
     template <typename ArgTypes, typename Connectors>
     struct ConnectionPerformer
@@ -167,7 +165,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_newEditor act_text_textEditor_newEditor;
+            const Action_text_textEditor_newEditor &act_text_textEditor_newEditor;
 
             Ex_base_actionExecuter_file_new
             (
@@ -226,7 +224,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_saveEditorContents_current act_text_textEditor_saveEditorContents_current;
+            const Action_text_textEditor_saveEditorContents_current &act_text_textEditor_saveEditorContents_current;
 
             Ex_base_actionExecuter_file_save
             (
@@ -285,7 +283,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_saveAll act_text_textEditor_saveAll;
+            const Action_text_textEditor_saveAll &act_text_textEditor_saveAll;
 
             Ex_base_actionExecuter_file_saveAll
             (
@@ -344,7 +342,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_closingSelectedEditor act_text_textEditor_closingSelectedEditor;
+            const Action_text_textEditor_closingSelectedEditor &act_text_textEditor_closingSelectedEditor;
 
             Ex_base_actionExecuter_file_close
             (
@@ -403,7 +401,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_closingEditor act_text_textEditor_closingEditor;
+            const Action_text_textEditor_closingEditor &act_text_textEditor_closingEditor;
 
             Ex_base_mainWindow_notebook_closingTab
             (
@@ -470,8 +468,8 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_fileOpener_fileSelected act_text_fileOpener_fileSelected;
-            Action_text_textEditor_fileSelected act_text_textEditor_fileSelected;
+            const Action_text_fileOpener_fileSelected &act_text_fileOpener_fileSelected;
+            const Action_text_textEditor_fileSelected &act_text_textEditor_fileSelected;
 
             Ex_base_mainWindow_notebook_tabSelected
             (
@@ -551,7 +549,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_actionExecuter_execute act_text_actionExecuter_execute;
+            const Action_text_actionExecuter_execute &act_text_actionExecuter_execute;
 
             Ex_base_mainWindow_actionExecuted
             (
@@ -617,7 +615,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_tabAdded act_text_textEditor_tabAdded;
+            const Action_text_textEditor_tabAdded &act_text_textEditor_tabAdded;
 
             Ex_base_mainWindow_notebook_tabAdded
             (
@@ -687,7 +685,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_fileOpener_openFile act_text_fileOpener_openFile;
+            const Action_text_fileOpener_openFile &act_text_fileOpener_openFile;
 
             Ex_base_fileChooser_open_fileChosen
             (
@@ -753,7 +751,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_saveEditorContents_as act_text_textEditor_saveEditorContents_as;
+            const Action_text_textEditor_saveEditorContents_as &act_text_textEditor_saveEditorContents_as;
 
             Ex_base_fileChooser_saveAs_fileChosen
             (
@@ -819,7 +817,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_undo act_text_textEditor_undo;
+            const Action_text_textEditor_undo &act_text_textEditor_undo;
 
             Ex_text_actionExecuter_edit_undo
             (
@@ -878,7 +876,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_redo act_text_textEditor_redo;
+            const Action_text_textEditor_redo &act_text_textEditor_redo;
 
             Ex_text_actionExecuter_edit_redo
             (
@@ -937,7 +935,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_findReplace_start act_text_textEditor_findReplace_start;
+            const Action_text_textEditor_findReplace_start &act_text_textEditor_findReplace_start;
 
             Ex_text_actionExecuter_edit_findReplace
             (
@@ -997,8 +995,8 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_findReplace_findPrevious act_text_textEditor_findReplace_findPrevious;
-            Action_base_mainWindow_setPresent act_base_mainWindow_setPresent;
+            const Action_text_textEditor_findReplace_findPrevious &act_text_textEditor_findReplace_findPrevious;
+            const Action_base_mainWindow_setPresent &act_base_mainWindow_setPresent;
 
             Ex_text_findReplace_findPrevious
             (
@@ -1071,8 +1069,8 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_findReplace_findNext act_text_textEditor_findReplace_findNext;
-            Action_base_mainWindow_setPresent act_base_mainWindow_setPresent;
+            const Action_text_textEditor_findReplace_findNext &act_text_textEditor_findReplace_findNext;
+            const Action_base_mainWindow_setPresent &act_base_mainWindow_setPresent;
 
             Ex_text_findReplace_findNext
             (
@@ -1145,8 +1143,8 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_findReplace_replace act_text_textEditor_findReplace_replace;
-            Action_base_mainWindow_setPresent act_base_mainWindow_setPresent;
+            const Action_text_textEditor_findReplace_replace &act_text_textEditor_findReplace_replace;
+            const Action_base_mainWindow_setPresent &act_base_mainWindow_setPresent;
 
             Ex_text_findReplace_replace
             (
@@ -1225,7 +1223,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_findReplace_replaceAll act_text_textEditor_findReplace_replaceAll;
+            const Action_text_textEditor_findReplace_replaceAll &act_text_textEditor_findReplace_replaceAll;
 
             Ex_text_findReplace_replaceAll
             (
@@ -1291,7 +1289,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_findReplace_restoreFind act_text_textEditor_findReplace_restoreFind;
+            const Action_text_textEditor_findReplace_restoreFind &act_text_textEditor_findReplace_restoreFind;
 
             Ex_text_findReplace_closed
             (
@@ -1350,7 +1348,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_findReplace_stateChanged act_text_textEditor_findReplace_stateChanged;
+            const Action_text_textEditor_findReplace_stateChanged &act_text_textEditor_findReplace_stateChanged;
 
             Ex_text_findReplace_stateChanged
             (
@@ -1420,7 +1418,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_mainWindow_notebook_openNewTab act_base_mainWindow_notebook_openNewTab;
+            const Action_base_mainWindow_notebook_openNewTab &act_base_mainWindow_notebook_openNewTab;
 
             Ex_text_textEditor_newTBTabRequested
             (
@@ -1498,7 +1496,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textHighlighter_parseText act_text_textHighlighter_parseText;
+            const Action_text_textHighlighter_parseText &act_text_textHighlighter_parseText;
 
             Ex_text_textEditor_parseText
             (
@@ -1572,7 +1570,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_fileOpener_saveFile_current act_text_fileOpener_saveFile_current;
+            const Action_text_fileOpener_saveFile_current &act_text_fileOpener_saveFile_current;
 
             Ex_text_textEditor_saveEditorContents_current
             (
@@ -1642,7 +1640,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_fileOpener_saveFile_as act_text_fileOpener_saveFile_as;
+            const Action_text_fileOpener_saveFile_as &act_text_fileOpener_saveFile_as;
 
             Ex_text_textEditor_saveEditorContents_as
             (
@@ -1716,7 +1714,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_mainWindow_notebook_tabContentsModified act_base_mainWindow_notebook_tabContentsModified;
+            const Action_base_mainWindow_notebook_tabContentsModified &act_base_mainWindow_notebook_tabContentsModified;
 
             Ex_text_textEditor_contentsModified
             (
@@ -1782,7 +1780,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_mainWindow_notebook_tabContentsAreOriginal act_base_mainWindow_notebook_tabContentsAreOriginal;
+            const Action_base_mainWindow_notebook_tabContentsAreOriginal &act_base_mainWindow_notebook_tabContentsAreOriginal;
 
             Ex_text_textEditor_contentsAreOriginal
             (
@@ -1848,7 +1846,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_mainWindow_notebook_tabDataChanged act_base_mainWindow_notebook_tabDataChanged;
+            const Action_base_mainWindow_notebook_tabDataChanged &act_base_mainWindow_notebook_tabDataChanged;
 
             Ex_text_textEditor_tabDataChanged
             (
@@ -1923,8 +1921,8 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_fileOpener_fileClosed act_text_fileOpener_fileClosed;
-            Action_base_mainWindow_notebook_closeTab act_base_mainWindow_notebook_closeTab;
+            const Action_text_fileOpener_fileClosed &act_text_fileOpener_fileClosed;
+            const Action_base_mainWindow_notebook_closeTab &act_base_mainWindow_notebook_closeTab;
 
             Ex_text_textEditor_editorClosed
             (
@@ -2004,7 +2002,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_findReplace_setTexts act_text_findReplace_setTexts;
+            const Action_text_findReplace_setTexts &act_text_findReplace_setTexts;
 
             Ex_text_textEditor_findReplace_setFindText
             (
@@ -2070,7 +2068,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_mainWindow_addAction act_base_mainWindow_addAction;
+            const Action_base_mainWindow_addAction &act_base_mainWindow_addAction;
 
             Ex_text_textEditor_registerAction
             (
@@ -2140,7 +2138,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_mainWindow_clearActions act_base_mainWindow_clearActions;
+            const Action_base_mainWindow_clearActions &act_base_mainWindow_clearActions;
 
             Ex_text_textEditor_clearActions
             (
@@ -2199,7 +2197,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_mainWindow_addSeparator act_base_mainWindow_addSeparator;
+            const Action_base_mainWindow_addSeparator &act_base_mainWindow_addSeparator;
 
             Ex_text_textEditor_addSeparator
             (
@@ -2265,7 +2263,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_mainWindow_notebook_selectTab act_base_mainWindow_notebook_selectTab;
+            const Action_base_mainWindow_notebook_selectTab &act_base_mainWindow_notebook_selectTab;
 
             Ex_text_textEditor_selectFile
             (
@@ -2331,7 +2329,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_applyTags act_text_textEditor_applyTags;
+            const Action_text_textEditor_applyTags &act_text_textEditor_applyTags;
 
             Ex_text_textHighlighter_applyTags
             (
@@ -2405,7 +2403,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_openEditor act_text_textEditor_openEditor;
+            const Action_text_textEditor_openEditor &act_text_textEditor_openEditor;
 
             Ex_text_fileOpener_openingNewFile
             (
@@ -2479,7 +2477,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_addText act_text_textEditor_addText;
+            const Action_text_textEditor_addText &act_text_textEditor_addText;
 
             Ex_text_fileOpener_textFound
             (
@@ -2549,7 +2547,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_mainWindow_notebook_selectTab act_base_mainWindow_notebook_selectTab;
+            const Action_base_mainWindow_notebook_selectTab &act_base_mainWindow_notebook_selectTab;
 
             Ex_text_fileOpener_fileAlreadyOpened
             (
@@ -2616,8 +2614,8 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_editorTypeChanged act_text_textEditor_editorTypeChanged;
-            Action_text_textEditor_savingDone act_text_textEditor_savingDone;
+            const Action_text_textEditor_editorTypeChanged &act_text_textEditor_editorTypeChanged;
+            const Action_text_textEditor_savingDone &act_text_textEditor_savingDone;
 
             Ex_text_fileOpener_fileSaved
             (
@@ -2701,7 +2699,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_text_textEditor_openingDone act_text_textEditor_openingDone;
+            const Action_text_textEditor_openingDone &act_text_textEditor_openingDone;
 
             Ex_text_fileOpener_fileOpened
             (
@@ -2767,7 +2765,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_fileChooser_saveAs_setFileName act_base_fileChooser_saveAs_setFileName;
+            const Action_base_fileChooser_saveAs_setFileName &act_base_fileChooser_saveAs_setFileName;
 
             Ex_text_fileOpener_fileSelected
             (
@@ -2835,7 +2833,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             typedef void result_type;
 
-            Action_base_fileChooser_saveAs_open act_base_fileChooser_saveAs_open;
+            const Action_base_fileChooser_saveAs_open &act_base_fileChooser_saveAs_open;
 
             Ex_text_fileOpener_savingUnnamedFile
             (
@@ -2920,19 +2918,19 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             cInstances.base_actionExecuter.events.file_new.addFun(ex_base_actionExecuter_file_new
             (
-                actionExecuter<Tag_base_actionExecuter_file_new, 0>(cInstances.text_textEditor.actions.newEditor)
+                cInstances.text_textEditor.actions.newEditor
             ));
             cInstances.base_actionExecuter.events.file_save.addFun(ex_base_actionExecuter_file_save
             (
-                actionExecuter<Tag_base_actionExecuter_file_save, 0>(cInstances.text_textEditor.actions.saveEditorContents_current)
+                cInstances.text_textEditor.actions.saveEditorContents_current
             ));
             cInstances.base_actionExecuter.events.file_saveAll.addFun(ex_base_actionExecuter_file_saveAll
             (
-                actionExecuter<Tag_base_actionExecuter_file_saveAll, 0>(cInstances.text_textEditor.actions.saveAll)
+                cInstances.text_textEditor.actions.saveAll
             ));
             cInstances.base_actionExecuter.events.file_close.addFun(ex_base_actionExecuter_file_close
             (
-                actionExecuter<Tag_base_actionExecuter_file_close, 0>(cInstances.text_textEditor.actions.closingSelectedEditor)
+                cInstances.text_textEditor.actions.closingSelectedEditor
             ));
         }
 
@@ -2942,20 +2940,20 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             cInstances.base_mainWindow.events.notebook_closingTab.addFun(ex_base_mainWindow_notebook_closingTab
             (
-                actionExecuter<Tag_base_mainWindow_notebook_closingTab, 0>(cInstances.text_textEditor.actions.closingEditor)
+                cInstances.text_textEditor.actions.closingEditor
             ));
             cInstances.base_mainWindow.events.notebook_tabSelected.addFun(ex_base_mainWindow_notebook_tabSelected
             (
-                actionExecuter<Tag_base_mainWindow_notebook_tabSelected, 0>(cInstances.text_fileOpener.actions.fileSelected),
-                actionExecuter<Tag_base_mainWindow_notebook_tabSelected, 1>(cInstances.text_textEditor.actions.fileSelected)
+                cInstances.text_fileOpener.actions.fileSelected,
+                cInstances.text_textEditor.actions.fileSelected
             ));
             cInstances.base_mainWindow.events.actionExecuted.addFun(ex_base_mainWindow_actionExecuted
             (
-                actionExecuter<Tag_base_mainWindow_actionExecuted, 0>(cInstances.text_actionExecuter.actions.execute)
+                cInstances.text_actionExecuter.actions.execute
             ));
             cInstances.base_mainWindow.events.notebook_tabAdded.addFun(ex_base_mainWindow_notebook_tabAdded
             (
-                actionExecuter<Tag_base_mainWindow_notebook_tabAdded, 0>(cInstances.text_textEditor.actions.tabAdded)
+                cInstances.text_textEditor.actions.tabAdded
             ));
         }
 
@@ -2965,7 +2963,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             cInstances.base_fileChooser_open.events.fileChosen.addFun(ex_base_fileChooser_open_fileChosen
             (
-                actionExecuter<Tag_base_fileChooser_open_fileChosen, 0>(cInstances.text_fileOpener.actions.openFile)
+                cInstances.text_fileOpener.actions.openFile
             ));
         }
 
@@ -2975,7 +2973,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             cInstances.base_fileChooser_saveAs.events.fileChosen.addFun(ex_base_fileChooser_saveAs_fileChosen
             (
-                actionExecuter<Tag_base_fileChooser_saveAs_fileChosen, 0>(cInstances.text_textEditor.actions.saveEditorContents_as)
+                cInstances.text_textEditor.actions.saveEditorContents_as
             ));
         }
 
@@ -2985,15 +2983,15 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             cInstances.text_actionExecuter.events.edit_undo.addFun(ex_text_actionExecuter_edit_undo
             (
-                actionExecuter<Tag_text_actionExecuter_edit_undo, 0>(cInstances.text_textEditor.actions.undo)
+                cInstances.text_textEditor.actions.undo
             ));
             cInstances.text_actionExecuter.events.edit_redo.addFun(ex_text_actionExecuter_edit_redo
             (
-                actionExecuter<Tag_text_actionExecuter_edit_redo, 0>(cInstances.text_textEditor.actions.redo)
+                cInstances.text_textEditor.actions.redo
             ));
             cInstances.text_actionExecuter.events.edit_findReplace.addFun(ex_text_actionExecuter_edit_findReplace
             (
-                actionExecuter<Tag_text_actionExecuter_edit_findReplace, 0>(cInstances.text_textEditor.actions.findReplace_start)
+                cInstances.text_textEditor.actions.findReplace_start
             ));
         }
 
@@ -3003,30 +3001,30 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             cInstances.text_findReplace.events.findPrevious.addFun(ex_text_findReplace_findPrevious
             (
-                actionExecuter<Tag_text_findReplace_findPrevious, 0>(cInstances.text_textEditor.actions.findReplace_findPrevious),
-                actionExecuter<Tag_text_findReplace_findPrevious, 1>(cInstances.base_mainWindow.actions.setPresent)
+                cInstances.text_textEditor.actions.findReplace_findPrevious,
+                cInstances.base_mainWindow.actions.setPresent
             ));
             cInstances.text_findReplace.events.findNext.addFun(ex_text_findReplace_findNext
             (
-                actionExecuter<Tag_text_findReplace_findNext, 0>(cInstances.text_textEditor.actions.findReplace_findNext),
-                actionExecuter<Tag_text_findReplace_findNext, 1>(cInstances.base_mainWindow.actions.setPresent)
+                cInstances.text_textEditor.actions.findReplace_findNext,
+                cInstances.base_mainWindow.actions.setPresent
             ));
             cInstances.text_findReplace.events.replace.addFun(ex_text_findReplace_replace
             (
-                actionExecuter<Tag_text_findReplace_replace, 0>(cInstances.text_textEditor.actions.findReplace_replace),
-                actionExecuter<Tag_text_findReplace_replace, 1>(cInstances.base_mainWindow.actions.setPresent)
+                cInstances.text_textEditor.actions.findReplace_replace,
+                cInstances.base_mainWindow.actions.setPresent
             ));
             cInstances.text_findReplace.events.replaceAll.addFun(ex_text_findReplace_replaceAll
             (
-                actionExecuter<Tag_text_findReplace_replaceAll, 0>(cInstances.text_textEditor.actions.findReplace_replaceAll)
+                cInstances.text_textEditor.actions.findReplace_replaceAll
             ));
             cInstances.text_findReplace.events.closed.addFun(ex_text_findReplace_closed
             (
-                actionExecuter<Tag_text_findReplace_closed, 0>(cInstances.text_textEditor.actions.findReplace_restoreFind)
+                cInstances.text_textEditor.actions.findReplace_restoreFind
             ));
             cInstances.text_findReplace.events.stateChanged.addFun(ex_text_findReplace_stateChanged
             (
-                actionExecuter<Tag_text_findReplace_stateChanged, 0>(cInstances.text_textEditor.actions.findReplace_stateChanged)
+                cInstances.text_textEditor.actions.findReplace_stateChanged
             ));
         }
 
@@ -3036,56 +3034,56 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             cInstances.text_textEditor.events.newTBTabRequested.addFun(ex_text_textEditor_newTBTabRequested
             (
-                actionExecuter<Tag_text_textEditor_newTBTabRequested, 0>(cInstances.base_mainWindow.actions.notebook_openNewTab)
+                cInstances.base_mainWindow.actions.notebook_openNewTab
             ));
             cInstances.text_textEditor.events.parseText.addFun(ex_text_textEditor_parseText
             (
-                actionExecuter<Tag_text_textEditor_parseText, 0>(cInstances.text_textHighlighter.actions.parseText)
+                cInstances.text_textHighlighter.actions.parseText
             ));
             cInstances.text_textEditor.events.saveEditorContents_current.addFun(ex_text_textEditor_saveEditorContents_current
             (
-                actionExecuter<Tag_text_textEditor_saveEditorContents_current, 0>(cInstances.text_fileOpener.actions.saveFile_current)
+                cInstances.text_fileOpener.actions.saveFile_current
             ));
             cInstances.text_textEditor.events.saveEditorContents_as.addFun(ex_text_textEditor_saveEditorContents_as
             (
-                actionExecuter<Tag_text_textEditor_saveEditorContents_as, 0>(cInstances.text_fileOpener.actions.saveFile_as)
+                cInstances.text_fileOpener.actions.saveFile_as
             ));
             cInstances.text_textEditor.events.contentsModified.addFun(ex_text_textEditor_contentsModified
             (
-                actionExecuter<Tag_text_textEditor_contentsModified, 0>(cInstances.base_mainWindow.actions.notebook_tabContentsModified)
+                cInstances.base_mainWindow.actions.notebook_tabContentsModified
             ));
             cInstances.text_textEditor.events.contentsAreOriginal.addFun(ex_text_textEditor_contentsAreOriginal
             (
-                actionExecuter<Tag_text_textEditor_contentsAreOriginal, 0>(cInstances.base_mainWindow.actions.notebook_tabContentsAreOriginal)
+                cInstances.base_mainWindow.actions.notebook_tabContentsAreOriginal
             ));
             cInstances.text_textEditor.events.tabDataChanged.addFun(ex_text_textEditor_tabDataChanged
             (
-                actionExecuter<Tag_text_textEditor_tabDataChanged, 0>(cInstances.base_mainWindow.actions.notebook_tabDataChanged)
+                cInstances.base_mainWindow.actions.notebook_tabDataChanged
             ));
             cInstances.text_textEditor.events.editorClosed.addFun(ex_text_textEditor_editorClosed
             (
-                actionExecuter<Tag_text_textEditor_editorClosed, 0>(cInstances.text_fileOpener.actions.fileClosed),
-                actionExecuter<Tag_text_textEditor_editorClosed, 1>(cInstances.base_mainWindow.actions.notebook_closeTab)
+                cInstances.text_fileOpener.actions.fileClosed,
+                cInstances.base_mainWindow.actions.notebook_closeTab
             ));
             cInstances.text_textEditor.events.findReplace_setFindText.addFun(ex_text_textEditor_findReplace_setFindText
             (
-                actionExecuter<Tag_text_textEditor_findReplace_setFindText, 0>(cInstances.text_findReplace.actions.setTexts)
+                cInstances.text_findReplace.actions.setTexts
             ));
             cInstances.text_textEditor.events.registerAction.addFun(ex_text_textEditor_registerAction
             (
-                actionExecuter<Tag_text_textEditor_registerAction, 0>(cInstances.base_mainWindow.actions.addAction)
+                cInstances.base_mainWindow.actions.addAction
             ));
             cInstances.text_textEditor.events.clearActions.addFun(ex_text_textEditor_clearActions
             (
-                actionExecuter<Tag_text_textEditor_clearActions, 0>(cInstances.base_mainWindow.actions.clearActions)
+                cInstances.base_mainWindow.actions.clearActions
             ));
             cInstances.text_textEditor.events.addSeparator.addFun(ex_text_textEditor_addSeparator
             (
-                actionExecuter<Tag_text_textEditor_addSeparator, 0>(cInstances.base_mainWindow.actions.addSeparator)
+                cInstances.base_mainWindow.actions.addSeparator
             ));
             cInstances.text_textEditor.events.selectFile.addFun(ex_text_textEditor_selectFile
             (
-                actionExecuter<Tag_text_textEditor_selectFile, 0>(cInstances.base_mainWindow.actions.notebook_selectTab)
+                cInstances.base_mainWindow.actions.notebook_selectTab
             ));
         }
 
@@ -3095,7 +3093,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             cInstances.text_textHighlighter.events.applyTags.addFun(ex_text_textHighlighter_applyTags
             (
-                actionExecuter<Tag_text_textHighlighter_applyTags, 0>(cInstances.text_textEditor.actions.applyTags)
+                cInstances.text_textEditor.actions.applyTags
             ));
         }
 
@@ -3105,32 +3103,32 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
         {
             cInstances.text_fileOpener.events.openingNewFile.addFun(ex_text_fileOpener_openingNewFile
             (
-                actionExecuter<Tag_text_fileOpener_openingNewFile, 0>(cInstances.text_textEditor.actions.openEditor)
+                cInstances.text_textEditor.actions.openEditor
             ));
             cInstances.text_fileOpener.events.textFound.addFun(ex_text_fileOpener_textFound
             (
-                actionExecuter<Tag_text_fileOpener_textFound, 0>(cInstances.text_textEditor.actions.addText)
+                cInstances.text_textEditor.actions.addText
             ));
             cInstances.text_fileOpener.events.fileAlreadyOpened.addFun(ex_text_fileOpener_fileAlreadyOpened
             (
-                actionExecuter<Tag_text_fileOpener_fileAlreadyOpened, 0>(cInstances.base_mainWindow.actions.notebook_selectTab)
+                cInstances.base_mainWindow.actions.notebook_selectTab
             ));
             cInstances.text_fileOpener.events.fileSaved.addFun(ex_text_fileOpener_fileSaved
             (
-                actionExecuter<Tag_text_fileOpener_fileSaved, 0>(cInstances.text_textEditor.actions.editorTypeChanged),
-                actionExecuter<Tag_text_fileOpener_fileSaved, 1>(cInstances.text_textEditor.actions.savingDone)
+                cInstances.text_textEditor.actions.editorTypeChanged,
+                cInstances.text_textEditor.actions.savingDone
             ));
             cInstances.text_fileOpener.events.fileOpened.addFun(ex_text_fileOpener_fileOpened
             (
-                actionExecuter<Tag_text_fileOpener_fileOpened, 0>(cInstances.text_textEditor.actions.openingDone)
+                cInstances.text_textEditor.actions.openingDone
             ));
             cInstances.text_fileOpener.events.fileSelected.addFun(ex_text_fileOpener_fileSelected
             (
-                actionExecuter<Tag_text_fileOpener_fileSelected, 0>(cInstances.base_fileChooser_saveAs.actions.setFileName)
+                cInstances.base_fileChooser_saveAs.actions.setFileName
             ));
             cInstances.text_fileOpener.events.savingUnnamedFile.addFun(ex_text_fileOpener_savingUnnamedFile
             (
-                actionExecuter<Tag_text_fileOpener_savingUnnamedFile, 0>(cInstances.base_fileChooser_saveAs.actions.open)
+                cInstances.base_fileChooser_saveAs.actions.open
             ));
         }
 
