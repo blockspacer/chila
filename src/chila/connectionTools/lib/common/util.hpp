@@ -5,7 +5,7 @@
 #ifndef CHILA_CONNECTIONTOOLS_COMMON__UTIL_HPP
 #define CHILA_CONNECTIONTOOLS_COMMON__UTIL_HPP
 
-#include "common/impl/connection/Forwarder.hpp"
+#include "impl/connection/Forwarder.hpp"
 
 #include "macros.fgen.hpp"
 
@@ -24,7 +24,7 @@ MY_NSP_START
         {
             queue.post([eventExecuter, object]
             {
-                eventExecuter.template execute<common::impl::connection::Forwarder::CProvider::Connector::Events::MData_forwarded>(object);
+                eventExecuter.template execute<impl::connection::Forwarder::CProvider::Connector::Events::MData_forwarded>(object);
             });
         }
     };

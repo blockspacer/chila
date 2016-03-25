@@ -85,12 +85,14 @@ MY_NSP_START
 
         void nullEvents() override
         {
-            chila::connectionTools::lib::other::nullFunctions(connector.events.list());
+            abort();
+//            chila::connectionTools::lib::other::nullFunctions(connector.events.list());
         }
 
         void nullActions() override
         {
-            chila::connectionTools::lib::other::nullFunctions(connector.actions.list());
+            abort();
+//            chila::connectionTools::lib::other::nullFunctions(connector.actions.list());
         }
 
         void checkState(const std::initializer_list<ModuleState> &states, const char *function, const char *file, unsigned line) const override
