@@ -41,10 +41,6 @@ MY_NSP_START
 //                my_assert(!executed); // the whole "execute once" should be rethinked, maybe an execution order is preferable
 //                executed = true;
 
-//                abort();
-
-//                static_assert(boost::fusion::result_of::has_key<EventHMap, Event&>::type::value, "event not found");
-//
                 auto &ev = boost::unwrap_ref(eventHMap[boost::hana::type_c<boost::reference_wrapper<Event>>]);
 
                 if (ev) ev(args...);
