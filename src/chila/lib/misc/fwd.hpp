@@ -14,6 +14,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/make_unique.hpp>
 #include "macrosExp.hpp"
+#include <boost/hana.hpp>
 
 #include "macros.fgen.hpp"
 
@@ -62,6 +63,15 @@ MY_NSP_START
 
        return std::move(t);
     }
+
+    template <typename ...Args>
+    auto makeHTypeMap(const Args& ...args)
+    {
+        return boost::hana::make_map(boost::hana::make_pair(boost::hana::type_c<Args>, args)...);
+    }
+
+    template <typename ...Args>
+    using HTypeMap = decltype(makeHTypeMap(std::declval<Args>()...));
 }
 MY_NSP_END
 
