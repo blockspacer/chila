@@ -146,7 +146,6 @@ MY_NSP_START
             <<             "#define BOOST_MPL_LIMIT_VECTOR_SIZE 50\n"
             <<             "#include <boost/call_traits.hpp>\n"
             <<             "#include <chila/lib/misc/Path.hpp>\n"
-            <<             "#include <chila/connectionTools/lib/codegen/ActionExecuter.hpp>\n"
             <<             "#include <chila/connectionTools/lib/codegen/ConnectorMap.hpp>\n"
             <<             "#include <chila/connectionTools/lib/codegen/convert.hpp>\n"
             <<             "#include <chila/connectionTools/lib/codegen/macrosDef.hpp>\n\n"
@@ -241,8 +240,7 @@ MY_NSP_START
             <<             "#include <chila/lib/misc/macrosExp.hpp>\n"
             <<             "\n"
             <<             "CHILA_LIB_MISC__DEF_NAMESPACE(" << appNsp.getNames().size() << ", (" << delimRep(appNsp, ",", false) << "))\n"
-            <<             "{\n"
-            <<             "    using chila::connectionTools::lib::codegen::actionExecuter;\n\n";
+            <<             "{\n\n";
 
         // ************************************** ConnectionPerformer *****************************************
         headerOut <<             "    template <typename ArgTypes, typename Connectors>\n"
@@ -411,9 +409,8 @@ MY_NSP_START
             if (first) first = false;
             else headerOut << ",\n";
 
-            headerOut << INDENT << "actionExecuter<Tag_" << eventCallName << ", " << actionIndex++ << ">("
-                            << "cInstances." << cclTree::getFullId(instance.connInstance().referenced()).getStringRep("_")
-                            << ".actions." << instance.action().value.getStringRep("_") << ")";
+            headerOut << INDENT << "cInstances." << cclTree::getFullId(instance.connInstance().referenced()).getStringRep("_")
+                                << ".actions." << instance.action().value.getStringRep("_");
         }
         if (!first) headerOut << "\n";
     }
@@ -489,7 +486,7 @@ MY_NSP_START
             switch (gen)
             {
                 case AAGE_TEMPLATE:         headerOut << INDENT << "typename " << typeName; break;
-                case AAGE_FIELD:            headerOut << INDENT << typeName << " " << varName; break;
+                case AAGE_FIELD:            
                 case AAGE_ARG:              headerOut << INDENT << "const " << typeName << " &" << varName; break;
                 case AAGE_INIT_LIST:        headerOut << INDENT << varName << "(" << varName << ")"; break;
                 case AAGE_PASS_ARG_TYPE:    headerOut << INDENT << typeName; break;
