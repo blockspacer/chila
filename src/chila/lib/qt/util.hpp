@@ -25,14 +25,14 @@ MY_NSP_START
     inline std::unique_ptr<typename TSigConn<argCount>::type>
         connectSignal(QObject &object, const char *signal, typename TSigConn<argCount>::type::Fun fun = {})
     {
-        return boost::make_unique<typename TSigConn<argCount>::type>(object, signal, rvalue_cast(fun));
+        return std::make_unique<typename TSigConn<argCount>::type>(object, signal, rvalue_cast(fun));
     }
 
     template <unsigned argCount>
     inline std::unique_ptr<typename TSigConn<argCount>::type>
         connectSignal(QQmlProperty property, typename TSigConn<argCount>::type::Fun fun = {})
     {
-        return boost::make_unique<typename TSigConn<argCount>::type>(rvalue_cast(property), rvalue_cast(fun));
+        return std::make_unique<typename TSigConn<argCount>::type>(rvalue_cast(property), rvalue_cast(fun));
     }
 
     template <typename Type>

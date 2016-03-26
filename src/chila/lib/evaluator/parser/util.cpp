@@ -10,10 +10,10 @@
 MY_NSP_START
 {
     #define def_create(name, Iterator)  \
-        boost::shared_ptr< IParser<Iterator> >  name(                               \
+        std::shared_ptr< IParser<Iterator> >  name(                               \
             const IExpressionProviderSCPtr &expProvider, bool optimize)             \
         {                                                                           \
-            return boost::make_shared< Parser<Iterator> >(expProvider, optimize);   \
+            return std::make_shared< Parser<Iterator> >(expProvider, optimize);   \
         }
 
     def_create(createStrItParser, std::string::const_iterator)

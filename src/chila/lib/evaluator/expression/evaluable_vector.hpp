@@ -64,7 +64,7 @@
 
     #define ARG_TYPE_AT(index) typename boost::mpl::at_c<MPLForwardSeq, index>::type
     #define EVALUABLE_TYPE_AT(index) Evaluable<ARG_TYPE_AT(index)>
-    #define DEF_ARG(z, index, data) boost::shared_ptr< const EVALUABLE_TYPE_AT(index) >
+    #define DEF_ARG(z, index, data) std::shared_ptr< const EVALUABLE_TYPE_AT(index) >
     #define VALUE_AT(z, index, data) boost::fusion::at_c<index>(args)->evaluate(valueMap)
 
     CHILA_LIB_MISC__DEF_NAMESPACE_VAR(chila,lib,evaluator,expression)

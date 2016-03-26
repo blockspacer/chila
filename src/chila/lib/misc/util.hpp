@@ -66,9 +66,9 @@ MY_NSP_START
     }
 
     template <typename T>
-    inline boost::shared_ptr<T> removeConst(const boost::shared_ptr<const T> &value)
+    inline std::shared_ptr<T> removeConst(const std::shared_ptr<const T> &value)
     {
-        return boost::const_pointer_cast<T>(value);
+        return std::const_pointer_cast<T>(value);
     }
 
     template <typename T>
@@ -112,10 +112,10 @@ MY_NSP_START
     }
 
     template <typename Target, typename Base>
-    inline boost::shared_ptr<Target> polymorphic_pointer_downcast(const boost::shared_ptr<Base> &ptr)
+    inline std::shared_ptr<Target> polymorphic_pointer_downcast(const std::shared_ptr<Base> &ptr)
     {
         assert(dynamic_cast<Target*>(ptr.get()) == ptr.get());
-        return boost::static_pointer_cast<Target>(ptr);
+        return std::static_pointer_cast<Target>(ptr);
     }
 
     template <typename Fun>
@@ -516,9 +516,9 @@ MY_NSP_START
     const char *getEscapeChar(char c);
 
     template <typename Type>
-    inline boost::shared_ptr<Type> toSharedPtr(std::unique_ptr<Type> value)
+    inline std::shared_ptr<Type> toSharedPtr(std::unique_ptr<Type> value)
     {
-        return boost::shared_ptr<Type>{rvalue_cast(value)};
+        return std::shared_ptr<Type>{rvalue_cast(value)};
     }
 
     void removeTrailingWSpace(std::string &text);

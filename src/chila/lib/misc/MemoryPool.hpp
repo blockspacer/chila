@@ -80,9 +80,9 @@ MY_NSP_START
             DestroyFun destroyFun() { return DestroyFun(*this); }
 
             template <typename ...Args>
-            boost::shared_ptr<typename Pool::element_type> make_shared(Args&&... args)
+            std::shared_ptr<typename Pool::element_type> make_shared(Args&&... args)
             {
-                return boost::shared_ptr<typename Pool::element_type>(construct(std::forward<Args>(args)...), destroyFun());
+                return std::shared_ptr<typename Pool::element_type>(construct(std::forward<Args>(args)...), destroyFun());
 
 
             }

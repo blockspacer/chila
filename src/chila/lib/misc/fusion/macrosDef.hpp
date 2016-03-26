@@ -34,8 +34,8 @@
 #define CHILA_LIB_MISC__SHOW(x) std::cout << "<" << __FILE__ << ":" << __LINE__ << ">: [" << x << "]" << std::endl
 
 #define CHILA_LIB_MISC__FWDEC_SPTR(Type)                            \
-    typedef boost::shared_ptr<Type> Type##SPtr;            \
-    typedef boost::shared_ptr<const Type> Type##SCPtr;     \
+    typedef std::shared_ptr<Type> Type##SPtr;            \
+    typedef std::shared_ptr<const Type> Type##SCPtr;     \
     typedef boost::weak_ptr<Type> Type##WPtr;              \
     typedef boost::weak_ptr<const Type> Type##WCPtr;        \
     typedef std::unique_ptr<Type> Type##UPtr;         \

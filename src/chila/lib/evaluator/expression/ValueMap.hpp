@@ -31,7 +31,7 @@ MY_NSP_START
             template <typename Type>
             void setValue(const std::string &varName, const Type &value)
             {
-                values[varName] = boost::make_shared< ValueBase<Type> >(value);
+                values[varName] = std::make_shared< ValueBase<Type> >(value);
             }
 
             const ValueSCPtr &getValue(const std::string &varName) const

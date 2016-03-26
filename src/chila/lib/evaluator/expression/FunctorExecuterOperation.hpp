@@ -57,7 +57,7 @@
         #define EVAL_ARG(z, index, aList) arg##index->evaluate(valueMap)
 
         #define IS_COMP_ARG(z, index, data) \
-            && boost::dynamic_pointer_cast<const Arg##index##EvType>(aList[index])
+            && std::dynamic_pointer_cast<const Arg##index##EvType>(aList[index])
 
 //        #define SHOW_TYPE_ID(z, index, data) SHOW(typeid(aList[index].get()).name());
 
@@ -70,7 +70,7 @@
         #define DEC_VAR(z, index, data) Arg##index##EvTypeSCPtr arg##index;
 
         #define SET_VAR(z, index, aList) \
-            if (!(arg##index = boost::dynamic_pointer_cast<const Arg##index##EvType>(aList[index])))    \
+            if (!(arg##index = std::dynamic_pointer_cast<const Arg##index##EvType>(aList[index])))    \
                 throw IncompatibleArgumentList();
 
         /** Defines an operation that executes a functor on the arguments. */
@@ -105,7 +105,7 @@
 
             ValueSCPtr evaluateOnValue(const ValueMap &valueMap) const
             {
-                return boost::make_shared< ValueBase<Ret> >(evaluate(valueMap));
+                return std::make_shared< ValueBase<Ret> >(evaluate(valueMap));
             }
 
             bool isConstant() const { return _isConstant; }

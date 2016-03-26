@@ -32,7 +32,7 @@ MY_NSP_START
         typedef expNSP::FunctorExecuterOperation<Function, isConstant> FExOp;
         typedef expNSP::BaseOperationProvider<FExOp, Function> Provider;
 
-        providerMap.add(name, boost::make_shared<Provider>(name, fun));
+        providerMap.add(name, std::make_shared<Provider>(name, fun));
     }
 
     #define BIND_PARAM(z, index, data) , BOOST_PP_CAT(_, BOOST_PP_INC(index))

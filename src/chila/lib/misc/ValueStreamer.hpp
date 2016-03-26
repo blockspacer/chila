@@ -56,7 +56,7 @@ MY_NSP_START
             template <typename Type>
             void addFun(Fun<Type> fun)
             {
-                my_assert(map.insert({boost::typeindex::type_id<Type>(), boost::make_shared<StreamFunImpl<Type>>(fun)}).second);
+                my_assert(map.insert({boost::typeindex::type_id<Type>(), std::make_shared<StreamFunImpl<Type>>(fun)}).second);
             }
 
             template <typename Type>
@@ -69,7 +69,7 @@ MY_NSP_START
                 }
                 else
                 {
-                    auto pf = boost::dynamic_pointer_cast<const StreamFunImpl<Type>>(it->second);
+                    auto pf = std::dynamic_pointer_cast<const StreamFunImpl<Type>>(it->second);
                     pf->stream(out, value);
                 }
             }

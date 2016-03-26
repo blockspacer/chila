@@ -92,7 +92,7 @@ MY_NSP_START
             template <typename Type>
             static std::unique_ptr<Type> createNamed(std::string name)
             {
-                std::unique_ptr<Type> ret(new Type()); // can't be friends with boost::make_unique
+                std::unique_ptr<Type> ret(new Type()); // can't be friends with std::make_unique
 
                 ret->_name = rvalue_cast(name);
                 return ret;

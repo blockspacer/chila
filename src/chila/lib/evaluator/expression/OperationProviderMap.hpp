@@ -32,11 +32,11 @@ MY_NSP_START
 
         OperationSPtr create(const ArgumentListSCPtr &argList) const try
         {
-            return boost::make_shared<Operation>(name, arg, argList);
+            return std::make_shared<Operation>(name, arg, argList);
         }
         catch (const IncompatibleArgumentList&)
         {
-            return boost::shared_ptr<Operation>();
+            return std::shared_ptr<Operation>();
         }
     };
 

@@ -43,8 +43,8 @@
     chila::lib::misc::lockCOutMutexWhile([&] { CHILA_LIB_MISC__SHOW(maxSize, x); });
 
 #define CHILA_LIB_MISC__FWDEC_SPTR(Type) \
-    typedef boost::shared_ptr<Type> Type##SPtr; \
-    typedef boost::shared_ptr<const Type> Type##SCPtr; \
+    typedef std::shared_ptr<Type> Type##SPtr; \
+    typedef std::shared_ptr<const Type> Type##SCPtr; \
     typedef boost::weak_ptr<Type> Type##WPtr; \
     typedef boost::weak_ptr<const Type> Type##WCPtr; \
     typedef std::unique_ptr<Type> Type##UPtr; \
@@ -189,13 +189,13 @@
         });
 
 #define CHILA_LIB_MISC__ADD_DEFAULT_ANYPRINTER_SPTR(anyPrinter, Type) \
-        chila::lib::misc::addFunWR<boost::shared_ptr<Type>>(anyPrinter, [](std::ostream &out, const boost::shared_ptr<Type> &val) \
+        chila::lib::misc::addFunWR<std::shared_ptr<Type>>(anyPrinter, [](std::ostream &out, const std::shared_ptr<Type> &val) \
         { \
             out << *val; \
         });
 
 #define CHILA_LIB_MISC__ADD_DEFAULT_ANYPRINTER_SPTR_GET(anyPrinter, Type) \
-        chila::lib::misc::addFunWR<boost::shared_ptr<Type>>(anyPrinter, [](std::ostream &out, const boost::shared_ptr<Type> &val) \
+        chila::lib::misc::addFunWR<std::shared_ptr<Type>>(anyPrinter, [](std::ostream &out, const std::shared_ptr<Type> &val) \
         { \
             out << val.get(); \
         });

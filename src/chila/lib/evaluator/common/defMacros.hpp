@@ -3,7 +3,7 @@
  */
 
 #define add_provider(name, Type) \
-    providerMap.add(name, boost::make_shared< Type##OperationProvider >());
+    providerMap.add(name, std::make_shared< Type##OperationProvider >());
 
 #define expNSP chila::lib::evaluator::expression
 

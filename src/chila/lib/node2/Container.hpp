@@ -18,7 +18,7 @@ MY_NSP_START
             template <typename Type>
             void add(std::string name, Type data)
             {
-                auto ret = map.insert({rvalue_cast(name), boost::make_shared<Holder<Type>>(data)});
+                auto ret = map.insert({rvalue_cast(name), std::make_shared<Holder<Type>>(data)});
                 my_assert(ret.second);
                 itVec.push_back(ret.first);
             }
@@ -29,7 +29,7 @@ MY_NSP_START
                 auto it = map.find(name);
                 my_assert(it != map.end());
 
-                return boost::dynamic_pointer_cast<const Holder<Type>>(it->second)->held;
+                return std::dynamic_pointer_cast<const Holder<Type>>(it->second)->held;
             }
 
             void stream(std::ostream &out, unsigned indent = 0) const;
@@ -41,7 +41,7 @@ MY_NSP_START
                 virtual ~IHolder() = default;
             };
 
-            using IHolderSCPtr = boost::shared_ptr<const IHolder>;
+            using IHolderSCPtr = std::shared_ptr<const IHolder>;
 
             template <typename Type>
             struct Holder final : public IHolder

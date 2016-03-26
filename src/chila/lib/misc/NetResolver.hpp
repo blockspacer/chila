@@ -33,7 +33,7 @@ MY_NSP_START
             void resolve(const boost::asio::ip::tcp::endpoint &ep, const ResolverHandlerFun &handler);
 
         private:
-            typedef boost::shared_ptr<boost::asio::deadline_timer> TimerSPtr;
+            typedef std::shared_ptr<boost::asio::deadline_timer> TimerSPtr;
             boost::posix_time::time_duration timeOut;
             ResolverType resolver;
             TimerSPtr timer;
@@ -46,7 +46,7 @@ MY_NSP_START
     void NetResolver<ResolverType>::resolve(const std::string &host, const std::string &service,
             const ResolverHandlerFun &handler)
     {
-        timer = boost::make_shared<boost::asio::deadline_timer>(boost::ref(resolver.get_io_service()), timeOut);
+        timer = std::make_shared<boost::asio::deadline_timer>(boost::ref(resolver.get_io_service()), timeOut);
         timer->async_wait(boost::bind(&NetResolver<ResolverType>::timerHandler, this, handler, _1));
 
         if (host == "*")
@@ -64,7 +64,7 @@ MY_NSP_START
     template <typename ResolverType>
     void NetResolver<ResolverType>::resolve(const boost::asio::ip::tcp::endpoint &ep, const ResolverHandlerFun &handler)
     {
-        timer = boost::make_shared<boost::asio::deadline_timer>(boost::ref(resolver.get_io_service()), timeOut);
+        timer = std::make_shared<boost::asio::deadline_timer>(boost::ref(resolver.get_io_service()), timeOut);
         timer->async_wait(boost::bind(&NetResolver<ResolverType>::timerHandler, this, handler, _1));
 
         resolver.async_resolve(ep, boost::bind(&NetResolver<ResolverType>::resolveHandler, this, handler, _1, _2));

@@ -24,8 +24,8 @@ typedef boost::gregorian::date Date;
 typedef boost::gregorian::date_duration Days;
 typedef boost::posix_time::time_duration Time;
 typedef boost::posix_time::ptime DateTime;
-typedef boost::shared_ptr< const std::set<Numeric> > NumericSetSCPtr;
-typedef boost::shared_ptr< const std::set<String> > StringSetSCPtr;
+typedef std::shared_ptr< const std::set<Numeric> > NumericSetSCPtr;
+typedef std::shared_ptr< const std::set<String> > StringSetSCPtr;
 
 struct ExpressionProvider final: public chila::lib::evaluator::parser::IExpressionProvider
 {
@@ -44,17 +44,17 @@ struct ExpressionProvider final: public chila::lib::evaluator::parser::IExpressi
 
     ValueSCPtr createNumericValue(double val) const
     {
-        return boost::make_shared< ValueBase<Numeric> >(val);
+        return std::make_shared< ValueBase<Numeric> >(val);
     }
 
     ValueSCPtr createBooleanValue(bool val) const
     {
-        return boost::make_shared< ValueBase<Boolean> >(val); ;
+        return std::make_shared< ValueBase<Boolean> >(val); ;
     }
 
     ValueSCPtr createStringValue(const std::string &val) const
     {
-        return boost::make_shared< ValueBase<String> >(val); ;
+        return std::make_shared< ValueBase<String> >(val); ;
     }
 
     OperationSCPtr createOperation(const std::string &name, const ArgumentListSCPtr &aList) const
@@ -63,7 +63,7 @@ struct ExpressionProvider final: public chila::lib::evaluator::parser::IExpressi
     }
 };
 
-typedef boost::shared_ptr<ExpressionProvider> ExpressionProviderSCPtr;
+typedef std::shared_ptr<ExpressionProvider> ExpressionProviderSCPtr;
 
 
 
@@ -73,7 +73,7 @@ typedef boost::shared_ptr<ExpressionProvider> ExpressionProviderSCPtr;
 #include <chila/lib/evaluator/expression/FunctorExecuterOperation.hpp>
 
 template <typename Type>
-std::ostream &operator<<(std::ostream &out, const boost::shared_ptr< const std::set<Type> > &set)
+std::ostream &operator<<(std::ostream &out, const std::shared_ptr< const std::set<Type> > &set)
 {
     out << "set<";
     bool first = true;
@@ -90,8 +90,8 @@ std::ostream &operator<<(std::ostream &out, const boost::shared_ptr< const std::
 template <typename Type>
 inline void printResultIf(const ExpressionSCPtr &exp, const ValueMap &vMap)
 {
-    if (boost::shared_ptr< const Evaluable<Type> > ev =
-            boost::dynamic_pointer_cast< const Evaluable<Type> >(exp))
+    if (std::shared_ptr< const Evaluable<Type> > ev =
+            std::dynamic_pointer_cast< const Evaluable<Type> >(exp))
     {
         unsigned rep = 10000;
         Type ret;
@@ -111,7 +111,7 @@ inline void printResultIf(const ExpressionSCPtr &exp, const ValueMap &vMap)
 int main()
 {
 
-    ExpressionProviderSCPtr eProv = boost::make_shared<ExpressionProvider>();
+    ExpressionProviderSCPtr eProv = std::make_shared<ExpressionProvider>();
 
     std::string text;// = "5 *";
 
@@ -124,10 +124,10 @@ int main()
     typedef std::string::const_iterator Iterator;
 
     typedef chila::lib::evaluator::parser::IParser<Iterator> IParser;
-    typedef boost::shared_ptr<const IParser> IParserSCPtr;
+    typedef std::shared_ptr<const IParser> IParserSCPtr;
 
     IParserSCPtr parser = chila::lib::evaluator::parser::createStrItParser(eProv, false);
-//            boost::make_shared< chila::lib::evaluator::parser::Parser<Iterator> >(eProv, false);
+//            std::make_shared< chila::lib::evaluator::parser::Parser<Iterator> >(eProv, false);
 
     while (getline(std::cin, text)) try
     {

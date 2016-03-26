@@ -64,8 +64,8 @@ MY_NSP_START
         Type evaluate(const ValueMap &valueMap) const
         {
             typedef Evaluable<Type> EvType;
-            boost::shared_ptr<const EvType> ev =
-                boost::dynamic_pointer_cast<const EvType>(valueMap.getValue(name));
+            std::shared_ptr<const EvType> ev =
+                std::dynamic_pointer_cast<const EvType>(valueMap.getValue(name));
 
             if (!ev) throw InvalidValue();
 
@@ -93,7 +93,7 @@ MY_NSP_START
 
         VariableSCPtr createVariable(const std::string &name) const
         {
-            return boost::make_shared< VariableBase<Type> >(name);
+            return std::make_shared< VariableBase<Type> >(name);
         }
 
         void print(std::ostream &out, std::vector<bool> &prefixList) const

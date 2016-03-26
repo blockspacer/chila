@@ -17,11 +17,11 @@ MY_NSP_START
     struct CreateSet
     {
         typedef std::set<Type> Set;
-        typedef boost::shared_ptr<Set> SetSPtr;
-        typedef boost::shared_ptr<const Set> SetSCPtr;
+        typedef std::shared_ptr<Set> SetSPtr;
+        typedef std::shared_ptr<const Set> SetSCPtr;
         typedef SetSCPtr result_type;
 
-        SetSCPtr operator()() const { return boost::make_shared<Set>(); }
+        SetSCPtr operator()() const { return std::make_shared<Set>(); }
 
         #define SET_INSERT(z, index, argCount) ret->insert(arg##index);
 
@@ -29,7 +29,7 @@ MY_NSP_START
             template <BOOST_PP_ENUM_PARAMS(argCount, typename Arg)>                             \
             SetSCPtr operator()(BOOST_PP_ENUM_BINARY_PARAMS(argCount, const Arg, &arg)) const   \
             {                                                                                   \
-                SetSPtr ret = boost::make_shared<Set>();                                        \
+                SetSPtr ret = std::make_shared<Set>();                                        \
                 BOOST_PP_REPEAT(argCount, SET_INSERT,)                                          \
                 return ret;                                                                     \
             }
@@ -44,7 +44,7 @@ MY_NSP_START
     struct IsMemberOfSet
     {
         typedef std::set<Type> Set;
-        typedef boost::shared_ptr<const Set> SetSCPtr;
+        typedef std::shared_ptr<const Set> SetSCPtr;
 
         typedef Boolean result_type;
 
@@ -58,7 +58,7 @@ MY_NSP_START
     void addSetOperations(expNSP::OperationProviderMap &providerMap)
     {
         typedef std::set<Type> Set;
-        typedef boost::shared_ptr<const Set> SetSCPtr;
+        typedef std::shared_ptr<const Set> SetSCPtr;
 
         // ----------------------------------- Construction ------------------------------------------------
         addProvider<true>(providerMap, "set", adapt_fun_0(SetSCPtr)(CreateSet<Type>()));

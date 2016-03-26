@@ -12,7 +12,7 @@
 MY_NSP_START
 {
     #define dec_create(name, Iterator)                                      \
-        boost::shared_ptr< IParser<Iterator> > name(                        \
+        std::shared_ptr< IParser<Iterator> > name(                        \
             const IExpressionProviderSCPtr &expProvider, bool optimize)
 
     dec_create(createStrItParser, std::string::const_iterator);

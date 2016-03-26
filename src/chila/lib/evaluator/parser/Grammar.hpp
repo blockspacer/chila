@@ -246,7 +246,7 @@ MY_NSP_START
             const expression::ArgumentList &aList = *(op->getArgumentList());
             for (const auto &exp : aList)
             {
-                if (!boost::dynamic_pointer_cast<const expression::Value>(exp))
+                if (!std::dynamic_pointer_cast<const expression::Value>(exp))
                     return op;
             }
 
@@ -282,7 +282,7 @@ MY_NSP_START
 
             expression::ArgumentListSPtr operator()() const
             {
-                return boost::make_shared<expression::ArgumentList>();
+                return std::make_shared<expression::ArgumentList>();
             }
         };
 

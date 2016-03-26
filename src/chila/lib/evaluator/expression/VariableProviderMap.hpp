@@ -27,7 +27,7 @@ MY_NSP_START
     {
         ExpressionSCPtr create(const std::string &name) const
         {
-            return boost::make_shared<Variable>(name);
+            return std::make_shared<Variable>(name);
         }
     };
 
