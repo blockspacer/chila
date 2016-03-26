@@ -78,7 +78,7 @@ MY_NSP_START
 
     connection::FileChooser::CProviderUPtr connection::FileChooser::create(module_args_ex)
     {
-        return boost::make_unique<impl::FileChooser>(module_pass_args_ex);
+        return std::make_unique<impl::FileChooser>(module_pass_args_ex);
     }
 }
 MY_NSP_END

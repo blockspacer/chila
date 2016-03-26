@@ -48,7 +48,7 @@ MY_NSP_START
 //        textHighligther(textHighligther),
 //        langDefManager(&ruleFactory),
 //        state(langDefManager.getHighlightState(SH_DIR, file)),
-//        formatterManager(boost::make_shared<Formatter>(textHighligther))
+//        formatterManager(std::make_shared<Formatter>(textHighligther))
 //    {
 //
 //        for (auto &vt : textHighligther.formatterMap)
@@ -59,7 +59,7 @@ MY_NSP_START
 //
 //    void TextHighlighter::ParseData::parse(const connection::BufferRange &textBuffer)
 //    {
-//        auto highlighter = boost::make_shared<srchilite::SourceHighlighter>(state);
+//        auto highlighter = std::make_shared<srchilite::SourceHighlighter>(state);
 //
 //        highlighter->setFormatterParams(&params);
 //        highlighter->setFormatterManager(&formatterManager);
@@ -102,12 +102,12 @@ MY_NSP_START
 //
 //    void TextHighlighter::addFormatter(const std::string &name)
 //    {
-//        my_assert(formatterMap.insert({name, boost::make_shared<Formatter>(*this, name)}).second);
+//        my_assert(formatterMap.insert({name, std::make_shared<Formatter>(*this, name)}).second);
 //    }
 //
 //    void TextHighlighter::addParseData(const std::string &name)
 //    {
-//        my_assert(parseDataMap.insert({name, boost::make_shared<ParseData>(*this, name + ".lang")}).second);
+//        my_assert(parseDataMap.insert({name, std::make_shared<ParseData>(*this, name + ".lang")}).second);
 //    }
 //
     void TextHighlighter::MOD_ACTION_SIG(parseText)
@@ -129,7 +129,7 @@ MY_NSP_START
 
     connection::TextHighlighter::CProviderUPtr connection::TextHighlighter::create(module_args_ex)
     {
-        return boost::make_unique<impl::TextHighlighter>(module_pass_args_ex);
+        return std::make_unique<impl::TextHighlighter>(module_pass_args_ex);
     }
 }
 MY_NSP_END

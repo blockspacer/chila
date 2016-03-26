@@ -124,7 +124,7 @@ MY_NSP_START
 
     connection::FindReplace::CProviderUPtr connection::FindReplace::create(module_args_ex)
     {
-        return boost::make_unique<impl::FindReplace>(module_pass_args_ex);
+        return std::make_unique<impl::FindReplace>(module_pass_args_ex);
     }
 }
 MY_NSP_END

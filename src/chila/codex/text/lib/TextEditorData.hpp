@@ -36,7 +36,7 @@ MY_NSP_START
 //
 //            struct QtSigConns
 //            {
-//                boost::shared_ptr<clQt::SigConn0> textChanged;
+//                std::shared_ptr<clQt::SigConn0> textChanged;
 //            } qtSigConns;
 ////
 //            CHILA_LIB_MISC__NAMED_TUPLE
@@ -57,7 +57,7 @@ MY_NSP_START
 //
 //            BufferActionGroup &addActionGroup()
 //            {
-//                auto action = boost::make_shared<BufferActionGroup>();
+//                auto action = std::make_shared<BufferActionGroup>();
 //                addAction(action);
 //                return *action;
 //            }

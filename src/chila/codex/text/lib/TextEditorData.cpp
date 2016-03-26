@@ -96,7 +96,7 @@ MY_NSP_START
 //
 //    void TextEditorData::addAction(BufferAction::Type type, unsigned pos, const Glib::ustring &text, const ModifyTextFun &modifyText)
 //    {
-//        auto action = boost::make_shared<BufferAction>(type, pos, text);
+//        auto action = std::make_shared<BufferAction>(type, pos, text);
 //
 //        if (bActionList.empty() || text.size() > 1)
 //        {
@@ -104,7 +104,7 @@ MY_NSP_START
 //        }
 //        else
 //        {
-//            auto lastAction = boost::dynamic_pointer_cast<BufferAction>(*(bActionList.end() - 1));
+//            auto lastAction = std::dynamic_pointer_cast<BufferAction>(*(bActionList.end() - 1));
 //
 //            if (text.size() == 1 && lastAction && type == lastAction->type)
 //            {
@@ -125,7 +125,7 @@ MY_NSP_START
 //        auto buffer = textView.get_buffer();
 //        auto pos = std::distance(buffer->begin(), it);
 //        auto ret = buffer->insert(it, text);
-//        addAction(boost::make_shared<BufferAction>(BufferAction::Type::INSERT, pos, text));
+//        addAction(std::make_shared<BufferAction>(BufferAction::Type::INSERT, pos, text));
 //
 //        return ret;
 //    }
@@ -136,7 +136,7 @@ MY_NSP_START
 //        auto pos = std::distance(buffer->begin(), begin);
 //        auto text = std::string(begin, end);
 //        auto ret = buffer->erase(begin, end);
-//        addAction(boost::make_shared<BufferAction>(BufferAction::Type::ERASE, pos, text));
+//        addAction(std::make_shared<BufferAction>(BufferAction::Type::ERASE, pos, text));
 //
 //        return ret;
 //    }
@@ -151,8 +151,8 @@ MY_NSP_START
 //
 //        auto &aGroup = addActionGroup();
 //
-//        aGroup.add(boost::make_shared<lib::BufferAction>(lib::BufferAction::Type::ERASE, pos, erasedText));
-//        aGroup.add(boost::make_shared<lib::BufferAction>(lib::BufferAction::Type::INSERT, pos, text));
+//        aGroup.add(std::make_shared<lib::BufferAction>(lib::BufferAction::Type::ERASE, pos, erasedText));
+//        aGroup.add(std::make_shared<lib::BufferAction>(lib::BufferAction::Type::INSERT, pos, text));
 //
 //        auto startIt = endIt;
 //        std::advance(startIt, -text.size());

@@ -67,7 +67,7 @@ MY_NSP_START
             });
 
             // Module creation ---------------------------------------------------------
-            auto createFileId = [] { return boost::make_shared<impl::connection::FileId>(); };
+            auto createFileId = [] { return std::make_shared<impl::connection::FileId>(); };
 
             providers.create_module_na(text_actionExecuter);
 

@@ -28,13 +28,13 @@
 MY_NSP_START
 {
     App::App(const boost::filesystem::path &installDir, cclOther::DataMap &dataMap, QApplication &qApplication) :
-        work(boost::make_unique<boost::asio::io_service::work>(ioService)),
+        work(std::make_unique<boost::asio::io_service::work>(ioService)),
         showArguments(true),
         gtkTimer(ioService),
         installDir(installDir),
         qApplication(qApplication)
     {
-        debugLogFile = boost::make_unique<cclOther::fileDebug::LogFile>("/home/robert/tmp/testDebug.log", 10, 3, 10000, false);
+        debugLogFile = std::make_unique<cclOther::fileDebug::LogFile>("/home/robert/tmp/testDebug.log", 10, 3, 10000, false);
         qEngine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
         auto objects = qEngine.rootObjects();

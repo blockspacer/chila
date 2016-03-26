@@ -155,7 +155,7 @@ MY_NSP_START
 
     connection::FileOpener::CProviderUPtr connection::FileOpener::create(module_args_ex)
     {
-        return boost::make_unique<impl::FileOpener>(module_pass_args_ex);
+        return std::make_unique<impl::FileOpener>(module_pass_args_ex);
     }
 }
 MY_NSP_END

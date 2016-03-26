@@ -475,9 +475,9 @@ MY_NSP_START
 //    }
 //
 //    template <typename Type>
-//    inline boost::shared_ptr<Type> makeSharedClone(const Type &type)
+//    inline std::shared_ptr<Type> makeSharedClone(const Type &type)
 //    {
-//        return boost::make_shared<Type>(type);
+//        return std::make_shared<Type>(type);
 //    }
 //
 //    unsigned getLineIndent(const Glib::RefPtr<Gtk::TextBuffer> &buffer)
@@ -1082,7 +1082,7 @@ MY_NSP_START
 
     connection::TextEditor::CProviderUPtr connection::TextEditor::create(module_args_ex)
     {
-        return boost::make_unique<impl::TextEditor>(module_pass_args_ex);
+        return std::make_unique<impl::TextEditor>(module_pass_args_ex);
     }
 }
 MY_NSP_END

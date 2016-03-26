@@ -22,11 +22,11 @@ po::variables_map vm;
 unsigned port;
 
 ccBase::app::AppSPtr app;
-boost::shared_ptr<QApplication> qApplication;
+std::shared_ptr<QApplication> qApplication;
 
 boost::filesystem::path initApp(int &argc, char** argv, cclOther::DataMap &dataMap)
 {
-    qApplication = boost::make_shared<QApplication>(argc, argv);
+    qApplication = std::make_shared<QApplication>(argc, argv);
 
     po::options_description opDesc("Allowed options");
     po::positional_options_description popDesc;
@@ -59,7 +59,7 @@ boost::filesystem::path initApp(int &argc, char** argv, cclOther::DataMap &dataM
     std::cout << "Loading base data..." << std::endl;
 
     auto installDir = clMisc::getProgramOption<std::string>(vm, "install-dir", ".");
-    app = boost::make_shared<ccBase::app::App>(installDir, dataMap, *qApplication);
+    app = std::make_shared<ccBase::app::App>(installDir, dataMap, *qApplication);
 
     boost::filesystem::path loaderConfig = clMisc::getProgramOption<std::string>(vm, "loader-config", "loaderConfig.xml");
 

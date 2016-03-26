@@ -50,7 +50,7 @@ MY_NSP_START
 
     connection::ActionExecuter::CProviderUPtr connection::ActionExecuter::create(const std::string &instanceName)
     {
-        return boost::make_unique<impl::ActionExecuter>(instanceName);
+        return std::make_unique<impl::ActionExecuter>(instanceName);
     }
 }
 MY_NSP_END
