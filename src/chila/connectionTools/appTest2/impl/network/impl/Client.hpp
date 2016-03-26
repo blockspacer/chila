@@ -41,7 +41,7 @@ MY_NSP_START
 
             void readMessage(const ReadHandlerFun &readHandler)
             {
-                auto buffer = boost::make_shared<Buffer>(1024);
+                auto buffer = std::make_shared<Buffer>(1024);
 
                 async_read(socket, boost::asio::buffer(*buffer),
                     boost::bind(&Client::readCompletionCond, this, boost::ref(*buffer), _1, _2),
@@ -50,7 +50,7 @@ MY_NSP_START
 
             void writeMessage(const BufferSCPtr &buffer, const WriteHandlerFun &writeHandler)
             {
-                auto sndBuffer = boost::make_shared<Buffer>(*buffer);
+                auto sndBuffer = std::make_shared<Buffer>(*buffer);
                 sndBuffer->push_back('\n');
 
                 async_write(socket, boost::asio::buffer(*sndBuffer),

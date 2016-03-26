@@ -31,7 +31,7 @@ MY_NSP_START
     /** Accepts a client. */
     void Network::MOD_ACTION_SIG(acceptClient)
     {
-        ClientSPtr client = boost::make_shared<Client>(boost::ref(acceptor.get_io_service()));
+        ClientSPtr client = std::make_shared<Client>(boost::ref(acceptor.get_io_service()));
         client->accept(acceptor, boost::bind(&Network::acceptHandler, this, client, _1, eventExecuter));
     }
 
@@ -119,7 +119,7 @@ MY_NSP_START
     connection::Network::CProviderSPtr connection::Network::create(boost::asio::io_service &ioService,
                     const boost::asio::ip::tcp::endpoint &listenEndPoint)
     {
-        return boost::make_shared<app::impl::Network>(boost::ref(ioService), listenEndPoint);
+        return std::make_shared<app::impl::Network>(boost::ref(ioService), listenEndPoint);
     }
 
 }

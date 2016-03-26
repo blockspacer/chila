@@ -43,7 +43,7 @@ MY_NSP_START
             void MOD_ACTION_SIG(processMessage);
 
        private:
-            using TimerSPtr=  boost::shared_ptr<boost::asio::deadline_timer>;
+            using TimerSPtr=  std::shared_ptr<boost::asio::deadline_timer>;
             boost::asio::io_service &ioService;
 
             void sendResponse(const BufferSCPtr &buffer, const ProcMessageSCPtr &procMessage, const TimerSPtr &timer, ev_executer_arg(processMessage))

@@ -67,7 +67,7 @@ MY_NSP_START
             {
                 execute_event(messageObtained)(sessionBuffer, sessionId, messageCount++);
 
-                sessionBuffer = boost::make_shared<CharVector>();
+                sessionBuffer = std::make_shared<CharVector>();
                 sessionBuffer->reserve(bufferSize);
 
                 if (criteria == connection::MsgReadCriteriaEnum::NLCR)
@@ -84,7 +84,7 @@ MY_NSP_START
         SessionIdBufferMap::iterator it = sessionIdBufferMap.find(sessionId);
         if (it == sessionIdBufferMap.end())
         {
-            CharVectorSPtr newBuffer(boost::make_shared<CharVector>());
+            CharVectorSPtr newBuffer(std::make_shared<CharVector>());
             newBuffer->reserve(bufferSize);
             std::pair<SessionIdBufferMap::iterator, bool> ret = sessionIdBufferMap.insert(std::make_pair(sessionId, newBuffer));
             ct_assert(ret.second);
@@ -106,7 +106,7 @@ MY_NSP_START
         unsigned criteriaValue,
         unsigned bufferSize)
     {
-        return boost::make_unique<impl::TextMessageCreator>(instanceName, criteria, criteriaValue, bufferSize);
+        return std::make_unique<impl::TextMessageCreator>(instanceName, criteria, criteriaValue, bufferSize);
     }
 
 

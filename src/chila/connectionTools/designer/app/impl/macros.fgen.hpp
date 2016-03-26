@@ -121,7 +121,7 @@
         if (auto *typedNode = dynamic_cast<Type*>(node))
 
     #define bptr_cast(Type, data) \
-        if (boost::shared_ptr<const Type> typedNode = boost::dynamic_pointer_cast<const Type>(data))
+        if (std::shared_ptr<const Type> typedNode = std::dynamic_pointer_cast<const Type>(data))
 
     #define show_error_info(out, Type, name, extended) \
                              if (const Type::error_info::value_type *value = boost::get_error_info<Type>(ex))                         out << "- " << name << ": " << (extended ? " \
@@ -129,10 +129,10 @@
         ") << std::flush;
 
     #define create_action(Name) \
-        boost::make_shared<lib::actions::Name>()
+        std::make_shared<lib::actions::Name>()
 
     #define create_action_wp(Name, ...) \
-        boost::make_shared<lib::actions::Name>(__VA_ARGS__)
+        std::make_shared<lib::actions::Name>(__VA_ARGS__)
 
     #define cast_load_action_wp_typed(Type, Action) \
                              node_if_dcast(const Type, &node)                     {                         loadAction<lib::actions::Action>(*actionMap, node);                     }

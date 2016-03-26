@@ -581,7 +581,7 @@ MY_NSP_START
 
     void FileLoader::MOD_ACTION_SIG(giveActionList)
     {
-        lib::ActionMapSPtr actionMap = boost::make_shared<lib::ActionMap>();
+        lib::ActionMapSPtr actionMap = std::make_shared<lib::ActionMap>();
 
         auto ctNodePath = tPathMap.getNodePath(nodePath);
         auto &node = globalNsp.find(ctNodePath);
@@ -1025,7 +1025,7 @@ MY_NSP_START
     template <typename TProp>
     void addToProps(lib::TextProperties &dest, const TProp &prop)
     {
-        dest.push_back(boost::make_shared<TProp>(prop));
+        dest.push_back(std::make_shared<TProp>(prop));
     }
 
     template <>
@@ -1047,7 +1047,7 @@ MY_NSP_START
     template <typename ...TProps>
     inline lib::TextPropertiesSPtr makeProps(const TProps& ...props)
     {
-        auto ret = boost::make_shared<lib::TextProperties>();
+        auto ret = std::make_shared<lib::TextProperties>();
 
         addToProps(*ret, props...);
 
@@ -1170,7 +1170,7 @@ MY_NSP_START
         const ClmPathSet &flowCInstancesDim,
         bool showFunEvents)
     {
-        return boost::make_shared<app::impl::FileLoader>(
+        return std::make_shared<app::impl::FileLoader>(
             boost::ref(ioService),
             boost::cref(flowCInstances),
             boost::cref(flowCInstancesDim),
@@ -1512,7 +1512,7 @@ MY_NSP_START
 
 
 #define if_cast_action(Type) \
-        if (boost::shared_ptr<Type> action = boost::dynamic_pointer_cast<Type>(*actionsCursor))
+        if (std::shared_ptr<Type> action = std::dynamic_pointer_cast<Type>(*actionsCursor))
 
     void FileLoader::MOD_ACTION_SIG(undo)
     {

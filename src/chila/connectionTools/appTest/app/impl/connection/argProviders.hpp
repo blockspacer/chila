@@ -24,7 +24,7 @@ MY_NSP_START
 
         ProcMessageSCPtr message;
         MessageCreatorArgProvider(unsigned clientId, const BufferSCPtr &buffer) :
-            message(boost::make_shared<MyProcMessage>(clientId, buffer)) {}
+            message(std::make_shared<MyProcMessage>(clientId, buffer)) {}
 
         const ProcMessageSCPtr &getArgument(typename ArgAliases::procMessage) const { return message; }
     };
@@ -39,7 +39,7 @@ MY_NSP_START
 
         MyProcMessageSCPtr message;
         MessageReaderArgProvider(const ProcMessageSCPtr &message) :
-            message(boost::dynamic_pointer_cast<const MyProcMessage>(message)) {}
+            message(std::dynamic_pointer_cast<const MyProcMessage>(message)) {}
 
         unsigned getArgument(typename ArgAliases::clientId) const { return message->clientId; }
     };

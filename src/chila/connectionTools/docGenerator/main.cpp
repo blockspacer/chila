@@ -221,12 +221,12 @@
 //    for (const auto &cError : ex.getErrors())
 //    {
 //        if (const cclTree::CheckErrorElementSCPtr &error =
-//                boost::dynamic_pointer_cast<const cclTree::CheckErrorElement>(cError))
+//                std::dynamic_pointer_cast<const cclTree::CheckErrorElement>(cError))
 //        {
 //            showCheckErrorElement(*error);
 //        }
 //        else if (const cclTree::CheckErrorGroupSCPtr &error =
-//                boost::dynamic_pointer_cast<const cclTree::CheckErrorGroup>(cError))
+//                std::dynamic_pointer_cast<const cclTree::CheckErrorGroup>(cError))
 //        {
 //            showCheckErrorGroup(*error);
 //        }

@@ -104,7 +104,7 @@ MY_NSP_START
                 }
             };
 
-            typedef boost::shared_ptr<Session> SessionSPtr;
+            typedef std::shared_ptr<Session> SessionSPtr;
             typedef std::map<unsigned, SessionSPtr> SessionMap;
 
             SessionMap sessionMap;

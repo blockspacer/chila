@@ -57,7 +57,7 @@ MY_NSP_START
     };
 
     template <typename Target, typename Type>
-    struct SPtrTypeBaseOfTarget< boost::shared_ptr<Target>, boost::shared_ptr<Type> >
+    struct SPtrTypeBaseOfTarget< std::shared_ptr<Target>, std::shared_ptr<Type> >
     {
         typedef typename boost::is_base_of
         <
@@ -74,7 +74,7 @@ MY_NSP_START
 //    };
 //
 //    template <typename Target, typename Type>
-//    struct IsSharedUPtr< boost::shared_ptr<Target> >
+//    struct IsSharedUPtr< std::shared_ptr<Target> >
 //    {
 //        typedef typename boost::is_base_of
 //        <
@@ -116,25 +116,25 @@ MY_NSP_START
     template <typename Target, typename Type>
     inline ENABLE_IF_DUMMY(Type) convert(const Type &arg)   { return Target(); }
 
-    /* boost::shared_ptr *****************************************************************************************************************/
+    /* std::shared_ptr *****************************************************************************************************************/
     template <typename Target, typename Type>
-    inline DISABLE_IF_DUMMY(Target) convert(const boost::shared_ptr<Type> &arg)
+    inline DISABLE_IF_DUMMY(Target) convert(const std::shared_ptr<Type> &arg)
     {
         typedef typename Target::element_type TargetType;
 
         assert(dynamic_cast<TargetType*>(arg.get()) == arg.get());
 
-        return boost::static_pointer_cast<TargetType>(arg);
+        return std::static_pointer_cast<TargetType>(arg);
     }
 
     template <typename Target, typename Type>
-    inline DISABLE_IF_DUMMY(Target) convert(const boost::shared_ptr<const Type> &arg)
+    inline DISABLE_IF_DUMMY(Target) convert(const std::shared_ptr<const Type> &arg)
     {
         typedef typename Target::element_type TargetType;
 
         assert(dynamic_cast<TargetType*>(chila::lib::misc::removeConst(arg.get())) == arg.get());
 
-        return boost::static_pointer_cast<TargetType>(chila::lib::misc::removeConst(arg));
+        return std::static_pointer_cast<TargetType>(chila::lib::misc::removeConst(arg));
     }
 
 //    /* chila::lib::misc::SmartSUPtr *****************************************************************************************************************/
@@ -145,7 +145,7 @@ MY_NSP_START
 ////
 ////        assert(dynamic_cast<TargetType*>(arg.get()) == arg.get());
 ////
-////        return boost::static_pointer_cast<TargetType>(arg);
+////        return std::static_pointer_cast<TargetType>(arg);
 //        return Target();
 //    }
 //
@@ -156,7 +156,7 @@ MY_NSP_START
 ////
 ////        assert(dynamic_cast<TargetType*>(chila::lib::misc::removeConst(arg.get())) == arg.get());
 ////
-////        return boost::static_pointer_cast<TargetType>(chila::lib::misc::removeConst(arg));
+////        return std::static_pointer_cast<TargetType>(chila::lib::misc::removeConst(arg));
 //        return Target();
 //    }
 

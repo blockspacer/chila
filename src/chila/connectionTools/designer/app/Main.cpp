@@ -11,7 +11,7 @@
 
 #include <boost/filesystem/path.hpp>
 
-#define cast_cprovider(Type, ptr) boost::dynamic_pointer_cast<app::impl::connection::Type::CProvider>(ptr)
+#define cast_cprovider(Type, ptr) std::dynamic_pointer_cast<app::impl::connection::Type::CProvider>(ptr)
 
 #define my_insert_fun(Alias, connector) cMap.add \
         ( \
@@ -105,7 +105,7 @@ MY_NSP_START
 
     void Main::start()
     {
-        work = boost::make_shared<boost::asio::io_service::work>(boost::ref(ioService));
+        work = std::make_shared<boost::asio::io_service::work>(boost::ref(ioService));
 
         launcher.start();
         ioService.run();

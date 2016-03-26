@@ -12,7 +12,7 @@ MY_NSP_START
     template <typename FunType>
     FunType *Loader::loadLibrary(const boost::filesystem::path &path, const std::string &symbol)
     {
-        auto dLibrary = boost::make_shared<clMisc::DynamicLibrary>(path);
+        auto dLibrary = std::make_shared<clMisc::DynamicLibrary>(path);
         my_assert(dLibrarySet.insert(dLibrary).second);
 
         return dLibrary->getSymbol<FunType>(symbol.c_str());

@@ -70,7 +70,7 @@ MY_NSP_START
 //        std::string message() const { return what() + (": " + path.getStringRep()); }
 //        ~InvalidReference() throw() {}
 //
-//        ExceptionSPtr cloneMe() const { return boost::make_shared<InvalidReference>(*this); }
+//        ExceptionSPtr cloneMe() const { return std::make_shared<InvalidReference>(*this); }
 //    };
 
 }

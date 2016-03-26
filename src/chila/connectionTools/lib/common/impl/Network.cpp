@@ -62,7 +62,7 @@ MY_NSP_START
     void Network::acceptClient(ev_executer_arg(launcher_start))
     {
         unsigned sessionId = nextSessionId++;
-        SessionSPtr session = boost::make_shared<Session>(boost::ref(ioService), sessionId, bufferSize, resolveTimeOut);
+        SessionSPtr session = std::make_shared<Session>(boost::ref(ioService), sessionId, bufferSize, resolveTimeOut);
 
         boost::mutex::scoped_lock lock(mutex);
         ct_assert(sessionMap.insert({ sessionId, session }).second);
@@ -242,7 +242,7 @@ MY_NSP_START
         unsigned bufferSize
     )
     {
-        return boost::make_unique<impl::Network>(
+        return std::make_unique<impl::Network>(
             instanceName,
             boost::ref(ioserv),
             host,

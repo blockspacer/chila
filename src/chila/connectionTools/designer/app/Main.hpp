@@ -52,7 +52,7 @@ MY_NSP_START
 
 
 
-            using WorkSPtr = boost::shared_ptr<boost::asio::io_service::work>;
+            using WorkSPtr = std::shared_ptr<boost::asio::io_service::work>;
             WorkSPtr work;
 
             void started();

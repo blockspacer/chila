@@ -14,7 +14,7 @@ MY_NSP_START
 {
     connection::Logger::CProviderSPtr connection::Logger::create()
     {
-        return boost::make_shared<app::impl::Logger>();
+        return std::make_shared<app::impl::Logger>();
     }
 }
 MY_NSP_END

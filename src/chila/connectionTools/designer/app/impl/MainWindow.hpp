@@ -85,14 +85,14 @@ MY_NSP_START
             Glib::RefPtr<Gtk::Builder> builder;
 
             using EventEx = Connector::Actions::MData_waitEvent::EventExecuter;
-            using EventExSPtr = boost::shared_ptr<EventEx>;
+            using EventExSPtr = std::shared_ptr<EventEx>;
             EventExSPtr eventEx;
 
-            boost::shared_ptr<boost::asio::deadline_timer> timer;
+            std::shared_ptr<boost::asio::deadline_timer> timer;
 
-            boost::shared_ptr<Gtk::Menu> popupMenu;
+            std::shared_ptr<Gtk::Menu> popupMenu;
 
-            boost::shared_ptr<Gtk::MessageDialog> errorDialog;
+            std::shared_ptr<Gtk::MessageDialog> errorDialog;
 
             struct ColumnRecord : public Gtk::TreeModel::ColumnRecord
             {

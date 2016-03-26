@@ -112,7 +112,7 @@ MY_NSP_START
 
             if (auto *child = findChild(parent, name))
             {
-                if (auto map = boost::dynamic_pointer_cast<const lib::ActionMap>(value))
+                if (auto map = std::dynamic_pointer_cast<const lib::ActionMap>(value))
                 {
                     addMenuItems(nodePath, *map, *chila::lib::misc::checkNotNull(child->get_submenu()), eventExecuter);
                 }
@@ -122,11 +122,11 @@ MY_NSP_START
             {
                 auto &item = *Gtk::manage(new Gtk::MenuItem(name));
                 parent.append(item);
-                if (auto action = boost::dynamic_pointer_cast<const lib::ActionWithPos>(value))
+                if (auto action = std::dynamic_pointer_cast<const lib::ActionWithPos>(value))
                 {
                     addPosibilities(nodePath, item, action, action->posibilities, "", eventExecuter);
                 }
-                else if (auto action = boost::dynamic_pointer_cast<const lib::Action>(value))
+                else if (auto action = std::dynamic_pointer_cast<const lib::Action>(value))
                 {
                     item.signal_event().connect_notify(
                         [this, nodePath, action, eventExecuter](GdkEvent *event)
@@ -134,7 +134,7 @@ MY_NSP_START
                             menuItem(event, nodePath, action, "", eventExecuter);
                         });
                 }
-                else if (auto map = boost::dynamic_pointer_cast<const lib::ActionMap>(value))
+                else if (auto map = std::dynamic_pointer_cast<const lib::ActionMap>(value))
                 {
                     auto &sm = *Gtk::manage(new Gtk::Menu());
                     item.set_submenu(sm);
@@ -183,7 +183,7 @@ MY_NSP_START
 
         if (!actionList->empty())
         {
-            popupMenu = boost::make_shared<Gtk::Menu>();
+            popupMenu = std::make_shared<Gtk::Menu>();
             addMenuItems(nodePath, *actionList, *popupMenu, eventExecuter);
 
             popupMenu->show_all();
@@ -204,7 +204,7 @@ MY_NSP_START
     void MainWindow::actionSelected(const chila::lib::misc::Path &nodePath, const lib::ActionSCPtr &action,
             const std::string &value, const EventExecuter &eventExecuter)
     {
-        if (auto awv = boost::dynamic_pointer_cast<const lib::ActionWithValue>(action))
+        if (auto awv = std::dynamic_pointer_cast<const lib::ActionWithValue>(action))
         {
             widgets.setValueTView->get_buffer()->set_text(awv->current);
 
@@ -562,10 +562,10 @@ MY_NSP_START
 
     void MainWindow::MOD_ACTION_SIG(waitEvent)
     {
-        timer = boost::make_shared<boost::asio::deadline_timer>(boost::ref(ioService));
+        timer = std::make_shared<boost::asio::deadline_timer>(boost::ref(ioService));
         setTimer();
 
-        eventEx = boost::make_shared<EventEx>(eventExecuter);
+        eventEx = std::make_shared<EventEx>(eventExecuter);
     }
 
     void MainWindow::setTimer()
@@ -598,12 +598,12 @@ MY_NSP_START
     connection::MainWindow::CProviderSPtr connection::MainWindow::create(boost::asio::io_service &ioService,
         const boost::filesystem::path &gladeFile, bool showFunEvents)
     {
-        return boost::make_shared<app::impl::MainWindow>(boost::ref(ioService), gladeFile, showFunEvents);
+        return std::make_shared<app::impl::MainWindow>(boost::ref(ioService), gladeFile, showFunEvents);
     }
 
     void MainWindow::MOD_ACTION_SIG(actionNotPerformed)
     {
-        errorDialog = boost::make_shared<Gtk::MessageDialog>(boost::ref(*widgets.mainWindow),
+        errorDialog = std::make_shared<Gtk::MessageDialog>(boost::ref(*widgets.mainWindow),
                 errorText, true, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
 
         errorDialog->signal_response().connect([this](int response) { errorDialog->hide(); });

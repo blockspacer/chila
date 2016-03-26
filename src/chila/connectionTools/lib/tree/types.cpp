@@ -434,7 +434,7 @@ MY_NSP_START
 
         chila::lib::node::CheckDataUPtr EventCall::createCheckData(chila::lib::node::CheckData *data) const
         {
-            auto ret = boost::make_unique<EventCallCheckData>();
+            auto ret = std::make_unique<EventCallCheckData>();
             for (auto &apcRef : aProvCreators())
                 my_assert(ret->apcs.insert(clMisc::Path(apcRef.name(), ":")).second);
 

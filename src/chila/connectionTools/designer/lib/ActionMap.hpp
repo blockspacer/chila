@@ -39,14 +39,14 @@ MY_NSP_START
             template <typename Type>
             Type &addAction(std::string key = Type::title())
             {
-                auto ret = boost::make_shared<Type>(key, this);
+                auto ret = std::make_shared<Type>(key, this);
                 add(rvalue_cast(key), ret);
                 return *ret;
             }
 
             ActionMap &addMap(std::string key)
             {
-                auto ret = boost::make_shared<ActionMap>(key, this);
+                auto ret = std::make_shared<ActionMap>(key, this);
                 add(rvalue_cast(key), ret);
                 return *ret;
             }

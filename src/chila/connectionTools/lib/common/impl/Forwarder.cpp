@@ -27,7 +27,7 @@ MY_NSP_START
 
     connection::Forwarder::CProviderUPtr connection::Forwarder::create(const std::string &instanceName, const ExecuterFun &executer)
     {
-        return boost::make_unique<impl::Forwarder>(instanceName, executer);
+        return std::make_unique<impl::Forwarder>(instanceName, executer);
     }
 }
 MY_NSP_END

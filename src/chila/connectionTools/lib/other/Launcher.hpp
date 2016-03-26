@@ -71,9 +71,9 @@ MY_NSP_START
             };
 
             template <typename ConnType>
-            boost::shared_ptr<ConnectorImpl<ConnType>> connectorImpl(ConnType &connector)
+            std::shared_ptr<ConnectorImpl<ConnType>> connectorImpl(ConnType &connector)
             {
-                return boost::make_shared<ConnectorImpl<ConnType>>(connector);
+                return std::make_shared<ConnectorImpl<ConnType>>(connector);
             }
 
             CHILA_LIB_MISC__FWDEC_SPTR(Connector);
