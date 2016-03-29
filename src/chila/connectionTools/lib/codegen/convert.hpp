@@ -135,34 +135,16 @@ MY_NSP_START
     }
 
     /* convert1 *************************************************************************************************************************/
-    template <typename Target, typename Type>
-    constexpr auto enableIf0(Target target, Type type)
+    auto enableIf0 = [](auto target, auto type)
     {
-        auto sptrIsBase = SPtrTypeBaseOfTarget<Target, Type>::type::valu;
-
-        return sptrIsBase;
-
-//        return hana::eval_if(SPtrTypeBaseOfTarget<Target, Type>{},
-//            [&](auto _) { return std::unique_ptr<T>(new T(std::forward<Args>(_(args))...)); },
-//            [&](auto _) { return std::unique_ptr<T>(new T{std::forward<Args>(_(args))...}); }
-    }
-
-    RESULT_OF_CONVERT_IMPL
-    (
-        1,
-        const Target&,
-        boost::false_type,  // Type is base of Target and Target is shared_ptr
-        op0,                // Type can be converted to Target
-        boost::true_type,   // Type is base of Target
-        boost::false_type,  // Target is base of Type
-        boost::false_type,  // Target = Type
-        (op0)
-    )
+        return !hSPtrTypeBaseOfTarget(target, type) &&
+               hana::traits::is_base_of(type, target) &&
+               !hana::traits::is_base_of(target, type) &&
+               !hana::traits::is_same(target, type);
+    };
     template <typename Target, typename Type>
-    inline RESULT_OF_CONVERT(5) convert(const Type &arg)
+    inline ENABLE_IF(0, const Target&) convert(const Type &arg)
     {
-//        std::cout << enableIf0(hana::type_c<Target>, hana::type_c<Type>) << std::endl;
-
         return *boost::polymorphic_downcast<const Target*>(&arg);
     }
 
@@ -171,50 +153,51 @@ MY_NSP_START
     {
         return !hSPtrTypeBaseOfTarget(target, type) &&
                hana::traits::is_convertible(target, type) &&
-               !hana::traits::is_base_of(target, type) &&
                !hana::traits::is_base_of(type, target) &&
+               !hana::traits::is_base_of(target, type) &&
                !hana::traits::is_same(target, type);
     };
     template <typename Target, typename Type>
     inline ENABLE_IF(1, Target) convert(const Type &arg)
     {
+        std::cout << enableIf1(hana::type_c<Target>, hana::type_c<Type>) << std::endl;
+
         return arg;
     }
 
     /* convert3 *************************************************************************************************************************/
-    RESULT_OF_CONVERT_IMPL
-    (
-        3,
-        typename boost::call_traits<Target>::param_type,
-        op0,                // Type is base of Target and Target is shared_ptr
-        op1,                // Type can be converted to Target
-        op2,                // Type is base of Target
-        op3,                // Target is base of Type
-        boost::true_type,   // Target = Type
-        (op0)(op1)(op2)(op3)
-    )
-    template <typename Target, typename Type>
-    inline RESULT_OF_CONVERT(3) convert(const Type &arg)
+    auto enableIf2 = [](auto target, auto type)
     {
-//        std::cout << enableIf0(hana::type_c<Target>, hana::type_c<Type>) << std::endl;
-
+        return hana::traits::is_same(target, type);
+    };
+    template <typename Target, typename Type>
+    inline ENABLE_IF(2, typename boost::call_traits<Target>::param_type) convert(const Type &arg)
+    {
         return arg;
     }
 
     /* convert4 *************************************************************************************************************************/
-    RESULT_OF_CONVERT_IMPL
-    (
-        4,
-        typename boost::call_traits<Target>::param_type,
-        boost::false_type,  // Type is base of Target and Target is shared_ptr
-        op0,                // Type can be converted to Target
-        boost::false_type,  // Type is base of Target
-        boost::true_type,   // Target is base of Type
-        boost::false_type,  // Target = Type
-        (op0)
-    )
+    auto enableIf3 = [](auto target, auto type)
+    {
+        return !hSPtrTypeBaseOfTarget(target, type) &&
+               !hana::traits::is_base_of(type, target) &&
+               hana::traits::is_base_of(target, type) &&
+               !hana::traits::is_same(target, type);
+    };
+
+//    RESULT_OF_CONVERT_IMPL
+//    (
+//        3,
+//        typename boost::call_traits<Target>::param_type,
+//        boost::false_type,  // Type is base of Target and Target is shared_ptr
+//        op0,                // Type can be converted to Target
+//        boost::false_type,  // Type is base of Target
+//        boost::true_type,   // Target is base of Type
+//        boost::false_type,  // Target = Type
+//        (op0)
+//    )
     template <typename Target, typename Type>
-    inline RESULT_OF_CONVERT(4) convert(const Type &arg)
+    inline ENABLE_IF(3, typename boost::call_traits<Target>::param_type) convert(const Type &arg)
     {
 //        std::cout << enableIf0(hana::type_c<Target>, hana::type_c<Type>) << std::endl;
 
