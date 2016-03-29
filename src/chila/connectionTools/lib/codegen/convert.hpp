@@ -42,6 +42,10 @@
 #define DISABLE_IF_SMARTSUPTR(Type) \
     typename boost::disable_if<boost::is_same<Type, DummyType>, Target>::type
 
+#define ENABLE_IF(num, ReturnType) \
+    std::enable_if_t<decltype(enableIf##num(hana::type_c<Target>, hana::type_c<Type>))::value, ReturnType>
+
+
 #include "macros.fgen.hpp"
 
 MY_NSP_START
@@ -171,23 +175,9 @@ MY_NSP_START
                !hana::traits::is_base_of(type, target) &&
                !hana::traits::is_same(target, type);
     };
-
-    RESULT_OF_CONVERT_IMPL
-    (
-        2,
-        Target,
-        boost::false_type,  // Target is shared_ptr
-        boost::true_type,   // Type can be converted to Target
-        boost::false_type,  // Type is base of Target
-        boost::false_type,  // Target is base of Type
-        boost::false_type,  // Target = Type
-    )
     template <typename Target, typename Type>
-//    inline RESULT_OF_CONVERT(2) convert(const Type &arg)
-    inline std::enable_if_t<decltype(enableIf1(hana::type_c<Target>, hana::type_c<Type>))::value, Target> convert(const Type &arg)
+    inline ENABLE_IF(1, Target) convert(const Type &arg)
     {
-        std::cout << enableIf1(hana::type_c<Target>, hana::type_c<Type>) << std::endl;
-
         return arg;
     }
 
