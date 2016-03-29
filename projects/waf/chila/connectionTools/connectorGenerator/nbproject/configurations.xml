@@ -1032,8 +1032,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1068,8 +1068,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1104,8 +1104,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1140,8 +1140,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1176,8 +1176,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1212,8 +1212,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1272,8 +1272,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1348,8 +1348,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1467,8 +1467,8 @@
       <folder path="1/other">
         <ccTool>
           <incDir>
-            <pElem>../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
             <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
             <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
@@ -1494,8 +1494,8 @@
       <folder path="1/tree">
         <ccTool>
           <incDir>
-            <pElem>../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
             <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
             <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
@@ -1523,8 +1523,8 @@
           <incDir>
             <pElem>../../../build/release/src</pElem>
             <pElem>../../../../../src</pElem>
-            <pElem>../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1556,8 +1556,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.59</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.59</pElem>
+            <pElem>../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
