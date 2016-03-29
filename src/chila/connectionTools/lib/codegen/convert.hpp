@@ -47,6 +47,7 @@
 MY_NSP_START
 {
     struct DummyType {};
+    namespace hana = boost::hana;
 
 
     /* SPtrTypeBaseOfTarget **********************************************************************************************************************/
@@ -66,37 +67,11 @@ MY_NSP_START
         >::type type;
     };
 
-
-
     template <typename Target, typename Type>
-    constexpr auto enableIf0(Target target, Type type)
+    constexpr auto hSPtrTypeBaseOfTarget(Target target, Type type)
     {
-        auto sptrIsBase = SPtrTypeBaseOfTarget<Target, Type>::type::value;
-
-        return sptrIsBase;
-
-//        return hana::eval_if(SPtrTypeBaseOfTarget<Target, Type>{},
-//            [&](auto _) { return std::unique_ptr<T>(new T(std::forward<Args>(_(args))...)); },
-//            [&](auto _) { return std::unique_ptr<T>(new T{std::forward<Args>(_(args))...}); }
+        return hana::int_c<SPtrTypeBaseOfTarget<typename Target::type, typename Type::type>::type::value>;
     }
-
-//    /* IsSharedSUPtr **********************************************************************************************************************/
-//    template <typename Target, typename Type>
-//    struct IsSharedUPtr
-//    {
-//        typedef boost::false_type type;
-//    };
-//
-//    template <typename Target, typename Type>
-//    struct IsSharedUPtr< std::shared_ptr<Target> >
-//    {
-//        typedef typename boost::is_base_of
-//        <
-//            typename boost::remove_const<Type>::type,
-//            typename boost::remove_const<Target>::type
-//        >::type type;
-//    };
-
 
     /* ResultOf *************************************************************************************************************************/
     template
@@ -134,7 +109,7 @@ MY_NSP_START
     template <typename Target, typename Type>
     inline DISABLE_IF_DUMMY(Target) convert(const std::shared_ptr<Type> &arg)
     {
-        std::cout << enableIf0(boost::hana::type_c<Target>, boost::hana::type_c<Type>) << std::endl;
+//        std::cout << enableIf0(hana::type_c<Target>, hana::type_c<Type>) << std::endl;
 
         typedef typename Target::element_type TargetType;
 
@@ -146,7 +121,7 @@ MY_NSP_START
     template <typename Target, typename Type>
     inline DISABLE_IF_DUMMY(Target) convert(const std::shared_ptr<const Type> &arg)
     {
-        std::cout << enableIf0(boost::hana::type_c<Target>, boost::hana::type_c<Type>) << std::endl;
+//        std::cout << enableIf0(hana::type_c<Target>, hana::type_c<Type>) << std::endl;
 
         typedef typename Target::element_type TargetType;
 
@@ -155,31 +130,18 @@ MY_NSP_START
         return std::static_pointer_cast<TargetType>(chila::lib::misc::removeConst(arg));
     }
 
-//    /* chila::lib::misc::SmartSUPtr *****************************************************************************************************************/
-//    template <typename Target, typename Type>
-//    inline DISABLE_IF_DUMMY(Target) convert(const chila::lib::misc::SmartSUPtr<Type> &arg)
-//    {
-////        typedef typename Target::element_type TargetType;
-////
-////        assert(dynamic_cast<TargetType*>(arg.get()) == arg.get());
-////
-////        return std::static_pointer_cast<TargetType>(arg);
-//        return Target();
-//    }
-//
-//    template <typename Target, typename Type>
-//    inline DISABLE_IF_DUMMY(Target) convert(const chila::lib::misc::SmartSUPtr<const Type> &arg)
-//    {
-////        typedef typename Target::element_type TargetType;
-////
-////        assert(dynamic_cast<TargetType*>(chila::lib::misc::removeConst(arg.get())) == arg.get());
-////
-////        return std::static_pointer_cast<TargetType>(chila::lib::misc::removeConst(arg));
-//        return Target();
-//    }
-
     /* convert1 *************************************************************************************************************************/
+    template <typename Target, typename Type>
+    constexpr auto enableIf0(Target target, Type type)
+    {
+        auto sptrIsBase = SPtrTypeBaseOfTarget<Target, Type>::type::valu;
 
+        return sptrIsBase;
+
+//        return hana::eval_if(SPtrTypeBaseOfTarget<Target, Type>{},
+//            [&](auto _) { return std::unique_ptr<T>(new T(std::forward<Args>(_(args))...)); },
+//            [&](auto _) { return std::unique_ptr<T>(new T{std::forward<Args>(_(args))...}); }
+    }
 
     RESULT_OF_CONVERT_IMPL
     (
@@ -195,12 +157,21 @@ MY_NSP_START
     template <typename Target, typename Type>
     inline RESULT_OF_CONVERT(5) convert(const Type &arg)
     {
-        std::cout << enableIf0(boost::hana::type_c<Target>, boost::hana::type_c<Type>) << std::endl;
+//        std::cout << enableIf0(hana::type_c<Target>, hana::type_c<Type>) << std::endl;
 
         return *boost::polymorphic_downcast<const Target*>(&arg);
     }
 
     /* convert2 *************************************************************************************************************************/
+    auto enableIf1 = [](auto target, auto type)
+    {
+        return !hSPtrTypeBaseOfTarget(target, type) &&
+               hana::traits::is_convertible(target, type) &&
+               !hana::traits::is_base_of(target, type) &&
+               !hana::traits::is_base_of(type, target) &&
+               !hana::traits::is_same(target, type);
+    };
+
     RESULT_OF_CONVERT_IMPL
     (
         2,
@@ -212,9 +183,10 @@ MY_NSP_START
         boost::false_type,  // Target = Type
     )
     template <typename Target, typename Type>
-    inline RESULT_OF_CONVERT(2) convert(const Type &arg)
+//    inline RESULT_OF_CONVERT(2) convert(const Type &arg)
+    inline std::enable_if_t<decltype(enableIf1(hana::type_c<Target>, hana::type_c<Type>))::value, Target> convert(const Type &arg)
     {
-        std::cout << enableIf0(boost::hana::type_c<Target>, boost::hana::type_c<Type>) << std::endl;
+        std::cout << enableIf1(hana::type_c<Target>, hana::type_c<Type>) << std::endl;
 
         return arg;
     }
@@ -234,7 +206,7 @@ MY_NSP_START
     template <typename Target, typename Type>
     inline RESULT_OF_CONVERT(3) convert(const Type &arg)
     {
-        std::cout << enableIf0(boost::hana::type_c<Target>, boost::hana::type_c<Type>) << std::endl;
+//        std::cout << enableIf0(hana::type_c<Target>, hana::type_c<Type>) << std::endl;
 
         return arg;
     }
@@ -254,7 +226,7 @@ MY_NSP_START
     template <typename Target, typename Type>
     inline RESULT_OF_CONVERT(4) convert(const Type &arg)
     {
-        std::cout << enableIf0(boost::hana::type_c<Target>, boost::hana::type_c<Type>) << std::endl;
+//        std::cout << enableIf0(hana::type_c<Target>, hana::type_c<Type>) << std::endl;
 
         return arg;
     }
