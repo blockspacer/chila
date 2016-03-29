@@ -43,7 +43,7 @@ MY_NSP_START
             Type type;
             bfs::path lastFolder;
 
-            using GtkFileChooserDialogUPtr = boost::shared_ptr<Gtk::FileChooserDialog>;
+            using GtkFileChooserDialogUPtr = std::shared_ptr<Gtk::FileChooserDialog>;
 
             struct
             {

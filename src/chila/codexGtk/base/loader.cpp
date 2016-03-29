@@ -55,7 +55,7 @@ boost::filesystem::path initApp(int argc, char** argv, cclOther::DataMap &dataMa
     std::cout << "Loading base data..." << std::endl;
 
     auto installDir = clMisc::getProgramOption<std::string>(vm, "install-dir", ".");
-    app = boost::make_shared<ccBase::app::App>(installDir, dataMap);
+    app = std::make_shared<ccBase::app::App>(installDir, dataMap);
 
     boost::filesystem::path loaderConfig = clMisc::getProgramOption<std::string>(vm, "loader-config", "loaderConfig.xml");
 

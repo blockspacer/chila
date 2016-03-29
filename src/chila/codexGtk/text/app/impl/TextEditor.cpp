@@ -461,9 +461,9 @@ MY_NSP_START
     }
 
     template <typename Type>
-    inline boost::shared_ptr<Type> makeSharedClone(const Type &type)
+    inline std::shared_ptr<Type> makeSharedClone(const Type &type)
     {
-        return boost::make_shared<Type>(type);
+        return std::make_shared<Type>(type);
     }
 
     unsigned getLineIndent(const Glib::RefPtr<Gtk::TextBuffer> &buffer)
@@ -900,7 +900,7 @@ MY_NSP_START
     {
         if (!data.isOriginalContents())
         {
-            auto dialog = boost::make_shared<Gtk::MessageDialog>("Save contents before closing?", false, Gtk::MESSAGE_QUESTION, Gtk::BUTTONS_YES_NO, true);
+            auto dialog = std::make_shared<Gtk::MessageDialog>("Save contents before closing?", false, Gtk::MESSAGE_QUESTION, Gtk::BUTTONS_YES_NO, true);
 
             dialog->signal_response().connect_notify([this, dialog, &data, eventExecuter](int response)
             {
@@ -1072,7 +1072,7 @@ MY_NSP_START
 
     connection::TextEditor::CProviderUPtr connection::TextEditor::create(module_args_ex)
     {
-        return boost::make_unique<impl::TextEditor>(module_pass_args_ex);
+        return std::make_unique<impl::TextEditor>(module_pass_args_ex);
     }
 }
 MY_NSP_END

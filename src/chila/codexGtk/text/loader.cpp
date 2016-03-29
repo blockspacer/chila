@@ -25,7 +25,7 @@ void loadConnectors(ccLoader::ConnectorMap &cMap, const cclOther::DataMap &dataM
     std::cout << "chila.codex.text:loadConnectors..." << std::endl;
 
     if (!app)
-        app = boost::make_shared<ccText::app::App>();
+        app = std::make_shared<ccText::app::App>();
 
     app->connect(cMap, dataMap, launcher, preLoaderConnect);
 }

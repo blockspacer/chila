@@ -67,7 +67,7 @@ MY_NSP_START
 
             BufferActionGroup &addActionGroup()
             {
-                auto action = boost::make_shared<BufferActionGroup>();
+                auto action = std::make_shared<BufferActionGroup>();
                 addAction(action);
                 return *action;
             }

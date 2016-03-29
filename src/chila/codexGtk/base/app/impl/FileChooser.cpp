@@ -30,12 +30,12 @@ MY_NSP_START
         switch (type)
         {
             case Type::OPEN:
-                objects.dialog = boost::make_unique<Gtk::FileChooserDialog>("Open", Gtk::FILE_CHOOSER_ACTION_OPEN);
+                objects.dialog = std::make_unique<Gtk::FileChooserDialog>("Open", Gtk::FILE_CHOOSER_ACTION_OPEN);
                 objects.dialog->set_select_multiple(true);
                 break;
 
             case Type::SAVE:
-                objects.dialog = boost::make_unique<Gtk::FileChooserDialog>("Save as", Gtk::FILE_CHOOSER_ACTION_SAVE);
+                objects.dialog = std::make_unique<Gtk::FileChooserDialog>("Save as", Gtk::FILE_CHOOSER_ACTION_SAVE);
                 objects.dialog->set_do_overwrite_confirmation(true);
                 break;
 
@@ -93,7 +93,7 @@ MY_NSP_START
 
     connection::FileChooser::CProviderUPtr connection::FileChooser::create(module_args_ex)
     {
-        return boost::make_unique<impl::FileChooser>(module_pass_args_ex);
+        return std::make_unique<impl::FileChooser>(module_pass_args_ex);
     }
 }
 MY_NSP_END

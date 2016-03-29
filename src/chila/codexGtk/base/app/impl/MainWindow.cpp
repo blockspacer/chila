@@ -309,7 +309,7 @@ MY_NSP_START
 
     connection::MainWindow::CProviderUPtr connection::MainWindow::create(module_args_ex)
     {
-        return boost::make_unique<impl::MainWindow>(module_pass_args_ex);
+        return std::make_unique<impl::MainWindow>(module_pass_args_ex);
     }
 }
 MY_NSP_END

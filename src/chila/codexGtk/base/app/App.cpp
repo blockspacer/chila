@@ -25,13 +25,13 @@
 MY_NSP_START
 {
     App::App(const boost::filesystem::path &installDir, cclOther::DataMap &dataMap) :
-        work(boost::make_unique<boost::asio::io_service::work>(ioService)),
+        work(std::make_unique<boost::asio::io_service::work>(ioService)),
         showArguments(true),
         gtkTimer(ioService),
         installDir(installDir),
         builder(common::loadGtkBuilder(installDir / "base/widgets.glade"))
     {
-        debugLogFile = boost::make_unique<cclOther::fileDebug::LogFile>("/home/robert/tmp/testDebug.log", 10, 3, 10000, false);
+        debugLogFile = std::make_unique<cclOther::fileDebug::LogFile>("/home/robert/tmp/testDebug.log", 10, 3, 10000, false);
 
         providers.create_module_na(base_application);
 

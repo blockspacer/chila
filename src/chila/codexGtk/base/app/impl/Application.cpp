@@ -15,7 +15,7 @@ MY_NSP_START
 {
     connection::Application::CProviderUPtr connection::Application::create(const std::string &instanceName)
     {
-        return boost::make_unique<impl::Application>(instanceName);
+        return std::make_unique<impl::Application>(instanceName);
     }
 }
 MY_NSP_END
