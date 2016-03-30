@@ -6,7 +6,7 @@
 #define CHILA_LIB_MISC__NETRESOLVER_HPP
 
 #include <boost/asio.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <boost/make_shared.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/function.hpp>

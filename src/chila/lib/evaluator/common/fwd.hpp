@@ -6,7 +6,7 @@
 #define CHILA_LIB_EVALUATOR_COMMON__FWD_HPP
 
 #include <chila/lib/evaluator/expression/expression.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <string>
 #include <chila/lib/evaluator/expression/defMacros.hpp>
 

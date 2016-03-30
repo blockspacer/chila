@@ -5,8 +5,8 @@
 #ifndef CHILA_LIB_GTKMM__FWD_HPP
 #define CHILA_LIB_GTKMM__FWD_HPP
 
-#include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
+#include <memory>
+#include <memory>
 
 #include "macros.fgen.hpp"
 

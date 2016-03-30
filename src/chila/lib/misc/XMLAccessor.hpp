@@ -9,7 +9,7 @@
 #include "exceptions.hpp"
 #include <boost/lexical_cast.hpp>
 #include <libxml++/libxml++.h>
-#include <boost/type_traits.hpp>
+#include <type_traits>
 #include <boost/utility.hpp>
 
 #include "macros.fgen.hpp"

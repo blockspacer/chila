@@ -9,7 +9,7 @@
 #include <boost/any.hpp>
 #include <string>
 #include <boost/program_options.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <map>
 #include <boost/range.hpp>
 #include "exceptions.hpp"

@@ -19,7 +19,7 @@
 #include "macros.fgen.hpp"
 
 #define is_not_streamable(ttype) \
-    typename boost::disable_if<boost::is_base_of<Streamable, Type>, ttype>::type
+    typename boost::disable_if<std::is_base_of<Streamable, Type>, ttype>::type
 
 MY_NSP_START
 {

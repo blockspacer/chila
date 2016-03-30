@@ -5,7 +5,7 @@
 #ifndef CHILA_LIB_EVALUATOR_EXPRESSION__FWD_HPP
 #define CHILA_LIB_EVALUATOR_EXPRESSION__FWD_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>

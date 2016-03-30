@@ -6,7 +6,7 @@
 #define CHILA_LIB_NODE__EXCEPTIONS_HPP
 
 #include "fwd.hpp"
-#include <boost/type_traits.hpp>
+#include <type_traits>
 #include <chila/lib/misc/exceptions.hpp>
 
 #define DEF_RUNTIME_ERROR_WT            CHILA_LIB_MISC__DEF_RUNTIME_ERROR_WT
