@@ -13,34 +13,11 @@
 #include <boost/cast.hpp>
 #include <chila/lib/misc/util.hpp>
 
-#define RESULT_OF_CONVERT(opN) typename ResultOfConvert<Target, Type>::convert##opN##_type
-
-#define CONVERT_TMPL_ARG(r, data, i, elem) , typename elem
-
-#define RESULT_OF_CONVERT_IMPL(opN, Ret, sptrTypeBaseOfTarget, isConvertible, typeBaseOfTarget, targetBaseOfType, isSame, opSeq) \
-    template <typename Target BOOST_PP_SEQ_FOR_EACH_I(CONVERT_TMPL_ARG,, opSeq)> \
-    struct ResultOfConvertImpl \
-    < \
-        Target, \
-        sptrTypeBaseOfTarget, \
-        isConvertible, \
-        typeBaseOfTarget, \
-        targetBaseOfType, \
-        isSame \
-    > \
-    { \
-        typedef Ret type; \
-        typedef Ret convert##opN##_type; \
-    };
-
 #define ENABLE_IF_DUMMY(Type) \
-    typename boost::enable_if<boost::is_same<Type, DummyType>, Target>::type
+    typename boost::enable_if<std::is_same<Type, DummyType>, Target>::type
 
 #define DISABLE_IF_DUMMY(Type) \
-    typename boost::disable_if<boost::is_same<Type, DummyType>, Target>::type
-
-#define DISABLE_IF_SMARTSUPTR(Type) \
-    typename boost::disable_if<boost::is_same<Type, DummyType>, Target>::type
+    typename boost::disable_if<std::is_same<Type, DummyType>, Target>::type
 
 #define ENABLE_IF(num, ReturnType) \
     std::enable_if_t<decltype(enableIf##num(hana::type_c<Target>, hana::type_c<Type>))::value, ReturnType>
@@ -76,8 +53,8 @@ MY_NSP_START
     {
         typedef typename boost::is_base_of
         <
-            typename boost::remove_const<Type>::type,
-            typename boost::remove_const<Target>::type
+            typename std::remove_const<Type>::type,
+            typename std::remove_const<Target>::type
         >::type type;
     };
 
@@ -86,31 +63,6 @@ MY_NSP_START
     {
         return hana::int_c<SPtrTypeBaseOfTarget<typename Target::type, typename Type::type>::type::value>;
     }
-
-    /* ResultOf *************************************************************************************************************************/
-    template
-    <
-        typename Target,
-        typename sptrTypeBaseOfTarget,
-        typename isConvertible,
-        typename typeBaseOfTarget,
-        typename targetBaseOfType,
-        typename isSame
-    >
-    struct ResultOfConvertImpl {};
-
-    template <typename Target, typename Type>
-    struct ResultOfConvert final: public ResultOfConvertImpl
-    <
-        Target,
-        typename SPtrTypeBaseOfTarget<Target, Type>::type,
-        typename boost::is_convertible<Type, Target>::type,
-        typename boost::is_base_of<Type, Target>::type,
-        typename boost::is_base_of<Target, Type>::type,
-        typename boost::is_same<Target, Type>::type
-    >
-    {
-    };
 
     /* DummyType *************************************************************************************************************************/
     template <typename Target, typename Type>
@@ -123,8 +75,6 @@ MY_NSP_START
     template <typename Target, typename Type>
     inline DISABLE_IF_DUMMY(Target) convert(const std::shared_ptr<Type> &arg)
     {
-//        std::cout << enableIf0(hana::type_c<Target>, hana::type_c<Type>) << std::endl;
-
         typedef typename Target::element_type TargetType;
 
         assert(dynamic_cast<TargetType*>(arg.get()) == arg.get());
@@ -135,8 +85,6 @@ MY_NSP_START
     template <typename Target, typename Type>
     inline DISABLE_IF_DUMMY(Target) convert(const std::shared_ptr<const Type> &arg)
     {
-//        std::cout << enableIf0(hana::type_c<Target>, hana::type_c<Type>) << std::endl;
-
         typedef typename Target::element_type TargetType;
 
         assert(dynamic_cast<TargetType*>(chila::lib::misc::removeConst(arg.get())) == arg.get());
@@ -193,10 +141,10 @@ MY_NSP_END
 
 #include "macros.fgen.hpp"
 
-#undef RESULT_OF_CONVERT
-#undef RESULT_OF_CONVERT_IMPL
-#undef CONVERT_TMPL_ARG
 #undef ENABLE_IF_DUMMY
 #undef DISABLE_IF_DUMMY
+#undef ENABLE_IF
+#undef DEF_CONVERT_ELEM
+#undef DEF_CONVERT
 
 #endif
