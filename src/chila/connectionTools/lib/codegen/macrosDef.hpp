@@ -165,7 +165,7 @@
 
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_CREATE_APROVIDER(name, ...) \
-        const typename APC##_##name::result_type &name##Prov = apc##_##name(__VA_ARGS__)
+        const auto &name##Prov = apc##_##name(__VA_ARGS__)
 
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_CREATE_ARG(connArgName, aliasName) \
@@ -176,8 +176,8 @@
         provider##Prov.getArgument(typename ArgAliases::aliasName())
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_PASS_ARG(connector, action, argName, data) \
-        chila::connectionTools::lib::codegen::convert<typename \
-            BOOST_PP_CAT(Action_, BOOST_PP_CAT(connector, BOOST_PP_CAT(_, action)))::ConnectorType::argName::Type>(data)
+        chila::connectionTools::lib::codegen::convert<typename std::remove_reference<decltype(\
+            BOOST_PP_CAT(act_, BOOST_PP_CAT(connector, BOOST_PP_CAT(_, action))))>::type::ConnectorType::argName::Type>(data)
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_EXECUTE_ACTION(connector, action, ...) \
         BOOST_PP_CAT(act_, BOOST_PP_CAT(connector, BOOST_PP_CAT(_, action)))(__VA_ARGS__)
