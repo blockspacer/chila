@@ -17,8 +17,8 @@
 #include <QObject>
 #include <QQuickItem>
 
-#include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
+#include <memory>
+#include <memory>
 
 #include "macros.fgen.hpp"
 

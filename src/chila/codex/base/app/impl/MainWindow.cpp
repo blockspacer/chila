@@ -6,7 +6,7 @@
 #include "MainWindow.hpp"
 #include <boost/thread.hpp>
 #include <boost/make_shared.hpp>
-#include <boost/type_traits.hpp>
+#include <type_traits>
 
 #include <chila/lib/misc/util.hpp>
 #include <chila/lib/qt/util.hpp>
