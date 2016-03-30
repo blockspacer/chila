@@ -15,10 +15,10 @@
 #include "macros.fgen.hpp"
 
 #define disable_if_bool \
-    typename boost::disable_if<typename boost::is_same<Type, bool>::type, Type>::type
+    typename boost::disable_if<typename std::is_same<Type, bool>::type, Type>::type
 
 #define enable_if_bool \
-    typename boost::enable_if<typename boost::is_same<Type, bool>::type, Type>::type
+    typename boost::enable_if<typename std::is_same<Type, bool>::type, Type>::type
 
 MY_NSP_START
 {
