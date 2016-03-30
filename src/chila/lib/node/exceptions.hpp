@@ -30,7 +30,7 @@ MY_NSP_START
 
         ExceptionWrapper(const ExceptionWrapper &ex) = default;
         template <typename ExType>
-        ExceptionWrapper(const ExType &rhs, typename std::enable_if<boost::is_same<ExceptionWrapper, ExType>::value == false>::type *v = nullptr) :
+        ExceptionWrapper(const ExType &rhs, typename std::enable_if<std::is_same<ExceptionWrapper, ExType>::value == false>::type *v = nullptr) :
             Exception("wrapper"), ex(std::make_shared<ExType>(rhs))
         {
         }
