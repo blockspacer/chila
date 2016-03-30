@@ -6,8 +6,8 @@
 #define CHILA_CONNECTIONTOOLS_APPTEST_APP_IMPL__FWD_HPP
 
 #include <vector>
-#include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
+#include <memory>
+#include <memory>
 
 #include "nspDef.hpp"
 

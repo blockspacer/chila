@@ -11,7 +11,7 @@
 #include <boost/tokenizer.hpp>
 #include "types.hpp"
 #include "exceptions.hpp"
-#include <boost/type_traits.hpp>
+#include <type_traits>
 #include <boost/range/adaptors.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <chila/lib/misc/RepeatText.hpp>
@@ -637,7 +637,7 @@ MY_NSP_START
     }
 
     template <typename Type>
-    typename std::enable_if<boost::is_base_of<chila::lib::node::IReference, Type>::value, ValueVec>::type
+    typename std::enable_if<std::is_base_of<chila::lib::node::IReference, Type>::value, ValueVec>::type
         posibilities(const Type &node)
     {
         ValueVec ret;

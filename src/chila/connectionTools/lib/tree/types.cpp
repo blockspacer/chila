@@ -6,7 +6,7 @@
 #include "exceptions.hpp"
 #include <chila/lib/node/util.hpp>
 #include <chila/lib/misc/util.hpp>
-#include <boost/type_traits.hpp>
+#include <type_traits>
 #include "util.hpp"
 
 #include "nspDef.hpp"

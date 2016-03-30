@@ -7,8 +7,8 @@
 
 #include <vector>
 #include <set>
-#include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
+#include <memory>
+#include <memory>
 #include <chila/lib/misc/exceptions.hpp>
 #include <chila/connectionTools/lib/codegen/fwd.hpp>
 #include "chila/connectionTools/lib/other/fwd.hpp"

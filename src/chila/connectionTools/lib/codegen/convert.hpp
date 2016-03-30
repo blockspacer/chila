@@ -6,9 +6,9 @@
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONVERT_HPP
 
 #include <boost/utility.hpp>
-#include <boost/type_traits.hpp>
+#include <type_traits>
 #include <boost/ref.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <boost/call_traits.hpp>
 #include <boost/cast.hpp>
 #include <chila/lib/misc/util.hpp>
@@ -45,13 +45,13 @@ MY_NSP_START
     template <typename Target, typename Type>
     struct SPtrTypeBaseOfTarget
     {
-        typedef boost::false_type type;
+        typedef std::false_type type;
     };
 
     template <typename Target, typename Type>
     struct SPtrTypeBaseOfTarget< std::shared_ptr<Target>, std::shared_ptr<Type> >
     {
-        typedef typename boost::is_base_of
+        typedef typename std::is_base_of
         <
             typename std::remove_const<Type>::type,
             typename std::remove_const<Target>::type

@@ -7,9 +7,9 @@
 
 #include <chila/lib/misc/Path.hpp>
 #include <set>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <boost/integer_traits.hpp>
-#include <boost/weak_ptr.hpp>
+#include <memory>
 #include <vector>
 #include <boost/exception/error_info.hpp>
 

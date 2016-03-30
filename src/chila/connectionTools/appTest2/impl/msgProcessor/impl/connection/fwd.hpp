@@ -5,8 +5,8 @@
 #ifndef CHILA_CONNECTIONTOOLS_APPTEST2_IMPL_MSGPROCESSOR_IMPL_CONNECTION__FWD_HPP
 #define CHILA_CONNECTIONTOOLS_APPTEST2_IMPL_MSGPROCESSOR_IMPL_CONNECTION__FWD_HPP
 
-#include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
+#include <memory>
+#include <memory>
 
 
 

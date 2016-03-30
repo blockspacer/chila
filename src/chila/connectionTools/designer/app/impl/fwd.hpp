@@ -7,13 +7,13 @@
 
 #include <vector>
 #include <chila/lib/misc/RepeatText.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <chila/lib/misc/Path.hpp>
 #include "../../lib/actions.hpp"
 #include <chila/connectionTools/lib/other/fwd.hpp>
 #include <chila/lib/node/fwd.hpp>
 #include "../fwd.hpp"
-#include <boost/weak_ptr.hpp>
+#include <memory>
 
 #define FWDEC_SPTR CHILA_LIB_MISC__FWDEC_SPTR
 #define FWDEC_TYPE CHILA_LIB_MISC__FWDEC_TYPE

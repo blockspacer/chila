@@ -5,8 +5,8 @@
 #ifndef CHILA_CONNECTIONTOOLS_DESIGNER_APP_IMPL_CONNECTION__FWD_HPP
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_IMPL_CONNECTION__FWD_HPP
 
-#include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
+#include <memory>
+#include <memory>
 
 #include "macros.fgen.hpp"
 
