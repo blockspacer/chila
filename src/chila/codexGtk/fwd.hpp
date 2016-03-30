@@ -13,8 +13,8 @@
 #include <chila/lib/xmlppUtils/fwd.hpp>
 #include <chila/lib/gtkmm/fwd.hpp>
 
-#include <boost/shared_ptr.hpp>
-#include <boost/weak_ptr.hpp>
+#include <memory>
+#include <memory>
 
 #include "macros.fgen.hpp"
 
