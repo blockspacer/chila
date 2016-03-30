@@ -51,36 +51,36 @@ MY_NSP_START
             showArguments(showArguments),
             comments(comments) {}
 
-            #define ARG_AT(pos) decltype(+boost::hana::at(typename FunctionMData::Arguments{}, boost::hana::int_c<pos>))::type
+            template <unsigned argIndex>
+            void streamParam(std::ofstream &file, const fileDebug::LogFile::WritePrefix &prefix)
+            {
+            }
 
-            #define STREAM_PARAM(z, n, data) \
-                    file << prefix << "  |--- " << ARG_AT(n)::getName() << ": [" << valueStreamer.inserter(BOOST_PP_CAT(arg, n)) << "]" << std::endl;
+            template <unsigned argIndex, typename Arg, typename ...Args>
+            void streamParam(std::ofstream &file, const fileDebug::LogFile::WritePrefix &prefix, const Arg &arg, const Args&... args)
+            {
+                using ArgType = typename decltype(+boost::hana::at(typename FunctionMData::Arguments{}, boost::hana::int_c<argIndex>))::type;
 
-            #define DEF_OPER(z, n, data) \
-                    BOOST_PP_IF(n, template <,) \
-                    BOOST_PP_ENUM_PARAMS(n, typename Arg) \
-                    BOOST_PP_IF(n, >,) \
-                    void operator()(BOOST_PP_ENUM_BINARY_PARAMS(n, const Arg, &arg)) \
-                    { \
-                        logFile.writeFunEx(function ? ([&] { function(BOOST_PP_ENUM_PARAMS(n, arg)); }) : fileDebug::LogFile::Function(), \
-                            [&](std::ofstream &file, const fileDebug::LogFile::WritePrefix &prefix) \
-                            { \
-                                file << prefix << "---> " << "<" << funType + "> " << connInstanceName << "." << FunctionMData::getName(); \
-                                \
-                                if (!comments.empty()) file << " (" << comments << ")"; \
-                                \
-                                file << std::endl; \
-                                \
-                                BOOST_PP_REPEAT(n, STREAM_PARAM,) \
-                            }); \
-                    }
+                file << prefix << "  |--- " << ArgType::getName() << ": [" << valueStreamer.inserter(arg) << "]" << std::endl;
 
-            BOOST_PP_REPEAT_FROM_TO(0, 49, DEF_OPER,)
+                streamParam<argIndex + 1>(file, prefix, args...);
+            }
 
-            #undef DEF_OPER
-            #undef STREAM_PARAM
-            #undef ARG_AT
-//        #endif
+            template <typename ...Args>
+            void operator()(const Args&... args)
+            {
+                logFile.writeFunEx(function ? ([&] { function(args...); }) : fileDebug::LogFile::Function(),
+                    [&](std::ofstream &file, const fileDebug::LogFile::WritePrefix &prefix)
+                    {
+                        file << prefix << "---> " << "<" << funType + "> " << connInstanceName << "." << FunctionMData::getName();
+
+                        if (!comments.empty()) file << " (" << comments << ")";
+
+                        file << std::endl;
+
+                        streamParam<0>(file, prefix, args...);
+                    });
+            }
     };
 
     template <typename FunctionMData>
