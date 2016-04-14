@@ -1396,22 +1396,18 @@ MY_NSP_START
         assert(it != fnMap.end());
         auto ctNodePath = it->second;
 
-        CHILA_LIB_MISC__SHOW(40, ctNodePath);
         const auto &node = globalNsp.find(ctNodePath);
-        CHILA_LIB_MISC__SHOW(40, "here");
 
         auto titleProps =  makeProps(TPBold());
         auto descProps = lib::TextPropertiesSPtr();
         auto noDescProps = makeProps(TPColor(70, 70, 70));
 
-        CHILA_LIB_MISC__SHOW(40, "here");
         auto showTitle = [&](const clMisc::Path &path, const std::string &title)
         {
             execute_event(outputText)(descProps, "- ");
             execute_event(outputText)(makeProps(titleProps, TPNPath(path)), title);
         };
 
-        CHILA_LIB_MISC__SHOW(40, "here");
         auto showArgs = [&](const chila::lib::node::NodeWithChildren &args)
         {
             execute_event(outputText)(descProps, "(");
@@ -1426,7 +1422,6 @@ MY_NSP_START
             execute_event(outputText)(descProps, ")");
         };
 
-        CHILA_LIB_MISC__SHOW(40, "here");
         auto showAliasedArgs = [&](const cclTree::cPerformer::ConnectorInstance &cIns, const cclTree::connector::ArgRefMap &args)
         {
             auto &cAlias = cIns.connAlias().referenced();
@@ -1444,7 +1439,6 @@ MY_NSP_START
             execute_event(outputText)(descProps, ")");
         };
 
-        CHILA_LIB_MISC__SHOW(40, "here");
         auto showDesc = [&](const std::string &desc)
         {
             execute_event(outputText)(titleProps, ": ");
@@ -1460,9 +1454,7 @@ MY_NSP_START
             }
         };
 
-        CHILA_LIB_MISC__SHOW(40, "here");
         execute_event(clearOutput)();
-        CHILA_LIB_MISC__SHOW(40, "here");
         if (auto *typed = dynamic_cast<const cclTree::cPerformer::ConnectorInstance*>(&node))
         {
             auto &cAlias = typed->connAlias().referenced();
