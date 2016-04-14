@@ -312,7 +312,7 @@ MY_NSP_START
 
         lastFlowSelection = nodePath;
 
-        execute_event_tn(flowNodeSelected)(nodePath);
+//        execute_event_tn(flowNodeSelected)(nodePath);
     };
 
     template <typename EventExecuter>
@@ -765,6 +765,7 @@ MY_NSP_START
         }
         else
         {
+//            CHILA_LIB_MISC__SHOW(40, parentPath);
             auto it = data.rowMap.find(parentPath);
             my_assert(it != data.rowMap.end());
 
