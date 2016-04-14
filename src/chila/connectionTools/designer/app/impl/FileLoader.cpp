@@ -1197,6 +1197,7 @@ MY_NSP_START
     void FileLoader::MOD_ACTION_SIG(requestFlowNodes)
     {
         PathSet walkedNodes;
+        fnMap.clear();
 
         for (const auto &cInsPath : flowCInstances)
         {
@@ -1374,6 +1375,8 @@ MY_NSP_START
                                    bool isExpandable,
                                    ev_executer_arg(requestFlowNodes))
     {
+        fnMap[flowNodePath] = nodePath;
+
         execute_event(flowNodeFound)
         (
             flowNodePath,
@@ -1389,8 +1392,12 @@ MY_NSP_START
         using TPBold = lib::textProperty::Bold;
         using TPNPath = lib::textProperty::NodePath;
 
-        CHILA_LIB_MISC__SHOW(40, nodePath);
-        const auto &node = globalNsp.find(nodePath);
+        auto it = fnMap.find(nodePath);
+        assert(it != fnMap.end());
+        auto ctNodePath = it->second;
+
+        CHILA_LIB_MISC__SHOW(40, ctNodePath);
+        const auto &node = globalNsp.find(ctNodePath);
         CHILA_LIB_MISC__SHOW(40, "here");
 
         auto titleProps =  makeProps(TPBold());

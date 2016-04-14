@@ -87,6 +87,8 @@ MY_NSP_START
             static constexpr unsigned descLimit = 80;
 
             using CInstanceSet = std::set<const cclTree::cPerformer::ConnectorInstance*>;
+            using FlowNodesMap = std::map<clMisc::Path, clMisc::Path>;
+            FlowNodesMap fnMap;
 
             lib::AddPosibilities addPosibilities;
             ClmPathVec flowCInstances;
