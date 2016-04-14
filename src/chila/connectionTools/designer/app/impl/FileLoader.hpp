@@ -232,6 +232,12 @@ MY_NSP_START
                                const CInstanceSet &flowCInstancesDimNodes,
                                ev_executer_arg(requestFlowNodes));
 
+            void flowNodeFound(const clMisc::Path &flowNodePath,
+                               const clMisc::Path &nodePath,
+                               const std::string &value,
+                               bool isExpandable,
+                               ev_executer_arg(requestFlowNodes));
+
             template <typename ArgRefMap>
             void showDesc(
                 const lib::TextPropertiesSPtr &titleProps,

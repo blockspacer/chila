@@ -312,7 +312,7 @@ MY_NSP_START
 
         lastFlowSelection = nodePath;
 
-//        execute_event_tn(flowNodeSelected)(nodePath);
+        execute_event_tn(flowNodeSelected)(nodePath);
     };
 
     template <typename EventExecuter>
@@ -745,6 +745,7 @@ MY_NSP_START
 
     void MainWindow::MOD_ACTION_SIG(addFlowNode)
     {
+        CHILA_LIB_MISC__SHOW(40, nodePath);
         addNodePrv(flowData, nodePath, value, isExpandable);
     }
 

@@ -1205,12 +1205,13 @@ MY_NSP_START
 
             chila::lib::misc::Path fnPath = nodePath.getStringRep(":");
 
-            execute_event(flowNodeFound)
+            flowNodeFound
             (
                 fnPath,
-//                nodePath,
+                nodePath,
                 str_stream(cInsPath),
-                true
+                true,
+                eventExecuter
             );
 
             walkFlowNodes(fnPath, node, walkedNodes, getCInstancesHLNodes(flowCInstancesDim), eventExecuter);
@@ -1234,12 +1235,13 @@ MY_NSP_START
             auto hasActions = inserted && !eventCall.actions().empty();
             auto insDesc = inserted ? eventCall.description().value : "";
 
-            execute_event(flowNodeFound)
+            flowNodeFound
             (
                 fnPath,
-//                eventCall.path(),
+                eventCall.path(),
                 str_stream(mu_fcolor(MU_DRED, "[event]" << " " << id << (inserted ? " " : "... ") << writeDesc(insDesc))),
-                hasActions
+                hasActions,
+                eventExecuter
             );
 
             if (inserted)
@@ -1269,7 +1271,7 @@ MY_NSP_START
         for (auto &actionIns : evCall.actions())
         {
             auto id = actionIns.connInstance().value.getStringRep(":") + "->" + actionIns.action().value.getStringRep(":");
-//            auto nodePath = actionIns.path();
+            auto nodePath = actionIns.path();
             auto fnPath = flowNodePath + id;
             bool hasEvents = !actionIns.action().referenced().events().empty();
 
@@ -1281,15 +1283,16 @@ MY_NSP_START
 
             auto cInsFText = dim ? cInsText : str_stream(mu_bold(cInsText));
 
-            execute_event(flowNodeFound)
+            flowNodeFound
             (
                 fnPath,
-//                nodePath,
+                nodePath,
                 str_stream(mu_fcolor(MU_BLUE, "[action] "
                         << cInsFText
                         << "." << actionIns.action().value << " ")
                         << writeDesc(insDesc)),
-                hasEvents
+                hasEvents,
+                eventExecuter
             );
 
             walkFlowNodes(fnPath, actionIns, walkedNodes, flowCInstancesDimNodes, eventExecuter);
@@ -1332,12 +1335,13 @@ MY_NSP_START
                 auto hasActions = inserted && !evCall.actions().empty();
                 auto insDesc = inserted ? (evCall.description().value.empty() ? connEv.description().value : evCall.description().value) : "";
 
-                execute_event(flowNodeFound)
+                flowNodeFound
                 (
                     fnPath,
-//                    nodePath,
+                    nodePath,
                     str_stream(mu_fcolor(MU_DRED, "[event]" << " " << id << (inserted ? " " : "... ")) << writeDesc(insDesc)),
-                    hasActions
+                    hasActions,
+                    eventExecuter
                 );
 
                 evRefMap.erase(it);
@@ -1353,15 +1357,31 @@ MY_NSP_START
             auto id = event.name();
             auto fnPath = flowNodePath + id;
 
-            execute_event(flowNodeFound)
+            flowNodeFound
             (
                 fnPath,
-//                event.path(),
+                event.path(),
                 str_stream(mu_fcolor(MU_LRED, "[event]" << " " << id)),
-                false
+                false,
+                eventExecuter
             );
         }
     }
+
+    void FileLoader::flowNodeFound(const clMisc::Path &flowNodePath,
+                                   const clMisc::Path &nodePath,
+                                   const std::string &value,
+                                   bool isExpandable,
+                                   ev_executer_arg(requestFlowNodes))
+    {
+        execute_event(flowNodeFound)
+        (
+            flowNodePath,
+            value,
+            isExpandable
+        );
+    }
+
 
     void FileLoader::MOD_ACTION_SIG(showFNodeInfo)
     {
@@ -1369,18 +1389,22 @@ MY_NSP_START
         using TPBold = lib::textProperty::Bold;
         using TPNPath = lib::textProperty::NodePath;
 
+        CHILA_LIB_MISC__SHOW(40, nodePath);
         const auto &node = globalNsp.find(nodePath);
+        CHILA_LIB_MISC__SHOW(40, "here");
 
         auto titleProps =  makeProps(TPBold());
         auto descProps = lib::TextPropertiesSPtr();
         auto noDescProps = makeProps(TPColor(70, 70, 70));
 
+        CHILA_LIB_MISC__SHOW(40, "here");
         auto showTitle = [&](const clMisc::Path &path, const std::string &title)
         {
             execute_event(outputText)(descProps, "- ");
             execute_event(outputText)(makeProps(titleProps, TPNPath(path)), title);
         };
 
+        CHILA_LIB_MISC__SHOW(40, "here");
         auto showArgs = [&](const chila::lib::node::NodeWithChildren &args)
         {
             execute_event(outputText)(descProps, "(");
@@ -1395,6 +1419,7 @@ MY_NSP_START
             execute_event(outputText)(descProps, ")");
         };
 
+        CHILA_LIB_MISC__SHOW(40, "here");
         auto showAliasedArgs = [&](const cclTree::cPerformer::ConnectorInstance &cIns, const cclTree::connector::ArgRefMap &args)
         {
             auto &cAlias = cIns.connAlias().referenced();
@@ -1412,6 +1437,7 @@ MY_NSP_START
             execute_event(outputText)(descProps, ")");
         };
 
+        CHILA_LIB_MISC__SHOW(40, "here");
         auto showDesc = [&](const std::string &desc)
         {
             execute_event(outputText)(titleProps, ": ");
@@ -1427,7 +1453,9 @@ MY_NSP_START
             }
         };
 
+        CHILA_LIB_MISC__SHOW(40, "here");
         execute_event(clearOutput)();
+        CHILA_LIB_MISC__SHOW(40, "here");
         if (auto *typed = dynamic_cast<const cclTree::cPerformer::ConnectorInstance*>(&node))
         {
             auto &cAlias = typed->connAlias().referenced();
