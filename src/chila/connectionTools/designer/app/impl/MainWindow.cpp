@@ -423,6 +423,7 @@ MY_NSP_START
                         break;
 
                     case 3:
+                        CHILA_LIB_MISC__SHOW(40, "yes");
                         exandNodePath(eventExecuter);
                         break;
 

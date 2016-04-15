@@ -1181,7 +1181,10 @@ MY_NSP_START
 
     void FileLoader::MOD_ACTION_SIG(expandFlowNode)
     {
-//        fNodesToExpand[nodePath] = treeNodePath;
+        auto it = fnMap.find(nodePath);
+        assert(it != fnMap.end());
+
+        fNodesToExpand[it->second] = nodePath;
     }
 
     cclTree::cPerformer::ConnectorInstance &FileLoader::getCInstance(const clMisc::Path &cInsPath)
@@ -1290,7 +1293,7 @@ MY_NSP_START
                 nodePath,
                 str_stream(mu_fcolor(MU_BLUE, "[action] "
                         << cInsFText
-                        << "." << actionIns.action().value << " ")
+                        << "." << actionIns.action().value.getStringRep(":") << " ")
                         << writeDesc(insDesc)),
                 hasEvents,
                 eventExecuter
