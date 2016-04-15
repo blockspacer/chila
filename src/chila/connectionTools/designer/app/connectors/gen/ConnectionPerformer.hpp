@@ -1031,6 +1031,72 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
             );
         }
 
+        // mainWindow_designNodeRequested ------------------------------------------------------------------------------------------
+        struct Tag_mainWindow_designNodeRequested {};
+
+        template
+        <
+            typename Action_fileLoader_requestDesignNode
+        >
+        struct Ex_mainWindow_designNodeRequested
+        {
+            typedef void result_type;
+
+            const Action_fileLoader_requestDesignNode &act_fileLoader_requestDesignNode;
+
+            Ex_mainWindow_designNodeRequested
+            (
+                const Action_fileLoader_requestDesignNode &act_fileLoader_requestDesignNode
+            ) :
+                act_fileLoader_requestDesignNode(act_fileLoader_requestDesignNode)
+            {}
+
+            template
+            <
+                typename InArg0
+            >
+            void operator()
+            (
+                const InArg0 &nodePath_in
+            ) const
+            {
+                // Arguments -----------------------------------------------------------------
+                CREATE_ARG(nodePath, nodePath);
+
+                // Providers -----------------------------------------------------------------
+                // Actions -------------------------------------------------------------------
+                // fileLoader.actions.requestDesignNode
+                EXECUTE_ACTION
+                (
+                    fileLoader, requestDesignNode,
+                    PASS_ARG(fileLoader, requestDesignNode, nodePath, nodePath)
+                );
+
+            }
+        };
+
+        template
+<
+            typename Action_fileLoader_requestDesignNode
+        >
+        inline static Ex_mainWindow_designNodeRequested
+        <
+            Action_fileLoader_requestDesignNode
+        >
+        ex_mainWindow_designNodeRequested
+        (
+            const Action_fileLoader_requestDesignNode &act_fileLoader_requestDesignNode
+        )
+        {
+            return Ex_mainWindow_designNodeRequested
+            <
+                Action_fileLoader_requestDesignNode
+            >
+            (
+                act_fileLoader_requestDesignNode
+            );
+        }
+
         // fileLoader_launcher_started ---------------------------------------------------------------------------------------------
         struct Tag_fileLoader_launcher_started {};
 
@@ -2322,6 +2388,10 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
             cInstances.mainWindow.events.moveDownRequest.addFun(ex_mainWindow_moveDownRequest
             (
                 cInstances.fileLoader.actions.moveDown
+            ));
+            cInstances.mainWindow.events.designNodeRequested.addFun(ex_mainWindow_designNodeRequested
+            (
+                cInstances.fileLoader.actions.requestDesignNode
             ));
         }
 

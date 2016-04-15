@@ -252,6 +252,7 @@ MY_NSP_START
 
     void MainWindow::MOD_ACTION_SIG(addNode)
     {
+        CHILA_LIB_MISC__SHOW(40, nodePath);
         addNodePrv(designData, nodePath, value, false);
     }
 
@@ -646,12 +647,14 @@ MY_NSP_START
                     auto &path = typed->path;
 
                     tag->signal_event().connect_notify(
-                        [this, path, tag](const Glib::RefPtr<Glib::Object> &object, GdkEvent *event, const Gtk::TextIter &it)
+                        [this, path, tag, eventExecuter](const Glib::RefPtr<Glib::Object> &object, GdkEvent *event, const Gtk::TextIter &it)
                         {
                             switch (event->type)
                             {
                                 case GDK_BUTTON_PRESS:
-                                    selectNodePv(path, true, true);
+                                    CHILA_LIB_MISC__SHOW(40, path);
+//                                    selectNodePv(path, true, true);
+                                    execute_event_tn(designNodeRequested)(path);
                                     break;
 
                                 case GDK_MOTION_NOTIFY:
@@ -705,6 +708,7 @@ MY_NSP_START
 
     void MainWindow::MOD_ACTION_SIG(selectNode)
     {
+        CHILA_LIB_MISC__SHOW(40, nodePath);
         selectNodePv(nodePath, true, openNode);
     }
 

@@ -206,6 +206,14 @@
                     <action connector="fileLoader" name="moveDown" determinesOrder="false"/>
                 </actions>
             </event>
+
+            <event name="designNodeRequested" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="fileLoader" name="requestDesignNode" determinesOrder="false"/>
+                </actions>
+            </event>
+
         </instance>
 
         <!-- FileLoader -->

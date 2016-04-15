@@ -74,9 +74,8 @@
 
         <action name="expandFlowNode" arguments="nodePath" events=""/>
 
+        <action name="requestDesignNode" arguments="nodePath" description="Requests the path to a design node for the passed nodePath"/>
 
-<!--        <action name="nextNode"                 arguments=""
-                                                events="nodeFound, valueFound"     />-->
 
     </actions>
 

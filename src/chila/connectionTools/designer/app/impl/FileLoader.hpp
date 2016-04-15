@@ -83,6 +83,9 @@ MY_NSP_START
             void MOD_ACTION_SIG(showFNodeInfo);
 
             void MOD_ACTION_SIG(checkNodes) { check(eventExecuter); }
+
+            void MOD_ACTION_SIG(requestDesignNode) {}
+
        private:
             static constexpr unsigned descLimit = 80;
 

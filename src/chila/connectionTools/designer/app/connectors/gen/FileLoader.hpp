@@ -138,7 +138,8 @@
     (requestFlowNodes) \
     (showFNodeInfo) \
     (checkNodes) \
-    (expandFlowNode)
+    (expandFlowNode) \
+    (requestDesignNode)
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FileLoader_launcher_start \
 
@@ -173,6 +174,8 @@
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FileLoader_checkNodes \
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FileLoader_expandFlowNode \
+    (nodePath)
+#define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FileLoader_requestDesignNode \
     (nodePath)
 
 // Actions' called events
@@ -225,6 +228,9 @@
     (clearOutput)(outputText)
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_expandFlowNode \
+
+
+#define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_requestDesignNode \
 
 
 
@@ -294,6 +300,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
             MY_BIND_ACTION(showFNodeInfo);
             MY_BIND_ACTION(checkNodes);
             MY_BIND_ACTION(expandFlowNode);
+            MY_BIND_ACTION(requestDesignNode);
         }
     };
 }}}}}}

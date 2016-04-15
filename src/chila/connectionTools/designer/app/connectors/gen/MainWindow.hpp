@@ -63,7 +63,8 @@
     (flowNodesRequired) \
     (flowNodeSelected) \
     (checkNodes) \
-    (expandFlowNode)
+    (expandFlowNode) \
+    (designNodeRequested)
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_MainWindow_launcher_starting \
 
@@ -98,6 +99,8 @@
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_MainWindow_checkNodes \
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_MainWindow_expandFlowNode \
+    (nodePath)
+#define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_MainWindow_designNodeRequested \
     (nodePath)
 
 // Action defines
@@ -178,7 +181,7 @@
 
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_MainWindow_addOutputText \
-
+    (designNodeRequested)
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_MainWindow_clearOutput \
 

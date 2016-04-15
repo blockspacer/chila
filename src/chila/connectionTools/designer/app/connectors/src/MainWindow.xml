@@ -50,7 +50,7 @@
 
         <action name="setNodeValue" arguments="nodePath, value" description="Adds a node"/>
 
-        <action name="addOutputText" arguments="textProperties, outputText" description="Adds an error text"/>
+        <action name="addOutputText" arguments="textProperties, outputText" events="designNodeRequested" description="Adds an error text"/>
 
         <action name="clearOutput" arguments="" description="Clear the error message"/>
 
@@ -107,6 +107,8 @@
         <event name="checkNodes" arguments="" description="Check the design nodes"/>
 
         <event name="expandFlowNode" arguments="nodePath" description="Mark this flow node for exansion, and not the others"/>
+
+        <event name="designNodeRequested" arguments="nodePath" description="Requests the path to a design node for the passed nodePath"/>
     </events>
 
 </connector>
