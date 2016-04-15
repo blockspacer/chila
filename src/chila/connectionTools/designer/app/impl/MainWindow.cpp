@@ -252,7 +252,6 @@ MY_NSP_START
 
     void MainWindow::MOD_ACTION_SIG(addNode)
     {
-        CHILA_LIB_MISC__SHOW(40, nodePath);
         addNodePrv(designData, nodePath, value, false);
     }
 
@@ -424,7 +423,6 @@ MY_NSP_START
                         break;
 
                     case 3:
-                        CHILA_LIB_MISC__SHOW(40, "yes");
                         exandNodePath(eventExecuter);
                         break;
 
@@ -652,8 +650,6 @@ MY_NSP_START
                             switch (event->type)
                             {
                                 case GDK_BUTTON_PRESS:
-                                    CHILA_LIB_MISC__SHOW(40, path);
-//                                    selectNodePv(path, true, true);
                                     execute_event_tn(designNodeRequested)(path);
                                     break;
 
@@ -708,7 +704,6 @@ MY_NSP_START
 
     void MainWindow::MOD_ACTION_SIG(selectNode)
     {
-        CHILA_LIB_MISC__SHOW(40, nodePath);
         selectNodePv(nodePath, true, openNode);
     }
 

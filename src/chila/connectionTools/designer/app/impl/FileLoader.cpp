@@ -1156,6 +1156,11 @@ MY_NSP_START
         execute_event(actionNotPerformed)(ex.what());
     }
 
+    void FileLoader::MOD_ACTION_SIG(requestDesignNode)
+    {
+        auto treePath = tPathMap.getTreePath(nodePath);
+        execute_event(nodeSelected)(treePath, true);
+    }
 
 
     connection::FileLoader::CProviderSPtr connection::FileLoader::create(

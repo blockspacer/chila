@@ -231,7 +231,7 @@
 
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_requestDesignNode \
-
+    (nodeSelected)
 
 
 CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,gen))
