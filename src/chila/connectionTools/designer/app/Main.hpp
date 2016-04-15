@@ -61,8 +61,6 @@ MY_NSP_START
             template <typename Ret>
             Ret loadPaths(
                 const clMisc::XMLAccessor &projectAccessor,
-                const std::string &prefixPath,
-                const std::string &prefixCatStr,
                 const std::string &path,
                 const std::string &childName) const;
     };

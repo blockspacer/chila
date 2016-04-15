@@ -38,16 +38,12 @@ MY_NSP_START
             loadPaths<ClmPathVec>
             (
                 projectAccessor,
-                "/project/flowCInstances/@prefix",
-                ".",
                 "/project/flowCInstances/start",
                 "flowCInstance"
             ),
             loadPaths<ClmPathSet>
             (
                 projectAccessor,
-                "/project/flowCInstances/@prefix",
-                ".",
                 "/project/flowCInstances/dim",
                 "flowCInstance"
             ),
@@ -55,16 +51,12 @@ MY_NSP_START
         cpFiles(loadPaths<PathSet>
         (
             projectAccessor,
-            "/project/cPerformers/@prefix",
-            "/",
             "/project/cPerformers",
             "cPerformer"
         )),
         connFiles(loadPaths<PathSet>
         (
             projectAccessor,
-            "/project/connectors/@prefix",
-            "/",
             "/project/connectors",
             "connector"
         ))
@@ -112,23 +104,21 @@ MY_NSP_START
     }
 
     template <typename Type>
-    void load(std::set<Type> &set, const std::string &prefix, const std::string &value)
+    void load(std::set<Type> &set, const std::string &value)
     {
-        set.insert(prefix + value);
+        set.insert(value);
     }
 
     template <typename Type>
-    void load(std::vector<Type> &vec, const std::string &prefix, const std::string &value)
+    void load(std::vector<Type> &vec, const std::string &value)
     {
-        vec.push_back(prefix + value);
+        vec.push_back(value);
     }
 
 
     template <typename Ret>
     Ret Main::loadPaths(
         const clMisc::XMLAccessor &projectAccessor,
-        const std::string &prefixPath,
-        const std::string &prefixCatStr,
         const std::string &path,
         const std::string &childName) const
     {
@@ -136,13 +126,11 @@ MY_NSP_START
 
         auto &element = projectAccessor.getElement(path);
 
-        auto prefix = projectAccessor.getValue(prefixPath, "");
-
         for (auto *node : element.get_children(childName))
         {
             auto &elem = dynamic_cast<const xmlpp::Element&>(*node);
 
-            load(ret, prefix + (prefix.empty() ? "" : prefixCatStr), chila::lib::xmlppUtils::getAttribute<std::string>(elem, "path"));
+            load(ret, chila::lib::xmlppUtils::getAttribute<std::string>(elem, "path"));
         }
 
         return ret;
