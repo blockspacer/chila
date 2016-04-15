@@ -745,7 +745,6 @@ MY_NSP_START
 
     void MainWindow::MOD_ACTION_SIG(addFlowNode)
     {
-        CHILA_LIB_MISC__SHOW(40, nodePath);
         addNodePrv(flowData, nodePath, value, isExpandable);
     }
 
@@ -766,7 +765,6 @@ MY_NSP_START
         }
         else
         {
-//            CHILA_LIB_MISC__SHOW(40, parentPath);
             auto it = data.rowMap.find(parentPath);
             my_assert(it != data.rowMap.end());
 
