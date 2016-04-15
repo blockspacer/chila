@@ -1,7 +1,3 @@
-/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
- * (C.I.: 1.439.390 - Paraguay)
- */
-
 // ******************************************************************
 // *                 This is auto-generated code                    *
 // *                    - DO NOT MODIFY -                           *
@@ -15,16 +11,8 @@
 #undef BOOST_MPL_LIMIT_VECTOR_SIZE
 #define FUSION_MAX_VECTOR_SIZE 50
 #define BOOST_MPL_LIMIT_VECTOR_SIZE 50
-#include <boost/mpl/set.hpp>
-#include <boost/mpl/map.hpp>
-#include <boost/mpl/vector.hpp>
-#include <boost/mpl/at.hpp>
-#include <boost/fusion/sequence/intrinsic/at_c.hpp>
 #include <boost/call_traits.hpp>
-#include <boost/fusion/container/vector.hpp>
 #include <chila/lib/misc/Path.hpp>
-#include <boost/fusion/include/make_vector.hpp>
-#include <chila/connectionTools/lib/codegen/ActionExecuter.hpp>
 #include <chila/connectionTools/lib/codegen/ConnectorMap.hpp>
 #include <chila/connectionTools/lib/codegen/convert.hpp>
 #include <chila/connectionTools/lib/codegen/macrosDef.hpp>
@@ -124,7 +112,6 @@
 
 CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,gen))
 {
-    using chila::connectionTools::lib::codegen::actionExecuter;
 
     template <typename ArgTypes, typename Connectors>
     struct ConnectionPerformer
@@ -151,8 +138,8 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
             typedef void result_type;
 
             APC_mainWindowNameProv apc_mainWindowNameProv;
-            Action_logger_moduleStarted act_logger_moduleStarted;
-            Action_mainWindow_waitEvent act_mainWindow_waitEvent;
+            const Action_logger_moduleStarted &act_logger_moduleStarted;
+            const Action_mainWindow_waitEvent &act_mainWindow_waitEvent;
 
             Ex_mainWindow_launcher_started
             (
@@ -239,7 +226,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
             typedef void result_type;
 
             APC_mainWindowNameProv apc_mainWindowNameProv;
-            Action_logger_moduleFinished act_logger_moduleFinished;
+            const Action_logger_moduleFinished &act_logger_moduleFinished;
 
             Ex_mainWindow_launcher_finished
             (
@@ -312,8 +299,8 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_fileLoader_performAction act_fileLoader_performAction;
-            Action_mainWindow_waitEvent act_mainWindow_waitEvent;
+            const Action_fileLoader_performAction &act_fileLoader_performAction;
+            const Action_mainWindow_waitEvent &act_mainWindow_waitEvent;
 
             Ex_mainWindow_actionRequest
             (
@@ -400,7 +387,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_fileLoader_undo act_fileLoader_undo;
+            const Action_fileLoader_undo &act_fileLoader_undo;
 
             Ex_mainWindow_undoRequest
             (
@@ -459,7 +446,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_fileLoader_redo act_fileLoader_redo;
+            const Action_fileLoader_redo &act_fileLoader_redo;
 
             Ex_mainWindow_redoRequest
             (
@@ -519,8 +506,8 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_fileLoader_save act_fileLoader_save;
-            Action_mainWindow_waitEvent act_mainWindow_waitEvent;
+            const Action_fileLoader_save &act_fileLoader_save;
+            const Action_mainWindow_waitEvent &act_mainWindow_waitEvent;
 
             Ex_mainWindow_saveRequest
             (
@@ -593,8 +580,8 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_fileLoader_giveActionList act_fileLoader_giveActionList;
-            Action_mainWindow_waitEvent act_mainWindow_waitEvent;
+            const Action_fileLoader_giveActionList &act_fileLoader_giveActionList;
+            const Action_mainWindow_waitEvent &act_mainWindow_waitEvent;
 
             Ex_mainWindow_actionListRequired
             (
@@ -673,7 +660,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_fileLoader_requestFlowNodes act_fileLoader_requestFlowNodes;
+            const Action_fileLoader_requestFlowNodes &act_fileLoader_requestFlowNodes;
 
             Ex_mainWindow_flowNodesRequired
             (
@@ -732,7 +719,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_fileLoader_showFNodeInfo act_fileLoader_showFNodeInfo;
+            const Action_fileLoader_showFNodeInfo &act_fileLoader_showFNodeInfo;
 
             Ex_mainWindow_flowNodeSelected
             (
@@ -798,7 +785,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_fileLoader_checkNodes act_fileLoader_checkNodes;
+            const Action_fileLoader_checkNodes &act_fileLoader_checkNodes;
 
             Ex_mainWindow_checkNodes
             (
@@ -857,7 +844,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_fileLoader_expandFlowNode act_fileLoader_expandFlowNode;
+            const Action_fileLoader_expandFlowNode &act_fileLoader_expandFlowNode;
 
             Ex_mainWindow_expandFlowNode
             (
@@ -923,7 +910,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_fileLoader_moveUp act_fileLoader_moveUp;
+            const Action_fileLoader_moveUp &act_fileLoader_moveUp;
 
             Ex_mainWindow_moveUpRequest
             (
@@ -989,7 +976,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_fileLoader_moveDown act_fileLoader_moveDown;
+            const Action_fileLoader_moveDown &act_fileLoader_moveDown;
 
             Ex_mainWindow_moveDownRequest
             (
@@ -1057,7 +1044,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
             typedef void result_type;
 
             APC_fileLoaderNameProv apc_fileLoaderNameProv;
-            Action_logger_moduleStarted act_logger_moduleStarted;
+            const Action_logger_moduleStarted &act_logger_moduleStarted;
 
             Ex_fileLoader_launcher_started
             (
@@ -1131,7 +1118,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
             typedef void result_type;
 
             APC_fileLoaderNameProv apc_fileLoaderNameProv;
-            Action_logger_moduleFinished act_logger_moduleFinished;
+            const Action_logger_moduleFinished &act_logger_moduleFinished;
 
             Ex_fileLoader_launcher_finished
             (
@@ -1203,7 +1190,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_logger_connectorLoaded act_logger_connectorLoaded;
+            const Action_logger_connectorLoaded &act_logger_connectorLoaded;
 
             Ex_fileLoader_connectorLoaded
             (
@@ -1269,7 +1256,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_logger_cPerformerLoaded act_logger_cPerformerLoaded;
+            const Action_logger_cPerformerLoaded &act_logger_cPerformerLoaded;
 
             Ex_fileLoader_cPerformerLoaded
             (
@@ -1335,7 +1322,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_mainWindow_addNode act_mainWindow_addNode;
+            const Action_mainWindow_addNode &act_mainWindow_addNode;
 
             Ex_fileLoader_nodeFound
             (
@@ -1405,7 +1392,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_mainWindow_setNodeValue act_mainWindow_setNodeValue;
+            const Action_mainWindow_setNodeValue &act_mainWindow_setNodeValue;
 
             Ex_fileLoader_valueFound
             (
@@ -1475,7 +1462,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_mainWindow_addOutputText act_mainWindow_addOutputText;
+            const Action_mainWindow_addOutputText &act_mainWindow_addOutputText;
 
             Ex_fileLoader_outputText
             (
@@ -1545,7 +1532,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_mainWindow_clearOutput act_mainWindow_clearOutput;
+            const Action_mainWindow_clearOutput &act_mainWindow_clearOutput;
 
             Ex_fileLoader_clearOutput
             (
@@ -1604,7 +1591,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_mainWindow_actionNotPerformed act_mainWindow_actionNotPerformed;
+            const Action_mainWindow_actionNotPerformed &act_mainWindow_actionNotPerformed;
 
             Ex_fileLoader_actionNotPerformed
             (
@@ -1670,7 +1657,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_mainWindow_removeNode act_mainWindow_removeNode;
+            const Action_mainWindow_removeNode &act_mainWindow_removeNode;
 
             Ex_fileLoader_nodeRemoved
             (
@@ -1736,7 +1723,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_mainWindow_selectNode act_mainWindow_selectNode;
+            const Action_mainWindow_selectNode &act_mainWindow_selectNode;
 
             Ex_fileLoader_nodeSelected
             (
@@ -1806,7 +1793,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_mainWindow_showActions act_mainWindow_showActions;
+            const Action_mainWindow_showActions &act_mainWindow_showActions;
 
             Ex_fileLoader_actionListFound
             (
@@ -1876,7 +1863,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_mainWindow_renameNode act_mainWindow_renameNode;
+            const Action_mainWindow_renameNode &act_mainWindow_renameNode;
 
             Ex_fileLoader_nodeRenamed
             (
@@ -1946,7 +1933,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_mainWindow_addFlowNode act_mainWindow_addFlowNode;
+            const Action_mainWindow_addFlowNode &act_mainWindow_addFlowNode;
 
             Ex_fileLoader_flowNodeFound
             (
@@ -2020,7 +2007,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_mainWindow_noMoreFlowNodes act_mainWindow_noMoreFlowNodes;
+            const Action_mainWindow_noMoreFlowNodes &act_mainWindow_noMoreFlowNodes;
 
             Ex_fileLoader_noMoreFlowNodes
             (
@@ -2079,7 +2066,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_mainWindow_removeChildren act_mainWindow_removeChildren;
+            const Action_mainWindow_removeChildren &act_mainWindow_removeChildren;
 
             Ex_fileLoader_removeChildren
             (
@@ -2145,7 +2132,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_mainWindow_saveDesignTreeState act_mainWindow_saveDesignTreeState;
+            const Action_mainWindow_saveDesignTreeState &act_mainWindow_saveDesignTreeState;
 
             Ex_fileLoader_saveDesignTreeState
             (
@@ -2204,7 +2191,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         {
             typedef void result_type;
 
-            Action_mainWindow_restoreDesignTreeState act_mainWindow_restoreDesignTreeState;
+            const Action_mainWindow_restoreDesignTreeState &act_mainWindow_restoreDesignTreeState;
 
             Ex_fileLoader_restoreDesignTreeState
             (
@@ -2276,179 +2263,148 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         template <typename Providers>
         static void connect_mainWindow(ConnInstances &cInstances, const Providers &providers)
         {
-            cInstances.mainWindow.events.launcher_started
-                = ex_mainWindow_launcher_started
+            cInstances.mainWindow.events.launcher_started.addFun(ex_mainWindow_launcher_started
             (
                 providers.mainWindowNameProv
                 ,
-                actionExecuter<Tag_mainWindow_launcher_started, 0>(cInstances.logger.actions.moduleStarted),
-                actionExecuter<Tag_mainWindow_launcher_started, 1>(cInstances.mainWindow.actions.waitEvent)
-            );
-            cInstances.mainWindow.events.launcher_finished
-                = ex_mainWindow_launcher_finished
+                cInstances.logger.actions.moduleStarted,
+                cInstances.mainWindow.actions.waitEvent
+            ));
+            cInstances.mainWindow.events.launcher_finished.addFun(ex_mainWindow_launcher_finished
             (
                 providers.mainWindowNameProv
                 ,
-                actionExecuter<Tag_mainWindow_launcher_finished, 0>(cInstances.logger.actions.moduleFinished)
-            );
-            cInstances.mainWindow.events.actionRequest
-                = ex_mainWindow_actionRequest
+                cInstances.logger.actions.moduleFinished
+            ));
+            cInstances.mainWindow.events.actionRequest.addFun(ex_mainWindow_actionRequest
             (
-                actionExecuter<Tag_mainWindow_actionRequest, 0>(cInstances.fileLoader.actions.performAction),
-                actionExecuter<Tag_mainWindow_actionRequest, 1>(cInstances.mainWindow.actions.waitEvent)
-            );
-            cInstances.mainWindow.events.undoRequest
-                = ex_mainWindow_undoRequest
+                cInstances.fileLoader.actions.performAction,
+                cInstances.mainWindow.actions.waitEvent
+            ));
+            cInstances.mainWindow.events.undoRequest.addFun(ex_mainWindow_undoRequest
             (
-                actionExecuter<Tag_mainWindow_undoRequest, 0>(cInstances.fileLoader.actions.undo)
-            );
-            cInstances.mainWindow.events.redoRequest
-                = ex_mainWindow_redoRequest
+                cInstances.fileLoader.actions.undo
+            ));
+            cInstances.mainWindow.events.redoRequest.addFun(ex_mainWindow_redoRequest
             (
-                actionExecuter<Tag_mainWindow_redoRequest, 0>(cInstances.fileLoader.actions.redo)
-            );
-            cInstances.mainWindow.events.saveRequest
-                = ex_mainWindow_saveRequest
+                cInstances.fileLoader.actions.redo
+            ));
+            cInstances.mainWindow.events.saveRequest.addFun(ex_mainWindow_saveRequest
             (
-                actionExecuter<Tag_mainWindow_saveRequest, 0>(cInstances.fileLoader.actions.save),
-                actionExecuter<Tag_mainWindow_saveRequest, 1>(cInstances.mainWindow.actions.waitEvent)
-            );
-            cInstances.mainWindow.events.actionListRequired
-                = ex_mainWindow_actionListRequired
+                cInstances.fileLoader.actions.save,
+                cInstances.mainWindow.actions.waitEvent
+            ));
+            cInstances.mainWindow.events.actionListRequired.addFun(ex_mainWindow_actionListRequired
             (
-                actionExecuter<Tag_mainWindow_actionListRequired, 0>(cInstances.fileLoader.actions.giveActionList),
-                actionExecuter<Tag_mainWindow_actionListRequired, 1>(cInstances.mainWindow.actions.waitEvent)
-            );
-            cInstances.mainWindow.events.flowNodesRequired
-                = ex_mainWindow_flowNodesRequired
+                cInstances.fileLoader.actions.giveActionList,
+                cInstances.mainWindow.actions.waitEvent
+            ));
+            cInstances.mainWindow.events.flowNodesRequired.addFun(ex_mainWindow_flowNodesRequired
             (
-                actionExecuter<Tag_mainWindow_flowNodesRequired, 0>(cInstances.fileLoader.actions.requestFlowNodes)
-            );
-            cInstances.mainWindow.events.flowNodeSelected
-                = ex_mainWindow_flowNodeSelected
+                cInstances.fileLoader.actions.requestFlowNodes
+            ));
+            cInstances.mainWindow.events.flowNodeSelected.addFun(ex_mainWindow_flowNodeSelected
             (
-                actionExecuter<Tag_mainWindow_flowNodeSelected, 0>(cInstances.fileLoader.actions.showFNodeInfo)
-            );
-            cInstances.mainWindow.events.checkNodes
-                = ex_mainWindow_checkNodes
+                cInstances.fileLoader.actions.showFNodeInfo
+            ));
+            cInstances.mainWindow.events.checkNodes.addFun(ex_mainWindow_checkNodes
             (
-                actionExecuter<Tag_mainWindow_checkNodes, 0>(cInstances.fileLoader.actions.checkNodes)
-            );
-            cInstances.mainWindow.events.expandFlowNode
-                = ex_mainWindow_expandFlowNode
+                cInstances.fileLoader.actions.checkNodes
+            ));
+            cInstances.mainWindow.events.expandFlowNode.addFun(ex_mainWindow_expandFlowNode
             (
-                actionExecuter<Tag_mainWindow_expandFlowNode, 0>(cInstances.fileLoader.actions.expandFlowNode)
-            );
-            cInstances.mainWindow.events.moveUpRequest
-                = ex_mainWindow_moveUpRequest
+                cInstances.fileLoader.actions.expandFlowNode
+            ));
+            cInstances.mainWindow.events.moveUpRequest.addFun(ex_mainWindow_moveUpRequest
             (
-                actionExecuter<Tag_mainWindow_moveUpRequest, 0>(cInstances.fileLoader.actions.moveUp)
-            );
-            cInstances.mainWindow.events.moveDownRequest
-                = ex_mainWindow_moveDownRequest
+                cInstances.fileLoader.actions.moveUp
+            ));
+            cInstances.mainWindow.events.moveDownRequest.addFun(ex_mainWindow_moveDownRequest
             (
-                actionExecuter<Tag_mainWindow_moveDownRequest, 0>(cInstances.fileLoader.actions.moveDown)
-            );
+                cInstances.fileLoader.actions.moveDown
+            ));
         }
 
         // fileLoader --------------------------------------------------------------------------------------------------------------
         template <typename Providers>
         static void connect_fileLoader(ConnInstances &cInstances, const Providers &providers)
         {
-            cInstances.fileLoader.events.launcher_started
-                = ex_fileLoader_launcher_started
+            cInstances.fileLoader.events.launcher_started.addFun(ex_fileLoader_launcher_started
             (
                 providers.fileLoaderNameProv
                 ,
-                actionExecuter<Tag_fileLoader_launcher_started, 0>(cInstances.logger.actions.moduleStarted)
-            );
-            cInstances.fileLoader.events.launcher_finished
-                = ex_fileLoader_launcher_finished
+                cInstances.logger.actions.moduleStarted
+            ));
+            cInstances.fileLoader.events.launcher_finished.addFun(ex_fileLoader_launcher_finished
             (
                 providers.fileLoaderNameProv
                 ,
-                actionExecuter<Tag_fileLoader_launcher_finished, 0>(cInstances.logger.actions.moduleFinished)
-            );
-            cInstances.fileLoader.events.connectorLoaded
-                = ex_fileLoader_connectorLoaded
+                cInstances.logger.actions.moduleFinished
+            ));
+            cInstances.fileLoader.events.connectorLoaded.addFun(ex_fileLoader_connectorLoaded
             (
-                actionExecuter<Tag_fileLoader_connectorLoaded, 0>(cInstances.logger.actions.connectorLoaded)
-            );
-            cInstances.fileLoader.events.cPerformerLoaded
-                = ex_fileLoader_cPerformerLoaded
+                cInstances.logger.actions.connectorLoaded
+            ));
+            cInstances.fileLoader.events.cPerformerLoaded.addFun(ex_fileLoader_cPerformerLoaded
             (
-                actionExecuter<Tag_fileLoader_cPerformerLoaded, 0>(cInstances.logger.actions.cPerformerLoaded)
-            );
-            cInstances.fileLoader.events.nodeFound
-                = ex_fileLoader_nodeFound
+                cInstances.logger.actions.cPerformerLoaded
+            ));
+            cInstances.fileLoader.events.nodeFound.addFun(ex_fileLoader_nodeFound
             (
-                actionExecuter<Tag_fileLoader_nodeFound, 0>(cInstances.mainWindow.actions.addNode)
-            );
-            cInstances.fileLoader.events.valueFound
-                = ex_fileLoader_valueFound
+                cInstances.mainWindow.actions.addNode
+            ));
+            cInstances.fileLoader.events.valueFound.addFun(ex_fileLoader_valueFound
             (
-                actionExecuter<Tag_fileLoader_valueFound, 0>(cInstances.mainWindow.actions.setNodeValue)
-            );
-            cInstances.fileLoader.events.outputText
-                = ex_fileLoader_outputText
+                cInstances.mainWindow.actions.setNodeValue
+            ));
+            cInstances.fileLoader.events.outputText.addFun(ex_fileLoader_outputText
             (
-                actionExecuter<Tag_fileLoader_outputText, 0>(cInstances.mainWindow.actions.addOutputText)
-            );
-            cInstances.fileLoader.events.clearOutput
-                = ex_fileLoader_clearOutput
+                cInstances.mainWindow.actions.addOutputText
+            ));
+            cInstances.fileLoader.events.clearOutput.addFun(ex_fileLoader_clearOutput
             (
-                actionExecuter<Tag_fileLoader_clearOutput, 0>(cInstances.mainWindow.actions.clearOutput)
-            );
-            cInstances.fileLoader.events.actionNotPerformed
-                = ex_fileLoader_actionNotPerformed
+                cInstances.mainWindow.actions.clearOutput
+            ));
+            cInstances.fileLoader.events.actionNotPerformed.addFun(ex_fileLoader_actionNotPerformed
             (
-                actionExecuter<Tag_fileLoader_actionNotPerformed, 0>(cInstances.mainWindow.actions.actionNotPerformed)
-            );
-            cInstances.fileLoader.events.nodeRemoved
-                = ex_fileLoader_nodeRemoved
+                cInstances.mainWindow.actions.actionNotPerformed
+            ));
+            cInstances.fileLoader.events.nodeRemoved.addFun(ex_fileLoader_nodeRemoved
             (
-                actionExecuter<Tag_fileLoader_nodeRemoved, 0>(cInstances.mainWindow.actions.removeNode)
-            );
-            cInstances.fileLoader.events.nodeSelected
-                = ex_fileLoader_nodeSelected
+                cInstances.mainWindow.actions.removeNode
+            ));
+            cInstances.fileLoader.events.nodeSelected.addFun(ex_fileLoader_nodeSelected
             (
-                actionExecuter<Tag_fileLoader_nodeSelected, 0>(cInstances.mainWindow.actions.selectNode)
-            );
-            cInstances.fileLoader.events.actionListFound
-                = ex_fileLoader_actionListFound
+                cInstances.mainWindow.actions.selectNode
+            ));
+            cInstances.fileLoader.events.actionListFound.addFun(ex_fileLoader_actionListFound
             (
-                actionExecuter<Tag_fileLoader_actionListFound, 0>(cInstances.mainWindow.actions.showActions)
-            );
-            cInstances.fileLoader.events.nodeRenamed
-                = ex_fileLoader_nodeRenamed
+                cInstances.mainWindow.actions.showActions
+            ));
+            cInstances.fileLoader.events.nodeRenamed.addFun(ex_fileLoader_nodeRenamed
             (
-                actionExecuter<Tag_fileLoader_nodeRenamed, 0>(cInstances.mainWindow.actions.renameNode)
-            );
-            cInstances.fileLoader.events.flowNodeFound
-                = ex_fileLoader_flowNodeFound
+                cInstances.mainWindow.actions.renameNode
+            ));
+            cInstances.fileLoader.events.flowNodeFound.addFun(ex_fileLoader_flowNodeFound
             (
-                actionExecuter<Tag_fileLoader_flowNodeFound, 0>(cInstances.mainWindow.actions.addFlowNode)
-            );
-            cInstances.fileLoader.events.noMoreFlowNodes
-                = ex_fileLoader_noMoreFlowNodes
+                cInstances.mainWindow.actions.addFlowNode
+            ));
+            cInstances.fileLoader.events.noMoreFlowNodes.addFun(ex_fileLoader_noMoreFlowNodes
             (
-                actionExecuter<Tag_fileLoader_noMoreFlowNodes, 0>(cInstances.mainWindow.actions.noMoreFlowNodes)
-            );
-            cInstances.fileLoader.events.removeChildren
-                = ex_fileLoader_removeChildren
+                cInstances.mainWindow.actions.noMoreFlowNodes
+            ));
+            cInstances.fileLoader.events.removeChildren.addFun(ex_fileLoader_removeChildren
             (
-                actionExecuter<Tag_fileLoader_removeChildren, 0>(cInstances.mainWindow.actions.removeChildren)
-            );
-            cInstances.fileLoader.events.saveDesignTreeState
-                = ex_fileLoader_saveDesignTreeState
+                cInstances.mainWindow.actions.removeChildren
+            ));
+            cInstances.fileLoader.events.saveDesignTreeState.addFun(ex_fileLoader_saveDesignTreeState
             (
-                actionExecuter<Tag_fileLoader_saveDesignTreeState, 0>(cInstances.mainWindow.actions.saveDesignTreeState)
-            );
-            cInstances.fileLoader.events.restoreDesignTreeState
-                = ex_fileLoader_restoreDesignTreeState
+                cInstances.mainWindow.actions.saveDesignTreeState
+            ));
+            cInstances.fileLoader.events.restoreDesignTreeState.addFun(ex_fileLoader_restoreDesignTreeState
             (
-                actionExecuter<Tag_fileLoader_restoreDesignTreeState, 0>(cInstances.mainWindow.actions.restoreDesignTreeState)
-            );
+                cInstances.mainWindow.actions.restoreDesignTreeState
+            ));
         }
 
         template <typename Args>

@@ -18,10 +18,13 @@
 
 MY_NSP_START
 {
-    CHILA_LIB_MISC__DEF_ITER_ITERATOR(action_map_iterator,
-    (
-        return **(this->it);
-    ));
+    CHILA_LIB_MISC__DEF_ITER_ITERATOR(action_map_iterator_tpl);
+//    (
+//        return **(this->it);
+//    ));
+
+    template <typename Iterator, typename CastedType, typename Fun>
+    using action_map_iterator = action_map_iterator_tpl<Iterator, CastedType, CastedType&, Fun>;
 
 
     class ActionMap final: public ActionElement, boost::noncopyable
@@ -31,8 +34,17 @@ MY_NSP_START
             using IterVec = std::vector<Map::iterator>;
 
         public:
-            typedef action_map_iterator<IterVec::iterator, Map::value_type> iterator;
-            typedef action_map_iterator<IterVec::const_iterator, const Map::value_type> const_iterator;
+            struct DerefFun
+            {
+                template <typename CastedTypeRef, typename Iterator>
+                CastedTypeRef cast(const Iterator &it) const
+                {
+                    return dynamic_cast<CastedTypeRef>(*(*it)->second);
+                }
+            };
+
+            typedef action_map_iterator<IterVec::iterator, Map::value_type, DerefFun> iterator;
+            typedef action_map_iterator<IterVec::const_iterator, const Map::value_type, DerefFun> const_iterator;
 
             ActionMap(std::string id = "", ActionMap *parent = nullptr) : ActionElement(rvalue_cast(id), parent) {}
 

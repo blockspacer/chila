@@ -121,7 +121,7 @@
         if (auto *typedNode = dynamic_cast<Type*>(node))
 
     #define bptr_cast(Type, data) \
-        if (std::shared_ptr<const Type> typedNode = std::dynamic_pointer_cast<const Type>(data))
+        if (auto typedNode = std::dynamic_pointer_cast<const Type>(data))
 
     #define show_error_info(out, Type, name, extended) \
                              if (const Type::error_info::value_type *value = boost::get_error_info<Type>(ex))                         out << "- " << name << ": " << (extended ? " \

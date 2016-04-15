@@ -19,7 +19,7 @@ def build(ctx):
     project = glob.executable()
 
     project.compilationArg("{target.comp_args}")
-    project.pkgConfigVars("libxml++")
+    project.pkgConfigVars("libxml++-2.6")
     project.pkgConfigVars("gtkmm-2.4")
     project.archiveLib("chila/connectionTools/lib/codegen")
     project.archiveLib("chila/connectionTools/lib/other")

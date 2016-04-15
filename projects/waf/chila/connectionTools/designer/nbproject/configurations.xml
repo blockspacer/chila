@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="95">
+<configurationDescriptor version="97">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="../../../../../src/chila/connectionTools/designer" name="0">
       <df name="app">
@@ -121,6 +121,10 @@
             </incDir>
           </ccTool>
         </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
       </makefileType>
       <item path="../../../../../src/chila/connectionTools/designer/app/Main.cpp"
             ex="false"
@@ -294,6 +298,10 @@
             <standard>8</standard>
           </ccTool>
         </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
       </makefileType>
       <item path="../../../../../src/chila/connectionTools/designer/app/Main.cpp"
             ex="false"
