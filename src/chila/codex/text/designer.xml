@@ -7,11 +7,11 @@
         <connector path="../base/app/connectors/src/MainWindow.xml"/>
         <connector path="../base/app/connectors/src/FileChooser.xml"/>
         <connector path="../base/app/connectors/src/ActionExecuter.xml"/>
-        <connector path="../../connectionTools/lib/other/common/connectors/src/Forwarder.xml"/>
-        <connector path="../../connectionTools/lib/other/common/connectors/src/FunDynExecuter.xml"/>
-        <connector path="../../connectionTools/lib/other/common/connectors/src/Network.xml"/>
-        <connector path="../../connectionTools/lib/other/common/connectors/src/TextMessageCreator.xml"/>
-        <connector path="../../connectionTools/lib/other/common/connectors/src/FunDynXMLParser.xml"/>
+        <connector path="../../connectionTools/lib/common/connectors/src/Forwarder.xml"/>
+        <connector path="../../connectionTools/lib/common/connectors/src/FunDynExecuter.xml"/>
+        <connector path="../../connectionTools/lib/common/connectors/src/Network.xml"/>
+        <connector path="../../connectionTools/lib/common/connectors/src/TextMessageCreator.xml"/>
+        <connector path="../../connectionTools/lib/common/connectors/src/FunDynXMLParser.xml"/>
         <connector path="app/connectors/src/TextEditor.xml"/>
         <connector path="app/connectors/src/TextHighlighter.xml"/>
         <connector path="app/connectors/src/FileOpener.xml"/>
@@ -26,7 +26,9 @@
 
     <flowCInstances prefix="chila.codex.text.app.connectors.gen.ConnectionPerformer">
         <start>
-            <flowCInstance path="application"/>
+            <flowCInstance path="base:actionExecuter"/>
+            <flowCInstance path="base:mainWindow"/>
+            <flowCInstance path="text:actionExecuter"/>
         </start>
 
         <dim>
