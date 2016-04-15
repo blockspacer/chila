@@ -34,7 +34,7 @@ MY_NSP_START
         installDir(installDir),
         qApplication(qApplication)
     {
-        debugLogFile = std::make_unique<cclOther::fileDebug::LogFile>("/home/robert/tmp/testDebug.log", 10, 3, 10000, false);
+        debugLogFile = std::make_unique<cclOther::fileDebug::LogFile>(installDir / "debug.log", 10, 3, 10000, false);
         qEngine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
         auto objects = qEngine.rootObjects();

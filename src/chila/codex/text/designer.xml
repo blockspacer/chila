@@ -24,11 +24,14 @@
         <cPerformer path="app/connectors/src/ConnectionPerformer.xml"/>
     </cPerformers>
 
-    <flowCInstances prefix="chila.codex.text.app.connectors.gen.ConnectionPerformer">
+    <flowCInstances>
         <start>
-            <flowCInstance path="base:actionExecuter"/>
-            <flowCInstance path="base:mainWindow"/>
-            <flowCInstance path="text:actionExecuter"/>
+            <flowCInstance path="chila.codex.base.app.connectors.gen.ConnectionPerformer.base:actionExecuter"/>
+            <flowCInstance path="chila.codex.base.app.connectors.gen.ConnectionPerformer.base:mainWindow"/>
+
+            <flowCInstance path="chila.codex.text.app.connectors.gen.ConnectionPerformer.base:actionExecuter"/>
+            <flowCInstance path="chila.codex.text.app.connectors.gen.ConnectionPerformer.base:mainWindow"/>
+            <flowCInstance path="chila.codex.text.app.connectors.gen.ConnectionPerformer.text:actionExecuter"/>
         </start>
 
         <dim>
