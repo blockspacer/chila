@@ -770,17 +770,6 @@ MY_NSP_START
 
             auto &pRow = it->second.row;
 
-//            if (position == std::numeric_limits<unsigned>::max())
-//            {
-//                row = *(designData.treeStore->append(it->second.row.children()));
-//            }
-//            else
-//            {
-//                auto children = it->second.row.children().begin();
-//                std::advance(children, position);
-//                row = *(designData.treeStore->insert(children));
-//            }
-
             // Remove any "empty" node
             if (pRow.children().size() == 1)
             {
