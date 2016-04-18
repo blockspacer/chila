@@ -46,7 +46,6 @@ MY_NSP_START
 
             cclOther::dynFunExecuter::ExecuterMap dynFExecuter;
 
-//            Glib::RefPtr<Gtk::Builder> loadBuilder(const boost::filesystem::path &file);
             void setTimer();
 
             template <typename Provider>
