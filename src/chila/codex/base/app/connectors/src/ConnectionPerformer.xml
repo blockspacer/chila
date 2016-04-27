@@ -130,7 +130,7 @@
                 <event name="actionExecuted" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="actionExecuter" name="execute" description="" determinesOrder="false"/>
+                        <action connector="base:actionExecuter" name="execute" description="" determinesOrder="false"/>
                     </actions>
                 </event>
             </instance>
@@ -140,7 +140,7 @@
                     <event name="parsed" connectorAlias="">
                         <aProviderCreators/>
                         <actions>
-                            <action connector="funDynExecuter" name="execute" description="" determinesOrder="false"/>
+                            <action connector="base:appCommand:funDynExecuter" name="execute" description="" determinesOrder="false"/>
                         </actions>
                     </event>
                 </instance>
@@ -150,7 +150,7 @@
                             <apc name="cmdNetServer:msgCreatorFromBuff"/>
                         </aProviderCreators>
                         <actions>
-                            <action connector="funDynXMLParser" name="take" description="" determinesOrder="false"/>
+                            <action connector="base:appCommand:funDynXMLParser" name="take" description="" determinesOrder="false"/>
                         </actions>
                     </event>
                 </instance>
@@ -158,7 +158,7 @@
                     <event name="msgRead" connectorAlias="">
                         <aProviderCreators/>
                         <actions>
-                            <action connector="msgCreator" name="takeBuffer" description="" determinesOrder="false"/>
+                            <action connector="base:appCommand:msgCreator" name="takeBuffer" description="" determinesOrder="false"/>
                         </actions>
                     </event>
                 </instance>
@@ -167,13 +167,13 @@
                 <event name="file:open" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="fileChooser:open" name="open" description="" determinesOrder="false"/>
+                        <action connector="base:fileChooser:open" name="open" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="file:saveAs" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="fileChooser:saveAs" name="open" description="" determinesOrder="false"/>
+                        <action connector="base:fileChooser:saveAs" name="open" description="" determinesOrder="false"/>
                     </actions>
                 </event>
             </instance>

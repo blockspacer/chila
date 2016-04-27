@@ -211,19 +211,19 @@
                 <event name="edit:undo" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textEditor" name="undo" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="undo" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="edit:redo" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textEditor" name="redo" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="redo" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="edit:findReplace" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textEditor" name="findReplace:start" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="findReplace:start" description="" determinesOrder="false"/>
                     </actions>
                 </event>
             </instance>
@@ -231,40 +231,40 @@
                 <event name="findPrevious" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textEditor" name="findReplace:findPrevious" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="findReplace:findPrevious" description="" determinesOrder="false"/>
                         <action connector="base:mainWindow" name="setPresent" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="findNext" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textEditor" name="findReplace:findNext" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="findReplace:findNext" description="" determinesOrder="false"/>
                         <action connector="base:mainWindow" name="setPresent" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="replace" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textEditor" name="findReplace:replace" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="findReplace:replace" description="" determinesOrder="false"/>
                         <action connector="base:mainWindow" name="setPresent" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="replaceAll" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textEditor" name="findReplace:replaceAll" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="findReplace:replaceAll" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="closed" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textEditor" name="findReplace:restoreFind" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="findReplace:restoreFind" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="stateChanged" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textEditor" name="findReplace:stateChanged" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="findReplace:stateChanged" description="" determinesOrder="false"/>
                     </actions>
                 </event>
             </instance>
@@ -278,19 +278,19 @@
                 <event name="parseText" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textHighlighter" name="parseText" description="" determinesOrder="false"/>
+                        <action connector="text:textHighlighter" name="parseText" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="saveEditorContents:current" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="fileOpener" name="saveFile:current" description="" determinesOrder="false"/>
+                        <action connector="text:fileOpener" name="saveFile:current" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="saveEditorContents:as" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="fileOpener" name="saveFile:as" description="" determinesOrder="false"/>
+                        <action connector="text:fileOpener" name="saveFile:as" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="contentsModified" connectorAlias="">
@@ -314,14 +314,14 @@
                 <event name="editorClosed" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="fileOpener" name="fileClosed" description="" determinesOrder="false"/>
+                        <action connector="text:fileOpener" name="fileClosed" description="" determinesOrder="false"/>
                         <action connector="base:mainWindow" name="notebook:closeTab" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="findReplace:setFindText" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="findReplace" name="setTexts" description="" determinesOrder="false"/>
+                        <action connector="text:findReplace" name="setTexts" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="registerAction" connectorAlias="">
@@ -353,7 +353,7 @@
                 <event name="applyTags" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textEditor" name="applyTags" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="applyTags" description="" determinesOrder="false"/>
                     </actions>
                 </event>
             </instance>
@@ -361,13 +361,13 @@
                 <event name="openingNewFile" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textEditor" name="openEditor" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="openEditor" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="textFound" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textEditor" name="addText" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="addText" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="fileAlreadyOpened" connectorAlias="">
@@ -379,14 +379,14 @@
                 <event name="fileSaved" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textEditor" name="editorTypeChanged" description="" determinesOrder="false"/>
-                        <action connector="textEditor" name="savingDone" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="editorTypeChanged" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="savingDone" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="fileOpened" connectorAlias="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="textEditor" name="openingDone" description="" determinesOrder="false"/>
+                        <action connector="text:textEditor" name="openingDone" description="" determinesOrder="false"/>
                     </actions>
                 </event>
                 <event name="fileSelected" connectorAlias="">
