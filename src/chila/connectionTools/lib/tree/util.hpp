@@ -104,19 +104,6 @@ MY_NSP_START
         if (path.empty())
             BOOST_THROW_EXCEPTION(chila::lib::node::NodeNotFound());
 
-        while (!lastNode->template getPtr(path.front()))
-        {
-            auto *p = lastNode->parentPtr();
-            my_assert(p);
-
-            if (auto *typed = p->template toTypePtr<Group>())
-            {
-                lastNode = &(typed->template parent<Map>());
-            }
-            else BOOST_THROW_EXCEPTION(chila::lib::node::NodeNotFound()
-                << clMisc::ExceptionInfo::Path(path));
-        }
-
         auto name = path.top();
         path.pop();
 

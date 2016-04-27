@@ -331,12 +331,7 @@ MY_NSP_START
                 BOOST_THROW_EXCEPTION(ConnectorInstanceNotFound());
             }
 
-            auto &cInsMap = ciRef.template parent<ActionInstance>()
-                                 .template parent<ActionInstanceVec>()
-                                 .template parent<EventCall>()
-                                 .template parent<EventCallMap>()
-                                 .template parent<ConnectorInstance>()
-                                 .template parent<ConnectorInstanceMap>();
+            auto &cInsMap = ConnectorInstanceRef::base(ciRef);
 
             return getGroupedElement<ADD_CONST_IF(ConnectorInstanceGroup), ADD_CONST_IF(ConnectorInstance)>(cInsMap, ciRef.value);
         }
@@ -410,7 +405,7 @@ MY_NSP_START
                 rpVec.push_back(reqProv);
             });
 
-            // Addes the action's required arguments
+            // Adds the action's required arguments
             ReqProv acReqProv(aInstance.path(), "");
 
             chila::lib::node::checkAndAdd(eList, [&]
