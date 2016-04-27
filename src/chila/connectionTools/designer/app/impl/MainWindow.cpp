@@ -756,41 +756,46 @@ MY_NSP_START
     {
         Gtk::TreeModel::Row row;
         auto parentPath = nodePath;
-        auto id = parentPath.top();
         parentPath.pop();
 
-        if (parentPath.empty())
+        auto it = data.rowMap.find(nodePath);
+        if (it != data.rowMap.end())
         {
-            row = *(data.treeStore->append());
+            row = it->second.row;
         }
         else
         {
-            auto it = data.rowMap.find(parentPath);
-            my_assert(it != data.rowMap.end());
-
-            auto &pRow = it->second.row;
-
-            // Remove any "empty" node
-            if (pRow.children().size() == 1)
+            if (parentPath.empty())
             {
-                auto &child = *pRow.children().begin();
+                row = *(data.treeStore->append());
+            }
+            else
+            {
+                auto it = data.rowMap.find(parentPath);
+                my_assert(it != data.rowMap.end());
 
-                if (clMisc::Path(child[data.columnRecord.id]) == ":empty:")
-                    row = *child;
+                auto &pRow = it->second.row;
+
+                // Remove any "empty" node
+                if (pRow.children().size() == 1)
+                {
+                    auto &child = *pRow.children().begin();
+
+                    if (clMisc::Path(child[data.columnRecord.id]) == ":empty:")
+                        row = *child;
+                }
+
+                if (!row)
+                    row = *(data.treeStore->append(pRow.children()));
             }
 
-            if (!row)
-                row = *(data.treeStore->append(pRow.children()));
+            if (appendEmpty)
+                appendFlowEmptyNode(row);
+
+            row[data.columnRecord.id] = nodePath;
+            row[data.columnRecord.value] = value;
+            data.rowMap[nodePath] = row;
         }
-
-        if (appendEmpty)
-            appendFlowEmptyNode(row);
-
-        row[data.columnRecord.id] = nodePath;
-        row[data.columnRecord.value] = value;
-
-        auto insRet = data.rowMap.insert({nodePath, row});
-        my_assert(insRet.second);
 
         data.tree->queue_draw();
     }

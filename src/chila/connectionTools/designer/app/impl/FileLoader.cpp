@@ -1212,18 +1212,19 @@ MY_NSP_START
             auto &node = getCInstance(cInsPath);
             auto nodePath = node.path();
 
-            chila::lib::misc::Path fnPath = nodePath.getStringRep(":");
+            auto path = cclTree::getGroupedPath<cclTree::cPerformer::ConnectorInstanceGroup,
+                    cclTree::cPerformer::ConnectorInstanceMap>(node).getStringRep(":");
 
             flowNodeFound
             (
-                fnPath,
+                path,
                 nodePath,
-                str_stream(cInsPath),
+                str_stream(path),
                 true,
                 eventExecuter
             );
 
-            walkFlowNodes(fnPath, node, walkedNodes, getCInstancesHLNodes(flowCInstancesDim), eventExecuter);
+            walkFlowNodes(path, node, walkedNodes, getCInstancesHLNodes(flowCInstancesDim), eventExecuter);
         }
 
         execute_event(noMoreFlowNodes)();
