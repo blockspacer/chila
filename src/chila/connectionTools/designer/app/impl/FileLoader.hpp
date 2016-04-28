@@ -100,6 +100,9 @@ MY_NSP_START
 
             ClmPathSet flowCInstancesDim;
 
+            using CInsSet = std::set<const cclTree::cPerformer::ConnectorInstance*>;
+            using PCInsMap = std::map<clMisc::Path, CInsSet>;
+
             using ColorMap = std::map<boost::typeindex::type_index, std::string>;
             ColorMap colorMap;
 
@@ -225,18 +228,21 @@ MY_NSP_START
                                const cclTree::cPerformer::ConnectorInstance &cInstance,
                                PathSet &walkedNodes,
                                const CInstanceSet &flowCInstancesDimNodes,
+                               const PCInsMap &pcInsMap,
                                ev_executer_arg(requestFlowNodes));
 
             void walkFlowNodes(const clMisc::Path &flowNodePath,
                                const cclTree::cPerformer::EventCall &evCall,
                                PathSet &walkedNodes,
                                const CInstanceSet &flowCInstancesDimNodes,
+                               const PCInsMap &pcInsMap,
                                ev_executer_arg(requestFlowNodes));
 
             void walkFlowNodes(const clMisc::Path &flowNodePath,
                                const cclTree::cPerformer::ActionInstance &aInstance,
                                PathSet &walkedNodes,
                                const CInstanceSet &flowCInstancesDimNodes,
+                               const PCInsMap &pcInsMap,
                                ev_executer_arg(requestFlowNodes));
 
             void flowNodeFound(const clMisc::Path &flowNodePath,
@@ -282,6 +288,8 @@ MY_NSP_START
                 clMisc::Path::const_iterator &pathIt,
                 const clMisc::Path::const_iterator &pathEnd,
                 const Map & map);
+
+            void loadPCInsMap(PCInsMap &pcInsMap, const chila::lib::node::NodeWithChildren &root) const;
     };
 }
 MY_NSP_END

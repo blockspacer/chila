@@ -1201,34 +1201,6 @@ MY_NSP_START
         return cclTree::getCInstance(cPerformer, subPath);
     }
 
-    void FileLoader::MOD_ACTION_SIG(requestFlowNodes)
-    {
-        PathSet walkedNodes;
-        fnMap.clear();
-
-        for (const auto &cInsPath : flowCInstances)
-        {
-            auto &node = getCInstance(cInsPath);
-            auto nodePath = node.path();
-
-            auto path = cclTree::getGroupedPath<cclTree::cPerformer::ConnectorInstanceGroup,
-                    cclTree::cPerformer::ConnectorInstanceMap>(node).getStringRep(":");
-
-            flowNodeFound
-            (
-                path,
-                nodePath,
-                str_stream(path),
-                true,
-                eventExecuter
-            );
-
-            walkFlowNodes(path, node, walkedNodes, getCInstancesHLNodes(flowCInstancesDim), eventExecuter);
-        }
-
-        execute_event(noMoreFlowNodes)();
-    }
-
     struct FileLoader::InsWalkedFNode
     {
         PathSet &walkedNodes;
@@ -1254,11 +1226,65 @@ MY_NSP_START
         }
     };
 
+    void FileLoader::loadPCInsMap(PCInsMap &pcInsMap, const chila::lib::node::NodeWithChildren &root) const
+    {
+        for (auto &node : root)
+        {
+            if (auto cIns = dynamic_cast<const cclTree::cPerformer::ConnectorInstance*>(&node))
+            {
+                auto path = cclTree::getGroupedPath<cclTree::cPerformer::ConnectorInstanceGroup,
+                    cclTree::cPerformer::ConnectorInstanceMap>(*cIns);
+
+                pcInsMap[path].insert(cIns);
+            }
+            else if (auto cIns = dynamic_cast<const chila::lib::node::NodeWithChildren*>(&node))
+            {
+                loadPCInsMap(pcInsMap, *cIns);
+            }
+        }
+    }
+
+    void FileLoader::MOD_ACTION_SIG(requestFlowNodes)
+    {
+        PathSet walkedNodes;
+        PCInsMap pcInsMap;
+
+        fnMap.clear();
+
+        // Loads 'pcInsMap'
+        loadPCInsMap(pcInsMap, globalNsp);
+
+        // Goes through all the flow instances marked for display
+        for (const auto &cInsPath : flowCInstances)
+        {
+            auto &node = getCInstance(cInsPath);
+            auto nodePath = node.path();
+
+
+            auto fnPath = cclTree::getGroupedPath<cclTree::cPerformer::ConnectorInstanceGroup,
+                    cclTree::cPerformer::ConnectorInstanceMap>(node).getStringRep(":");
+
+
+            flowNodeFound
+            (
+                fnPath,
+                nodePath,
+                str_stream(fnPath),
+                true,
+                eventExecuter
+            );
+
+            walkFlowNodes(fnPath, node, walkedNodes, getCInstancesHLNodes(flowCInstancesDim), pcInsMap, eventExecuter);
+        }
+
+        execute_event(noMoreFlowNodes)();
+    }
 
     void FileLoader::walkFlowNodes(const clMisc::Path &flowNodePath,
                                    const cclTree::cPerformer::ConnectorInstance &cInstance,
                                    PathSet &walkedNodes,
                                    const CInstanceSet &flowCInstancesDimNodes,
+                                   const PCInsMap &pcInsMap,
                                    ev_executer_arg(requestFlowNodes))
     {
         for (auto &eventCall : cInstance.events())
@@ -1280,7 +1306,7 @@ MY_NSP_START
             );
 
             if (inserted)
-                walkFlowNodes(fnPath, eventCall, walkedNodes, flowCInstancesDimNodes, eventExecuter);
+                walkFlowNodes(fnPath, eventCall, walkedNodes, flowCInstancesDimNodes, pcInsMap, eventExecuter);
         }
     }
 
@@ -1301,6 +1327,7 @@ MY_NSP_START
                                    const cclTree::cPerformer::EventCall &evCall,
                                    PathSet &walkedNodes,
                                    const CInstanceSet &flowCInstancesDimNodes,
+                                   const PCInsMap &pcInsMap,
                                    ev_executer_arg(requestFlowNodes))
     {
         for (auto &actionIns : evCall.actions())
@@ -1330,7 +1357,7 @@ MY_NSP_START
                 eventExecuter
             );
 
-            walkFlowNodes(fnPath, actionIns, walkedNodes, flowCInstancesDimNodes, eventExecuter);
+            walkFlowNodes(fnPath, actionIns, walkedNodes, flowCInstancesDimNodes, pcInsMap, eventExecuter);
         }
     }
 
@@ -1338,6 +1365,7 @@ MY_NSP_START
                                    const cclTree::cPerformer::ActionInstance &aInstance,
                                    PathSet &walkedNodes,
                                    const CInstanceSet &flowCInstancesDimNodes,
+                                   const PCInsMap &pcInsMap,
                                    ev_executer_arg(requestFlowNodes))
     {
         using EvRefMap = std::map<std::string, const cclTree::connector::EventRef*>;
@@ -1349,56 +1377,60 @@ MY_NSP_START
             my_assert(evRefMap.insert({evRef.name(), &evRef}).second);
         }
 
-        // Goes through the events of the connector instance
-        for (auto &evCall : aInstance.connInstance().referenced().events())
-        {
-            auto it = evRefMap.find(evCall.name());
-
-            if (it != evRefMap.end())
+        // Goes through all the action instances conceptually referenced by the 'aInstance'
+        auto it = pcInsMap.find(aInstance.connInstance().value);
+        assert(it != pcInsMap.end());
+        for (auto cInstance : it->second)
+            // Goes through the events of the connector instance
+            for (auto &evCall : cInstance->events())
             {
-                auto &connEv = it->second->referenced();
+                auto it = evRefMap.find(evCall.name());
 
-                auto id = evCall.name();
-                auto fnPath = flowNodePath + id;
-                auto nodePath = evCall.path();
-                auto inserted = InsWalkedFNode(nodePath, walkedNodes);
-                auto hasActions = inserted && !evCall.actions().empty();
-                auto insDesc = inserted ? (evCall.description().value.empty() ? connEv.description().value : evCall.description().value) : "";
+                if (it != evRefMap.end())
+                {
+                    auto &connEv = it->second->referenced();
 
-                flowNodeFound
-                (
-                    fnPath,
-                    nodePath,
-                    str_stream(mu_fcolor(MU_DRED, "[event] " << id << (inserted ? " " : "... ")) << writeDesc(insDesc)),
-                    hasActions,
-                    eventExecuter
-                );
+                    auto id = evCall.name();
+                    auto fnPath = flowNodePath + id;
+                    auto nodePath = evCall.path();
+                    auto inserted = InsWalkedFNode(nodePath, walkedNodes);
+                    auto hasActions = inserted && !evCall.actions().empty();
+                    auto insDesc = inserted ? (evCall.description().value.empty() ? connEv.description().value : evCall.description().value) : "";
 
-                // Removes the walked event
-                evRefMap.erase(it);
+                    flowNodeFound
+                    (
+                        fnPath,
+                        nodePath,
+                        str_stream(mu_fcolor(MU_DRED, "[event] " << id << (inserted ? " " : "... ")) << writeDesc(insDesc)),
+                        hasActions,
+                        eventExecuter
+                    );
 
-                // If the event was not walked, do it
-                if (inserted)
-                    walkFlowNodes(fnPath, evCall, walkedNodes, flowCInstancesDimNodes, eventExecuter);
+                    // Removes the walked event
+                    evRefMap.erase(it);
+
+                    // If the event was not walked, do it
+                    if (inserted)
+                        walkFlowNodes(fnPath, evCall, walkedNodes, flowCInstancesDimNodes, pcInsMap, eventExecuter);
+                }
             }
-        }
 
-//        // Adds the remaining events
-//        for (auto &vt : evRefMap)
-//        {
-//            auto &event = *vt.second;
-//            auto id = event.name();
-//            auto fnPath = flowNodePath + id;
-//
-//            flowNodeFound
-//            (
-//                fnPath,
-//                event.path(),
-//                str_stream(mu_fcolor(MU_LRED, "[event]" << " " << id)),
-//                false,
-//                eventExecuter
-//            );
-//        }
+        // Adds the remaining events
+        for (auto &vt : evRefMap)
+        {
+            auto &event = *vt.second;
+            auto id = event.name();
+            auto fnPath = flowNodePath + id;
+
+            flowNodeFound
+            (
+                fnPath,
+                event.path(),
+                str_stream(mu_fcolor(MU_LRED, "[event]" << " " << id)),
+                false,
+                eventExecuter
+            );
+        }
     }
 
     void FileLoader::flowNodeFound(const clMisc::Path &flowNodePath,
