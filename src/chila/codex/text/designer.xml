@@ -26,12 +26,9 @@
 
     <flowCInstances>
         <start>
-            <flowCInstance path="chila.codex.base.app.connectors.gen.ConnectionPerformer.base:actionExecuter"/>
-            <flowCInstance path="chila.codex.base.app.connectors.gen.ConnectionPerformer.base:mainWindow"/>
-
-            <flowCInstance path="chila.codex.text.app.connectors.gen.ConnectionPerformer.base:actionExecuter"/>
-            <flowCInstance path="chila.codex.text.app.connectors.gen.ConnectionPerformer.base:mainWindow"/>
-            <flowCInstance path="chila.codex.text.app.connectors.gen.ConnectionPerformer.text:actionExecuter"/>
+            <flowCInstance path="base.actionExecuter"/>
+            <flowCInstance path="base.mainWindow"/>
+            <flowCInstance path="text.actionExecuter"/>
         </start>
 
         <dim>
