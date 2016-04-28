@@ -1255,26 +1255,24 @@ MY_NSP_START
         loadPCInsMap(pcInsMap, globalNsp);
 
         // Goes through all the flow instances marked for display
-        for (const auto &cInsPath : flowCInstances)
+        for (auto &cInsPath : flowCInstances)
         {
-            auto &node = getCInstance(cInsPath);
-            auto nodePath = node.path();
+            auto fnPath = cInsPath.getStringRep(":");
 
+            // Goes through all the connector instances conceptually referenced by the instance
+            for (auto cIns : getCInstances(pcInsMap, cInsPath))
+            {
+                flowNodeFound
+                (
+                    fnPath,
+                    cIns->path(),
+                    str_stream(cInsPath),
+                    true,
+                    eventExecuter
+                );
 
-            auto fnPath = cclTree::getGroupedPath<cclTree::cPerformer::ConnectorInstanceGroup,
-                    cclTree::cPerformer::ConnectorInstanceMap>(node).getStringRep(":");
-
-
-            flowNodeFound
-            (
-                fnPath,
-                nodePath,
-                str_stream(fnPath),
-                true,
-                eventExecuter
-            );
-
-            walkFlowNodes(fnPath, node, walkedNodes, getCInstancesHLNodes(flowCInstancesDim), pcInsMap, eventExecuter);
+                walkFlowNodes(fnPath, *cIns, walkedNodes, getCInstancesHLNodes(flowCInstancesDim), pcInsMap, eventExecuter);
+            }
         }
 
         execute_event(noMoreFlowNodes)();
@@ -1361,6 +1359,14 @@ MY_NSP_START
         }
     }
 
+    const FileLoader::CInsSet &FileLoader::getCInstances(const PCInsMap &pcInsMap, const clMisc::Path &path) const
+    {
+        auto it = pcInsMap.find(path);
+        assert(it != pcInsMap.end());
+        return it->second;
+    }
+
+
     void FileLoader::walkFlowNodes(const clMisc::Path &flowNodePath,
                                    const cclTree::cPerformer::ActionInstance &aInstance,
                                    PathSet &walkedNodes,
@@ -1378,9 +1384,7 @@ MY_NSP_START
         }
 
         // Goes through all the action instances conceptually referenced by the 'aInstance'
-        auto it = pcInsMap.find(aInstance.connInstance().value);
-        assert(it != pcInsMap.end());
-        for (auto cInstance : it->second)
+        for (auto cInstance : getCInstances(pcInsMap, aInstance.connInstance().value))
             // Goes through the events of the connector instance
             for (auto &evCall : cInstance->events())
             {

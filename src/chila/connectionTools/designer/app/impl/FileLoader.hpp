@@ -290,6 +290,8 @@ MY_NSP_START
                 const Map & map);
 
             void loadPCInsMap(PCInsMap &pcInsMap, const chila::lib::node::NodeWithChildren &root) const;
+
+            const CInsSet &getCInstances(const PCInsMap &pcInsMap, const clMisc::Path &path) const;
     };
 }
 MY_NSP_END
