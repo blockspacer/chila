@@ -1229,6 +1229,32 @@ MY_NSP_START
         execute_event(noMoreFlowNodes)();
     }
 
+    struct FileLoader::InsWalkedFNode
+    {
+        PathSet &walkedNodes;
+        std::pair<PathSet::iterator, bool> insRet;
+        clMisc::Path nodePath;
+
+        InsWalkedFNode(const clMisc::Path &nodePath, PathSet &walkedNodes) :
+            walkedNodes(walkedNodes),
+            nodePath(nodePath),
+            insRet(walkedNodes.insert(nodePath))
+        {
+        }
+
+        operator bool() const
+        {
+            return insRet.second;
+        }
+
+        ~InsWalkedFNode()
+        {
+            if (insRet.second)
+                walkedNodes.erase(insRet.first);
+        }
+    };
+
+
     void FileLoader::walkFlowNodes(const clMisc::Path &flowNodePath,
                                    const cclTree::cPerformer::ConnectorInstance &cInstance,
                                    PathSet &walkedNodes,
@@ -1240,7 +1266,7 @@ MY_NSP_START
             auto id = eventCall.name();
             auto nodePath = eventCall.path();
             auto fnPath = flowNodePath + id;
-            auto inserted = insertWalkedFNode(fnPath, nodePath, walkedNodes);
+            auto inserted = InsWalkedFNode(nodePath, walkedNodes);
             auto hasActions = inserted && !eventCall.actions().empty();
             auto insDesc = inserted ? eventCall.description().value : "";
 
@@ -1248,7 +1274,7 @@ MY_NSP_START
             (
                 fnPath,
                 eventCall.path(),
-                str_stream(mu_fcolor(MU_DRED, "[event]" << " " << id << (inserted ? " " : "... ") << writeDesc(insDesc))),
+                str_stream(mu_fcolor(MU_DRED, "[event] " << id << (inserted ? " " : "... ") << writeDesc(insDesc))),
                 hasActions,
                 eventExecuter
             );
@@ -1308,13 +1334,6 @@ MY_NSP_START
         }
     }
 
-    bool FileLoader::insertWalkedFNode(const clMisc::Path &flowNodePath, const clMisc::Path &nodePath, PathSet &walkedNodes)
-    {
-        auto it = fNodesToExpand.find(nodePath);
-
-        return (it == fNodesToExpand.end() || it->second == flowNodePath) && walkedNodes.insert(nodePath).second;
-    }
-
     void FileLoader::walkFlowNodes(const clMisc::Path &flowNodePath,
                                    const cclTree::cPerformer::ActionInstance &aInstance,
                                    PathSet &walkedNodes,
@@ -1324,11 +1343,13 @@ MY_NSP_START
         using EvRefMap = std::map<std::string, const cclTree::connector::EventRef*>;
         EvRefMap evRefMap;
 
+        // Inserts the allowed events by the action
         for (auto &evRef : aInstance.action().referenced().events())
         {
             my_assert(evRefMap.insert({evRef.name(), &evRef}).second);
         }
 
+        // Goes through the events of the connector instance
         for (auto &evCall : aInstance.connInstance().referenced().events())
         {
             auto it = evRefMap.find(evCall.name());
@@ -1340,7 +1361,7 @@ MY_NSP_START
                 auto id = evCall.name();
                 auto fnPath = flowNodePath + id;
                 auto nodePath = evCall.path();
-                auto inserted = insertWalkedFNode(fnPath, nodePath, walkedNodes);
+                auto inserted = InsWalkedFNode(nodePath, walkedNodes);
                 auto hasActions = inserted && !evCall.actions().empty();
                 auto insDesc = inserted ? (evCall.description().value.empty() ? connEv.description().value : evCall.description().value) : "";
 
@@ -1348,33 +1369,36 @@ MY_NSP_START
                 (
                     fnPath,
                     nodePath,
-                    str_stream(mu_fcolor(MU_DRED, "[event]" << " " << id << (inserted ? " " : "... ")) << writeDesc(insDesc)),
+                    str_stream(mu_fcolor(MU_DRED, "[event] " << id << (inserted ? " " : "... ")) << writeDesc(insDesc)),
                     hasActions,
                     eventExecuter
                 );
 
+                // Removes the walked event
                 evRefMap.erase(it);
 
+                // If the event was not walked, do it
                 if (inserted)
                     walkFlowNodes(fnPath, evCall, walkedNodes, flowCInstancesDimNodes, eventExecuter);
             }
         }
 
-        for (auto &vt : evRefMap)
-        {
-            auto &event = *vt.second;
-            auto id = event.name();
-            auto fnPath = flowNodePath + id;
-
-            flowNodeFound
-            (
-                fnPath,
-                event.path(),
-                str_stream(mu_fcolor(MU_LRED, "[event]" << " " << id)),
-                false,
-                eventExecuter
-            );
-        }
+//        // Adds the remaining events
+//        for (auto &vt : evRefMap)
+//        {
+//            auto &event = *vt.second;
+//            auto id = event.name();
+//            auto fnPath = flowNodePath + id;
+//
+//            flowNodeFound
+//            (
+//                fnPath,
+//                event.path(),
+//                str_stream(mu_fcolor(MU_LRED, "[event]" << " " << id)),
+//                false,
+//                eventExecuter
+//            );
+//        }
     }
 
     void FileLoader::flowNodeFound(const clMisc::Path &flowNodePath,

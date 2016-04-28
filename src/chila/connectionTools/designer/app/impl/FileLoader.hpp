@@ -89,6 +89,8 @@ MY_NSP_START
        private:
             static constexpr unsigned descLimit = 80;
 
+            struct InsWalkedFNode;
+
             using CInstanceSet = std::set<const cclTree::cPerformer::ConnectorInstance*>;
             using FlowNodesMap = std::map<clMisc::Path, clMisc::Path>;
             FlowNodesMap fnMap;
@@ -254,8 +256,6 @@ MY_NSP_START
                 const ArgRefMap &args,
                 const std::string &desc,
                 ev_executer_arg(showFNodeInfo));
-
-            bool insertWalkedFNode(const clMisc::Path &flowNodePath, const clMisc::Path &nodePath, PathSet &walkedNodes);
 
             CInstanceSet getCInstancesHLNodes(const ClmPathSet &paths);
 
