@@ -39,7 +39,7 @@ MY_NSP_START
                 template <typename CastedTypeRef, typename Iterator>
                 CastedTypeRef cast(const Iterator &it) const
                 {
-                    return dynamic_cast<CastedTypeRef>(*(*it)->second);
+                    return **it;
                 }
             };
 

@@ -620,7 +620,6 @@ MY_NSP_START
             actionMap->addAction<lib::actions::GoToReferenced>();
         }
 
-
         execute_event(actionListFound)(nodePath, actionMap);
     }
 
