@@ -838,20 +838,25 @@ MY_NSP_START
         return CInsVec(sorted.begin(), sorted.end());
     }
 
-    clMisc::Path getGroupedFullPath(const chila::lib::node::Node &element)
+    clMisc::Path getGroupedFullPath(const chila::lib::node::Node &node)
     {
-        clMisc::Path ret = element.name();
+        clMisc::Path ret;
 
-        for (auto curr = &element; curr; curr = curr->parentPtr(), ret = curr->name() + ret)
+        for (auto curr = &node; curr; curr = curr->parentPtr())
         {
-            if (auto map = curr->toTypePtr<chila::lib::node::NodeMap>())
+            std::string toAdd = curr->name();
+
+            while (auto parentMap = curr->parentPtr<chila::lib::node::NodeMap>())
             {
-                if (auto parent = map->parentPtr())
+                if (auto parentGroup = parentMap->parentPtr<Group>())
                 {
-                    if (parent->toTypePtr<Group>())
-                        curr = parent;
+                    toAdd = dynamic_cast<const chila::lib::node::Node&>(*parentGroup).name() + ":" + toAdd;
+                    curr = curr->parentPtr()->parentPtr();
                 }
+                else break;
             }
+
+            ret = toAdd + ret;
         }
 
         return ret;
