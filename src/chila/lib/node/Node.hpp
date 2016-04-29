@@ -31,10 +31,12 @@ MY_NSP_START
             const std::string &name() const { return _name; }
 
             /** Returns the parent. */
-            NodeWithChildren *parentPtr() { return _parent; }
+            template <typename Derived = NodeWithChildren>
+            Derived *parentPtr() { return dynamic_cast<Derived*>(_parent); }
 
             /** Returns the parent. */
-            const NodeWithChildren *parentPtr() const { return _parent; }
+            template <typename Derived = NodeWithChildren>
+            const Derived *parentPtr() const { return dynamic_cast<const Derived*>(_parent); }
 
             /** Returns the parent. */
             template <typename Derived = NodeWithChildren>
