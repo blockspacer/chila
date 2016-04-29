@@ -36,6 +36,9 @@
         \
         CHILA_META_NODE__DEF_STRUCT_NODE(Name##Group, (Name##Base)(Element)(virtual chila::lib::node::IContainerOfTyped)(virtual Group), \
             ( \
+                using ElementType = Name; \
+                using MapType = Name##Map; \
+                \
                 bool canTakeChildFrom(chila::lib::node::IContainerOfTyped &from) const override { return elements().canTakeChildFrom(from); } \
                 chila::lib::node::Node &takeChild(chila::lib::node::IContainerOfTyped &from, const std::string &name) override \
                 { \

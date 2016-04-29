@@ -134,6 +134,7 @@ MY_NSP_START
         }
     }
 
+    clMisc::Path getGroupedFullPath(const chila::lib::node::Node &element);
 
     inline std::string getImplName(const std::string &groupQualName)
     {

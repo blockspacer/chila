@@ -837,5 +837,24 @@ MY_NSP_START
 
         return CInsVec(sorted.begin(), sorted.end());
     }
+
+    clMisc::Path getGroupedFullPath(const chila::lib::node::Node &element)
+    {
+        clMisc::Path ret = element.name();
+
+        for (auto curr = &element; curr; curr = curr->parentPtr(), ret = curr->name() + ret)
+        {
+            if (auto map = curr->toTypePtr<chila::lib::node::NodeMap>())
+            {
+                if (auto parent = map->parentPtr())
+                {
+                    if (parent->toTypePtr<Group>())
+                        curr = parent;
+                }
+            }
+        }
+
+        return ret;
+    }
 }
 MY_NSP_END
