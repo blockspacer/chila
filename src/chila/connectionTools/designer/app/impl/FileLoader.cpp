@@ -1226,7 +1226,7 @@ MY_NSP_START
         }
     };
 
-    void FileLoader::loadPCInsMap(PCInsMap &pcInsMap, const chila::lib::node::NodeWithChildren &root) const
+    void FileLoader::loadPCInsMap(const chila::lib::node::NodeWithChildren &root)
     {
         for (auto &node : root)
         {
@@ -1239,7 +1239,7 @@ MY_NSP_START
             }
             else if (auto cIns = dynamic_cast<const chila::lib::node::NodeWithChildren*>(&node))
             {
-                loadPCInsMap(pcInsMap, *cIns);
+                loadPCInsMap(*cIns);
             }
         }
     }
@@ -1247,12 +1247,13 @@ MY_NSP_START
     void FileLoader::MOD_ACTION_SIG(requestFlowNodes)
     {
         PathSet walkedNodes;
-        PCInsMap pcInsMap;
+
 
         fnMap.clear();
 
         // Loads 'pcInsMap'
-        loadPCInsMap(pcInsMap, globalNsp);
+        pcInsMap.clear();
+        loadPCInsMap(globalNsp);
 
         // Goes through all the flow instances marked for display
         for (auto &cInsPath : flowCInstances)
@@ -1260,7 +1261,7 @@ MY_NSP_START
             auto fnPath = cInsPath.getStringRep(":");
 
             // Goes through all the connector instances conceptually referenced by the instance
-            for (auto cIns : getCInstances(pcInsMap, cInsPath))
+            for (auto cIns : getCInstances(cInsPath))
             {
                 flowNodeFound
                 (
@@ -1271,7 +1272,7 @@ MY_NSP_START
                     eventExecuter
                 );
 
-                walkFlowNodes(fnPath, *cIns, walkedNodes, getCInstancesHLNodes(flowCInstancesDim), pcInsMap, eventExecuter);
+                walkFlowNodes(fnPath, *cIns, walkedNodes, getCInstancesHLNodes(flowCInstancesDim), eventExecuter);
             }
         }
 
@@ -1282,7 +1283,6 @@ MY_NSP_START
                                    const cclTree::cPerformer::ConnectorInstance &cInstance,
                                    PathSet &walkedNodes,
                                    const CInstanceSet &flowCInstancesDimNodes,
-                                   const PCInsMap &pcInsMap,
                                    ev_executer_arg(requestFlowNodes))
     {
         for (auto &eventCall : cInstance.events())
@@ -1304,7 +1304,7 @@ MY_NSP_START
             );
 
             if (inserted)
-                walkFlowNodes(fnPath, eventCall, walkedNodes, flowCInstancesDimNodes, pcInsMap, eventExecuter);
+                walkFlowNodes(fnPath, eventCall, walkedNodes, flowCInstancesDimNodes, eventExecuter);
         }
     }
 
@@ -1325,7 +1325,6 @@ MY_NSP_START
                                    const cclTree::cPerformer::EventCall &evCall,
                                    PathSet &walkedNodes,
                                    const CInstanceSet &flowCInstancesDimNodes,
-                                   const PCInsMap &pcInsMap,
                                    ev_executer_arg(requestFlowNodes))
     {
         for (auto &actionIns : evCall.actions())
@@ -1355,23 +1354,29 @@ MY_NSP_START
                 eventExecuter
             );
 
-            walkFlowNodes(fnPath, actionIns, walkedNodes, flowCInstancesDimNodes, pcInsMap, eventExecuter);
+            walkFlowNodes(fnPath, actionIns, walkedNodes, flowCInstancesDimNodes, eventExecuter);
         }
     }
 
-    const FileLoader::CInsSet &FileLoader::getCInstances(const PCInsMap &pcInsMap, const clMisc::Path &path) const
+    const FileLoader::CInsSet &FileLoader::getCInstances(const clMisc::Path &path) const
     {
         auto it = pcInsMap.find(path);
         assert(it != pcInsMap.end());
         return it->second;
     }
 
+    const FileLoader::CInsSet &FileLoader::getCInstances(const cclTree::cPerformer::ConnectorInstance &cInstance) const
+    {
+        auto path = cclTree::getGroupedPath<cclTree::cPerformer::ConnectorInstanceGroup,
+            cclTree::cPerformer::ConnectorInstanceMap>(cInstance);
+
+        return getCInstances(path);
+    }
 
     void FileLoader::walkFlowNodes(const clMisc::Path &flowNodePath,
                                    const cclTree::cPerformer::ActionInstance &aInstance,
                                    PathSet &walkedNodes,
                                    const CInstanceSet &flowCInstancesDimNodes,
-                                   const PCInsMap &pcInsMap,
                                    ev_executer_arg(requestFlowNodes))
     {
         using EvRefMap = std::map<std::string, const cclTree::connector::EventRef*>;
@@ -1384,7 +1389,7 @@ MY_NSP_START
         }
 
         // Goes through all the action instances conceptually referenced by the 'aInstance'
-        for (auto cInstance : getCInstances(pcInsMap, aInstance.connInstance().value))
+        for (auto cInstance : getCInstances(aInstance.connInstance().value))
             // Goes through the events of the connector instance
             for (auto &evCall : cInstance->events())
             {
@@ -1415,7 +1420,7 @@ MY_NSP_START
 
                     // If the event was not walked, do it
                     if (inserted)
-                        walkFlowNodes(fnPath, evCall, walkedNodes, flowCInstancesDimNodes, pcInsMap, eventExecuter);
+                        walkFlowNodes(fnPath, evCall, walkedNodes, flowCInstancesDimNodes, eventExecuter);
                 }
             }
 
@@ -1469,9 +1474,13 @@ MY_NSP_START
         auto titleProps =  makeProps(TPBold());
         auto descProps = lib::TextPropertiesSPtr();
         auto noDescProps = makeProps(TPColor(70, 70, 70));
+        auto typeProps =  makeProps(TPBold(), TPColor(0, 0, 70));
 
-        auto showTitle = [&](const clMisc::Path &path, const std::string &title)
+        auto showTitle = [&](const std::string &kind, const clMisc::Path &path, const std::string &title)
         {
+            if (kind)
+                execute_event(outputText)(typeProps, "[" + kind + "] ");
+
             execute_event(outputText)(descProps, "- ");
             execute_event(outputText)(makeProps(titleProps, TPNPath(path)), title);
         };
@@ -1532,9 +1541,19 @@ MY_NSP_START
             auto &connAliasDesc = cAlias.description().value;
             auto connPathTitle = connector.path().getStringRep();
 
+            auto gPath = cclTree::getGroupedPath<cclTree::cPerformer::ConnectorInstanceGroup,
+                cclTree::cPerformer::ConnectorInstanceMap>(*typed);
 
-            showTitle(typed->path(),     typed->name()); showDesc(typed->description().value);
-            showTitle(cAlias.path(),     cAlias.name()); showDesc(connAliasDesc);
+            for (auto cInstance : getCInstances(gPath))
+            {
+                showTitle("cInstance",
+                          cInstance->path(),
+                          cInstance->parent().parent().parent().path().getStringRep() + "." + gPath.getStringRep(":"));
+
+                showDesc(cInstance->description().value);
+            }
+
+            showTitle(cAlias.path(),     cAlias.path().getStringRep()); showDesc(connAliasDesc);
             showTitle(connector.path(),  connPathTitle); showDesc(connDesc);
         }
         else if (auto *typed = dynamic_cast<const cclTree::connector::EventRef*>(&node))
@@ -1557,15 +1576,15 @@ MY_NSP_START
 
             auto &event = typed->referenced();
 
-            auto evCallTitle = cInstance.name() + "." + typed->name();
-            auto connEvTitle = cInstance.connAlias().value + "." + typed->name();
+            auto evCallTitle = cInstance.path().getStringRep() + "."+ typed->name();
+            auto connEvTitle = cInstance.connAlias().referenced().path().getStringRep() + "." + typed->name();
 
             showTitle(typed->path(),   evCallTitle);  showAliasedArgs(cInstance, event.arguments()); showDesc(typed->description().value);
             showTitle(typed->refPath(), connEvTitle); showArgs(event.arguments());                   showDesc(typed->referenced().description().value);
 
             for (auto &apc : typed->aProvCreators())
             {
-                showTitle(apc.path(), apc.name());
+                showTitle(apc.path(), apc.path().getStringRep());
                 showArgs(apc.referenced().requires());
                 execute_event(outputText)(descProps, " -> ");
                 showArgs(apc.referenced().provides());
@@ -1586,15 +1605,15 @@ MY_NSP_START
             auto &acInsDesc = typed->description().value;
             auto &connInsDesc = cInstance.description().value;
 
-            auto aInsTitle = cInstance.name() + "." + typed->action().value.getStringRep(":");
-            auto connAcTitle = cAlias.name() + "." + typed->action().value.getStringRep(":");
+            auto aInsTitle = cInstance.path().getStringRep() + "." + typed->action().value.getStringRep(":");
+            auto connAcTitle = cAlias.path().getStringRep() + "." + typed->action().value.getStringRep(":");
             auto connPathTitle = connector.path().getStringRep();
-            auto connInsTitle = cInstance.name();
+            auto connInsTitle = cInstance.path().getStringRep();
 
             showTitle(typed->path(),     aInsTitle);     showAliasedArgs(cInstance, connAction.arguments()); showDesc(acInsDesc);
             showTitle(cInstance.path(),  connInsTitle);                                                      showDesc(connInsDesc);
             showTitle(connAction.path(), connAcTitle);   showArgs(connAction.arguments());                   showDesc(connActionDesc);
-            showTitle(cAlias.path(),     cAlias.name());                                                     showDesc(connAliasDesc);
+            showTitle(cAlias.path(),     cAlias.path().getStringRep());                                      showDesc(connAliasDesc);
             showTitle(connector.path(),  connPathTitle);                                                     showDesc(connDesc);
         }
     }

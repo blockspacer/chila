@@ -102,6 +102,7 @@ MY_NSP_START
 
             using CInsSet = std::set<const cclTree::cPerformer::ConnectorInstance*>;
             using PCInsMap = std::map<clMisc::Path, CInsSet>;
+            PCInsMap pcInsMap;
 
             using ColorMap = std::map<boost::typeindex::type_index, std::string>;
             ColorMap colorMap;
@@ -228,21 +229,18 @@ MY_NSP_START
                                const cclTree::cPerformer::ConnectorInstance &cInstance,
                                PathSet &walkedNodes,
                                const CInstanceSet &flowCInstancesDimNodes,
-                               const PCInsMap &pcInsMap,
                                ev_executer_arg(requestFlowNodes));
 
             void walkFlowNodes(const clMisc::Path &flowNodePath,
                                const cclTree::cPerformer::EventCall &evCall,
                                PathSet &walkedNodes,
                                const CInstanceSet &flowCInstancesDimNodes,
-                               const PCInsMap &pcInsMap,
                                ev_executer_arg(requestFlowNodes));
 
             void walkFlowNodes(const clMisc::Path &flowNodePath,
                                const cclTree::cPerformer::ActionInstance &aInstance,
                                PathSet &walkedNodes,
                                const CInstanceSet &flowCInstancesDimNodes,
-                               const PCInsMap &pcInsMap,
                                ev_executer_arg(requestFlowNodes));
 
             void flowNodeFound(const clMisc::Path &flowNodePath,
@@ -289,9 +287,10 @@ MY_NSP_START
                 const clMisc::Path::const_iterator &pathEnd,
                 const Map & map);
 
-            void loadPCInsMap(PCInsMap &pcInsMap, const chila::lib::node::NodeWithChildren &root) const;
+            void loadPCInsMap(const chila::lib::node::NodeWithChildren &root);
 
-            const CInsSet &getCInstances(const PCInsMap &pcInsMap, const clMisc::Path &path) const;
+            const CInsSet &getCInstances(const clMisc::Path &path) const;
+            const CInsSet &getCInstances(const cclTree::cPerformer::ConnectorInstance &cInstance) const;
     };
 }
 MY_NSP_END
