@@ -291,6 +291,7 @@ MY_NSP_START
 
             const CInsSet &getCInstances(const clMisc::Path &path) const;
             const CInsSet &getCInstances(const cclTree::cPerformer::ConnectorInstance &cInstance) const;
+
     };
 }
 MY_NSP_END

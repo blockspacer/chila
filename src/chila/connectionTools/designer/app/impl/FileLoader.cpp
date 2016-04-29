@@ -1459,6 +1459,8 @@ MY_NSP_START
     }
 
 
+
+
     void FileLoader::MOD_ACTION_SIG(showFNodeInfo)
     {
         using TPColor = lib::textProperty::Color;
@@ -1478,12 +1480,12 @@ MY_NSP_START
 
         auto showTitle = [&](const std::string &kind, const clMisc::Path &path, const std::string &title)
         {
-            if (kind)
-                execute_event(outputText)(typeProps, "[" + kind + "] ");
+            if (!kind.empty())
+                execute_event(outputText)(typeProps, "- [" + kind + "] ");
 
-            execute_event(outputText)(descProps, "- ");
             execute_event(outputText)(makeProps(titleProps, TPNPath(path)), title);
         };
+
 
         auto showArgs = [&](const chila::lib::node::NodeWithChildren &args)
         {
@@ -1531,6 +1533,21 @@ MY_NSP_START
             }
         };
 
+        auto showNInfoCInstance = [&](const cclTree::cPerformer::ConnectorInstance &cInstance)
+        {
+            auto &cAlias = cInstance.connAlias().referenced();
+            auto &conn = cAlias.connector().referenced();
+            auto &connDesc = conn.description().value;
+            auto &connAliasDesc = cAlias.description().value;
+            auto &connInsDesc = cInstance.description().value;
+            auto connPathTitle = conn.path().getStringRep();
+            auto connInsTitle = cInstance.path().getStringRep();
+
+            showTitle("connInstance", cInstance.path(), connInsTitle);                  showDesc(connInsDesc);
+            showTitle("connAlias", cAlias.path(),       cAlias.path().getStringRep());  showDesc(connAliasDesc);
+            showTitle("connector", conn.path(),         connPathTitle);                 showDesc(connDesc);
+        };
+
         execute_event(clearOutput)();
         if (auto *typed = dynamic_cast<const cclTree::cPerformer::ConnectorInstance*>(&node))
         {
@@ -1546,15 +1563,15 @@ MY_NSP_START
 
             for (auto cInstance : getCInstances(gPath))
             {
-                showTitle("cInstance",
+                showTitle("connInstance",
                           cInstance->path(),
                           cInstance->parent().parent().parent().path().getStringRep() + "." + gPath.getStringRep(":"));
 
                 showDesc(cInstance->description().value);
             }
 
-            showTitle(cAlias.path(),     cAlias.path().getStringRep()); showDesc(connAliasDesc);
-            showTitle(connector.path(),  connPathTitle); showDesc(connDesc);
+            showTitle("connAlias", cAlias.path(),     cAlias.path().getStringRep()); showDesc(connAliasDesc);
+            showTitle("connector", connector.path(),  connPathTitle); showDesc(connDesc);
         }
         else if (auto *typed = dynamic_cast<const cclTree::connector::EventRef*>(&node))
         {
@@ -1565,7 +1582,7 @@ MY_NSP_START
 
             auto connEvTitle = connector.path().getStringRep() + "." + typed->name();
 
-            showTitle(typed->refPath(), connEvTitle);
+            showTitle("event", typed->refPath(), connEvTitle);
             showArgs(typed->referenced().arguments());
             showDesc(typed->referenced().description().value);
         }
@@ -1579,12 +1596,14 @@ MY_NSP_START
             auto evCallTitle = cInstance.path().getStringRep() + "."+ typed->name();
             auto connEvTitle = cInstance.connAlias().referenced().path().getStringRep() + "." + typed->name();
 
-            showTitle(typed->path(),   evCallTitle);  showAliasedArgs(cInstance, event.arguments()); showDesc(typed->description().value);
-            showTitle(typed->refPath(), connEvTitle); showArgs(event.arguments());                   showDesc(typed->referenced().description().value);
+            showTitle("evCall", typed->path(),   evCallTitle);  showAliasedArgs(cInstance, event.arguments()); showDesc(typed->description().value);
+            showTitle("event", typed->refPath(), connEvTitle); showArgs(event.arguments());                   showDesc(typed->referenced().description().value);
+
+            showNInfoCInstance(cInstance);
 
             for (auto &apc : typed->aProvCreators())
             {
-                showTitle(apc.path(), apc.path().getStringRep());
+                showTitle("apc", apc.path(), apc.path().getStringRep());
                 showArgs(apc.referenced().requires());
                 execute_event(outputText)(descProps, " -> ");
                 showArgs(apc.referenced().provides());
@@ -1595,29 +1614,21 @@ MY_NSP_START
         {
             auto &cInstance = typed->connInstance().referenced();
             auto &cAlias = cInstance.connAlias().referenced();
-            auto &connector = cAlias.connector().referenced();
 
             auto &connAction = typed->action().referenced();
 
-            auto &connDesc = connector.description().value;
-            auto &connAliasDesc = cAlias.description().value;
             auto &connActionDesc = connAction.description().value;
             auto &acInsDesc = typed->description().value;
-            auto &connInsDesc = cInstance.description().value;
 
             auto aInsTitle = cInstance.path().getStringRep() + "." + typed->action().value.getStringRep(":");
             auto connAcTitle = cAlias.path().getStringRep() + "." + typed->action().value.getStringRep(":");
-            auto connPathTitle = connector.path().getStringRep();
-            auto connInsTitle = cInstance.path().getStringRep();
 
-            showTitle(typed->path(),     aInsTitle);     showAliasedArgs(cInstance, connAction.arguments()); showDesc(acInsDesc);
-            showTitle(cInstance.path(),  connInsTitle);                                                      showDesc(connInsDesc);
-            showTitle(connAction.path(), connAcTitle);   showArgs(connAction.arguments());                   showDesc(connActionDesc);
-            showTitle(cAlias.path(),     cAlias.path().getStringRep());                                      showDesc(connAliasDesc);
-            showTitle(connector.path(),  connPathTitle);                                                     showDesc(connDesc);
+            showTitle("actionInstance", typed->path(),  aInsTitle);     showAliasedArgs(cInstance, connAction.arguments()); showDesc(acInsDesc);
+            showTitle("action", connAction.path(),      connAcTitle);   showArgs(connAction.arguments());                   showDesc(connActionDesc);
+
+            showNInfoCInstance(cInstance);
         }
     }
-
 
 #define if_cast_action(Type) \
         if (std::shared_ptr<Type> action = std::dynamic_pointer_cast<Type>(*actionsCursor))
