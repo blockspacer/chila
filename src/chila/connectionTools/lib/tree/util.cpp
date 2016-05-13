@@ -254,14 +254,26 @@ MY_NSP_START
                     add_element_wf(root, "argument", child)
                     {
                         child.set_attribute("name", arg.name());
-                        child.set_attribute("description", my_ipss_exp(xmlEscape(arg.description().value)));
                         child.set_attribute("unique", my_ipss_exp(clMisc::boolToText(arg.unique().value)));
+                        child.set_attribute("description", my_ipss_exp(xmlEscape(arg.description().value)));
                     });
                 });
         });
     }
 
-    template <typename Aliases>
+    template <typename Alias>
+    void printCPName(xmlpp::Element &childElem, const Alias &aliasRef, int)
+    {
+    }
+
+
+    template <typename Alias>
+    void printCPName(xmlpp::Element &childElem, const Alias &aliasRef, long)
+    {
+        childElem.set_attribute("cpName", chila::lib::misc::Path(aliasRef.cpRef().value).getStringRep(":"));
+    }
+
+    template <typename WithCPInt, typename Aliases>
     void printAliases(xmlpp::Element &root, const Aliases &aliases, const std::string &rootName, const std::string &childName, unsigned indent)
     {
         add_element_wf(root, rootName, rootElem)
@@ -271,28 +283,10 @@ MY_NSP_START
                 add_element_wf(rootElem, childName, childElem)
                 {
                     childElem.set_attribute("name", aliasRef.name());
-                    childElem.set_attribute("cpName", chila::lib::misc::Path(aliasRef.cpRef().value).getStringRep(":"));
+                    printCPName(childElem, aliasRef, WithCPInt{});
                     childElem.set_attribute("description", aliasRef.description().value);
                 });
             }
-        });
-    }
-
-    template <typename Alias, typename Group, typename Map>
-    void printAliasesGrouped(xmlpp::Element &root, const Map &aliases, const std::string &rootName, const std::string &childName, unsigned indent)
-    {
-        add_element_wf(root, rootName, rootElem)
-        {
-            sendToStreamGrouped<Group, Alias>(root, aliases, indent,
-                [childName](xmlpp::Element &root, const Alias &alias, unsigned indent)
-                {
-                    add_element_wf(root, childName, child)
-                    {
-                        child.set_attribute("name", alias.name());
-                        child.set_attribute("cpName", chila::lib::misc::Path(alias.cpRef().value).getStringRep(":"));
-                        child.set_attribute("description", alias.description().value);
-                     });
-                });
         });
     }
 
@@ -310,9 +304,9 @@ MY_NSP_START
                     cAliasElem.set_attribute("connectorPath", alias.connector().value.getStringRep());
                     cAliasElem.set_attribute("description", my_ipss_exp(xmlEscape(alias.description().value)));
 
-                    printAliases(cAliasElem, alias.argAliases(), "arguments", "argument", indent);
-                    printAliasesGrouped<cPerformer::EventAlias, cPerformer::EventAliasGroup>(cAliasElem, alias.eventAliases(), "events", "events", indent);
-                    printAliasesGrouped<cPerformer::ActionAlias, cPerformer::ActionAliasGroup>(cAliasElem, alias.actionAliases(), "actions", "actions", indent);
+                    printAliases<long>(cAliasElem, alias.argAliases(), "arguments", "argument", indent);
+                    printAliases<int>(cAliasElem, alias.eventAliases(), "events", "event", indent);
+                    printAliases<int>(cAliasElem, alias.actionAliases(), "actions", "action", indent);
                 });
             }
         });
@@ -360,7 +354,7 @@ MY_NSP_START
                             add_element_wf(instanceElem, "event", eventElem)
                             {
                                 eventElem.set_attribute("name", eventCall.name());
-                                eventElem.set_attribute("connectorAlias", my_ipss_exp(xmlEscape(eventCall.description().value)));
+                                eventElem.set_attribute("description", my_ipss_exp(xmlEscape(eventCall.description().value)));
 
                                 add_element_wf(eventElem, "aProviderCreators", apCreatorsElem)
                                 {
@@ -381,8 +375,8 @@ MY_NSP_START
                                         {
                                             actionElem.set_attribute("connector", action.connInstance().value.getStringRep(":"));
                                             actionElem.set_attribute("name", action.action().value.getStringRep(":"));
-                                            actionElem.set_attribute("description", my_ipss_exp(xmlEscape(action.description().value)));
                                             actionElem.set_attribute("determinesOrder", clMisc::boolToText(action.determinesOrder().value));
+                                            actionElem.set_attribute("description", my_ipss_exp(xmlEscape(action.description().value)));
                                         });
                                     }
                                 });
@@ -585,6 +579,16 @@ MY_NSP_START
         return ciMapPos<connector::ArgumentGroup>(cPerformer::CAArgAlias::base(node), noLeafFun);
     }
 
+    ValueVec posibilities(const cPerformer::EventAliasMap &node)
+    {
+        return ciMapPos<connector::EventGroup>(cPerformer::EventAlias::base(node), noLeafFun);
+    }
+
+    ValueVec posibilities(const cPerformer::ActionAliasMap &node)
+    {
+        return ciMapPos<connector::EventGroup>(cPerformer::ActionAlias::base(node), noLeafFun);
+    }
+
     ValueVec posibilities(const cPerformer::ArgRefVMap &node)
     {
         return ciMapPos<cPerformer::ArgumentGroup>(cPerformer::ArgRefV::base(node), noLeafFun);
@@ -662,6 +666,8 @@ MY_NSP_START
         ret_posibilites(connector::EventRefMap)
         ret_posibilites(cPerformer::CAArgAliasMap)
         ret_posibilites(cPerformer::CAArgAlias)
+        ret_posibilites(cPerformer::EventAliasMap)
+        ret_posibilites(cPerformer::ActionAliasMap)
         ret_posibilites(cPerformer::ArgRefVMap)
         ret_posibilites(cPerformer::APCRef)
         ret_posibilites(cPerformer::APCRefMap)
@@ -838,28 +844,50 @@ MY_NSP_START
         return CInsVec(sorted.begin(), sorted.end());
     }
 
+    clMisc::Path getGroupedPath(const chila::lib::node::Node &node)
+    {
+        clMisc::Path ret = node.name();
+        auto *curr = &node;
+        while (auto parentMap = curr->parentPtr<chila::lib::node::NodeMap>())
+        {
+            if (auto parentGroup = parentMap->parentPtr<Group>())
+            {
+                ret = dynamic_cast<const chila::lib::node::Node&>(*parentGroup).name() + ret;
+                curr = curr->parentPtr()->parentPtr();
+            }
+            else break;
+        }
+
+        return ret;
+    }
+
     clMisc::Path getGroupedFullPath(const chila::lib::node::Node &node)
     {
         clMisc::Path ret;
 
         for (auto curr = &node; curr; curr = curr->parentPtr())
         {
-            std::string toAdd = curr->name();
-
-            while (auto parentMap = curr->parentPtr<chila::lib::node::NodeMap>())
-            {
-                if (auto parentGroup = parentMap->parentPtr<Group>())
-                {
-                    toAdd = dynamic_cast<const chila::lib::node::Node&>(*parentGroup).name() + ":" + toAdd;
-                    curr = curr->parentPtr()->parentPtr();
-                }
-                else break;
-            }
-
-            ret = toAdd + ret;
+            ret = getGroupedPath(*curr) + ret;
         }
 
         return ret;
+    }
+
+    const cPerformer::EventAlias *getEventAlias(const cPerformer::EventCall &eventCall)
+    {
+        auto &cInstance = eventCall.parent<const cPerformer::EventCallMap>()
+                                   .parent<const cPerformer::ConnectorInstance>();
+
+        auto &connAlias = cInstance.connAlias().referenced();
+        auto gfPath = getGroupedPath(eventCall.referenced());
+        return connAlias.eventAliases().getPtr(gfPath.getStringRep(":"));
+    }
+
+    const cPerformer::ActionAlias *getActionAlias(const cPerformer::ActionInstance &actionIns)
+    {
+        auto &connAlias = actionIns.connInstance().referenced().connAlias().referenced();
+        auto gfPath = getGroupedPath(actionIns.action().referenced());
+        return connAlias.actionAliases().getPtr(gfPath.getStringRep(":"));
     }
 }
 MY_NSP_END

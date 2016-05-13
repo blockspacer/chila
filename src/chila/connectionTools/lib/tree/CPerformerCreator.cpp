@@ -85,17 +85,29 @@ MY_NSP_START
         });
     }
 
-    template <typename Alias, typename AliasGroup, typename AliasMap>
+    template <typename AliasMap>
     void parseFunAliases(AliasMap &map, const xmlpp::Element &root, const std::string &elemStr)
     {
-        parseGrouped<AliasGroup>(map, root, "events",
-           [](AliasMap &map, const xmlpp::Element &element)
-           {
-               auto name = xmlppUtils::getAttribute<std::string>(element, "name");
-               auto aliasName = xmlppUtils::getAttribute<std::string>(element, "cpName");
-               map.template add<Alias>(name).cpRef().value = clMisc::Path(aliasName, ":");
-           });
+        xmlppUtils::iterateChildren(root, elemStr, [&](const xmlpp::Element &element)
+        {
+            auto name = xmlppUtils::getAttribute<std::string>(element, "name");
+            auto description = xmlppUtils::getAttribute<std::string>(element, "description");
+
+            map.add(name).description().value = description;
+        });
     }
+
+//    template <typename Alias, typename AliasGroup, typename AliasMap>
+//    void parseFunAliases(AliasMap &map, const xmlpp::Element &root, const std::string &elemStr)
+//    {
+//        parseGrouped<AliasGroup>(map, root, elemStr,
+//           [](AliasMap &map, const xmlpp::Element &element)
+//           {
+//               auto name = xmlppUtils::getAttribute<std::string>(element, "name");
+//               auto aliasName = xmlppUtils::getAttribute<std::string>(element, "cpName");
+//               map.template add<Alias>(name).cpRef().value = clMisc::Path(aliasName, ":");
+//           });
+//    }
 
     void CPerformerCreator::parseConnectorAliases(cPerformer::ConnectionPerformer &cPerf, const xmlpp::Element &aliasesElem)
     {
@@ -107,7 +119,7 @@ MY_NSP_START
 
                 auto &connectorAlias = cPerf.connectorAliases().add(aliasName);
 
-                connectorAlias.connector().value = xmlppUtils::getAttribute<std::string>(aliasElem, "connectorPath");
+                connectorAlias.connector().value = xmlppUtils::getAttribute<std::string>(aliasElem, "connectorPath", "");
                 connectorAlias.description().value = xmlppUtils::getAttribute<std::string>(aliasElem, "description", "");
 
                 auto &argElem = xmlppUtils::getUniqueChildElement(aliasElem, "arguments");
@@ -119,12 +131,8 @@ MY_NSP_START
                     connectorAlias.argAliases().add(name).cpRef().value = clMisc::Path(aliasName, ":");
                 });
 
-                parseFunAliases<cPerformer::EventAlias, cPerformer::EventAliasGroup>(connectorAlias.eventAliases(), eventsElem, "events");
-//
-//                parseAliases(actionsElem, "actions", [&](const std::string &name, const std::string &aliasName)
-//                {
-//                    connectorAlias.actionAliases().add(name).cpRef().value = clMisc::Path(aliasName, ":");;
-//                });
+                parseFunAliases(connectorAlias.eventAliases(), eventsElem, "event");
+                parseFunAliases(connectorAlias.actionAliases(), actionsElem, "action");
             }
             else chila::lib::xmlppUtils::throwException(chila::lib::xmlppUtils::InvalidTagName(), aliasElem);
         });
@@ -163,7 +171,7 @@ MY_NSP_START
         parseGrouped<cPerformer::ConnectorInstanceGroup>(cPerformer.connInstances(), instancesElem, "instance",
             [this](cPerformer::ConnectorInstanceMap &map, const xmlpp::Element &element)
             {
-                auto connAliasName = xmlppUtils::getAttribute<std::string>(element, "connectorAlias");
+                auto connAliasName = xmlppUtils::getAttribute<std::string>(element, "connectorAlias", "");
                 auto instanceName = xmlppUtils::getAttribute<std::string>(element, "name");
 
                 auto &connInstance = map.add<cPerformer::ConnectorInstance>(instanceName);

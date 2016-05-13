@@ -134,12 +134,8 @@ MY_NSP_START
         FWDEC_TYPE(CAEventRef);
         FWDEC_TYPE(CAActionRef);
         FWDEC_TYPE(EventAlias);
-        FWDEC_TYPE(EventAliasBase);
-        FWDEC_TYPE(EventAliasGroup);
         FWDEC_TYPE(EventAliasMap);
         FWDEC_TYPE(ActionAlias);
-        FWDEC_TYPE(ActionAliasBase);
-        FWDEC_TYPE(ActionAliasGroup);
         FWDEC_TYPE(ActionAliasMap);
         FWDEC_TYPE(EventCall);
         FWDEC_TYPE(EventCallMap);

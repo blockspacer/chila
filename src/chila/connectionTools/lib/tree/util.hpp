@@ -115,25 +115,6 @@ MY_NSP_START
         return lastNode->get(name).template toType<Element>();
     }
 
-    template <typename Group, typename Map, typename Element>
-    clMisc::Path getGroupedPath(const Element &element)
-    {
-        clMisc::Path ret = element.name();
-
-        auto *curr = &element.template parent<Map>();
-        while (true)
-        {
-            auto *parent = chila::lib::misc::checkNotNull(curr->parentPtr());
-
-            if (auto *tp = parent->template toTypePtr<Group>())
-            {
-                curr = &(tp->template parent<Map>());
-                ret = tp->name() + ret;
-            }
-            else return ret;
-        }
-    }
-
     clMisc::Path getGroupedFullPath(const chila::lib::node::Node &element);
 
     inline std::string getImplName(const std::string &groupQualName)
@@ -251,6 +232,12 @@ MY_NSP_START
             }
         });
     }
+
+    clMisc::Path getGroupedPath(const chila::lib::node::Node &node);
+
+    const cPerformer::EventAlias *getEventAlias(const cPerformer::EventCall &eventCall);
+    const cPerformer::ActionAlias *getActionAlias(const cPerformer::ActionInstance &actionIns);
+
 }
 MY_NSP_END
 

@@ -114,8 +114,8 @@ MY_NSP_START
         CHILA_META_NODE__DEF_VECTOR_OF_TYPED(ActionInstanceVec, ActionInstance);
 
         DEF_BASE_MAP_GROUP(Argument)
-        DEF_BASE_MAP_GROUP(EventAlias)
-        DEF_BASE_MAP_GROUP(ActionAlias)
+        CHILA_META_NODE__DEF_MAP_OF_TYPED(EventAliasMap, EventAlias,);
+        CHILA_META_NODE__DEF_MAP_OF_TYPED(ActionAliasMap, ActionAlias,);
 
         CHILA_META_NODE__DEF_STRUCT_NODE(Argument, (ArgumentBase)(Element), (),
             ((Boolean)(unique))
@@ -123,9 +123,6 @@ MY_NSP_START
 
         CHILA_META_NODE__DEF_REFERENCE_VNODE(ArgRefV, Argument, ArgumentMap);
         CHILA_META_NODE__DEF_REFERENCE_TNODE(ArgRefT, chila::lib::misc::Path, Argument, ArgumentMap);
-
-        CHILA_META_NODE__DEF_REFERENCE_TNODE(CAEventRef, std::string, connector::Event, connector::EventMap);
-        CHILA_META_NODE__DEF_REFERENCE_TNODE(CAActionRef, std::string, connector::Action, connector::ActionMap);
 
         CHILA_META_NODE__DEF_STRUCT_NODE(CAArgAlias, (Element)(Reference<connector::Argument>),
             (
@@ -135,12 +132,18 @@ MY_NSP_START
             ((ArgRefT)(cpRef))
         );
 
-        CHILA_META_NODE__DEF_STRUCT_NODE(EventAlias, (EventAliasBase)(Element), (),
-            ((CAEventRef)(cpRef))
+        CHILA_META_NODE__DEF_STRUCT_NODE(EventAlias, (Element)(Reference<connector::Event>),
+            (
+                REF_METHODS(connector::EventMap)
+                CHILA_META_NODE__DEF_CHECK_BASES((Reference<connector::Event>)(NodeWithChildren), 0)
+            ),
         );
 
-        CHILA_META_NODE__DEF_STRUCT_NODE(ActionAlias, (ActionAliasBase)(Element), (),
-            ((CAActionRef)(cpRef))
+        CHILA_META_NODE__DEF_STRUCT_NODE(ActionAlias, (Element)(Reference<connector::Action>),
+            (
+                REF_METHODS(connector::ActionMap)
+                CHILA_META_NODE__DEF_CHECK_BASES((Reference<connector::Action>)(NodeWithChildren), 0)
+            ),
         );
 
         // TODO The check of this node is not being called

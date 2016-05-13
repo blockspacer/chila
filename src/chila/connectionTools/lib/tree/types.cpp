@@ -8,6 +8,7 @@
 #include <chila/lib/misc/util.hpp>
 #include <type_traits>
 #include "util.hpp"
+#include <boost/make_unique.hpp>
 
 #include "nspDef.hpp"
 
@@ -165,37 +166,37 @@ MY_NSP_START
 
         def_referenced_grouped(CAArgAlias, parent<CAArgAliasMap>(), connector::ArgumentGroup, clMisc::Path(name(), ":"))
 
-        // CAEventRef --------------------------------------------------------------------------------------------------------
-        connector::EventMap &CAEventRef::base(Node &ref)
+        // EventAlias --------------------------------------------------------------------------------------------------------
+        connector::EventMap &EventAlias::base(Node &ref)
         {
             return ref.parent<ConnectorAlias>()
                       .connector().referenced().events();
         }
 
 
-        const connector::EventMap &CAEventRef::base(const Node &ref)
+        const connector::EventMap &EventAlias::base(const Node &ref)
         {
             return ref.parent<ConnectorAlias>()
                       .connector().referenced().events();
         }
 
-        def_referenced_grouped(CAEventRef, parent<EventAliasMap>(), connector::EventGroup, clMisc::Path(name(), ":"))
+        def_referenced_grouped(EventAlias, parent<EventAliasMap>(), connector::EventGroup, clMisc::Path(name(), ":"))
 
         // ActionAlias --------------------------------------------------------------------------------------------------------
-        connector::ActionMap &CAActionRef::base(Node &ref)
+        connector::ActionMap &ActionAlias::base(Node &ref)
         {
             return ref.parent<ConnectorAlias>()
                       .connector().referenced().actions();
         }
 
 
-        const connector::ActionMap &CAActionRef::base(const Node &ref)
+        const connector::ActionMap &ActionAlias::base(const Node &ref)
         {
             return ref.parent<ConnectorAlias>()
                       .connector().referenced().actions();
         }
 
-        def_referenced_grouped(CAActionRef, parent<ActionAliasMap>(), connector::ActionGroup, name())
+        def_referenced_grouped(ActionAlias, parent<ActionAliasMap>(), connector::ActionGroup, clMisc::Path(name(), ":"))
 
         // ConnectorRef --------------------------------------------------------------------------------------------------------
         Namespace &ConnectorRef::base(Node &ref)
