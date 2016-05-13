@@ -3,6 +3,7 @@
  */
 
 #include "FileLoader.hpp"
+#include <boost/range/adaptor/reversed.hpp>
 #include <chila/connectionTools/lib/tree/types.hpp>
 #include <chila/connectionTools/lib/tree/util.hpp>
 #include <chila/lib/misc/SinkInserter.hpp>
@@ -1484,7 +1485,9 @@ MY_NSP_START
     {
         using TPColor = lib::textProperty::Color;
         using TPBold = lib::textProperty::Bold;
+        using TPUnder = lib::textProperty::Underline;
         using TPNPath = lib::textProperty::NodePath;
+        using TPScale = lib::textProperty::Scale;
 
         auto it = fnMap.find(nodePath);
         assert(it != fnMap.end());
@@ -1498,7 +1501,12 @@ MY_NSP_START
         auto noDescProps = makeProps(TPColor(70, 70, 70));
         auto typeProps =  makeProps(TPBold(), TPColor(0, 0, 70));
 
-        auto showTitle = [&](const std::string &kind, const clMisc::Path &path, const std::string &title)
+        auto showTitle = [&](const std::string &title)
+        {
+            execute_event(outputText)(makeProps(titleProps, TPUnder()), title + ":\n");
+        };
+
+        auto showSubTitle = [&](const std::string &kind, const clMisc::Path &path, const std::string &title)
         {
             if (!kind.empty())
                 execute_event(outputText)(typeProps, "- [" + kind + "] ");
@@ -1566,9 +1574,9 @@ MY_NSP_START
             auto connPathTitle = conn.path().getStringRep();
             auto connInsTitle = cclTree::getGroupedFullPath(cInstance).getStringRep();
 
-            showTitle("connInstance", cInstance.path(), connInsTitle);                  showDesc(connInsDesc);
-            showTitle("connAlias", cAlias.path(),       cAlias.path().getStringRep());  showDesc(connAliasDesc);
-            showTitle("connector", conn.path(),         connPathTitle);                 showDesc(connDesc);
+            showSubTitle("connInstance", cInstance.path(), connInsTitle);                  showDesc(connInsDesc);
+            showSubTitle("connAlias", cAlias.path(),       cAlias.path().getStringRep());  showDesc(connAliasDesc);
+            showSubTitle("connector", conn.path(),         connPathTitle);                 showDesc(connDesc);
         };
 
         execute_event(clearOutput)();
@@ -1581,9 +1589,13 @@ MY_NSP_START
 
             auto gPath = cclTree::getGroupedPath(*typed);
 
-            for (auto cInstance : getCInstances(gPath))
+            auto cInstances = getCInstances(gPath);
+            unsigned cInd = cInstances.size();
+            for (auto cInstance : cInstances | boost::adaptors::reversed)
             {
-                showTitle("connInstance",
+                showTitle("Instance " + boost::lexical_cast<std::string>(--cInd));
+
+                showSubTitle("connInstance",
                           cInstance->path(),
                           cInstance->parent().parent().parent().path().getStringRep() + "." + gPath.getStringRep(":"));
 
@@ -1591,10 +1603,11 @@ MY_NSP_START
 
                 auto &cAlias = cInstance->connAlias().referenced();
                 auto &connAliasDesc = cAlias.description().value;
-                showTitle("connAlias", cAlias.path(),     cAlias.path().getStringRep()); showDesc(connAliasDesc);
+                showSubTitle("connAlias", cAlias.path(),     cAlias.path().getStringRep()); showDesc(connAliasDesc);
             }
 
-            showTitle("connector", connector.path(),  connPathTitle); showDesc(connDesc);
+            showTitle("Global");
+            showSubTitle("connector", connector.path(),  connPathTitle); showDesc(connDesc);
         }
         else if (auto *typed = dynamic_cast<const cclTree::connector::EventRef*>(&node))
         {
@@ -1605,7 +1618,7 @@ MY_NSP_START
 
             auto connEvTitle = cclTree::getGroupedFullPath(*typed).getStringRep();
 
-            showTitle("event", typed->refPath(), connEvTitle);
+            showSubTitle("event", typed->refPath(), connEvTitle);
             showArgs(typed->referenced().arguments());
             showDesc(typed->referenced().description().value);
         }
@@ -1619,14 +1632,14 @@ MY_NSP_START
             auto evCallTitle = cclTree::getGroupedFullPath(*typed).getStringRep();
             auto connEvTitle = cclTree::getGroupedFullPath(typed->referenced()).getStringRep();
 
-            showTitle("evCall", typed->path(),   evCallTitle);  showAliasedArgs(cInstance, event.arguments()); showDesc(typed->description().value);
-            showTitle("event", typed->refPath(), connEvTitle); showArgs(event.arguments());                   showDesc(typed->referenced().description().value);
+            showSubTitle("evCall", typed->path(),   evCallTitle); showAliasedArgs(cInstance, event.arguments()); showDesc(typed->description().value);
+            showSubTitle("event", typed->refPath(), connEvTitle); showArgs(event.arguments());                   showDesc(typed->referenced().description().value);
 
             showNInfoCInstance(cInstance);
 
             for (auto &apc : typed->aProvCreators())
             {
-                showTitle("apc", apc.path(), apc.path().getStringRep());
+                showSubTitle("apc", apc.path(), apc.path().getStringRep());
                 showArgs(apc.referenced().requires());
                 execute_event(outputText)(descProps, " -> ");
                 showArgs(apc.referenced().provides());
@@ -1646,8 +1659,8 @@ MY_NSP_START
             auto aInsTitle = cclTree::getGroupedFullPath(*typed).getStringRep();
             auto connAcTitle = cclTree::getGroupedFullPath(typed->action().referenced()).getStringRep();
 
-            showTitle("actionInstance", typed->path(),  aInsTitle);     showAliasedArgs(cInstance, connAction.arguments()); showDesc(acInsDesc);
-            showTitle("action", connAction.path(),      connAcTitle);   showArgs(connAction.arguments());                   showDesc(connActionDesc);
+            showSubTitle("actionInstance", typed->path(),  aInsTitle);     showAliasedArgs(cInstance, connAction.arguments()); showDesc(acInsDesc);
+            showSubTitle("action", connAction.path(),      connAcTitle);   showArgs(connAction.arguments());                   showDesc(connActionDesc);
 
             showNInfoCInstance(cInstance);
         }

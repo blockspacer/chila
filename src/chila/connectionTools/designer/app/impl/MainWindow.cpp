@@ -681,6 +681,10 @@ MY_NSP_START
                 {
                     tag->property_weight() = Pango::WEIGHT_BOLD;
                 }
+                else if (auto *typed = dynamic_cast<const lib::textProperty::Scale*>(prop.get()))
+                {
+                    tag->property_scale() = typed->scale;
+                }
             }
 
             buffer->get_tag_table()->add(tag);
