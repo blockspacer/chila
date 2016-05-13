@@ -1503,7 +1503,7 @@ MY_NSP_START
 
         auto showTitle = [&](const std::string &title)
         {
-            execute_event(outputText)(makeProps(titleProps, TPUnder()), title + ":\n");
+            execute_event(outputText)(makeProps(titleProps, TPUnder()), title + "\n");
         };
 
         auto showSubTitle = [&](const std::string &kind, const clMisc::Path &path, const std::string &title)
@@ -1548,15 +1548,15 @@ MY_NSP_START
 
         auto showDesc = [&](const std::string &desc)
         {
-            execute_event(outputText)(titleProps, ": \n");
+            execute_event(outputText)(titleProps, ": ");
 
             if (desc.empty())
-                execute_event(outputText)(noDescProps, "  (no description)\n\n");
+                execute_event(outputText)(noDescProps, "(no description)\n\n");
             else
             {
                 clMisc::tokenize(desc, "\n", [&](const std::string &token)
                 {
-                    execute_event(outputText)(descProps, "  " + token + "\n");
+                    execute_event(outputText)(descProps, token + "\n");
                     return true;
                 });
 
@@ -1570,10 +1570,10 @@ MY_NSP_START
             auto &conn = cAlias.connector().referenced();
             auto &connAliasDesc = cAlias.description().value;
             auto &connInsDesc = cInstance.description().value;
-            auto connInsTitle = cclTree::getGroupedFullPath(cInstance).getStringRep();
+            auto connInsTitle = cclTree::getGroupedPath(cInstance).getStringRep(":");
 
-            showSubTitle("connInstance", cInstance.path(), connInsTitle);                  showDesc(connInsDesc);
-            showSubTitle("connAlias", cAlias.path(),       cAlias.path().getStringRep());  showDesc(connAliasDesc);
+            showSubTitle("connInstance", cInstance.path(), connInsTitle);   showDesc(connInsDesc);
+            showSubTitle("connAlias", cAlias.path(),       cAlias.name());  showDesc(connAliasDesc);
         };
 
         auto showNInfoConnector = [&](const cclTree::cPerformer::ConnectorInstance &cInstance)
@@ -1581,7 +1581,7 @@ MY_NSP_START
             auto &cAlias = cInstance.connAlias().referenced();
             auto &conn = cAlias.connector().referenced();
             auto &connDesc = conn.description().value;
-            auto connPathTitle = cclTree::getGroupedFullPath(conn).getStringRep();
+            auto connPathTitle = cclTree::getGroupedPath(conn).getStringRep(":");
 
             showSubTitle("connector", conn.path(), connPathTitle);
             showDesc(connDesc);
@@ -1620,21 +1620,25 @@ MY_NSP_START
         {
             auto &cInstance = typed->parent<cclTree::cPerformer::EventCallMap>()
                                     .parent<cclTree::cPerformer::ConnectorInstance>();
+            auto &conn = cInstance.connAlias().referenced().connector().referenced();
+            auto connTitle = cclTree::getGroupedFullPath(conn).getStringRep(":");
 
             auto &event = typed->referenced();
 
-            auto evCallTitle = cclTree::getGroupedFullPath(*typed).getStringRep();
-            auto connEvTitle = cclTree::getGroupedFullPath(typed->referenced()).getStringRep();
+            auto connEvTitle = cclTree::getGroupedPath(typed->referenced()).getStringRep();
 
             auto igPath = cclTree::getGroupedPath(cInstance);
 
             auto cInstances = getCInstances(igPath);
-            unsigned cInd = cInstances.size();
             for (auto cIns : cInstances | boost::adaptors::reversed)
             {
+                auto cInsPathGPath = cclTree::getGroupedFullPath(*cIns).getStringRep();
+
                 if (auto *evCall = cIns->events().getPtr(typed->name()))
                 {
-                    showTitle("Instance " + boost::lexical_cast<std::string>(--cInd));
+                    auto evCallTitle = evCall->name();
+
+                    showTitle(cInsPathGPath);
 
                     showSubTitle("evCall", evCall->path(),   evCallTitle);
                     showAliasedArgs(*cIns, event.arguments());
@@ -1644,7 +1648,7 @@ MY_NSP_START
                 }
             }
 
-            showTitle("Global");
+            showTitle(connTitle);
 
             showSubTitle("event", event.path(), connEvTitle);
             showArgs(event.arguments());
