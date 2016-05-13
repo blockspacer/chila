@@ -390,6 +390,65 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
             );
         }
 
+        // base_actionExecuter_file_open -------------------------------------------------------------------------------------------
+        struct Tag_base_actionExecuter_file_open {};
+
+        template
+        <
+            typename Action_text_textEditor_newEditor
+        >
+        struct Ex_base_actionExecuter_file_open
+        {
+            typedef void result_type;
+
+            const Action_text_textEditor_newEditor &act_text_textEditor_newEditor;
+
+            Ex_base_actionExecuter_file_open
+            (
+                const Action_text_textEditor_newEditor &act_text_textEditor_newEditor
+            ) :
+                act_text_textEditor_newEditor(act_text_textEditor_newEditor)
+            {}
+
+            void operator()
+            (
+            ) const
+            {
+                // Arguments -----------------------------------------------------------------
+
+                // Providers -----------------------------------------------------------------
+                // Actions -------------------------------------------------------------------
+                // text_textEditor.actions.newEditor
+                EXECUTE_ACTION
+                (
+                    text_textEditor, newEditor,
+                );
+
+            }
+        };
+
+        template
+<
+            typename Action_text_textEditor_newEditor
+        >
+        inline static Ex_base_actionExecuter_file_open
+        <
+            Action_text_textEditor_newEditor
+        >
+        ex_base_actionExecuter_file_open
+        (
+            const Action_text_textEditor_newEditor &act_text_textEditor_newEditor
+        )
+        {
+            return Ex_base_actionExecuter_file_open
+            <
+                Action_text_textEditor_newEditor
+            >
+            (
+                act_text_textEditor_newEditor
+            );
+        }
+
         // base_mainWindow_notebook_closingTab -------------------------------------------------------------------------------------
         struct Tag_base_mainWindow_notebook_closingTab {};
 
@@ -2931,6 +2990,10 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,text,app,connectors,gen))
             cInstances.base_actionExecuter.events.file_close.addFun(ex_base_actionExecuter_file_close
             (
                 cInstances.text_textEditor.actions.closingSelectedEditor
+            ));
+            cInstances.base_actionExecuter.events.file_open.addFun(ex_base_actionExecuter_file_open
+            (
+                cInstances.text_textEditor.actions.newEditor
             ));
         }
 
