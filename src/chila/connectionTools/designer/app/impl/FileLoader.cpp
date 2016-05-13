@@ -1568,15 +1568,23 @@ MY_NSP_START
         {
             auto &cAlias = cInstance.connAlias().referenced();
             auto &conn = cAlias.connector().referenced();
-            auto &connDesc = conn.description().value;
             auto &connAliasDesc = cAlias.description().value;
             auto &connInsDesc = cInstance.description().value;
-            auto connPathTitle = conn.path().getStringRep();
             auto connInsTitle = cclTree::getGroupedFullPath(cInstance).getStringRep();
 
             showSubTitle("connInstance", cInstance.path(), connInsTitle);                  showDesc(connInsDesc);
             showSubTitle("connAlias", cAlias.path(),       cAlias.path().getStringRep());  showDesc(connAliasDesc);
-            showSubTitle("connector", conn.path(),         connPathTitle);                 showDesc(connDesc);
+        };
+
+        auto showNInfoConnector = [&](const cclTree::cPerformer::ConnectorInstance &cInstance)
+        {
+            auto &cAlias = cInstance.connAlias().referenced();
+            auto &conn = cAlias.connector().referenced();
+            auto &connDesc = conn.description().value;
+            auto connPathTitle = conn.path().getStringRep();
+
+            showSubTitle("connector", conn.path(), connPathTitle);
+            showDesc(connDesc);
         };
 
         execute_event(clearOutput)();
@@ -1588,22 +1596,13 @@ MY_NSP_START
             auto connPathTitle = conn.path().getStringRep();
 
             auto gPath = cclTree::getGroupedPath(*typed);
-
             auto cInstances = getCInstances(gPath);
             unsigned cInd = cInstances.size();
             for (auto cInstance : cInstances | boost::adaptors::reversed)
             {
                 showTitle("Instance " + boost::lexical_cast<std::string>(--cInd));
 
-                showSubTitle("connInstance",
-                          cInstance->path(),
-                          cInstance->parent().parent().parent().path().getStringRep() + "." + gPath.getStringRep(":"));
-
-                showDesc(cInstance->description().value);
-
-                auto &cAlias = cInstance->connAlias().referenced();
-                auto &connAliasDesc = cAlias.description().value;
-                showSubTitle("connAlias", cAlias.path(),     cAlias.path().getStringRep()); showDesc(connAliasDesc);
+                showNInfoCInstance(*cInstance);
             }
 
             showTitle("Global");
@@ -1611,11 +1610,6 @@ MY_NSP_START
         }
         else if (auto *typed = dynamic_cast<const cclTree::connector::EventRef*>(&node))
         {
-            auto &connector = typed->parent<cclTree::connector::EventRefMap>()
-                                    .parent<cclTree::connector::Action>()
-                                    .parent<cclTree::connector::ActionMap>()
-                                    .parent<cclTree::connector::Connector>();
-
             auto connEvTitle = cclTree::getGroupedFullPath(*typed).getStringRep();
 
             showSubTitle("event", typed->refPath(), connEvTitle);
@@ -1632,10 +1626,29 @@ MY_NSP_START
             auto evCallTitle = cclTree::getGroupedFullPath(*typed).getStringRep();
             auto connEvTitle = cclTree::getGroupedFullPath(typed->referenced()).getStringRep();
 
-            showSubTitle("evCall", typed->path(),   evCallTitle); showAliasedArgs(cInstance, event.arguments()); showDesc(typed->description().value);
-            showSubTitle("event", typed->refPath(), connEvTitle); showArgs(event.arguments());                   showDesc(typed->referenced().description().value);
+            auto igPath = cclTree::getGroupedPath(cInstance);
 
-            showNInfoCInstance(cInstance);
+            auto cInstances = getCInstances(igPath);
+            unsigned cInd = cInstances.size();
+            for (auto cIns : cInstances | boost::adaptors::reversed)
+            {
+                auto &evCall = cIns->events().get(typed->name());
+
+                showTitle("Instance " + boost::lexical_cast<std::string>(--cInd));
+
+                showSubTitle("evCall", evCall.path(),   evCallTitle);
+                showAliasedArgs(*cIns, event.arguments());
+                showDesc(evCall.description().value);
+
+                showSubTitle("event", evCall.refPath(), connEvTitle);
+                showArgs(event.arguments());
+                showDesc(evCall.referenced().description().value);
+
+                showNInfoCInstance(*cIns);
+            }
+
+            showTitle("Global");
+            showNInfoConnector(cInstance);
 
             for (auto &apc : typed->aProvCreators())
             {
