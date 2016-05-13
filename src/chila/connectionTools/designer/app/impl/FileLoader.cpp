@@ -1593,20 +1593,19 @@ MY_NSP_START
             auto &conn = typed->connAlias().referenced().connector().referenced();
 
             auto &connDesc = conn.description().value;
-            auto connPathTitle = cclTree::getGroupedFullPath(conn).getStringRep();
+            auto connPathTitle = cclTree::getGroupedPath(conn).getStringRep(":");
 
             auto gPath = cclTree::getGroupedPath(*typed);
             auto cInstances = getCInstances(gPath);
             unsigned cInd = cInstances.size();
             for (auto cInstance : cInstances | boost::adaptors::reversed)
             {
-                showTitle("Instance " + boost::lexical_cast<std::string>(--cInd));
-
+                showTitle(cclTree::getGroupedFullPath(*cInstance).getStringRep());
                 showNInfoCInstance(*cInstance);
             }
 
-            showTitle("Global");
-            showSubTitle("connector", connector.path(),  connPathTitle); showDesc(connDesc);
+            showTitle(cclTree::getGroupedFullPath(conn).getStringRep());
+            showNInfoConnector(*typed);
         }
         else if (auto *typed = dynamic_cast<const cclTree::connector::EventRef*>(&node))
         {
