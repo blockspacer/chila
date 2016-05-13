@@ -42,7 +42,7 @@ macros = clmUtil.nspMacrosFF(__file__) + \
             ['cast_load_action_np_typed(Type, Action)',' \
                     node_if_dcast(const Type, &node) \
                     { \
-                        actionMap->addAction<lib::actions::Action>(); \
+                        actionMap->addAction<lib::actions::Action>().current = typedNode->value; \
                     }'],
 
             ['cast_load_actions_cont(Type, ContSuffix)',' \

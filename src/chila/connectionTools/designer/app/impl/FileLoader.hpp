@@ -63,7 +63,6 @@ MY_NSP_START
             void MOD_ACTION_SIG(loadCPerformer);
             void MOD_ACTION_SIG(loadConnector);
             void MOD_ACTION_SIG(refreshTree);
-//            void MOD_ACTION_SIG(nextNode);
 
             void MOD_ACTION_SIG(performAction);
 
@@ -100,8 +99,8 @@ MY_NSP_START
 
             ClmPathSet flowCInstancesDim;
 
-            using CInsSet = std::set<const cclTree::cPerformer::ConnectorInstance*>;
-            using PCInsMap = std::map<clMisc::Path, CInsSet>;
+            using CInsVec = std::vector<const cclTree::cPerformer::ConnectorInstance*>;
+            using PCInsMap = std::map<clMisc::Path, CInsVec>;
             PCInsMap pcInsMap;
 
             using ColorMap = std::map<boost::typeindex::type_index, std::string>;
@@ -190,6 +189,8 @@ MY_NSP_START
 
             using PathSet = std::set<clMisc::Path>;
 
+            using EvRefMap = std::map<std::string, const cclTree::connector::EventRef*>;
+
             clMisc::Path cutPathFrom;
 
             template <typename EventExecuter>
@@ -225,11 +226,12 @@ MY_NSP_START
             template <typename EventExecuter>
             void removeChildren(cclTree::NodeWithChildren &parent, const EventExecuter &eventExecuter);
 
-            void walkFlowNodes(const clMisc::Path &flowNodePath,
-                               const cclTree::cPerformer::ConnectorInstance &cInstance,
-                               PathSet &walkedNodes,
-                               const CInstanceSet &flowCInstancesDimNodes,
-                               ev_executer_arg(requestFlowNodes));
+//            void walkFlowNodes(const clMisc::Path &flowNodePath,
+//                               const cclTree::cPerformer::ConnectorInstance &cInstance,
+//                               const CInsVec &cInsVec,
+//                               PathSet &walkedNodes,
+//                               const CInstanceSet &flowCInstancesDimNodes,
+//                               ev_executer_arg(requestFlowNodes));
 
             void walkFlowNodes(const clMisc::Path &flowNodePath,
                                const cclTree::cPerformer::EventCall &evCall,
@@ -281,16 +283,17 @@ MY_NSP_START
 
             void markModified(const clMisc::Path &nodePath);
 
-            template <typename Group, typename Instance, typename Map>
-            clMisc::Path getPathPortion(
-                clMisc::Path::const_iterator &pathIt,
-                const clMisc::Path::const_iterator &pathEnd,
-                const Map & map);
-
             void loadPCInsMap(const chila::lib::node::NodeWithChildren &root);
 
-            const CInsSet &getCInstances(const clMisc::Path &path) const;
-            const CInsSet &getCInstances(const cclTree::cPerformer::ConnectorInstance &cInstance) const;
+            const CInsVec &getCInstances(const clMisc::Path &path) const;
+            const CInsVec &getCInstances(const cclTree::cPerformer::ConnectorInstance &cInstance) const;
+
+            void walkEvCallFNode(const cclTree::cPerformer::EventCall &evCall,
+                                 const clMisc::Path &flowNodePath,
+                                 PathSet &walkedNodes,
+                                 const CInstanceSet &flowCInstancesDimNodes,
+                                 const CInsVec &cInsVec,
+                                 ev_executer_arg(requestFlowNodes));
 
     };
 }

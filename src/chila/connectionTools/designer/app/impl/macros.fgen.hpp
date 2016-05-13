@@ -138,7 +138,7 @@
                              node_if_dcast(const Type, &node)                     {                         loadAction<lib::actions::Action>(*actionMap, node);                     }
 
     #define cast_load_action_np_typed(Type, Action) \
-                             node_if_dcast(const Type, &node)                     {                         actionMap->addAction<lib::actions::Action>();                     }
+                             node_if_dcast(const Type, &node)                     {                         actionMap->addAction<lib::actions::Action>().current = typedNode->value;                     }
 
     #define cast_load_actions_cont(Type, ContSuffix) \
                              node_if_dcast(const Type##ContSuffix, &node)                     {                         loadContainerOfTyped(*actionMap, node);                     }                     else node_if_dcast(const Type, &node)                     {                         actionMap->addAction<lib::actions::Remove>();                         actionMap->addAction<lib::actions::MoveUp>();                         actionMap->addAction<lib::actions::MoveDown>();                         actionMap->addAction<lib::actions::Cut>();                     }
