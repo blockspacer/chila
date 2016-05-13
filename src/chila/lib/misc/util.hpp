@@ -598,6 +598,22 @@ MY_NSP_START
         }
     }
 
+    template <typename Type>
+    inline const std::string &getNonEmpty(const Type &arg)
+    {
+        return arg;
+    }
+
+    template <typename Type, typename... Types>
+    inline const std::string &getNonEmpty(const Type &arg, const Types& ...args)
+    {
+        if (arg.empty())
+            return getNonEmpty(args...);
+        else
+            return arg;
+    }
+
+
 }
 MY_NSP_END
 

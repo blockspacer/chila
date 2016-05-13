@@ -32,6 +32,7 @@ MY_NSP_START
             using const_iterator = StringVec::const_iterator;
 
             Path() {}
+            Path(const_iterator begin, const_iterator end) : names(begin, end) {}
             Path(const char *path, const std::string &sep = ".") { load(path, sep); }
             Path(const std::string &path, const std::string &sep = ".") { load(path, sep); }
             Path(const Path &rhs) = default;
