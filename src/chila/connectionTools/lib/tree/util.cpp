@@ -844,7 +844,7 @@ MY_NSP_START
         return CInsVec(sorted.begin(), sorted.end());
     }
 
-    clMisc::Path getGroupedPath(const chila::lib::node::Node &node)
+    std::pair<clMisc::Path, const chila::lib::node::Node*> getGroupedPathPrv(const chila::lib::node::Node &node)
     {
         clMisc::Path ret = node.name();
         auto *curr = &node;
@@ -858,7 +858,12 @@ MY_NSP_START
             else break;
         }
 
-        return ret;
+        return {ret, curr};
+    }
+
+    clMisc::Path getGroupedPath(const chila::lib::node::Node &node)
+    {
+        return getGroupedPathPrv(node).first;
     }
 
     clMisc::Path getGroupedFullPath(const chila::lib::node::Node &node)
@@ -867,7 +872,10 @@ MY_NSP_START
 
         for (auto curr = &node; curr; curr = curr->parentPtr())
         {
-            ret = getGroupedPath(*curr) + ret;
+            clMisc::Path gPath;
+
+            std::tie(gPath, curr) = getGroupedPathPrv(*curr);
+            ret = gPath.getStringRep(":") + ret;
         }
 
         return ret;
