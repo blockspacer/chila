@@ -30,6 +30,12 @@ MY_NSP_START
             Color(float red, float green, float blue) : red(red), green(green), blue(blue) {}
         };
 
+        struct Scale : public TextProperty
+        {
+            double scale;
+            Scale(double scale) : scale(scale) {}
+        };
+
         struct Bold : public TextProperty {};
         struct Italic : public TextProperty {};
         struct Underline : public TextProperty {};
