@@ -1581,7 +1581,7 @@ MY_NSP_START
             auto &cAlias = cInstance.connAlias().referenced();
             auto &conn = cAlias.connector().referenced();
             auto &connDesc = conn.description().value;
-            auto connPathTitle = conn.path().getStringRep();
+            auto connPathTitle = cclTree::getGroupedFullPath(conn).getStringRep();
 
             showSubTitle("connector", conn.path(), connPathTitle);
             showDesc(connDesc);
@@ -1593,7 +1593,7 @@ MY_NSP_START
             auto &conn = typed->connAlias().referenced().connector().referenced();
 
             auto &connDesc = conn.description().value;
-            auto connPathTitle = conn.path().getStringRep();
+            auto connPathTitle = cclTree::getGroupedFullPath(conn).getStringRep();
 
             auto gPath = cclTree::getGroupedPath(*typed);
             auto cInstances = getCInstances(gPath);
@@ -1632,27 +1632,29 @@ MY_NSP_START
             unsigned cInd = cInstances.size();
             for (auto cIns : cInstances | boost::adaptors::reversed)
             {
-                auto &evCall = cIns->events().get(typed->name());
+                if (auto *evCall = cIns->events().getPtr(typed->name()))
+                {
+                    showTitle("Instance " + boost::lexical_cast<std::string>(--cInd));
 
-                showTitle("Instance " + boost::lexical_cast<std::string>(--cInd));
+                    showSubTitle("evCall", evCall->path(),   evCallTitle);
+                    showAliasedArgs(*cIns, event.arguments());
+                    showDesc(evCall->description().value);
 
-                showSubTitle("evCall", evCall.path(),   evCallTitle);
-                showAliasedArgs(*cIns, event.arguments());
-                showDesc(evCall.description().value);
-
-                showSubTitle("event", evCall.refPath(), connEvTitle);
-                showArgs(event.arguments());
-                showDesc(evCall.referenced().description().value);
-
-                showNInfoCInstance(*cIns);
+                    showNInfoCInstance(*cIns);
+                }
             }
 
             showTitle("Global");
+
+            showSubTitle("event", event.path(), connEvTitle);
+            showArgs(event.arguments());
+            showDesc(event.description().value);
+
             showNInfoConnector(cInstance);
 
             for (auto &apc : typed->aProvCreators())
             {
-                showSubTitle("apc", apc.path(), apc.path().getStringRep());
+                showSubTitle("apc", apc.path(), cclTree::getGroupedFullPath(apc).getStringRep());
                 showArgs(apc.referenced().requires());
                 execute_event(outputText)(descProps, " -> ");
                 showArgs(apc.referenced().provides());
