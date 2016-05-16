@@ -1302,7 +1302,7 @@ MY_NSP_START
         auto inserted = InsWalkedFNode(nodePath, walkedNodes);
         auto hasActions = inserted && !evCall.actions().empty();
 
-        for (auto cIns : cInsVec)
+        for (auto cIns : cInsVec | boost::adaptors::reversed)
         {
             auto *eventAlias = cclTree::getEventAlias(evCall);
 
@@ -1329,21 +1329,6 @@ MY_NSP_START
             walkFlowNodes(fnPath, evCall, walkedNodes, flowCInstancesDimNodes, eventExecuter);
     }
 
-
-//    void FileLoader::walkFlowNodes(const clMisc::Path &flowNodePath,
-//                                   const cclTree::cPerformer::ConnectorInstance &cInstance,
-//                                   const CInsVec &cInsVec,
-//                                   PathSet &walkedNodes,
-//                                   const CInstanceSet &flowCInstancesDimNodes,
-//                                   ev_executer_arg(requestFlowNodes))
-//    {
-//        for (auto &eventCall : cInstance.events())
-//        {
-//
-//
-//            walkEvCallFNode(eventCall, flowNodePath, walkedNodes, flowCInstancesDimNodes, evCallDesc, evAliasDesc, eventExecuter);
-//        }
-//    }
 
     FileLoader::CInstanceSet FileLoader::getCInstancesHLNodes(const ClmPathSet &paths)
     {
@@ -1617,34 +1602,41 @@ MY_NSP_START
         }
         else if (auto *typed = dynamic_cast<const cclTree::cPerformer::EventCall*>(&node))
         {
-            auto &cInstance = typed->parent<cclTree::cPerformer::EventCallMap>()
+            auto &evCall = *typed;
+            auto &cInstance = evCall.parent<cclTree::cPerformer::EventCallMap>()
                                     .parent<cclTree::cPerformer::ConnectorInstance>();
             auto &conn = cInstance.connAlias().referenced().connector().referenced();
             auto connTitle = cclTree::getGroupedFullPath(conn).getStringRep(":");
+            auto evCallTitle = cclTree::getGroupedFullPath(evCall).getStringRep(":");
 
-            auto &event = typed->referenced();
+            auto &event = evCall.referenced();
 
-            auto connEvTitle = cclTree::getGroupedPath(typed->referenced()).getStringRep();
+            auto connEvTitle = cclTree::getGroupedPath(evCall.referenced()).getStringRep();
 
             auto igPath = cclTree::getGroupedPath(cInstance);
 
             auto cInstances = getCInstances(igPath);
             for (auto cIns : cInstances | boost::adaptors::reversed)
             {
-                auto cInsPathGPath = cclTree::getGroupedFullPath(*cIns).getStringRep();
+                auto cInsTitle = cclTree::getGroupedFullPath(*cIns).getStringRep();
 
-                if (auto *evCall = cIns->events().getPtr(typed->name()))
+                showTitle(cInsTitle);
+
+                if (auto *eCall = cIns->events().getPtr(evCall.name()))
                 {
-                    auto evCallTitle = evCall->name();
-
-                    showTitle(cInsPathGPath);
-
-                    showSubTitle("evCall", evCall->path(),   evCallTitle);
+                    showSubTitle("evCall", eCall->path(),   eCall->name());
                     showAliasedArgs(*cIns, event.arguments());
-                    showDesc(evCall->description().value);
+                    showDesc(eCall->description().value);
 
-                    showNInfoCInstance(*cIns);
+                    if (auto *evAlias = cclTree::getEventAlias(*eCall))
+                    {
+                        showSubTitle("evAlias", evAlias->path(), evAlias->name());
+                        showAliasedArgs(*cIns, event.arguments());
+                        showDesc(evAlias->description().value);
+                    }
                 }
+
+                showNInfoCInstance(*cIns);
             }
 
             showTitle(connTitle);
@@ -1655,7 +1647,7 @@ MY_NSP_START
 
             showNInfoConnector(cInstance);
 
-            for (auto &apc : typed->aProvCreators())
+            for (auto &apc : evCall.aProvCreators())
             {
                 showSubTitle("apc", apc.path(), cclTree::getGroupedFullPath(apc).getStringRep());
                 showArgs(apc.referenced().requires());
@@ -1666,21 +1658,43 @@ MY_NSP_START
         }
         else if (auto *typed = dynamic_cast<const cclTree::cPerformer::ActionInstance*>(&node))
         {
-            auto &cInstance = typed->connInstance().referenced();
-            auto &cAlias = cInstance.connAlias().referenced();
-
-            auto &connAction = typed->action().referenced();
-
-            auto &connActionDesc = connAction.description().value;
-            auto &acInsDesc = typed->description().value;
-
-            auto aInsTitle = cclTree::getGroupedFullPath(*typed).getStringRep();
-            auto connAcTitle = cclTree::getGroupedFullPath(typed->action().referenced()).getStringRep();
-
-            showSubTitle("actionInstance", typed->path(),  aInsTitle);     showAliasedArgs(cInstance, connAction.arguments()); showDesc(acInsDesc);
-            showSubTitle("action", connAction.path(),      connAcTitle);   showArgs(connAction.arguments());                   showDesc(connActionDesc);
-
-            showNInfoCInstance(cInstance);
+//            auto &cInstance = typed->connInstance().referenced();
+//            auto &cAlias = cInstance.connAlias().referenced();
+//
+//            auto &connAction = typed->action().referenced();
+//
+//            auto &connActionDesc = connAction.description().value;
+//            auto &acInsDesc = typed->description().value;
+//
+//            auto aInsTitle = cclTree::getGroupedFullPath(*typed).getStringRep();
+//            auto connAcTitle = cclTree::getGroupedFullPath(typed->action().referenced()).getStringRep();
+//
+//            showSubTitle("actionInstance", typed->path(),  aInsTitle);
+//            showAliasedArgs(cInstance, connAction.arguments()); showDesc(acInsDesc);
+//
+//            auto igPath = cclTree::getGroupedPath(cInstance);
+//            auto cInstances = getCInstances(igPath);
+//            for (auto cIns : cInstances | boost::adaptors::reversed)
+//            {
+//                auto cInsPathGPath = cclTree::getGroupedFullPath(*cIns).getStringRep();
+//
+//                if (auto *aIns = cIns->actions().getPtr(typed->name()))
+//                {
+//                    auto evCallTitle = evCall->name();
+//
+//                    showTitle(cInsPathGPath);
+//
+//                    showSubTitle("action", evCall->path(),   evCallTitle);
+//                    showAliasedArgs(*cIns, event.arguments());
+//                    showDesc(evCall->description().value);
+//
+//                    showNInfoCInstance(*cIns);
+//                }
+//            }
+//
+//            showSubTitle("action", connAction.path(),      connAcTitle);   showArgs(connAction.arguments());                   showDesc(connActionDesc);
+//
+//            showNInfoCInstance(cInstance);
         }
     }
 
