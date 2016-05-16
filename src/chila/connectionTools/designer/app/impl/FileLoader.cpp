@@ -824,9 +824,6 @@ MY_NSP_START
         {
             try
             {
-                CHILA_LIB_MISC__SHOW(40, nodePath);
-                CHILA_LIB_MISC__SHOW(40, value);
-
                 bptr_cast(lib::actions::GoToReferenced, action)
                 {
                     auto dNodePath = tPathMap.getNodePath(nodePath);
@@ -846,10 +843,7 @@ MY_NSP_START
                     auto &dNodePath = tPathMap.getNodePath(nodePath);
                     auto &node = globalNsp.find(dNodePath);
 
-                    CHILA_LIB_MISC__SHOW(40, value);
-
                     setNodeValue(dNodePath + "description", value, eventExecuter);
-//                    refreshDesignTreeAndMM(dNodePath, eventExecuter);
                     execute_event(valueFound)(nodePath, getValueFor(node));
                 }
                 else bptr_cast(lib::actions::SetValue, action)
