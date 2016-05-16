@@ -1658,43 +1658,39 @@ MY_NSP_START
         }
         else if (auto *typed = dynamic_cast<const cclTree::cPerformer::ActionInstance*>(&node))
         {
-//            auto &cInstance = typed->connInstance().referenced();
-//            auto &cAlias = cInstance.connAlias().referenced();
-//
-//            auto &connAction = typed->action().referenced();
-//
-//            auto &connActionDesc = connAction.description().value;
-//            auto &acInsDesc = typed->description().value;
-//
-//            auto aInsTitle = cclTree::getGroupedFullPath(*typed).getStringRep();
-//            auto connAcTitle = cclTree::getGroupedFullPath(typed->action().referenced()).getStringRep();
-//
-//            showSubTitle("actionInstance", typed->path(),  aInsTitle);
-//            showAliasedArgs(cInstance, connAction.arguments()); showDesc(acInsDesc);
-//
-//            auto igPath = cclTree::getGroupedPath(cInstance);
-//            auto cInstances = getCInstances(igPath);
-//            for (auto cIns : cInstances | boost::adaptors::reversed)
-//            {
-//                auto cInsPathGPath = cclTree::getGroupedFullPath(*cIns).getStringRep();
-//
-//                if (auto *aIns = cIns->actions().getPtr(typed->name()))
-//                {
-//                    auto evCallTitle = evCall->name();
-//
-//                    showTitle(cInsPathGPath);
-//
-//                    showSubTitle("action", evCall->path(),   evCallTitle);
-//                    showAliasedArgs(*cIns, event.arguments());
-//                    showDesc(evCall->description().value);
-//
-//                    showNInfoCInstance(*cIns);
-//                }
-//            }
-//
-//            showSubTitle("action", connAction.path(),      connAcTitle);   showArgs(connAction.arguments());                   showDesc(connActionDesc);
-//
-//            showNInfoCInstance(cInstance);
+            auto &aIns = *typed;
+            auto &cInstance = aIns.connInstance().referenced();
+            auto &action = aIns.action().referenced();
+
+            auto &actionDesc = action.description().value;
+            auto &acInsDesc = aIns.description().value;
+
+            auto aInsTitle = cclTree::getGroupedFullPath(aIns).getStringRep();
+            auto connAcTitle = cclTree::getGroupedFullPath(aIns.action().referenced()).getStringRep();
+
+            showSubTitle("actionInstance", aIns.path(),  aInsTitle);
+            showAliasedArgs(cInstance, action.arguments());
+            showDesc(acInsDesc);
+
+
+            auto igPath = cclTree::getGroupedPath(cInstance);
+
+            auto cInstances = getCInstances(igPath);
+            for (auto cIns : cInstances | boost::adaptors::reversed)
+            {
+                if (auto *acAlias = cclTree::getActionAlias(*cIns, aIns))
+                {
+                    showSubTitle("acAlias", acAlias->path(), getGroupedFullPath(*acAlias).getStringRep());
+                    showAliasedArgs(*cIns, action.arguments());
+                    showDesc(acAlias->description().value);
+                }
+            }
+
+            showSubTitle("action", action.path(), connAcTitle);
+            showArgs(action.arguments());
+            showDesc(actionDesc);
+
+            showNInfoCInstance(cInstance);
         }
     }
 
