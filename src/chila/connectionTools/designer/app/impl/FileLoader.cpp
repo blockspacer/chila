@@ -1615,7 +1615,6 @@ MY_NSP_START
                                     .parent<cclTree::cPerformer::ConnectorInstance>();
             auto &conn = cInstance.connAlias().referenced().connector().referenced();
             auto connTitle = cclTree::getGroupedFullPath(conn).getStringRep(":");
-            auto evCallTitle = cclTree::getGroupedFullPath(evCall).getStringRep(":");
 
             auto &event = evCall.referenced();
 
@@ -1627,7 +1626,6 @@ MY_NSP_START
             for (auto cIns : cInstances | boost::adaptors::reversed)
             {
                 auto cInsTitle = cclTree::getGroupedFullPath(*cIns).getStringRep();
-
                 showTitle(cInsTitle);
 
                 if (auto *eCall = cIns->events().getPtr(evCall.name()))
@@ -1673,31 +1671,47 @@ MY_NSP_START
             auto &actionDesc = action.description().value;
             auto &acInsDesc = aIns.description().value;
 
-            auto aInsTitle = cclTree::getGroupedFullPath(aIns).getStringRep();
-            auto connAcTitle = cclTree::getGroupedFullPath(aIns.action().referenced()).getStringRep();
+            auto &conn = cInstance.connAlias().referenced().connector().referenced();
+            auto connTitle = cclTree::getGroupedFullPath(conn).getStringRep(":");
+
+            auto aInsTitle = cclTree::getGroupedPath(action).getStringRep(":");
+            auto connAcTitle = cclTree::getGroupedPath(aIns.action().referenced()).getStringRep();
+
+            auto cInsTitle = cclTree::getGroupedFullPath(cInstance).getStringRep();
+            showTitle(cInsTitle);
 
             showSubTitle("actionInstance", aIns.path(),  aInsTitle);
             showAliasedArgs(cInstance, action.arguments());
             showDesc(acInsDesc);
 
+            showNInfoCInstance(cInstance);
 
             auto igPath = cclTree::getGroupedPath(cInstance);
-
             auto cInstances = getCInstances(igPath);
             for (auto cIns : cInstances | boost::adaptors::reversed)
             {
                 if (auto *acAlias = cclTree::getActionAlias(*cIns, aIns))
                 {
-                    showSubTitle("acAlias", acAlias->path(), getGroupedFullPath(*acAlias).getStringRep());
+                    auto cInsTitle = cclTree::getGroupedFullPath(*cIns).getStringRep();
+                    auto &connAlias = acAlias->parent<cclTree::cPerformer::ActionAliasMap>()
+                                              .parent<cclTree::cPerformer::ConnectorAlias>();
+
+                    showTitle(cInsTitle);
+
+                    showSubTitle("acAlias", acAlias->path(), getGroupedPath(*acAlias).getStringRep(":"));
                     showDesc(acAlias->description().value);
+
+                    showSubTitle("connAlias", connAlias.path(), connAlias.name());
+                    showDesc(connAlias.description().value);
                 }
             }
 
+            showTitle(connTitle);
             showSubTitle("action", action.path(), connAcTitle);
             showArgs(action.arguments());
             showDesc(actionDesc);
 
-            showNInfoCInstance(cInstance);
+            showNInfoConnector(cInstance);
         }
     }
 
