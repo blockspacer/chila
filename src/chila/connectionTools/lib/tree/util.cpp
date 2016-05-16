@@ -586,7 +586,7 @@ MY_NSP_START
 
     ValueVec posibilities(const cPerformer::ActionAliasMap &node)
     {
-        return ciMapPos<connector::EventGroup>(cPerformer::ActionAlias::base(node), noLeafFun);
+        return ciMapPos<connector::ActionGroup>(cPerformer::ActionAlias::base(node), noLeafFun);
     }
 
     ValueVec posibilities(const cPerformer::ArgRefVMap &node)
