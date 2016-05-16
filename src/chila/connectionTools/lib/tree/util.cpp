@@ -897,5 +897,13 @@ MY_NSP_START
         auto gfPath = getGroupedPath(actionIns.action().referenced());
         return connAlias.actionAliases().getPtr(gfPath.getStringRep(":"));
     }
+
+    const cPerformer::ActionAlias *getActionAlias(const cPerformer::ConnectorInstance &cInstance,
+                                                  const cPerformer::ActionInstance &actionIns)
+    {
+        auto &connAlias = cInstance.connAlias().referenced();
+        auto gfPath = getGroupedPath(actionIns.action().referenced());
+        return connAlias.actionAliases().getPtr(gfPath.getStringRep(":"));
+    }
 }
 MY_NSP_END

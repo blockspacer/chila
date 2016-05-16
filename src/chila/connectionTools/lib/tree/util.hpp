@@ -237,7 +237,8 @@ MY_NSP_START
 
     const cPerformer::EventAlias *getEventAlias(const cPerformer::EventCall &eventCall);
     const cPerformer::ActionAlias *getActionAlias(const cPerformer::ActionInstance &actionIns);
-
+    const cPerformer::ActionAlias *getActionAlias(const cPerformer::ConnectorInstance &cInstance,
+                                                  const cPerformer::ActionInstance &actionIns);
 }
 MY_NSP_END
 
