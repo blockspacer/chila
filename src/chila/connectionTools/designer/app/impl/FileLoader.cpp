@@ -1355,11 +1355,19 @@ MY_NSP_START
             auto nodePath = actionIns.path();
             auto fnPath = flowNodePath + id;
             bool hasEvents = !actionIns.action().referenced().events().empty();
+            std::string aAliasDesc;
 
-            auto *actionAlias = cclTree::getActionAlias(actionIns);
+            auto igPath = cclTree::getGroupedPath(actionIns.connInstance().referenced());
+            auto cInstances = getCInstances(igPath);
+
+            for (auto cIns : cInstances | boost::adaptors::reversed)
+            {
+                if (auto *acAlias = cclTree::getActionAlias(*cIns, actionIns))
+                    aAliasDesc = clMisc::getNonEmpty(aAliasDesc, acAlias->description().value);
+            }
 
             auto insDesc = clMisc::getNonEmpty(actionIns.description().value,
-                                               actionAlias ? actionAlias->description().value : "",
+                                               aAliasDesc,
                                                actionIns.action().referenced().description().value);
 
 
@@ -1681,7 +1689,6 @@ MY_NSP_START
                 if (auto *acAlias = cclTree::getActionAlias(*cIns, aIns))
                 {
                     showSubTitle("acAlias", acAlias->path(), getGroupedFullPath(*acAlias).getStringRep());
-                    showAliasedArgs(*cIns, action.arguments());
                     showDesc(acAlias->description().value);
                 }
             }
