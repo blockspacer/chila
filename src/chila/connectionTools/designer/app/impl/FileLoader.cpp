@@ -1597,11 +1597,12 @@ MY_NSP_START
         }
         else if (auto *typed = dynamic_cast<const cclTree::connector::EventRef*>(&node))
         {
-            auto connEvTitle = cclTree::getGroupedFullPath(*typed).getStringRep();
+            auto &event = typed->referenced();
+            auto connEvTitle = cclTree::getGroupedPath(event).getStringRep(":");
 
-            showSubTitle("event", typed->refPath(), connEvTitle);
-            showArgs(typed->referenced().arguments());
-            showDesc(typed->referenced().description().value);
+            showSubTitle("event", event.path(), connEvTitle);
+            showArgs(event.arguments());
+            showDesc(event.description().value);
         }
         else if (auto *typed = dynamic_cast<const cclTree::cPerformer::EventCall*>(&node))
         {
@@ -1613,7 +1614,7 @@ MY_NSP_START
 
             auto &event = evCall.referenced();
 
-            auto connEvTitle = cclTree::getGroupedPath(evCall.referenced()).getStringRep();
+            auto connEvTitle = cclTree::getGroupedPath(event).getStringRep(":");
 
             auto igPath = cclTree::getGroupedPath(cInstance);
 
@@ -1667,7 +1668,7 @@ MY_NSP_START
             auto &acInsDesc = aIns.description().value;
 
             auto &conn = cInstance.connAlias().referenced().connector().referenced();
-            auto connTitle = cclTree::getGroupedFullPath(conn).getStringRep(":");
+            auto connTitle = cclTree::getGroupedFullPath(conn).getStringRep();
 
             auto aInsTitle = cclTree::getGroupedPath(action).getStringRep(":");
             auto connAcTitle = cclTree::getGroupedPath(aIns.action().referenced()).getStringRep();
@@ -1687,13 +1688,14 @@ MY_NSP_START
             {
                 if (auto *acAlias = cclTree::getActionAlias(*cIns, aIns))
                 {
-                    auto cInsTitle = cclTree::getGroupedFullPath(*cIns).getStringRep();
+                    CHILA_LIB_MISC__SHOW(40, cIns->path());
+                    auto cInsTitle = cclTree::getGroupedFullPath(*acAlias).getStringRep();
                     auto &connAlias = acAlias->parent<cclTree::cPerformer::ActionAliasMap>()
                                               .parent<cclTree::cPerformer::ConnectorAlias>();
 
                     showTitle(cInsTitle);
 
-                    showSubTitle("acAlias", acAlias->path(), getGroupedPath(*acAlias).getStringRep(":"));
+                    showSubTitle("acAlias", acAlias->path(), acAlias->name());
                     showDesc(acAlias->description().value);
 
                     showSubTitle("connAlias", connAlias.path(), connAlias.name());
