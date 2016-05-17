@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-    Copyright 2005-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
-    (C.I.: 1.439.390 - Paraguay)
--->
-
 <cPerformer name="chila.codex.base.app.connectors.gen.ConnectionPerformer" description="">
     <!-- Arguments -->
     <arguments>
         <group name="notebook" description="">
-            <argument name="tabName" description="" unique="false"/>
-            <argument name="tabTooltip" description="" unique="false"/>
-            <argument name="tabWidget" description="" unique="false"/>
+            <argument name="tabName" unique="false" description=""/>
+            <argument name="tabTooltip" unique="false" description=""/>
+            <argument name="tabWidget" unique="false" description=""/>
         </group>
-        <argument name="nullObject" description="" unique="false"/>
+        <argument name="nullObject" unique="false" description=""/>
         <group name="cmdNetServer" description="">
-            <argument name="clientId" description="" unique="false"/>
-            <argument name="rcvBuffer" description="" unique="false"/>
-            <argument name="sndBuffer" description="" unique="false"/>
-            <argument name="endpoint" description="" unique="false"/>
-            <argument name="address" description="" unique="false"/>
-            <argument name="host" description="" unique="false"/>
-            <argument name="msgId" description="" unique="false"/>
-            <argument name="funPath" description="" unique="false"/>
-            <argument name="funArgs" description="" unique="false"/>
-            <argument name="message" description="" unique="false"/>
-            <argument name="msgBuffer" description="" unique="false"/>
+            <argument name="clientId" unique="false" description=""/>
+            <argument name="rcvBuffer" unique="false" description=""/>
+            <argument name="sndBuffer" unique="false" description=""/>
+            <argument name="endpoint" unique="false" description=""/>
+            <argument name="address" unique="false" description=""/>
+            <argument name="host" unique="false" description=""/>
+            <argument name="msgId" unique="false" description=""/>
+            <argument name="funPath" unique="false" description=""/>
+            <argument name="funArgs" unique="false" description=""/>
+            <argument name="message" unique="false" description=""/>
+            <argument name="msgBuffer" unique="false" description=""/>
         </group>
-        <argument name="errorMsg" description="" unique="false"/>
-        <argument name="actionPath" description="" unique="false"/>
+        <argument name="errorMsg" unique="false" description=""/>
+        <argument name="actionPath" unique="false" description=""/>
     </arguments>
 
     <!-- Connector Aliases -->
@@ -99,7 +93,9 @@
                 <argument name="errorMsg" cpName="errorMsg" description=""/>
             </arguments>
             <events/>
-            <actions/>
+            <actions>
+                <action name="open" description="test"/>
+            </actions>
         </alias>
         <alias name="ActionExecuter" connectorPath="chila.codex.base.app.connectors.gen.ActionExecuter" description="">
             <arguments>
@@ -123,57 +119,57 @@
         <group name="base" description="">
             <instance name="application" connectorAlias="Application" description=""/>
             <instance name="mainWindow" connectorAlias="MainWindow" description="">
-                <event name="projectButtonPressed" connectorAlias="">
+                <event name="projectButtonPressed" description="">
                     <aProviderCreators/>
                     <actions/>
                 </event>
-                <event name="actionExecuted" connectorAlias="">
+                <event name="actionExecuted" description="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="base:actionExecuter" name="execute" description="" determinesOrder="false"/>
+                        <action connector="base:actionExecuter" name="execute" determinesOrder="false" description=""/>
                     </actions>
                 </event>
             </instance>
             <group name="appCommand" description="">
                 <instance name="funDynExecuter" connectorAlias="FunDynExecuter" description=""/>
                 <instance name="funDynXMLParser" connectorAlias="FunDynXMLParser" description="">
-                    <event name="parsed" connectorAlias="">
+                    <event name="parsed" description="">
                         <aProviderCreators/>
                         <actions>
-                            <action connector="base:appCommand:funDynExecuter" name="execute" description="" determinesOrder="false"/>
+                            <action connector="base:appCommand:funDynExecuter" name="execute" determinesOrder="false" description=""/>
                         </actions>
                     </event>
                 </instance>
                 <instance name="msgCreator" connectorAlias="CmdNetTextMsgCreator" description="">
-                    <event name="messageObtained" connectorAlias="">
+                    <event name="messageObtained" description="">
                         <aProviderCreators>
                             <apc name="cmdNetServer:msgCreatorFromBuff"/>
                         </aProviderCreators>
                         <actions>
-                            <action connector="base:appCommand:funDynXMLParser" name="take" description="" determinesOrder="false"/>
+                            <action connector="base:appCommand:funDynXMLParser" name="take" determinesOrder="false" description=""/>
                         </actions>
                     </event>
                 </instance>
                 <instance name="netServer" connectorAlias="CmdNetServer" description="">
-                    <event name="msgRead" connectorAlias="">
+                    <event name="msgRead" description="">
                         <aProviderCreators/>
                         <actions>
-                            <action connector="base:appCommand:msgCreator" name="takeBuffer" description="" determinesOrder="false"/>
+                            <action connector="base:appCommand:msgCreator" name="takeBuffer" determinesOrder="false" description=""/>
                         </actions>
                     </event>
                 </instance>
             </group>
             <instance name="actionExecuter" connectorAlias="ActionExecuter" description="">
-                <event name="file:open" connectorAlias="">
+                <event name="file:open" description="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="base:fileChooser:open" name="open" description="" determinesOrder="false"/>
+                        <action connector="base:fileChooser:open" name="open" determinesOrder="false" description=""/>
                     </actions>
                 </event>
-                <event name="file:saveAs" connectorAlias="">
+                <event name="file:saveAs" description="">
                     <aProviderCreators/>
                     <actions>
-                        <action connector="base:fileChooser:saveAs" name="open" description="" determinesOrder="false"/>
+                        <action connector="base:fileChooser:saveAs" name="open" determinesOrder="false" description=""/>
                     </actions>
                 </event>
             </instance>
