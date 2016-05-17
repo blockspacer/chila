@@ -135,14 +135,14 @@ MY_NSP_START
         CHILA_META_NODE__DEF_STRUCT_NODE(EventAlias, (Element)(Reference<connector::Event>),
             (
                 REF_METHODS(connector::EventMap)
-                CHILA_META_NODE__DEF_CHECK_BASES((Reference<connector::Event>)(NodeWithChildren), 0)
+                CHILA_META_NODE__DEF_CHECK_BASES((Reference<connector::Event>)(NodeWithChildren), 1)
             ),
         );
 
         CHILA_META_NODE__DEF_STRUCT_NODE(ActionAlias, (Element)(Reference<connector::Action>),
             (
                 REF_METHODS(connector::ActionMap)
-                CHILA_META_NODE__DEF_CHECK_BASES((Reference<connector::Action>)(NodeWithChildren), 0)
+                CHILA_META_NODE__DEF_CHECK_BASES((Reference<connector::Action>)(NodeWithChildren), 1)
             ),
         );
 

@@ -91,23 +91,11 @@ MY_NSP_START
         xmlppUtils::iterateChildren(root, elemStr, [&](const xmlpp::Element &element)
         {
             auto name = xmlppUtils::getAttribute<std::string>(element, "name");
-            auto description = xmlppUtils::getAttribute<std::string>(element, "description");
+            auto description = xmlppUtils::getAttribute<std::string>(element, "description", "");
 
             map.add(name).description().value = description;
         });
     }
-
-//    template <typename Alias, typename AliasGroup, typename AliasMap>
-//    void parseFunAliases(AliasMap &map, const xmlpp::Element &root, const std::string &elemStr)
-//    {
-//        parseGrouped<AliasGroup>(map, root, elemStr,
-//           [](AliasMap &map, const xmlpp::Element &element)
-//           {
-//               auto name = xmlppUtils::getAttribute<std::string>(element, "name");
-//               auto aliasName = xmlppUtils::getAttribute<std::string>(element, "cpName");
-//               map.template add<Alias>(name).cpRef().value = clMisc::Path(aliasName, ":");
-//           });
-//    }
 
     void CPerformerCreator::parseConnectorAliases(cPerformer::ConnectionPerformer &cPerf, const xmlpp::Element &aliasesElem)
     {

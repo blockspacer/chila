@@ -419,6 +419,16 @@ MY_NSP_START
             if (!eList.exceptions.empty()) BOOST_THROW_EXCEPTION(eList);
         }
 
+        void EventAlias::myCheck(chila::lib::node::CheckData *data) const
+        {
+
+        }
+
+        void ActionAlias::myCheck(chila::lib::node::CheckData *data) const
+        {
+
+        }
+
         struct EventCallCheckData : public chila::lib::node::CheckData
         {
             using PathSet = std::set<chila::lib::misc::Path>;

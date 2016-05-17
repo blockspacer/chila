@@ -122,30 +122,6 @@ MY_NSP_START
 
                 loadEvents(fun, element);
             });
-
-
-//        // Loads the functions
-//        chila::lib::xmlppUtils::iterateChildren(root, tagName, [&](const xmlpp::Element &funElem)
-//        {
-//            // Gets the name
-//            std::string name = xmlppUtils::getAttribute<std::string>(funElem, "name");
-//
-//            StringVec argNames;
-//            getSignature(funElem, argNames);
-//
-//            // Adds the function
-//            auto &fun = functions.add(name);
-//            fun.description().value = funElem.get_attribute_value("description");
-//
-//            auto &faVec = fun.arguments();
-//
-//            for (const auto &argName : argNames)
-//            {
-//                faVec.add(argName);
-//            }
-//
-//            loadEvents(fun, funElem);
-//        });
     }
 
     /** Loads the signature data and returns it. */

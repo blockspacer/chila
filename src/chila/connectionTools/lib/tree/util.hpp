@@ -236,6 +236,9 @@ MY_NSP_START
     clMisc::Path getGroupedPath(const chila::lib::node::Node &node);
 
     const cPerformer::EventAlias *getEventAlias(const cPerformer::EventCall &eventCall);
+    const cPerformer::EventAlias *getEventAlias(const cPerformer::ConnectorInstance &cInstance,
+                                                const cPerformer::EventCall &eventCall);
+
     const cPerformer::ActionAlias *getActionAlias(const cPerformer::ActionInstance &actionIns);
     const cPerformer::ActionAlias *getActionAlias(const cPerformer::ConnectorInstance &cInstance,
                                                   const cPerformer::ActionInstance &actionIns);

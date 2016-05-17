@@ -891,6 +891,14 @@ MY_NSP_START
         return connAlias.eventAliases().getPtr(gfPath.getStringRep(":"));
     }
 
+    const cPerformer::EventAlias *getEventAlias(const cPerformer::ConnectorInstance &cInstance,
+                                                const cPerformer::EventCall &eventCall)
+    {
+        auto &connAlias = cInstance.connAlias().referenced();
+        auto gfPath = getGroupedPath(eventCall.referenced());
+        return connAlias.eventAliases().getPtr(gfPath.getStringRep(":"));
+    }
+
     const cPerformer::ActionAlias *getActionAlias(const cPerformer::ActionInstance &actionIns)
     {
         auto &connAlias = actionIns.connInstance().referenced().connAlias().referenced();
