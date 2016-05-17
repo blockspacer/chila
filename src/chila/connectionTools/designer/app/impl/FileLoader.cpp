@@ -1298,10 +1298,11 @@ MY_NSP_START
 
         for (auto cIns : cInsVec | boost::adaptors::reversed)
         {
-            auto *eventAlias = cclTree::getEventAlias(evCall);
+            auto *eCall = cIns->events().getPtr(evCall.name());
+            auto *eventAlias = cclTree::getEventAlias(*cIns, evCall);
 
-            evCallDesc = clMisc::getNonEmpty(evCall.description().value, evCallDesc);
-            evAliasDesc = clMisc::getNonEmpty(eventAlias ? eventAlias->description().value : "", evAliasDesc);
+            evCallDesc = clMisc::getNonEmpty(evCallDesc, eCall ? eCall->description().value : "");
+            evAliasDesc = clMisc::getNonEmpty(evAliasDesc, eventAlias ? eventAlias->description().value : "");
         }
 
         auto insDesc = inserted ? clMisc::getNonEmpty(evCallDesc,
