@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!--
-    Copyright 2005-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
-    (C.I.: 1.439.390 - Paraguay)
--->
-
 <connector name="chila.codex.base.app.connectors.gen.FileChooser" description="Manages the main window.">
     <!-- Arguments -->
     <arguments>

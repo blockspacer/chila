@@ -93,9 +93,7 @@
                 <argument name="errorMsg" cpName="errorMsg" description=""/>
             </arguments>
             <events/>
-            <actions>
-                <action name="open" description="test"/>
-            </actions>
+            <actions/>
         </alias>
         <alias name="ActionExecuter" connectorPath="chila.codex.base.app.connectors.gen.ActionExecuter" description="">
             <arguments>
