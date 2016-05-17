@@ -419,14 +419,28 @@ MY_NSP_START
             if (!eList.exceptions.empty()) BOOST_THROW_EXCEPTION(eList);
         }
 
+        chila::lib::node::CheckDataUPtr EventAlias::createCheckData(chila::lib::node::CheckData *data) const
+        {
+            return std::make_unique<chila::lib::node::CheckData>(*data);
+        }
+
         void EventAlias::myCheck(chila::lib::node::CheckData *data) const
         {
+            if (description().value.empty())
+                throw chila::lib::node::ExceptionWrapper(DescriptionIsEmpty()
+                    << chila::lib::misc::ExceptionInfo::Path(path()));
+        }
 
+        chila::lib::node::CheckDataUPtr ActionAlias::createCheckData(chila::lib::node::CheckData *data) const
+        {
+            return std::make_unique<chila::lib::node::CheckData>(*data);
         }
 
         void ActionAlias::myCheck(chila::lib::node::CheckData *data) const
         {
-
+            if (description().value.empty())
+                throw chila::lib::node::ExceptionWrapper(DescriptionIsEmpty()
+                    << chila::lib::misc::ExceptionInfo::Path(path()));
         }
 
         struct EventCallCheckData : public chila::lib::node::CheckData

@@ -35,6 +35,7 @@ MY_NSP_START
     DEF_RUNTIME_ERROR_FROM_BASE(Exception, AProviderCreatorNotFound, "argument provider creator not found");
     DEF_RUNTIME_ERROR_FROM_BASE(Exception, UniqueArgumentRequiredMoreThanOnce, "unique argument required more than once");
     DEF_RUNTIME_ERROR_FROM_BASE(Exception, CInstanceReqCycle, "connector instance init requirement cycle");
+    DEF_RUNTIME_ERROR_FROM_BASE(Exception, DescriptionIsEmpty, "description is empty");
 
     struct ErrorInfo
     {
