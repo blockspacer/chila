@@ -1688,7 +1688,6 @@ MY_NSP_START
             {
                 if (auto *acAlias = cclTree::getActionAlias(*cIns, aIns))
                 {
-                    CHILA_LIB_MISC__SHOW(40, cIns->path());
                     auto cInsTitle = cclTree::getGroupedFullPath(*acAlias).getStringRep();
                     auto &connAlias = acAlias->parent<cclTree::cPerformer::ActionAliasMap>()
                                               .parent<cclTree::cPerformer::ConnectorAlias>();
