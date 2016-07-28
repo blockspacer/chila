@@ -39,10 +39,10 @@ MY_NSP_START
             bool parse(int argc, char **argv);
 
             template <typename Type>
-            Type getProgramOption(const std::string &name);
+            Type get(const std::string &name);
 
             template <typename Type>
-            Type getProgramOption(const std::string &name, const Type &defVal);
+            Type get(const std::string &name, const Type &defVal);
 
         private:
             boost::program_options::variables_map vm;
@@ -50,7 +50,7 @@ MY_NSP_START
     };
 
     template <typename Type>
-    Type ProgramOptions::getProgramOption(const std::string &name)
+    Type ProgramOptions::get(const std::string &name)
     {
         if (vm.count(name))
         {
@@ -63,7 +63,7 @@ MY_NSP_START
     }
 
     template <typename Type>
-    Type ProgramOptions::getProgramOption(const std::string &name, const Type &defVal)
+    Type ProgramOptions::get(const std::string &name, const Type &defVal)
     {
         if (vm.count(name))
         {
