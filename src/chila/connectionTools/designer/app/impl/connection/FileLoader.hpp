@@ -25,7 +25,7 @@ MY_NSP_START
         struct ArgTypes
         {
             using moduleName        = std::string;
-            using filePath          = boost::filesystem::path;
+            using filesData         = std::pair<PathSet, PathSet>;
             using nodePath          = chila::lib::misc::Path;
             using treeNodePath      = chila::lib::misc::Path;
             using nodeId            = std::string;

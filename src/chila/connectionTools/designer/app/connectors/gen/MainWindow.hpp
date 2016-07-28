@@ -116,6 +116,7 @@
     (actionNotPerformed) \
     (removeNode) \
     (removeChildren) \
+    (removeAllChildren) \
     (selectNode) \
     (showActions) \
     (renameNode) \
@@ -146,6 +147,8 @@
     (nodePath)
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_MainWindow_removeChildren \
     (nodePath)
+#define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_MainWindow_removeAllChildren \
+
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_MainWindow_selectNode \
     (nodePath)(openNode)
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_MainWindow_showActions \
@@ -163,7 +166,7 @@
 
 // Actions' called events
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_MainWindow_launcher_start \
-    (launcher_started)(flowNodesRequired)(actionListRequired)(saveRequest)(flowNodeSelected)(checkNodes)(expandFlowNode)(moveUpRequest)(moveDownRequest)
+    (launcher_started)(flowNodesRequired)(actionListRequired)(saveRequest)(flowNodeSelected)(checkNodes)(expandFlowNode)(moveUpRequest)(moveDownRequest)(undoRequest)(redoRequest)
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_MainWindow_launcher_deactivate \
     (launcher_deactivated)
@@ -193,6 +196,9 @@
 
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_MainWindow_removeChildren \
+
+
+#define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_MainWindow_removeAllChildren \
 
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_MainWindow_selectNode \
@@ -232,9 +238,11 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         typedef _ArgTypes ArgTypes;
 
         // Arguments
-        CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ARGUMENTS( \
-            CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN, MainWindow)
-
+        struct Arguments
+        {
+            CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ARGUMENTS( \
+                CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN, MainWindow)
+        };
         // Events
         struct Events
         {
@@ -277,6 +285,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
             MY_BIND_ACTION(actionNotPerformed);
             MY_BIND_ACTION(removeNode);
             MY_BIND_ACTION(removeChildren);
+            MY_BIND_ACTION(removeAllChildren);
             MY_BIND_ACTION(selectNode);
             MY_BIND_ACTION(showActions);
             MY_BIND_ACTION(renameNode);

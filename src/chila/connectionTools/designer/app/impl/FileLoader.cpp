@@ -16,11 +16,33 @@
 #include <chila/connectionTools/lib/tree/exceptions.hpp>
 #include <fstream>
 #include <boost/algorithm/string/case_conv.hpp>
+#include <boost/exception/detail/exception_ptr.hpp>
+#include <boost/exception/get_error_info.hpp>
 #include "../../lib/actions.hpp"
 #include "../../lib/ActionMap.hpp"
 #include "../../lib/TextProperty.hpp"
+#include <chila/connectionTools/lib/tree/ParseText.hpp>
+#include <chila/connectionTools/lib/tree/util.hpp>
+#include <boost/range/algorithm/transform.hpp>
 
 #define MODULE_NAME FileLoader
+
+#define go_to_ref_wpos_map_entry_elem(r, Type, i, elem) \
+    BOOST_PP_COMMA_IF(i) \
+    {BOOST_PP_SEQ_ELEM(0, elem), [this](const clNode::Node &node, const ev_executer_type(performAction) &eventExecuter) \
+    { \
+        auto &typed = clMisc::dynamicCast<const Type&>(node); \
+        goToReferencedNode(BOOST_PP_SEQ_ELEM(1, elem), eventExecuter); \
+    }}
+
+
+
+#define go_to_ref_wpos_map_entry(Type, elems) \
+    {boost::typeindex::type_id<Type>(), \
+    GoToRefWPosValMap \
+    { \
+        BOOST_PP_SEQ_FOR_EACH_I(go_to_ref_wpos_map_entry_elem, Type, elems) \
+    }}
 
 
 #include "macros.fgen.hpp"
@@ -99,7 +121,7 @@ MY_NSP_START
             auto parent = tPathMap.getNodePath(cutPathFrom);
             parent.pop();
 
-            auto &fromNode = globalNsp.find(parent).toType<chila::lib::node::IContainerOfTyped>();
+            auto &fromNode = globalNsp().find(parent).toType<chila::lib::node::IContainerOfTyped>();
             auto &toNode = node.toType<chila::lib::node::IContainerOfTyped>();
 
             if (toNode.canTakeChildFrom(fromNode))
@@ -117,7 +139,7 @@ MY_NSP_START
             auto parent = cutPathFrom;
             parent.pop();
 
-            if (globalNsp.find(parent).toTypePtr<NodeMap>())
+            if (globalNsp().find(parent).toTypePtr<NodeMap>())
             {
                 actionMap.addAction<lib::actions::Paste>();
             }
@@ -187,6 +209,9 @@ MY_NSP_START
         flowCInstances(flowCInstances),
         flowCInstancesDim(flowCInstancesDim),
         showFunEvents(showFunEvents),
+        globalNsps({cclTree::Namespace::create("")}),
+        currNsp(globalNsps.begin()),
+        savedNsp(currNsp),
         colorMap
         {
             def_color(connector::Connector, BLUE),
@@ -299,6 +324,21 @@ MY_NSP_START
 
                 return str_stream(str.str() << writeDesc(typed.description().value));
             }}}
+        },
+        goToRefWPosMap
+        {
+            {
+                go_to_ref_wpos_map_entry(cclTree::cPerformer::ActionInstance,
+                    (("connInstance")(typed.connInstance()))
+                    (("connAlias")(typed.connInstance().referenced().connAlias()))
+                    (("connector")(typed.connInstance().referenced().connAlias().referenced().connector()))
+                    (("action")(typed.action()))
+                ),
+                go_to_ref_wpos_map_entry(cclTree::cPerformer::CAArgAlias,
+                    (("connArg")(typed))
+                    (("cpArg")(typed.cpRef()))
+                )
+            }
         }
     {
         connector.bindActions(*this);
@@ -326,8 +366,6 @@ MY_NSP_START
         addPosibilities.set<cclTree::cPerformer::ActionInstanceVec>("", lib::AddType::WITH_POS,
             [this](chila::lib::node::NodeWithChildren &node, const std::string &value) -> chila::lib::node::Node&
             {
-                CHILA_LIB_MISC__SHOW(40, value);
-
                 auto &aIns = node.toType<cclTree::cPerformer::ActionInstanceVec>().add();
                 auto path = chila::lib::misc::Path(value, ":");
 
@@ -394,7 +432,7 @@ MY_NSP_START
         if_is_mtl_node(Name##Map) \
         { \
             for (auto &child : *typed) \
-                walkNode(treeNodePath, clMisc::dynamicCast<clNode::Node>(child), eventExecuter); \
+                walkNode(prefix, treeNodePath, clMisc::dynamicCast<clNode::Node>(child), eventExecuter); \
         } \
 
 #define wn_walk_ungrouped(Name) \
@@ -405,7 +443,7 @@ MY_NSP_START
         else if_is_mtl_node(Name##Group) \
         { \
             for (auto &child : typed->elements()) \
-                walkNode(treeNodePath, clMisc::dynamicCast<clNode::Node>(child), eventExecuter); \
+                walkNode(prefix, treeNodePath, clMisc::dynamicCast<clNode::Node>(child), eventExecuter); \
         } \
 
     std::string FileLoader::findColor(const boost::typeindex::type_index &index)
@@ -452,6 +490,21 @@ MY_NSP_START
         return it->second;
     }
 
+    std::pair<clMisc::Path, clMisc::Path> FileLoader::TPathMap::getExistingParentTreePath(const clMisc::Path &nodePath) const
+    {
+        auto np = nodePath;
+
+        while (true)
+        {
+            auto it = nodeTreeMap.find(np);
+            if (it != nodeTreeMap.end())
+                return { it->second->first, np };
+
+            np.pop();
+        }
+
+        BOOST_THROW_EXCEPTION(clMisc::ElementNotFound());
+    }
 
     const clMisc::Path &FileLoader::TPathMap::getTreePath(const clMisc::Path &nodePath) const
     {
@@ -475,33 +528,65 @@ MY_NSP_START
     }
 
     template <typename EventExecuter>
-    void FileLoader::walkNode(const clMisc::Path &parentNodePath, const clNode::Node &node, const EventExecuter &eventExecuter)
+    void FileLoader::walkNode(const std::string &prefix, const clMisc::Path &parentNodePath, const clNode::Node &node, const EventExecuter &eventExecuter)
     {
         auto treeNodePath = parentNodePath;
-        if (!node.name().empty())
-            treeNodePath += node.name();
+        std::string newPrefix;
+        auto *nsp = clMisc::dcast<cclTree::Namespace>(&node);
 
-        tPathMap.insert(node.path(), treeNodePath);
+        if (nsp && nsp->size() == 1 && clMisc::dcast<cclTree::Namespace>(&nsp->front()))
+        {
+            std::string pTop;
+            if (!parentNodePath.empty())
+            {
+                pTop = parentNodePath.top();
+            }
 
-        if (!treeNodePath.empty())
-            wn_node_found(getValueFor(node));
+            newPrefix = prefix + (prefix.empty() || node.name().empty() ? "" : ":") + node.name();
+        }
+        else
+        {
+            if (nsp)
+            {
+                if (!node.name().empty())
+                    treeNodePath += (prefix + ":" + node.name());
+            }
+            else
+            {
+                treeNodePath += node.name();
+            }
 
-        walkChildrenNodes(treeNodePath, node, eventExecuter);
+            tPathMap.insert(node.path(), treeNodePath);
+
+            if (!treeNodePath.empty())
+            {
+                if (nsp)
+                {
+                    wn_node_found(clMisc::Path(prefix, ":").getStringRep(".") + "." + node.name());
+                }
+                else
+                {
+                    wn_node_found(getValueFor(node));
+                }
+            }
+        }
+
+        walkChildrenNodes(newPrefix, treeNodePath, node, eventExecuter);
     }
 
     template <typename EventExecuter>
-    void FileLoader::walkChildrenNodes(const clMisc::Path &treeNodePath, const clNode::Node &node, const EventExecuter &eventExecuter)
+    void FileLoader::walkChildrenNodes(const std::string &prefix, const clMisc::Path &treeNodePath, const clNode::Node &node, const EventExecuter &eventExecuter)
     {
         if_is_mtl_node(Namespace)
         {
             for (auto &child : *typed)
-                walkNode(treeNodePath, clMisc::dynamicCast<clNode::Node>(child), eventExecuter);
+                walkNode(prefix, treeNodePath, clMisc::dynamicCast<clNode::Node>(child), eventExecuter);
         }
         else if_is_mtl_node(connector::Connector)
         {
-            walkNode(treeNodePath, typed->arguments(), eventExecuter);
-            walkNode(treeNodePath, typed->actions(), eventExecuter);
-            walkNode(treeNodePath, typed->events(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->arguments(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->actions(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->events(), eventExecuter);
         }
         else wn_walk_grouped(connector::Argument)
         else wn_walk_grouped(connector::Event)
@@ -510,10 +595,10 @@ MY_NSP_START
         else wn_walk_map(connector::EventRef)
         else if_is_mtl_node(cPerformer::ConnectionPerformer)
         {
-            walkNode(treeNodePath, typed->arguments(), eventExecuter);
-            walkNode(treeNodePath, typed->connectorAliases(), eventExecuter);
-            walkNode(treeNodePath, typed->aProvCreators(), eventExecuter);
-            walkNode(treeNodePath, typed->connInstances(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->arguments(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->connectorAliases(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->aProvCreators(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->connInstances(), eventExecuter);
         }
         else wn_walk_grouped(cPerformer::Argument)
         else wn_walk_grouped(cPerformer::AProviderCreator)
@@ -529,44 +614,44 @@ MY_NSP_START
         else if_is_mtl_node(cPerformer::ActionInstanceVec)
         {
             for (auto &child : *typed)
-                walkNode(treeNodePath, clMisc::dynamicCast<clNode::Node>(child), eventExecuter);
+                walkNode(prefix, treeNodePath, clMisc::dynamicCast<clNode::Node>(child), eventExecuter);
         }
 
         if_is_mtl_node(connector::Action)
         {
-            walkNode(treeNodePath, typed->arguments(), eventExecuter);
-            walkNode(treeNodePath, typed->events(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->arguments(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->events(), eventExecuter);
         }
 
         if_is_mtl_node(connector::Event)
         {
-            walkNode(treeNodePath, typed->arguments(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->arguments(), eventExecuter);
         }
 
         if_is_mtl_node(cPerformer::AProviderCreator)
         {
-            walkNode(treeNodePath, typed->requires(), eventExecuter);
-            walkNode(treeNodePath, typed->provides(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->requires(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->provides(), eventExecuter);
         }
 
         if_is_mtl_node(cPerformer::ConnectorAlias)
         {
-            walkNode(treeNodePath, typed->connector(), eventExecuter);
-            walkNode(treeNodePath, typed->argAliases(), eventExecuter);
-            walkNode(treeNodePath, typed->eventAliases(), eventExecuter);
-            walkNode(treeNodePath, typed->actionAliases(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->connector(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->arguments(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->events(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->actions(), eventExecuter);
         }
 
         if_is_mtl_node(cPerformer::ConnectorInstance)
         {
-            walkNode(treeNodePath, typed->connAlias(), eventExecuter);
-            walkNode(treeNodePath, typed->events(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->connAlias(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->events(), eventExecuter);
         }
 
         if_is_mtl_node(cPerformer::EventCall)
         {
-            walkNode(treeNodePath, typed->aProvCreators(), eventExecuter);
-            walkNode(treeNodePath, typed->actions(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->aProvCreators(), eventExecuter);
+            walkNode(prefix, treeNodePath, typed->actions(), eventExecuter);
         }
     }
 
@@ -575,7 +660,7 @@ MY_NSP_START
         lib::ActionMapSPtr actionMap = std::make_shared<lib::ActionMap>();
 
         auto ctNodePath = tPathMap.getNodePath(nodePath);
-        auto &node = globalNsp.find(ctNodePath);
+        auto &node = globalNsp().find(ctNodePath);
 
         node_if_dcast(const cclTree::Element, &node)
         {
@@ -585,36 +670,46 @@ MY_NSP_START
         if (auto *typedNode = dynamic_cast< const cclTree :: cPerformer :: ConnectorRef *>( & node )) {
             actionMap->addAction<lib::actions:: SetValueWVal >().current = typedNode->value.getStringRep();
         }
-        else cast_load_action_wp_typed(cclTree::cPerformer::ConnectorInstanceRef, SetValueWPos)
-        else cast_load_action_wp_typed(cclTree::cPerformer::CAArgAlias, SetValueWPos)
-        else cast_load_action_wp_typed(cclTree::cPerformer::ConnectorAliasRef, SetValueWPos)
-        else cast_load_action_wp_typed(cclTree::cPerformer::ActionRef, SetValueWPos)
-        else cast_load_action_wp_typed(chila::lib::node::TypedNode<bool>, SetValueWPos)
-        else cast_load_actions_cont_grouped(cclTree::connector::Argument, Map)
-        else cast_load_actions_cont_grouped(cclTree::connector::Event, Map)
-        else cast_load_actions_cont_grouped(cclTree::connector::Action, Map)
-        else cast_load_actions_cont(cclTree::connector::ArgRef, Map)
-        else cast_load_actions_cont(cclTree::connector::EventRef, Map)
 
-        else cast_load_actions_cont_grouped(cclTree::cPerformer::Argument, Map)
-        else cast_load_actions_cont(cclTree::cPerformer::ConnectorAlias, Map)
-        else cast_load_actions_cont(cclTree::cPerformer::CAArgAlias, Map)
-        else cast_load_actions_cont(cclTree::cPerformer::EventAlias, Map)
-        else cast_load_actions_cont(cclTree::cPerformer::ActionAlias, Map)
-        else cast_load_actions_cont(cclTree::cPerformer::ArgRefV, Map)
-        else cast_load_actions_cont(cclTree::cPerformer::ActionAlias, Map)
-        else cast_load_actions_cont_grouped(cclTree::cPerformer::AProviderCreator, Map)
-        else cast_load_actions_cont(cclTree::cPerformer::EventCall, Map)
-        else cast_load_actions_cont(cclTree::cPerformer::APCRef, Map)
-        else cast_load_actions_cont_grouped(cclTree::cPerformer::ConnectorInstance, Map)
-        else cast_load_actions_cont(cclTree::cPerformer::ActionInstance, Vec)
+        cast_load_action_wp_typed(cclTree::cPerformer::ConnectorInstanceRef, SetValueWPos)
+        cast_load_action_wp_typed(cclTree::cPerformer::CAArgAlias, SetValueWPos)
+        cast_load_action_wp_typed(cclTree::cPerformer::ConnectorAliasRef, SetValueWPos)
+        cast_load_action_wp_typed(cclTree::cPerformer::ActionRef, SetValueWPos)
+        cast_load_action_wp_typed(chila::lib::node::TypedNode<bool>, SetValueWPos)
+        cast_load_actions_cont_grouped(cclTree::connector::Argument, Map)
+        cast_load_actions_cont_grouped(cclTree::connector::Event, Map)
+        cast_load_actions_cont_grouped(cclTree::connector::Action, Map)
+        cast_load_actions_cont(cclTree::connector::ArgRef, Map)
+        cast_load_actions_cont(cclTree::connector::EventRef, Map)
 
-        node_if_dcast(const cclTree::cPerformer::ActionInstance, &node)
+        cast_load_actions_cont_grouped(cclTree::cPerformer::Argument, Map)
+        cast_load_actions_cont(cclTree::cPerformer::ConnectorAlias, Map)
+        cast_load_actions_cont(cclTree::cPerformer::CAArgAlias, Map)
+        cast_load_actions_cont(cclTree::cPerformer::EventAlias, Map)
+        cast_load_actions_cont(cclTree::cPerformer::ActionAlias, Map)
+        cast_load_actions_cont(cclTree::cPerformer::ArgRefV, Map)
+        cast_load_actions_cont(cclTree::cPerformer::ActionAlias, Map)
+        cast_load_actions_cont_grouped(cclTree::cPerformer::AProviderCreator, Map)
+        cast_load_actions_cont(cclTree::cPerformer::EventCall, Map)
+        cast_load_actions_cont(cclTree::cPerformer::APCRef, Map)
+        cast_load_actions_cont_grouped(cclTree::cPerformer::ConnectorInstance, Map)
+        cast_load_actions_cont(cclTree::cPerformer::ActionInstance, Vec)
+
+
+        auto typeIndex = boost::typeindex::type_id_runtime(node);
+        auto mapIt = goToRefWPosMap.find(typeIndex);
+        if (mapIt != goToRefWPosMap.end())
         {
-            actionMap->addAction<lib::actions::GoToReferenced>();
-        }
+            auto &vVec = actionMap->addAction<lib::actions::GoToReferencedWPos>().posibilities;
+            auto &map = mapIt->second;
 
-        node_if_dcast(const chila::lib::node::IReference, &node)
+            boost::transform(map, std::back_inserter(vVec),
+                [&](const GoToRefWPosValMap::value_type &vt)
+                {
+                    return cclTree::ValueEntry{vt.first};
+                });
+        }
+        else node_if_dcast(const chila::lib::node::IReference, &node)
         {
             actionMap->addAction<lib::actions::GoToReferenced>();
         }
@@ -632,86 +727,177 @@ MY_NSP_START
         execute_event(launcher_finished)();
     }
 
-    void FileLoader::MOD_ACTION_SIG(loadConnector)
+    bool FileLoader::checkRecovery(const boost::filesystem::path &path)
     {
-        cclTree::ConnectorCreator creator(globalNsp, filePath);
+        auto rPath = getRecoveryPath(path);
+        if (boost::filesystem::exists(rPath))
+        {
+            if (clMisc::filesAreEqual(path, rPath))
+            {
+                boost::filesystem::remove(rPath);
+            }
+            else return true;
+        }
 
-        connectors.push_back(ConnectorData(filePath, &creator.create()));
+        return false;
     }
 
-    void FileLoader::MOD_ACTION_SIG(loadCPerformer)
-    {
-        cclTree::CPerformerCreator creator(globalNsp, filePath);
 
-        cpVec.push_back(CPData(filePath, &creator.create()));
+    template <typename Type>
+    void FileLoader::loadObject(const boost::filesystem::path &filePath, bool isRecovery)
+    {
+        auto recPath = getRecoveryPath(filePath);
+        auto hasRec = isRecovery && boost::filesystem::exists(recPath);
+
+        Type creator(globalNsp(), hasRec ? recPath : filePath);
+
+        if (hasRec)
+            recoveredFiles.push_back(filePath);
+
+        fileDataVec.push_back(FileData{filePath, creator.create().path()});
+    }
+
+    bool FileLoader::checkRecFiles(const PathSet &files)
+    {
+        auto ret = false;
+        for (auto &path : files)
+        {
+            if (checkRecovery(path))
+                ret = true;
+        }
+
+        return ret;
+    }
+
+    void FileLoader::loadFilesPrv(const PathSet &cpFiles, const PathSet &connFiles, bool isRecovery)
+    {
+        for (auto &filePath : connFiles)
+        {
+            loadObject<cclTree::ConnectorCreator>(filePath, isRecovery);
+        }
+
+        for (auto &filePath : cpFiles)
+        {
+            loadObject<cclTree::CPerformerCreator>(filePath, isRecovery);
+        }
+    }
+
+    void FileLoader::MOD_ACTION_SIG(loadFiles)
+    {
+        PathSet cpRFiles, connRFiles;
+        auto ret0 = checkRecFiles(filesData.first);
+        auto ret1 = checkRecFiles(filesData.second);
+
+        loadFilesPrv(filesData.first, filesData.second, false);
+
+        if (ret0 || ret1)
+        {
+            pushGlobalNsp(std::make_shared<cclTree::Namespace>());
+
+            loadFilesPrv(filesData.first, filesData.second, true);
+
+            globalNsp().takeSimilar(*globalNsps[0]);
+        }
     }
 
     void FileLoader::MOD_ACTION_SIG(refreshTree)
     {
-        tPathMap.clear();
-        walkNode("", globalNsp, eventExecuter);
-        check(eventExecuter);
+        refresh(eventExecuter);
     }
 
-    template <typename Data>
-    void saveObject(Data &data)
+    void FileLoader::saveObject(const FileData &data, bool isRecovery)
     {
         std::ofstream out;
 
         out.exceptions(std::ios::badbit | std::ios::failbit);
-        auto tmpName = data.path.string() + "~";
+        auto tmpName = isRecovery ? getRecoveryPath(data.filePath) : getTemporalPath(data.filePath);
         out.open(tmpName.c_str());
         auto remover = clMisc::atExit([&] { boost::filesystem::remove(tmpName); });
 
-        cclTree::sendXMLToStream(out, *(data.object));
-        data.modified = false;
+        auto &node = globalNsp().find(data.path);
 
-        boost::filesystem::rename(tmpName, data.path);
+        if (auto *typed = node.template toTypePtr<cclTree::cPerformer::ConnectionPerformer>())
+            cclTree::sendXMLToStream(out, *typed);
+        else if (auto *typed = node.template toTypePtr<cclTree::connector::Connector>())
+            cclTree::sendXMLToStream(out, *typed);
+        else
+            abort();
+
+        if (!isRecovery)
+        {
+            boost::filesystem::rename(tmpName, data.filePath);
+        }
+
         remover.active = false;
+    }
+
+    void FileLoader::saveFiles(bool isRecovery)
+    {
+        for (auto &vt : modFiles)
+        {
+            saveObject(vt.second, isRecovery);
+        }
+
+        if (!isRecovery)
+        {
+            savedNsp = currNsp;
+            updateModFiles();
+        }
+
+        cleanTmpFiles();
+    }
+
+    void FileLoader::cleanTmpFiles()
+    {
+        for (auto &fileData : fileDataVec)
+        {
+            auto recoveryPath = getRecoveryPath(fileData.filePath);
+            if (modFiles.count(fileData.filePath) == 0 && boost::filesystem::exists(recoveryPath))
+            {
+                boost::filesystem::remove(recoveryPath);
+            }
+        }
     }
 
     void FileLoader::MOD_ACTION_SIG(save)
     {
-        for (auto &cData : connectors) if (cData.modified)
-        {
-            saveObject(cData);
-        }
-
-        for (auto &cpData : cpVec) if (cpData.modified)
-        {
-            saveObject(cpData);
-        }
+        recoveredFiles.clear();
+        saveFiles(false);
+        check(eventExecuter);
     }
 
     void FileLoader::MOD_ACTION_SIG(moveUp)
     {
         moveNode(nodePath, eventExecuter,
-            [&](chila::lib::node::NodeWithChildren &parent, const std::string &name, bool isVec)
+            [&](chila::lib::node::NodeWithChildren &parent, const std::string &name, bool isVec) -> clNode::Node&
             {
                 return parent.moveUp(name, isVec);
             });
+
+        updateModFiles();
+        saveFiles(true);
     }
 
     void FileLoader::MOD_ACTION_SIG(moveDown)
     {
         moveNode(nodePath, eventExecuter,
-            [&](chila::lib::node::NodeWithChildren &parent, const std::string &name, bool isVec)
+            [&](chila::lib::node::NodeWithChildren &parent, const std::string &name, bool isVec) -> clNode::Node&
             {
                 return parent.moveDown(name, isVec);
             });
+
+        updateModFiles();
+        saveFiles(true);
     }
 
     chila::lib::node::Node &FileLoader::addNodeInt(const chila::lib::misc::Path &treePath, const std::string &actionId, const std::string &value)
     {
         auto nodePath = tPathMap.getNodePath(treePath);
-        auto *nodePtr = &globalNsp.find(nodePath);
 
-        if (nodePtr->toTypePtr<cclTree::Group>())
-        {
-            nodePtr = &globalNsp.find(nodePath + "elements");
-        }
+        if (globalNsp().find(nodePath).toTypePtr<cclTree::Group>())
+            nodePath.add("elements");
 
-        auto &node = *nodePtr;
+        auto &node = editNode(nodePath);
 
         auto posSize = addPosibilities.size(typeid(node).name());
         if (posSize == 1)
@@ -727,65 +913,13 @@ MY_NSP_START
         return *static_cast<chila::lib::node::Node*>(nullptr);
     }
 
-    template <typename EventExecuter>
-    void FileLoader::refreshDesignTreeAndMM(const clMisc::Path &nodePath, const EventExecuter &eventExecuter)
-    {
-        execute_event_tn(saveDesignTreeState)();
-
-        chila::lib::node::NodeWithChildren *pNode = nullptr;
-
-        for (auto &cData : connectors)
-        {
-            if (nodePath.startsWith(cData.object->path()))
-            {
-                cData.modified = true;
-                pNode = cData.object;
-            }
-        }
-
-        for (auto &cpData : cpVec)
-        {
-            if (nodePath.startsWith(cpData.object->path()))
-            {
-                cpData.modified = true;
-                pNode = cpData.object;
-            }
-        }
-
-        my_assert(pNode);
-
-        auto pNodePath = pNode->path();
-
-        auto dNodePath = tPathMap.getTreePath(pNodePath);
-        execute_event_tn(removeChildren)(dNodePath);
-
-        tPathMap.eraseTreePath(dNodePath, true);
-
-        walkChildrenNodes(dNodePath, *pNode, eventExecuter);
-
-        execute_event_tn(restoreDesignTreeState)();
-    }
-
-    void FileLoader::markModified(const clMisc::Path &nodePath)
-    {
-        for (auto &cData : connectors)
-        {
-            cData.modified = cData.modified || nodePath.startsWith(cData.object->path());
-        }
-
-        for (auto &cpData : cpVec)
-        {
-            cpData.modified = cpData.modified || nodePath.startsWith(cpData.object->path());
-        }
-    }
-
     void FileLoader::addNode(const chila::lib::misc::Path &path, const std::string &actionId, const std::string &value, ev_executer_arg(performAction))
     {
         auto &node = addNodeInt(path, actionId, clMisc::Path(value).getStringRep(":"));
 
         auto addedNodePath = node.path();;
 
-        refreshDesignTreeAndMM(addedNodePath, eventExecuter);
+        refresh(eventExecuter);
 
         execute_event(nodeSelected)(tPathMap.getTreePath(addedNodePath), false);
 
@@ -797,16 +931,24 @@ MY_NSP_START
     {
         auto nodePath = tPathMap.getNodePath(treeNodePath);
 
-        auto &node = globalNsp.find(nodePath);
-        auto &parent = node.parent<cclTree::NodeWithChildren>();
+        CHILA_LIB_MISC__SHOW(40, nodePath);
+
+        auto name = nodePath.top();
+        auto parentPath = nodePath.parent();
+        auto &parent = editNode(parentPath).toType<cclTree::NodeWithChildren>();
+        auto &node = parent.child(name);
 
         bool isVec = dynamic_cast<const chila::lib::node::NodeVector*>(&parent);
-        fun(parent, node.name(), isVec);
+        fun(parent, name, isVec);
 
-        refreshDesignTreeAndMM(nodePath, eventExecuter);
-        execute_event_tn(nodeSelected)(treeNodePath, false);
+        auto newTNPath = tPathMap.getTreePath(node.path());
+
+        refresh(eventExecuter);
+        execute_event_tn(nodeSelected)(newTNPath, false);
 
         check(eventExecuter);
+
+        updateModFiles();
     }
 
     template <typename EventExecuter>
@@ -824,37 +966,46 @@ MY_NSP_START
         {
             try
             {
-                bptr_cast(lib::actions::GoToReferenced, action)
+                bptr_cast(lib::actions::GoToReferencedWPos, action)
                 {
                     auto dNodePath = tPathMap.getNodePath(nodePath);
-                    auto &node = globalNsp.find(dNodePath);
+                    auto &node = globalNsp().find(dNodePath);
 
-                    if (auto *typed = dynamic_cast<const cclTree::cPerformer::ActionInstance*>(&node))
-                    {
-                        goToReferencedNode(typed->action(), eventExecuter);
-                    }
-                    else
-                    {
-                        goToReferencedNode(node, eventExecuter);
-                    }
+                    auto typeIndex = boost::typeindex::type_id_runtime(node);
+                    auto mapIt = goToRefWPosMap.find(typeIndex);
+                    my_assert(mapIt != goToRefWPosMap.end());
+
+                    const auto &goToRefWPosValMap = mapIt->second;
+
+                    auto mapIt2 = goToRefWPosValMap.find(value);
+                    my_assert(mapIt2 != goToRefWPosValMap.end());
+
+                    mapIt2->second(node, eventExecuter);
+                }
+                else bptr_cast(lib::actions::GoToReferenced, action)
+                {
+                    auto dNodePath = tPathMap.getNodePath(nodePath);
+                    auto &node = globalNsp().find(dNodePath);
+                    goToReferencedNode(node, eventExecuter);
                 }
                 else bptr_cast(lib::actions::SetDesc, action)
                 {
                     auto &dNodePath = tPathMap.getNodePath(nodePath);
-                    auto &node = globalNsp.find(dNodePath);
 
                     setNodeValue(dNodePath + "description", value, eventExecuter);
+                    auto &node = globalNsp().find(dNodePath);
+
                     execute_event(valueFound)(nodePath, getValueFor(node));
                 }
                 else bptr_cast(lib::actions::SetValue, action)
                 {
-                    auto &node = globalNsp.find(nodePath);
                     setNodeValue(tPathMap.getNodePath(nodePath), value, eventExecuter);
+                    auto &node = globalNsp().find(nodePath);
+
                     execute_event(valueFound)(nodePath, getValueFor(node));
                 }
                 else bptr_cast(lib::actions::AddElement, action)
                 {
-                    CHILA_LIB_MISC__SHOW(40, "here");
                     addNode(nodePath, action->id, value, eventExecuter);
                 }
                 else bptr_cast(lib::actions::Remove, action)
@@ -864,7 +1015,7 @@ MY_NSP_START
                 else bptr_cast(lib::actions::MoveUp, action)
                 {
                     moveNode(nodePath, eventExecuter,
-                        [&](chila::lib::node::NodeWithChildren &parent, const std::string &name, bool isVec)
+                        [&](chila::lib::node::NodeWithChildren &parent, const std::string &name, bool isVec) -> clNode::Node&
                         {
                             return parent.moveUp(name, isVec);
                         });
@@ -872,7 +1023,7 @@ MY_NSP_START
                 else bptr_cast(lib::actions::MoveDown, action)
                 {
                     moveNode(nodePath, eventExecuter,
-                        [&](chila::lib::node::NodeWithChildren &parent, const std::string &name, bool isVec)
+                        [&](chila::lib::node::NodeWithChildren &parent, const std::string &name, bool isVec) -> clNode::Node&
                         {
                             return parent.moveDown(name, isVec);
                         });
@@ -885,19 +1036,27 @@ MY_NSP_START
                 {
                     my_assert(!cutPathFrom.empty());
 
-                    auto fromParentPath = tPathMap.getNodePath(cutPathFrom);
+                    auto fromNodePath = tPathMap.getNodePath(cutPathFrom);
+                    auto fromParentPath = fromNodePath;
                     auto name = fromParentPath.pop();
                     auto toNodePath = tPathMap.getNodePath(nodePath);
 
+                    auto tnPathClone = toNodePath;
+                    tnPathClone.add(globalNsp().find(toNodePath).toTypePtr<cclTree::Group>() ? "elements" : "");
 
-                    auto &fromParentNode = globalNsp.find(fromParentPath).toType<chila::lib::node::NodeWithChildren>();
+                    cloneNodes({fromNodePath, tnPathClone});
+
+                    auto &fromParentNode = globalNsp().find(fromParentPath).toType<chila::lib::node::NodeWithChildren>();
                     auto &fromNodeIC = fromParentNode.toType<chila::lib::node::IContainerOfTyped>();
-                    auto &toNode = globalNsp.find(toNodePath).toType<chila::lib::node::IContainerOfTyped>();
+                    auto &toNode = globalNsp().find(toNodePath).toType<chila::lib::node::IContainerOfTyped>();
 
                     auto &node = toNode.takeChild(fromNodeIC, name);
 
-                    refreshDesignTreeAndMM(fromParentPath, eventExecuter);
-                    refreshDesignTreeAndMM(toNodePath, eventExecuter);
+                    globalNsp().updateParents();
+
+                    refresh(eventExecuter);
+
+                    cutPathFrom.clear();
 
                     execute_event(nodeSelected)(nodePath, false);
 
@@ -905,14 +1064,16 @@ MY_NSP_START
                 }
                 else abort();
             }
-            catch (const chila::lib::node::Exception &ex)
-            {
-                execute_event(actionNotPerformed)(ex.what());
-            }
             catch (const cclTree::Exception &ex)
             {
                 execute_event(actionNotPerformed)(ex.what());
             }
+            catch (const chila::lib::node::Exception &ex)
+            {
+                execute_event(actionNotPerformed)(ex.what());
+            }
+
+            saveFiles(true);
         });
     }
 
@@ -920,9 +1081,56 @@ MY_NSP_START
     {
     }
 
+    cclTree::Namespace &FileLoader::globalNsp()
+    {
+        my_assert(!globalNsps.empty());
+        return clMisc::deref(*currNsp);
+    }
+
+    const cclTree::Namespace &FileLoader::globalNsp() const
+    {
+        my_assert(!globalNsps.empty());
+        return clMisc::deref(*currNsp);
+    }
+
+    void FileLoader::pushGlobalNsp(const cclTree::NamespaceSPtr &nsp)
+    {
+        my_assert(currNsp != globalNsps.end());
+
+        globalNsps.erase(currNsp + 1, globalNsps.end());
+        globalNsps.push_back(nsp);
+        currNsp = globalNsps.end() - 1;
+
+
+    }
+
+    clNode::Node &FileLoader::editNode(const chila::lib::misc::Path &nodePath)
+    {
+        auto cloneRet = globalNsp().find(nodePath).cloneAll();
+        auto nsp = std::dynamic_pointer_cast<cclTree::Namespace>(cloneRet.first);
+        nsp->updateParents();
+        pushGlobalNsp(nsp);
+
+        return cloneRet.second;
+    }
+
+    void FileLoader::cloneNodes(const ClmPathVec &paths)
+    {
+        auto lastNsp =  globalNsps.back();
+        for (auto &path : paths)
+        {
+            lastNsp = std::dynamic_pointer_cast<cclTree::Namespace>(lastNsp->find(path).cloneAll().first);
+            lastNsp->updateParents();
+        }
+
+        pushGlobalNsp(lastNsp);
+    }
+
+
     void FileLoader::setNodeValue(const chila::lib::misc::Path &nodePath, const std::string &value, ev_executer_arg(performAction))
     {
-        auto &node = globalNsp.find(nodePath);
+        auto &node = editNode(nodePath);
+
         ActionSPtr action;
 
         node_if_dcast(chila::lib::node::TypedNode<std::string>, &node)
@@ -947,51 +1155,10 @@ MY_NSP_START
         }
         else abort();
 
-        markModified(node.path());
+        updateModFiles();
+//        refresh(eventExecuter);
 
         check(eventExecuter);
-    }
-
-    void FileLoader::removeNode(const chila::lib::misc::Path &treeNodePath, ev_executer_arg(performAction))
-    {
-        try
-        {
-            auto nodePath = tPathMap.getNodePath(treeNodePath);
-
-            auto &node = globalNsp.find(nodePath);
-            auto &parent = node.parent();
-            auto parentPath = nodePath.parent();
-
-            parent.remove(node.name());
-
-            refreshDesignTreeAndMM(parentPath, eventExecuter);
-        }
-        catch (const chila::lib::node::Exception &ex)
-        {
-            execute_event(actionNotPerformed)(ex.what());
-        }
-        catch (const cclTree::Exception &ex)
-        {
-            execute_event(actionNotPerformed)(ex.what());
-        }
-
-        check(eventExecuter);
-    }
-
-    template <typename EventExecuter>
-    void FileLoader::check(const EventExecuter &eventExecuter) const try
-    {
-        execute_event_tn(clearOutput)();
-        globalNsp.check();
-        execute_event_tn(outputText)(lib::TextPropertiesSPtr(), "no errors found");
-    }
-    catch (const chila::lib::node::Exception &ex)
-    {
-        sendErrorEvents(ex, eventExecuter);
-    }
-    catch (const cclTree::Exception &ex)
-    {
-        sendErrorEvents(ex, eventExecuter);
     }
 
     template <typename TProp>
@@ -1024,6 +1191,57 @@ MY_NSP_START
         addToProps(*ret, props...);
 
         return ret;
+    }
+
+    void FileLoader::removeNode(const chila::lib::misc::Path &treeNodePath, ev_executer_arg(performAction))
+    {
+        try
+        {
+            auto nodePath = tPathMap.getNodePath(treeNodePath);
+
+            auto &node = editNode(nodePath);
+            auto &parent = node.parent();
+
+            parent.remove(node.name());
+        }
+        catch (const cclTree::Exception &ex)
+        {
+            execute_event(actionNotPerformed)(ex.what());
+        }
+        catch (const chila::lib::node::Exception &ex)
+        {
+            execute_event(actionNotPerformed)(ex.what());
+        }
+
+        updateModFiles();
+        refresh(eventExecuter);
+        check(eventExecuter);
+    }
+
+    template <typename EventExecuter>
+    void FileLoader::check(const EventExecuter &eventExecuter) try
+    {
+        execute_event_tn(clearOutput)();
+
+        using TPColor = lib::textProperty::Color;
+
+        auto redColor = makeProps(TPColor(75, 0, 0));
+
+        for (auto &path : recoveredFiles)
+        {
+            execute_event_tn(outputText)(redColor, "Recovered: \"" + path.string() + "\"\n\n");
+        }
+
+        globalNsp().check();
+        execute_event_tn(outputText)(lib::TextPropertiesSPtr(), "no errors found");
+    }
+    catch (const cclTree::Exception &ex)
+    {
+        sendErrorEvents(ex, eventExecuter);
+    }
+    catch (const chila::lib::node::Exception &ex)
+    {
+        sendErrorEvents(ex, eventExecuter);
     }
 
     template <typename EventExecuter>
@@ -1059,17 +1277,33 @@ MY_NSP_START
 
             execute_event_tn(outputText)(errorProps, ex.what() + std::string("\n"));
 
-            if (const chila::lib::misc::Path *path = boost::get_error_info<chila::lib::misc::ExceptionInfo::Path>(ex))
+            if (const auto *path = boost::get_error_info<chila::lib::misc::ExceptionInfo::Path>(ex))
             {
                 showPath(*path, "path");
             }
 
-            if (const chila::lib::misc::Path *path = boost::get_error_info<cclTree::ErrorInfo::ReferencePath>(ex))
+            if (const auto *path = boost::get_error_info<cclTree::ErrorInfo::ReferencePath>(ex))
             {
                 showPath(*path, "ref. path");
             }
 
-            if (const cclTree::ReqProvVector *vec = boost::get_error_info<cclTree::ErrorInfo::ReqProvVec>(ex))
+            if (const auto *type = boost::get_error_info<chila::lib::misc::ExceptionInfo::TypeFrom>(ex))
+            {
+                execute_event_tn(outputText)(lib::TextPropertiesSPtr(), "- type from: [" + type->pretty_name() + "]\n");
+            }
+
+            if (const auto *type = boost::get_error_info<chila::lib::misc::ExceptionInfo::ActualType>(ex))
+            {
+                execute_event_tn(outputText)(lib::TextPropertiesSPtr(), "- actual type: [" + type->pretty_name() + "]\n");
+            }
+
+            if (const auto *type = boost::get_error_info<chila::lib::misc::ExceptionInfo::TypeTo>(ex))
+            {
+                execute_event_tn(outputText)(lib::TextPropertiesSPtr(), "- type to: [" + type->pretty_name() + "]\n");
+            }
+
+
+            if (const auto *vec = boost::get_error_info<cclTree::ErrorInfo::ReqProvVec>(ex))
             {
                 for (const auto &reqProv : *vec)
                 {
@@ -1086,7 +1320,7 @@ MY_NSP_START
                 }
             }
 
-            if (const cclTree::AInsVec *data = boost::get_error_info<cclTree::ErrorInfo::AInsVecInfo>(ex))
+            if (const auto *data = boost::get_error_info<cclTree::ErrorInfo::AInsVecInfo>(ex))
             {
                 for (auto *aIns : *data)
                 {
@@ -1103,11 +1337,16 @@ MY_NSP_START
                     execute_event_tn(outputText)(lib::TextPropertiesSPtr(),                 "\n");
                 }
             }
+
+            if (const auto *data = boost::get_error_info<cclTree::ErrorInfo::DescToken>(ex))
+            {
+                execute_event_tn(outputText)(lib::TextPropertiesSPtr(), "- token: " + *data + "\n");
+            }
         }
     }
 
     template <typename EventExecuter>
-    void FileLoader::sendArgErrorEvents(const chila::lib::misc::Path &path, const PathSet &set, const EventExecuter &eventExecuter) const
+    void FileLoader::sendArgErrorEvents(const chila::lib::misc::Path &path, const ClmPathSet &set, const EventExecuter &eventExecuter) const
     {
         bool first = true;
         for (const auto &str : set)
@@ -1165,7 +1404,7 @@ MY_NSP_START
     void FileLoader::MOD_ACTION_SIG(expandFlowNode)
     {
         auto it = fnMap.find(nodePath);
-        assert(it != fnMap.end());
+        my_assert(it != fnMap.end());
 
         fNodesToExpand[it->second] = nodePath;
     }
@@ -1176,17 +1415,17 @@ MY_NSP_START
         auto parent = cInsPath;
         parent.pop();
 
-        auto &cPerformer = globalNsp.find(parent).toType<cclTree::cPerformer::ConnectionPerformer>();
+        auto &cPerformer = globalNsp().find(parent).toType<cclTree::cPerformer::ConnectionPerformer>();
         return cclTree::getCInstance(cPerformer, subPath);
     }
 
     struct FileLoader::InsWalkedFNode
     {
-        PathSet &walkedNodes;
-        std::pair<PathSet::iterator, bool> insRet;
+        ClmPathSet &walkedNodes;
+        std::pair<ClmPathSet::iterator, bool> insRet;
         clMisc::Path nodePath;
 
-        InsWalkedFNode(const clMisc::Path &nodePath, PathSet &walkedNodes) :
+        InsWalkedFNode(const clMisc::Path &nodePath, ClmPathSet &walkedNodes) :
             walkedNodes(walkedNodes),
             nodePath(nodePath),
             insRet(walkedNodes.insert(nodePath))
@@ -1222,42 +1461,153 @@ MY_NSP_START
         }
     }
 
+    std::string prefixSuffix(const std::string &prefix, const std::string &text, const std::string &suffix)
+    {
+        if (text.empty())
+            return "";
+        else
+            return prefix + text + suffix;
+    }
 
+    std::string firstLine(const std::string &text)
+    {
+        return text.substr(0, text.find('\n'));
+    }
+
+    std::string FileLoader::flGetEnhancedDesc(const cclTree::cPerformer::ActionInstance &actionIns, bool singleLine)
+    {
+        std::string aAliasDesc;
+        cclTree::CAliasVec cAliasVec;
+        auto &action = actionIns.action().referenced();
+
+        auto igPath = cclTree::getGroupedPath(actionIns.connInstance().referenced());
+        auto cInstances = getCInstances(igPath);
+
+        for (auto cIns : cInstances | boost::adaptors::reversed)
+        {
+            if (auto *acAlias = cclTree::getActionAlias(*cIns, actionIns))
+                aAliasDesc = clMisc::getNonEmpty(aAliasDesc, acAlias->description().value);
+
+            cAliasVec.push_back(boost::ref(cIns->connAlias().referenced()));
+        }
+
+        if (singleLine)
+        {
+            auto insDesc = clMisc::getNonEmpty(actionIns.description().value,
+                                               aAliasDesc,
+                                               actionIns.action().referenced().description().value);
+
+            return firstLine(getEnhancedDesc(actionIns, cAliasVec, insDesc));
+        }
+        else
+        {
+            return prefixSuffix("- [actionIns]: ", getEnhancedDesc(actionIns, cAliasVec, actionIns.description().value), "\n\n")
+                 + prefixSuffix("- [actionAlias]: ", getEnhancedDesc(actionIns, cAliasVec, aAliasDesc), "\n\n")
+                 + prefixSuffix("- [action]: ", getEnhancedDesc(actionIns, cAliasVec, action.description().value), "");
+        }
+    }
+
+    std::string FileLoader::flGetEnhancedDesc(const cclTree::cPerformer::EventCall &evCall, bool singleLine)
+    {
+        cclTree::CAliasVec cAliasVec;
+
+        auto igPath = cclTree::getGroupedPath(evCall.parent<cclTree::cPerformer::EventCallMap>()
+                                                    .parent<cclTree::cPerformer::ConnectorInstance>());
+        auto cInstances = getCInstances(igPath);
+
+        std::string evCallDesc, evAliasDesc;
+        auto &event = evCall.referenced();
+
+        for (auto cIns : cInstances | boost::adaptors::reversed)
+        {
+            auto *eCall = cIns->events().getPtr(evCall.name());
+            auto *eventAlias = cclTree::getEventAlias(*cIns, evCall);
+
+            evCallDesc = clMisc::getNonEmpty(evCallDesc, eCall ? eCall->description().value : "");
+            evAliasDesc = clMisc::getNonEmpty(evAliasDesc, eventAlias ? eventAlias->description().value : "");
+
+            cAliasVec.push_back(boost::ref(cIns->connAlias().referenced()));
+        }
+
+        if (singleLine)
+        {
+            auto desc = clMisc::getNonEmpty(evCallDesc, evAliasDesc, evCall.referenced().description().value);
+
+            return firstLine(getEnhancedDesc(evCall, cAliasVec, desc));
+        }
+        else
+        {
+            return prefixSuffix("- [eventCall]: ", getEnhancedDesc(evCall, cAliasVec, evCallDesc), "\n\n")
+                 + prefixSuffix("- [eventAlias]: ", getEnhancedDesc(evCall, cAliasVec, evAliasDesc), "\n\n")
+                 + prefixSuffix("- [event]: ", getEnhancedDesc(evCall, cAliasVec, event.description().value), "");
+        }
+    }
+
+    std::string FileLoader::flGetEnhancedDesc(const clMisc::Path &cInsPath, bool singleLine)
+    {
+        cclTree::CAliasVec cAliasVec;
+        std::string cInsDesc, cAliasDesc;
+        const cclTree::connector::Connector *connPtr = nullptr;
+
+        auto &cInsVec = getCInstances(cInsPath);
+
+        // Goes through all the connector instances conceptually referenced by the instance to obtain the description
+        for (auto cIns : cInsVec)
+        {
+            auto &connAlias = cIns->connAlias().referenced();
+            connPtr = &connAlias.connector().referenced();
+
+            cInsDesc = clMisc::getNonEmpty(cIns->description().value, cInsDesc);
+            cAliasDesc = clMisc::getNonEmpty(connAlias.description().value, cAliasDesc);
+
+            cAliasVec.push_back(boost::ref(connAlias));
+        }
+
+        if (singleLine)
+        {
+            auto desc = clMisc::getNonEmpty(cInsDesc, cAliasDesc, clMisc::deref(connPtr).description().value);
+            return firstLine(getEnhancedDesc(*connPtr, cAliasVec, desc));
+        }
+        else
+        {
+            auto &conn = clMisc::deref(connPtr);
+
+            return prefixSuffix("- [connInstance]: ", getEnhancedDesc(conn, cAliasVec, cInsDesc), "\n\n")
+                 + prefixSuffix("- [connAlias]: ", getEnhancedDesc(conn, cAliasVec, cAliasDesc), "\n\n")
+                 + prefixSuffix("- [connector]: ", getEnhancedDesc(conn, cAliasVec, conn.description().value), "");
+        }
+    }
 
     void FileLoader::MOD_ACTION_SIG(requestFlowNodes)
     {
-        PathSet walkedNodes;
+        ClmPathSet walkedNodes;
 
         fnMap.clear();
 
         // Loads 'pcInsMap'
         pcInsMap.clear();
 
-        for (auto &cpData : cpVec)
+        for (auto &fileData : fileDataVec)
         {
-            loadPCInsMap(*cpData.object);
+            loadPCInsMap(globalNsp().find(fileData.path).toType<clNode::NodeWithChildren>());
         }
 
         // Goes through all the flow instances marked for display
         for (auto &cInsPath : flowCInstances)
         {
             auto fnPath = cInsPath.getStringRep(":");
+            auto desc = flGetEnhancedDesc(cInsPath, true);
 
-            std::string cInsDesc, cAliasDesc;
             auto &cInsVec = getCInstances(cInsPath);
-
-            // Goes through all the connector instances conceptually referenced by the instance to obtain the description
-            for (auto cIns : cInsVec)
-            {
-                cInsDesc = clMisc::getNonEmpty(cIns->description().value, cInsDesc);
-                cAliasDesc = clMisc::getNonEmpty(cIns->connAlias().referenced().description().value, cAliasDesc);
-            }
 
             // Goes through all the connector instances conceptually referenced by the instance
             for (auto cIns : cInsVec)
             {
-                auto &conn = cIns->connAlias().referenced().connector().referenced();
-                auto desc = clMisc::getNonEmpty(cInsDesc, cAliasDesc, conn.description().value);
+                auto &connAlias = cIns->connAlias().referenced();
+                auto &conn = connAlias.connector().referenced();
+
+                cclTree::CAliasVec cAliasVec = {boost::ref(connAlias)};
+                desc = getEnhancedDesc(*cIns, cAliasVec, desc);
 
                 flowNodeFound
                 (
@@ -1267,8 +1617,6 @@ MY_NSP_START
                     true,
                     eventExecuter
                 );
-
-//                walkFlowNodes(fnPath, *cIns, cInsVec, walkedNodes, getCInstancesHLNodes(flowCInstancesDim), eventExecuter);
 
                 const auto &flowCInstancesDimNodes = getCInstancesHLNodes(flowCInstancesDim);
 
@@ -1284,7 +1632,7 @@ MY_NSP_START
 
     void FileLoader::walkEvCallFNode(const cclTree::cPerformer::EventCall &evCall,
                                      const clMisc::Path &flowNodePath,
-                                     PathSet &walkedNodes,
+                                     ClmPathSet &walkedNodes,
                                      const CInstanceSet &flowCInstancesDimNodes,
                                      const CInsVec &cInsVec,
                                      ev_executer_arg(requestFlowNodes))
@@ -1295,19 +1643,7 @@ MY_NSP_START
         auto nodePath = evCall.path();
         auto inserted = InsWalkedFNode(nodePath, walkedNodes);
         auto hasActions = inserted && !evCall.actions().empty();
-
-        for (auto cIns : cInsVec | boost::adaptors::reversed)
-        {
-            auto *eCall = cIns->events().getPtr(evCall.name());
-            auto *eventAlias = cclTree::getEventAlias(*cIns, evCall);
-
-            evCallDesc = clMisc::getNonEmpty(evCallDesc, eCall ? eCall->description().value : "");
-            evAliasDesc = clMisc::getNonEmpty(evAliasDesc, eventAlias ? eventAlias->description().value : "");
-        }
-
-        auto insDesc = inserted ? clMisc::getNonEmpty(evCallDesc,
-                                                      evAliasDesc,
-                                                      evCall.referenced().description().value) : "";
+        auto insDesc = inserted ? flGetEnhancedDesc(evCall, true) : "";
 
 
         flowNodeFound
@@ -1338,9 +1674,11 @@ MY_NSP_START
         return ret;
     }
 
+
+
     void FileLoader::walkFlowNodes(const clMisc::Path &flowNodePath,
                                    const cclTree::cPerformer::EventCall &evCall,
-                                   PathSet &walkedNodes,
+                                   ClmPathSet &walkedNodes,
                                    const CInstanceSet &flowCInstancesDimNodes,
                                    ev_executer_arg(requestFlowNodes))
     {
@@ -1350,21 +1688,8 @@ MY_NSP_START
             auto nodePath = actionIns.path();
             auto fnPath = flowNodePath + id;
             bool hasEvents = !actionIns.action().referenced().events().empty();
-            std::string aAliasDesc;
 
-            auto igPath = cclTree::getGroupedPath(actionIns.connInstance().referenced());
-            auto cInstances = getCInstances(igPath);
-
-            for (auto cIns : cInstances | boost::adaptors::reversed)
-            {
-                if (auto *acAlias = cclTree::getActionAlias(*cIns, actionIns))
-                    aAliasDesc = clMisc::getNonEmpty(aAliasDesc, acAlias->description().value);
-            }
-
-            auto insDesc = clMisc::getNonEmpty(actionIns.description().value,
-                                               aAliasDesc,
-                                               actionIns.action().referenced().description().value);
-
+            auto insDesc = flGetEnhancedDesc(actionIns, true);
 
             auto cInsText = actionIns.connInstance().value.getStringRep(":");
 
@@ -1391,7 +1716,7 @@ MY_NSP_START
     const FileLoader::CInsVec &FileLoader::getCInstances(const clMisc::Path &path) const
     {
         auto it = pcInsMap.find(path);
-        assert(it != pcInsMap.end());
+        my_assert(it != pcInsMap.end());
         return it->second;
     }
 
@@ -1404,7 +1729,7 @@ MY_NSP_START
 
     void FileLoader::walkFlowNodes(const clMisc::Path &flowNodePath,
                                    const cclTree::cPerformer::ActionInstance &aInstance,
-                                   PathSet &walkedNodes,
+                                   ClmPathSet &walkedNodes,
                                    const CInstanceSet &flowCInstancesDimNodes,
                                    ev_executer_arg(requestFlowNodes))
     {
@@ -1478,14 +1803,15 @@ MY_NSP_START
         using TPScale = lib::textProperty::Scale;
 
         auto it = fnMap.find(nodePath);
-        assert(it != fnMap.end());
+        my_assert(it != fnMap.end());
         auto ctNodePath = it->second;
 
-        const auto &node = globalNsp.find(ctNodePath);
+        const auto &node = globalNsp().find(ctNodePath);
 
         auto titleProps =  makeProps(TPBold());
         auto parenProps = lib::TextPropertiesSPtr();
         auto descProps = makeProps(TPColor(0, 50, 0));
+        auto descErrorProps = makeProps(TPColor(50, 70, 50));
         auto noDescProps = makeProps(TPColor(70, 70, 70));
         auto typeProps =  makeProps(TPBold(), TPColor(0, 0, 70));
 
@@ -1528,24 +1854,60 @@ MY_NSP_START
                 if (first) first = false;
                 else execute_event(outputText)(parenProps, ", ");
 
-                auto &argRef = cAlias.argAliases().get(arg.name()).cpRef();
+                auto &argRef = cAlias.arguments().get(arg.name()).cpRef();
                 execute_event(outputText)(makeProps(TPNPath(argRef.refPath())), argRef.value.getStringRep(":"));
             }
             execute_event(outputText)(parenProps, ")");
         };
 
-        auto showDesc = [&](const std::string &desc)
+        auto showDesc = [&](const cclTree::Element &elem)
         {
             execute_event(outputText)(titleProps, ": ");
+
+            auto &desc = elem.description().value;
+            auto &node = dynamic_cast<const chila::lib::node::Node&>(elem);
 
             if (desc.empty())
                 execute_event(outputText)(noDescProps, "(no description)\n\n");
             else
             {
-                clMisc::tokenize(desc, "\n", [&](const std::string &token)
+                bool first = true;
+
+                clMisc::writeParagraph(desc, 100, [&](const std::string &line)
                 {
-                    execute_event(outputText)(descProps, token + "\n");
-                    return true;
+                    execute_event(outputText)(descProps, (first ? "" : "  "));
+                    cclTree::ParseText parseText(line, node);
+
+                    while(true) try
+                    {
+                        if (!parseText.parse())
+                            break;
+
+                        if (auto *foundNode = parseText.foundNode())
+                        {
+                            execute_event(outputText)(descProps, "'");
+                            execute_event(outputText)(makeProps(TPNPath(foundNode->path()), descProps), parseText.tokenStr());
+                            execute_event(outputText)(descProps, "'");
+                        }
+                        else
+                        {
+                            execute_event(outputText)(descProps, parseText.tokenStr());
+                        }
+                    }
+                    catch (const cclTree::DescriptionParseError &ex)
+                    {
+                        execute_event(outputText)(descErrorProps, parseText.tokenStr());
+                    }
+                    catch (const cclTree::DescriptionParseInvalidReference &ex)
+                    {
+                        execute_event(outputText)(descErrorProps, "'");
+                        execute_event(outputText)(descErrorProps, parseText.tokenStr());
+                        execute_event(outputText)(descErrorProps, "'");
+                    }
+
+                    execute_event(outputText)(descProps, "\n");
+
+                    first = false;
                 });
 
                 execute_event(outputText)(descProps, "\n");
@@ -1556,23 +1918,20 @@ MY_NSP_START
         {
             auto &cAlias = cInstance.connAlias().referenced();
             auto &conn = cAlias.connector().referenced();
-            auto &connAliasDesc = cAlias.description().value;
-            auto &connInsDesc = cInstance.description().value;
             auto connInsTitle = cclTree::getGroupedPath(cInstance).getStringRep(":");
 
-            showSubTitle("connInstance", cInstance.path(), connInsTitle);   showDesc(connInsDesc);
-            showSubTitle("connAlias", cAlias.path(),       cAlias.name());  showDesc(connAliasDesc);
+            showSubTitle("connInstance", cInstance.path(), connInsTitle);   showDesc(cInstance);
+            showSubTitle("connAlias", cAlias.path(),       cAlias.name());  showDesc(cAlias);
         };
 
         auto showNInfoConnector = [&](const cclTree::cPerformer::ConnectorInstance &cInstance)
         {
             auto &cAlias = cInstance.connAlias().referenced();
             auto &conn = cAlias.connector().referenced();
-            auto &connDesc = conn.description().value;
             auto connPathTitle = cclTree::getGroupedPath(conn).getStringRep(":");
 
             showSubTitle("connector", conn.path(), connPathTitle);
-            showDesc(connDesc);
+            showDesc(conn);
         };
 
         execute_event(clearOutput)();
@@ -1584,6 +1943,11 @@ MY_NSP_START
             auto connPathTitle = cclTree::getGroupedPath(conn).getStringRep(":");
 
             auto gPath = cclTree::getGroupedPath(*typed);
+            auto desc = flGetEnhancedDesc(gPath, false);
+
+            showTitle("Description:");
+            execute_event(outputText)(descProps, desc + "\n\n");
+
             auto cInstances = getCInstances(gPath);
             unsigned cInd = cInstances.size();
             for (auto cInstance : cInstances | boost::adaptors::reversed)
@@ -1602,7 +1966,7 @@ MY_NSP_START
 
             showSubTitle("event", event.path(), connEvTitle);
             showArgs(event.arguments());
-            showDesc(event.description().value);
+            showDesc(event);
         }
         else if (auto *typed = dynamic_cast<const cclTree::cPerformer::EventCall*>(&node))
         {
@@ -1618,23 +1982,31 @@ MY_NSP_START
 
             auto igPath = cclTree::getGroupedPath(cInstance);
 
+            auto desc = flGetEnhancedDesc(evCall, false);
+
+            showTitle("Description:");
+            execute_event(outputText)(descProps, desc + "\n\n");
+
+
             auto cInstances = getCInstances(igPath);
             for (auto cIns : cInstances | boost::adaptors::reversed)
             {
                 auto cInsTitle = cclTree::getGroupedFullPath(*cIns).getStringRep();
                 showTitle(cInsTitle);
 
+                auto &connAlias = cIns->connAlias().referenced();
+
                 if (auto *eCall = cIns->events().getPtr(evCall.name()))
                 {
-                    showSubTitle("evCall", eCall->path(),   eCall->name());
+                    showSubTitle("eventCall", eCall->path(),   eCall->name());
                     showAliasedArgs(*cIns, event.arguments());
-                    showDesc(eCall->description().value);
+                    showDesc(*eCall);
 
                     if (auto *evAlias = cclTree::getEventAlias(*eCall))
                     {
                         showSubTitle("evAlias", evAlias->path(), evAlias->name());
                         showAliasedArgs(*cIns, event.arguments());
-                        showDesc(evAlias->description().value);
+                        showDesc(*evAlias);
                     }
                 }
 
@@ -1645,17 +2017,17 @@ MY_NSP_START
 
             showSubTitle("event", event.path(), connEvTitle);
             showArgs(event.arguments());
-            showDesc(event.description().value);
+            showDesc(event);
 
             showNInfoConnector(cInstance);
 
             for (auto &apc : evCall.aProvCreators())
             {
-                showSubTitle("apc", apc.path(), cclTree::getGroupedFullPath(apc).getStringRep());
+                showSubTitle("apc", apc.path(), cclTree::getGroupedPath(apc).getStringRep(":"));
                 showArgs(apc.referenced().requires());
                 execute_event(outputText)(descProps, " -> ");
                 showArgs(apc.referenced().provides());
-                showDesc(apc.referenced().description().value);
+                showDesc(apc.referenced());
             }
         }
         else if (auto *typed = dynamic_cast<const cclTree::cPerformer::ActionInstance*>(&node))
@@ -1664,9 +2036,6 @@ MY_NSP_START
             auto &cInstance = aIns.connInstance().referenced();
             auto &action = aIns.action().referenced();
 
-            auto &actionDesc = action.description().value;
-            auto &acInsDesc = aIns.description().value;
-
             auto &conn = cInstance.connAlias().referenced().connector().referenced();
             auto connTitle = cclTree::getGroupedFullPath(conn).getStringRep();
 
@@ -1674,11 +2043,18 @@ MY_NSP_START
             auto connAcTitle = cclTree::getGroupedPath(aIns.action().referenced()).getStringRep();
 
             auto cInsTitle = cclTree::getGroupedFullPath(cInstance).getStringRep();
+
+            auto desc = flGetEnhancedDesc(aIns, false);
+
+            showTitle("Description:");
+            execute_event(outputText)(descProps, desc + "\n\n");
+
             showTitle(cInsTitle);
+
 
             showSubTitle("actionInstance", aIns.path(),  aInsTitle);
             showAliasedArgs(cInstance, action.arguments());
-            showDesc(acInsDesc);
+            showDesc(aIns);
 
             showNInfoCInstance(cInstance);
 
@@ -1694,18 +2070,18 @@ MY_NSP_START
 
                     showTitle(cInsTitle);
 
-                    showSubTitle("acAlias", acAlias->path(), acAlias->name());
-                    showDesc(acAlias->description().value);
+                    showSubTitle("actionAlias", acAlias->path(), acAlias->name());
+                    showDesc(*acAlias);
 
                     showSubTitle("connAlias", connAlias.path(), connAlias.name());
-                    showDesc(connAlias.description().value);
+                    showDesc(connAlias);
                 }
             }
 
             showTitle(connTitle);
             showSubTitle("action", action.path(), connAcTitle);
             showArgs(action.arguments());
-            showDesc(actionDesc);
+            showDesc(action);
 
             showNInfoConnector(cInstance);
         }
@@ -1716,12 +2092,120 @@ MY_NSP_START
 
     void FileLoader::MOD_ACTION_SIG(undo)
     {
+        if (currNsp != globalNsps.begin())
+        {
+            (*--currNsp)->updateParents();
+            updateModFiles();
+            refresh(eventExecuter);
+            saveFiles(true);
+        }
     }
 
     void FileLoader::MOD_ACTION_SIG(redo)
     {
+        my_assert(currNsp != globalNsps.end());
+        if (currNsp + 1 != globalNsps.end())
+        {
+            (*++currNsp)->updateParents();
+            updateModFiles();
+            refresh(eventExecuter);
+            saveFiles(true);
+        }
     }
 
+    template <typename EventExecuter>
+    void FileLoader::refresh(const EventExecuter &eventExecuter)
+    {
+        execute_event_tn(saveDesignTreeState)();
+        execute_event_tn(removeAllChildren)();
+
+        tPathMap.clear();
+        walkNode("", "", globalNsp(), eventExecuter);
+        check(eventExecuter);
+        execute_event_tn(restoreDesignTreeState)();
+    }
+
+//    template <typename FoundPath>
+//    void loadPaths(const clNode::Node &node, clMisc::Path &path, const FoundPath &foundPath)
+//    {
+//        path.add(node.name());
+//        if (auto *typed = clMisc::dcast<clNode::NodeWithChildren>(&node))
+//        {
+//            for (auto &child : *typed)
+//                loadPaths(child, path, foundPath);
+//        }
+//        else
+//        {
+//            foundPath(path, node);
+//        }
+//        if (!node.name().empty())
+//            path.pop();
+//    }
+//
+//    template <typename FoundPath>
+//    void loadPaths(const clNode::Node &node, const FoundPath &foundPath)
+//    {
+//        clMisc::Path path;
+//        loadPaths(node, path, foundPath);
+//    }
+
+    void FileLoader::updateModFiles()
+    {
+        modFiles.clear();
+        for (auto &fileData : fileDataVec)
+        {
+            auto &savedNode = (**savedNsp).find(fileData.path);
+            auto &currNode = globalNsp().find(fileData.path);
+
+            if (!savedNode.compare(currNode))
+                modFiles.insert({fileData.filePath, fileData});
+        }
+    }
+
+//    void FileLoader::updateFiles()
+//    {
+//        modPaths.clear();
+//
+//        loadPaths(**savedNsp, [&](const clMisc::Path &path, const clNode::Node &node)
+//        {
+//            my_assert(modPaths.insert({path, &node}).second);
+//        });
+//
+//        loadPaths(globalNsp(), [&](const clMisc::Path &path, const clNode::Node &node)
+//        {
+//            auto it = modPaths.find(path);
+//
+////            CHILA_LIB_MISC__SHOW(40, (it != modPaths.end()));
+//
+//            if (it != modPaths.end())
+//            {
+//                CHILA_LIB_MISC__SHOW(40, "here");
+//                if (it->second->compare(node))
+//                    modPaths.erase(it);
+//            }
+//        });
+//    }
+
+//    FileLoader::PathFileDataMap FileLoader::findModifiedFiles()
+//    {
+//        PathFileDataMap ret;
+//
+//        for (auto &vt : modPaths)
+//        {
+//            auto &path = vt.first;
+//            auto *node = vt.second;
+//
+//            for (auto &fileData : fileDataVec)
+//            {
+//                if (path.startsWith(fileData.path))
+//                {
+//                    ret.insert({fileData.filePath, fileData});
+//                }
+//            }
+//        }
+//
+//        return ret;
+//    }
 
 }
 MY_NSP_END

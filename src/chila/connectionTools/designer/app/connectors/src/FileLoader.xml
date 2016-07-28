@@ -23,7 +23,7 @@
     <!-- Arguments -->
     <arguments>
         <arg name="moduleName" description="Module name"/>
-        <arg name="filePath" description="The path to the file"/>
+        <arg name="filesData" description="The path to the file"/>
         <arg name="nodePath" description="A tree node's path"/>
         <arg name="nodeId" description="A node id"/>
         <arg name="value" description="A node's value"/>
@@ -45,26 +45,24 @@
             <action name="finish" arguments="" description="Finishes the module" events="launcher:finished"/>
         </group>
 
-        <action name="loadCPerformer" arguments="filePath" description="Loads a ConnectionPerformer"/>
+        <action name="loadFiles" arguments="filesData" description="Loads a Connector"/>
 
-        <action name="loadConnector" arguments="filePath" description="Loads a Connector"/>
-
-        <action name="performAction" arguments="nodePath, action, value" events="saveDesignTreeState, restoreDesignTreeState, clearOutput, outputText, nodeFound, nodeSelected, nodeRemoved, removeChildren, actionNotPerformed, valueFound"/>
+        <action name="performAction" arguments="nodePath, action, value" events="saveDesignTreeState, restoreDesignTreeState, removeAllChildren, clearOutput, outputText, nodeFound, nodeSelected, nodeRemoved, removeChildren, actionNotPerformed, valueFound"/>
 
 
-        <action name="undo" arguments=""/>
+        <action name="undo" arguments="" events="nodeFound, valueFound, clearOutput, outputText, removeAllChildren, saveDesignTreeState, restoreDesignTreeState"/>
 
-        <action name="redo" arguments=""/>
+        <action name="redo" arguments="" events="nodeFound, valueFound, clearOutput, outputText, removeAllChildren, saveDesignTreeState, restoreDesignTreeState"/>
 
-        <action name="save" arguments=""/>
+        <action name="save" arguments="" events="clearOutput, outputText"/>
 
-        <action name="moveUp" arguments="nodePath" events="saveDesignTreeState, restoreDesignTreeState, nodeFound, nodeRemoved, removeChildren, valueFound, nodeSelected, clearOutput, outputText"/>
+        <action name="moveUp" arguments="nodePath" events="saveDesignTreeState, restoreDesignTreeState, removeAllChildren, nodeFound, nodeRemoved, removeChildren, valueFound, nodeSelected, clearOutput, outputText"/>
 
-        <action name="moveDown" arguments="nodePath" events="saveDesignTreeState, restoreDesignTreeState, nodeFound, nodeRemoved, removeChildren, valueFound, nodeSelected, clearOutput, outputText"/>
+        <action name="moveDown" arguments="nodePath" events="saveDesignTreeState, restoreDesignTreeState, removeAllChildren, nodeFound, nodeRemoved, removeChildren, valueFound, nodeSelected, clearOutput, outputText"/>
 
         <action name="giveActionList" arguments="nodePath" events="actionListFound"/>
 
-        <action name="refreshTree" arguments="" events="nodeFound, valueFound, clearOutput, outputText"/>
+        <action name="refreshTree" arguments="" events="nodeFound, valueFound, clearOutput, outputText, removeAllChildren, saveDesignTreeState, restoreDesignTreeState"/>
 
         <action name="requestFlowNodes" arguments="" events="flowNodeFound, noMoreFlowNodes"/>
 
@@ -111,6 +109,8 @@
         <event name="nodeSelected" arguments="nodePath, openNode" description="A node has been selected"/>
 
         <event name="removeChildren" arguments="nodePath" description="Remove the node's children."/>
+
+        <event name="removeAllChildren" arguments="" description="Remove all children."/>
 
         <event name="actionListFound" arguments="nodePath, actionList" description="Two nodes has been switched"/>
 

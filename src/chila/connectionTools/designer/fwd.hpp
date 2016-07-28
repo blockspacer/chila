@@ -13,6 +13,8 @@
 MY_NSP_START
 {
     namespace clMisc = chila::lib::misc;
+
+    using PathSet = std::set<boost::filesystem::path>;
 }
 MY_NSP_END
 

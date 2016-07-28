@@ -12,6 +12,7 @@
 #include "connection/FileLoader.hpp"
 #include "fwd.hpp"
 #include <list>
+#include <boost/range/algorithm/remove_if.hpp>
 
 #define MODULE_NAME FileLoader
 
@@ -21,6 +22,8 @@ MY_NSP_START
 {
     using StringSet = std::set<std::string>;
     using StringVec = std::vector<std::string>;
+    using PathSet = std::set<boost::filesystem::path>;
+    using PathVec = std::vector<boost::filesystem::path>;
 
     struct Action
     {
@@ -60,8 +63,7 @@ MY_NSP_START
             void MOD_ACTION_SIG(launcher_deactivate) { execute_event(launcher_deactivated)(); }
             void MOD_ACTION_SIG(launcher_finish);
 
-            void MOD_ACTION_SIG(loadCPerformer);
-            void MOD_ACTION_SIG(loadConnector);
+            void MOD_ACTION_SIG(loadFiles);
             void MOD_ACTION_SIG(refreshTree);
 
             void MOD_ACTION_SIG(performAction);
@@ -94,10 +96,18 @@ MY_NSP_START
             using FlowNodesMap = std::map<clMisc::Path, clMisc::Path>;
             FlowNodesMap fnMap;
 
+            using GoToRefWPosFun = std::function<void(const clNode::Node&, const ev_executer_type(performAction)&)>;
+            using GoToRefWPosValMap = std::map<std::string, GoToRefWPosFun>;
+            using GoToRefWPosMap = std::map<boost::typeindex::type_index, GoToRefWPosValMap>;
+
+            GoToRefWPosMap goToRefWPosMap;
+
             lib::AddPosibilities addPosibilities;
             ClmPathVec flowCInstances;
 
             ClmPathSet flowCInstancesDim;
+
+            PathVec recoveredFiles;
 
             using CInsVec = std::vector<const cclTree::cPerformer::ConnectorInstance*>;
             using PCInsMap = std::map<clMisc::Path, CInsVec>;
@@ -116,6 +126,7 @@ MY_NSP_START
                     void eraseTreePath(const clMisc::Path &nodePath, bool onlyChildren = false);
                     const clMisc::Path &getNodePath(const clMisc::Path &treePath) const;
                     const clMisc::Path &getTreePath(const clMisc::Path &nodePath) const;
+                    std::pair<clMisc::Path, clMisc::Path> getExistingParentTreePath(const clMisc::Path &nodePath) const;
                     const clMisc::Path &findTreePath(const clMisc::Path &nodePath) const;
                     void clear() { nodeTreeMap.clear(); treeNodeMap.clear(); }
 
@@ -128,50 +139,34 @@ MY_NSP_START
 
             } tPathMap;
 
-            using ValueForFun = boost::function<std::string(const chila::lib::node::Node&)>;
+            using ValueForFun = std::function<std::string(const chila::lib::node::Node&)>;
             using ValueForMap = std::map<boost::typeindex::type_index, ValueForFun>;
             ValueForMap valueForMap;
 
-            struct DeactivateUndo
-            {
-                FileLoader &loader;
-                DeactivateUndo(FileLoader &loader) : loader(loader) { loader.undoActive = false; }
-                ~DeactivateUndo() { loader.undoActive = true; }
-            };
+            using NspVec = std::deque<cclTree::NamespaceSPtr>;
+            NspVec globalNsps;
+            using NspVecIt = NspVec::iterator;
+            NspVecIt currNsp, savedNsp;
 
             struct FileData
             {
-                boost::filesystem::path path;
-                bool modified;
-                FileData(const boost::filesystem::path &path) :
-                    path(path), modified(false) {}
+                boost::filesystem::path filePath;
+                clMisc::Path path;
+                FileData(const boost::filesystem::path &filePath, const clMisc::Path &path) :
+                    filePath(filePath), path(path) {}
             };
 
-            struct ConnectorData : public FileData
-            {
-                cclTree::connector::Connector *object;
-                ConnectorData(const boost::filesystem::path &path, cclTree::connector::Connector *connector) :
-                    FileData(path), object(connector) {}
-            };
+            using FileDataVec = std::vector<FileData>;
+            FileDataVec fileDataVec;
 
-            struct CPData : public FileData
-            {
-                cclTree::cPerformer::ConnectionPerformer *object;
-                CPData(const boost::filesystem::path &path, cclTree::cPerformer::ConnectionPerformer *cPerformer) :
-                    FileData(path), object(cPerformer) {}
-            };
+            using PathFileDataMap = std::map<boost::filesystem::path, FileData>;
 
-            using ConnectorVector = std::vector<ConnectorData>;
-            ConnectorVector connectors;
-
-            using CPerfVec = std::vector<CPData>;
-
-            CPerfVec cpVec;
+            using ClmPathNodeMap = std::map<clMisc::Path, const clNode::Node*>;
+            PathFileDataMap modFiles;
 
             bool showFunEvents;
 
             boost::asio::io_service &ioService;
-            cclTree::Namespace globalNsp;
 
             using UndoRedoAList = std::list<ActionSPtr>;
             UndoRedoAList actions;
@@ -187,17 +182,15 @@ MY_NSP_START
 
             NodeWalkVec nodeWalkVec;
 
-            using PathSet = std::set<clMisc::Path>;
-
             using EvRefMap = std::map<std::string, const cclTree::connector::EventRef*>;
 
             clMisc::Path cutPathFrom;
 
             template <typename EventExecuter>
-            void check(const EventExecuter &eventExecuter) const;
+            void check(const EventExecuter &eventExecuter);
 
             template <typename EventExecuter>
-            void sendArgErrorEvents(const chila::lib::misc::Path &path, const PathSet &set, const EventExecuter &eventExecuter) const;
+            void sendArgErrorEvents(const chila::lib::misc::Path &path, const ClmPathSet &set, const EventExecuter &eventExecuter) const;
 
             template <typename EventExecuter>
             void sendErrorEvents(const std::exception &ex, const EventExecuter &eventExecuter) const;
@@ -218,7 +211,7 @@ MY_NSP_START
             void loadGroup(lib::ActionMap &actionMap);
             cclTree::cPerformer::ConnectorInstance &getCInstance(const clMisc::Path &cInsPath);
 
-            using MoveNodeFun = std::function<std::string(chila::lib::node::NodeWithChildren &parent, const std::string &name, bool isVec)>;
+            using MoveNodeFun = std::function<clNode::Node&(chila::lib::node::NodeWithChildren &parent, const std::string &name, bool isVec)>;
 
             template <typename EventExecuter>
             void moveNode(const chila::lib::misc::Path &treeNodePath, const EventExecuter &eventExecuter, const MoveNodeFun &fun);
@@ -229,19 +222,19 @@ MY_NSP_START
 //            void walkFlowNodes(const clMisc::Path &flowNodePath,
 //                               const cclTree::cPerformer::ConnectorInstance &cInstance,
 //                               const CInsVec &cInsVec,
-//                               PathSet &walkedNodes,
+//                               ClmPathSet &walkedNodes,
 //                               const CInstanceSet &flowCInstancesDimNodes,
 //                               ev_executer_arg(requestFlowNodes));
 
             void walkFlowNodes(const clMisc::Path &flowNodePath,
                                const cclTree::cPerformer::EventCall &evCall,
-                               PathSet &walkedNodes,
+                               ClmPathSet &walkedNodes,
                                const CInstanceSet &flowCInstancesDimNodes,
                                ev_executer_arg(requestFlowNodes));
 
             void walkFlowNodes(const clMisc::Path &flowNodePath,
                                const cclTree::cPerformer::ActionInstance &aInstance,
-                               PathSet &walkedNodes,
+                               ClmPathSet &walkedNodes,
                                const CInstanceSet &flowCInstancesDimNodes,
                                ev_executer_arg(requestFlowNodes));
 
@@ -266,10 +259,10 @@ MY_NSP_START
             CInstanceSet getCInstancesHLNodes(const ClmPathSet &paths);
 
             template <typename EventExecuter>
-            void walkNode(const clMisc::Path &parentNodePath, const clNode::Node &node, const EventExecuter &eventExecuter);
+            void walkNode(const std::string &prefix, const clMisc::Path &parentNodePath, const clNode::Node &node, const EventExecuter &eventExecuter);
 
             template <typename EventExecuter>
-            void walkChildrenNodes(const clMisc::Path &treeNodePath, const clNode::Node &node, const EventExecuter &eventExecuter);
+            void walkChildrenNodes(const std::string &prefix, const clMisc::Path &treeNodePath, const clNode::Node &node, const EventExecuter &eventExecuter);
 
             std::string findColor(const boost::typeindex::type_index &index);
 
@@ -278,11 +271,6 @@ MY_NSP_START
 
             std::string getValueFor(const chila::lib::node::Node &node);
 
-            template <typename EventExecuter>
-            void refreshDesignTreeAndMM(const clMisc::Path &nodePath, const EventExecuter &eventExecuter);
-
-            void markModified(const clMisc::Path &nodePath);
-
             void loadPCInsMap(const chila::lib::node::NodeWithChildren &root);
 
             const CInsVec &getCInstances(const clMisc::Path &path) const;
@@ -290,11 +278,58 @@ MY_NSP_START
 
             void walkEvCallFNode(const cclTree::cPerformer::EventCall &evCall,
                                  const clMisc::Path &flowNodePath,
-                                 PathSet &walkedNodes,
+                                 ClmPathSet &walkedNodes,
                                  const CInstanceSet &flowCInstancesDimNodes,
                                  const CInsVec &cInsVec,
                                  ev_executer_arg(requestFlowNodes));
 
+            std::string flGetEnhancedDesc(const cclTree::cPerformer::ActionInstance &actionIns, bool singleLine);
+            std::string flGetEnhancedDesc(const cclTree::cPerformer::EventCall &evCall, bool singleLine);
+            std::string flGetEnhancedDesc(const clMisc::Path &cInsPath, bool singleLine);
+
+            void pushGlobalNsp(const cclTree::NamespaceSPtr &nsp);
+            clNode::Node &editNode(const chila::lib::misc::Path &nodePath);
+
+            cclTree::Namespace &globalNsp();
+            const cclTree::Namespace &globalNsp() const;
+
+            template <typename EventExecuter>
+            void refresh(const EventExecuter &eventExecuter);
+
+            void saveObject(const FileData &data, bool isRecovery);
+
+            void cloneNodes(const ClmPathVec &paths);
+
+            void saveFiles(bool isRecovery);
+
+//            PathFileDataMap findModifiedFiles();
+
+            void updateModFiles();
+            void cleanTmpFiles();
+
+            static boost::filesystem::path appendExtension(const boost::filesystem::path &path, const std::string &extension)
+            {
+                return path.parent_path() / (path.filename().string() + "." + extension);
+            }
+
+            static boost::filesystem::path getRecoveryPath(const boost::filesystem::path &path)
+            {
+                return appendExtension(path, "recovery~");
+            }
+
+            static boost::filesystem::path getTemporalPath(const boost::filesystem::path &path)
+            {
+                return appendExtension(path, "~");
+            }
+
+            template <typename Type>
+            void loadObject(const boost::filesystem::path &filePath, bool isRecovery);
+
+            void loadFilesPrv(const PathSet &cpFiles, const PathSet &connFiles, bool isRecovery);
+
+            static bool checkRecFiles(const PathSet &files);
+
+            static bool checkRecovery(const boost::filesystem::path &path);
     };
 }
 MY_NSP_END

@@ -83,8 +83,8 @@ MY_NSP_START
         add_toolbar_button(moveUp);
         add_toolbar_button(moveDown);
 
-//        add_toolbar_button(undo);
-//        add_toolbar_button(redo);
+        add_toolbar_button(undo);
+        add_toolbar_button(redo);
 //        add_toolbar_button(goBack);
 //        add_toolbar_button(goForward);
 
@@ -271,6 +271,12 @@ MY_NSP_START
         shouldRefreshFlow = true;
     }
 
+    void MainWindow::MOD_ACTION_SIG(removeAllChildren)
+    {
+        designData.treeStore->clear();
+        designData.rowMap.clear();
+    }
+
     void MainWindow::MOD_ACTION_SIG(removeChildren)
     {
         auto it = designData.rowMap.find(nodePath);
@@ -334,6 +340,16 @@ MY_NSP_START
         refreshFlowNodes(eventExecuter);
     };
 
+
+    clMisc::Path MainWindow::getSelectedNodePath(const TreeData &treeData)
+    {
+        auto it = treeData.tree->get_selection()->get_selected();
+        if (!it) return chila::lib::misc::Path();
+
+        auto &row = *it;
+
+        return (chila::lib::misc::Path) row[designData.columnRecord.id];
+    };
 
     void MainWindow::MOD_ACTION_SIG(launcher_start)
     {
@@ -476,25 +492,19 @@ MY_NSP_START
                 }
             });
 
-        auto getSelectedNodePath = [this]()
-        {
-            auto it = widgets.designTree->get_selection()->get_selected();
-            if (!it) return chila::lib::misc::Path();
-
-            auto &row = *it;
-
-            return (chila::lib::misc::Path) row[designData.columnRecord.id];
-        };
-
         actions.save->signal_activate().connect_notify([this, eventExecuter] { execute_event(saveRequest)(); });
-        actions.moveUp->signal_activate().connect_notify([this, getSelectedNodePath, eventExecuter]
+
+        actions.undo->signal_activate().connect_notify([this, eventExecuter] { execute_event(undoRequest)(); });
+        actions.redo->signal_activate().connect_notify([this, eventExecuter] { execute_event(redoRequest)(); });
+
+        actions.moveUp->signal_activate().connect_notify([this, eventExecuter]
         {
-            execute_event(moveUpRequest)(getSelectedNodePath());
+            execute_event(moveUpRequest)(getSelectedNodePath(designData));
         });
 
-        actions.moveDown->signal_activate().connect_notify([this, getSelectedNodePath, eventExecuter]
+        actions.moveDown->signal_activate().connect_notify([this, eventExecuter]
         {
-            execute_event(moveDownRequest)(getSelectedNodePath());
+            execute_event(moveDownRequest)(getSelectedNodePath(designData));
         });
 
         widgets.mainWindow->signal_hide().connect_notify(boost::bind(boost::ref(connector.actions.launcher_finish)));
@@ -511,6 +521,8 @@ MY_NSP_START
     {
         expandedDesignNodes.clear();
 
+        lastDesignSelection = getSelectedNodePath(designData);
+
         saveDesignTreeStatePrv(widgets.designTree->get_model()->children());
     }
 
@@ -521,7 +533,7 @@ MY_NSP_START
 
         for (auto &row : children)
         {
-            if (tree.row_expanded(model->get_path(row))) // TODO Maybe it's better looking for the 'visibe' childs
+            if (tree.row_expanded(model->get_path(row))) // TODO Maybe it's better looking for the 'visible' children
             {
                 auto rowChildren = row->children();
 
@@ -545,6 +557,8 @@ MY_NSP_START
                 tree.expand_to_path(model->get_path(it->second.row));
             }
         }
+
+        selectTreeNode(designData, lastDesignSelection);
     }
 
 
@@ -572,7 +586,7 @@ MY_NSP_START
     {
         if (!timer) return;
 
-        static boost::function<void(const boost::system::error_code &)> fun(
+        static std::function<void(const boost::system::error_code &)> fun(
             boost::bind(&MainWindow::timerExpired, this, _1));
         timer->expires_from_now(boost::posix_time::milliseconds(10));
         timer->async_wait(fun);
@@ -762,6 +776,7 @@ MY_NSP_START
         auto parentPath = nodePath;
         parentPath.pop();
 
+//        CHILA_LIB_MISC__SHOW(40, nodePath);
         auto it = data.rowMap.find(nodePath);
         if (it != data.rowMap.end())
         {
@@ -820,16 +835,21 @@ MY_NSP_START
             flowNodesToExpand.clear();
         }
 
-        if (!lastFlowSelection.empty())
+        selectTreeNode(flowData, lastFlowSelection);
+
+        updateFlowSelection(eventExecuter);
+    }
+
+    void MainWindow::selectTreeNode(const TreeData &treeData, const clMisc::Path &path)
+    {
+        if (!path.empty())
         {
-            auto it = flowData.rowMap.find(lastFlowSelection);
-            if (it != flowData.rowMap.end())
+            auto it = designData.rowMap.find(path);
+            if (it != designData.rowMap.end())
             {
                 auto &row = it->second.row;
 
-                widgets.flowTree->get_selection()->select(row);
-
-                updateFlowSelection(eventExecuter);
+                treeData.tree->get_selection()->select(row);
             }
         }
     }

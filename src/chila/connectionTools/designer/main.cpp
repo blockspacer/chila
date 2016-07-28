@@ -97,7 +97,7 @@ int main(int argc, char** argv) try
 
     chila::lib::misc::XMLAccessor projectAccessor(rootElem);
 
-    app::Main main(ioService, projectAccessor, gladeFile, vm.count("verbose"));
+    app::Main main(ioService, projectAccessor, designerHome, vm.count("verbose"));
     main.start();
 
     ioService.run();
@@ -113,12 +113,12 @@ catch (const chila::lib::node::CheckExceptionList &ex)
     }
     return EXIT_FAILURE;
 }
-catch (const chila::lib::node::Exception &ex)
+catch (const chila::connectionTools::lib::tree::Exception &ex)
 {
     showException(ex);
     return EXIT_FAILURE;
 }
-catch (const chila::connectionTools::lib::tree::Exception &ex)
+catch (const chila::lib::node::Exception &ex)
 {
     showException(ex);
     return EXIT_FAILURE;

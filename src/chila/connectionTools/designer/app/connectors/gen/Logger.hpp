@@ -121,9 +121,11 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         typedef _ArgTypes ArgTypes;
 
         // Arguments
-        CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ARGUMENTS( \
-            CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN, Logger)
-
+        struct Arguments
+        {
+            CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ARGUMENTS( \
+                CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN, Logger)
+        };
         // Events
         struct Events
         {

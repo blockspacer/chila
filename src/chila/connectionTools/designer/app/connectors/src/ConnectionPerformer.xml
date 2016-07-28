@@ -23,7 +23,6 @@
     <!-- Aliases -->
     <arguments>
         <argument name="moduleName" description=""/>
-        <argument name="filePath" description=""/>
         <argument name="nodePath" description=""/>
         <argument name="nodeId" description=""/>
         <argument name="name" description=""/>
@@ -70,7 +69,6 @@
         <alias name="FileLoader" connectorPath="chila.connectionTools.designer.app.connectors.gen.FileLoader">
             <arguments>
                 <argument name="moduleName" cpName="moduleName"/>
-                <argument name="filePath" cpName="filePath"/>
                 <argument name="nodePath" cpName="nodePath"/>
                 <argument name="nodeId" cpName="nodeId"/>
                 <argument name="value" cpName="value"/>
@@ -331,6 +329,13 @@
                 <aProviderCreators/>
                 <actions>
                     <action connector="mainWindow" name="removeChildren" determinesOrder="false"/>
+                </actions>
+            </event>
+
+            <event name="removeAllChildren" description="">
+                <aProviderCreators/>
+                <actions>
+                    <action connector="mainWindow" name="removeAllChildren" determinesOrder="false"/>
                 </actions>
             </event>
 

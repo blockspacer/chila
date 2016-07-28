@@ -46,6 +46,7 @@ MY_NSP_START
             void MOD_ACTION_SIG(addNode);
             void MOD_ACTION_SIG(removeNode);
             void MOD_ACTION_SIG(removeChildren);
+            void MOD_ACTION_SIG(removeAllChildren);
             void MOD_ACTION_SIG(setNodeValue);
             void MOD_ACTION_SIG(showActions);
             void MOD_ACTION_SIG(renameNode);
@@ -152,7 +153,7 @@ MY_NSP_START
             using PathSet = std::set<clMisc::Path>;
             PathSet expandedDesignNodes, expandedFlowNodes, flowNodesToExpand;
 
-            clMisc::Path lastFlowSelection;
+            clMisc::Path lastFlowSelection, lastDesignSelection;
 
             GdkEventButton lastEventButton;
             bool textOver, shouldRefreshFlow;
@@ -213,6 +214,9 @@ MY_NSP_START
                 bool appendEmpty);
 
             void saveDesignTreeStatePrv(const Gtk::TreeNodeChildren &children);
+
+            clMisc::Path getSelectedNodePath(const TreeData &treeData);
+            void selectTreeNode(const TreeData &treeData, const clMisc::Path &path);
     };
 }
 MY_NSP_END

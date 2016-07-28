@@ -27,7 +27,6 @@
 // ------------------------------- Argument aliases utility macros ------------------------------------
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__ARG_ALIAS_SEQ \
     (moduleName) \
-    (filePath) \
     (nodePath) \
     (nodeId) \
     (name) \
@@ -65,7 +64,6 @@
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONN_ALIAS_AALINK_SEQ_FileLoader \
     ((moduleName)(moduleName)) \
-    ((filePath)(filePath)) \
     ((nodePath)(nodePath)) \
     ((nodeId)(nodeId)) \
     ((value)(value)) \
@@ -2187,6 +2185,65 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
             );
         }
 
+        // fileLoader_removeAllChildren --------------------------------------------------------------------------------------------
+        struct Tag_fileLoader_removeAllChildren {};
+
+        template
+        <
+            typename Action_mainWindow_removeAllChildren
+        >
+        struct Ex_fileLoader_removeAllChildren
+        {
+            typedef void result_type;
+
+            const Action_mainWindow_removeAllChildren &act_mainWindow_removeAllChildren;
+
+            Ex_fileLoader_removeAllChildren
+            (
+                const Action_mainWindow_removeAllChildren &act_mainWindow_removeAllChildren
+            ) :
+                act_mainWindow_removeAllChildren(act_mainWindow_removeAllChildren)
+            {}
+
+            void operator()
+            (
+            ) const
+            {
+                // Arguments -----------------------------------------------------------------
+
+                // Providers -----------------------------------------------------------------
+                // Actions -------------------------------------------------------------------
+                // mainWindow.actions.removeAllChildren
+                EXECUTE_ACTION
+                (
+                    mainWindow, removeAllChildren,
+                );
+
+            }
+        };
+
+        template
+<
+            typename Action_mainWindow_removeAllChildren
+        >
+        inline static Ex_fileLoader_removeAllChildren
+        <
+            Action_mainWindow_removeAllChildren
+        >
+        ex_fileLoader_removeAllChildren
+        (
+            const Action_mainWindow_removeAllChildren &act_mainWindow_removeAllChildren
+        )
+        {
+            return Ex_fileLoader_removeAllChildren
+            <
+                Action_mainWindow_removeAllChildren
+            >
+            (
+                act_mainWindow_removeAllChildren
+            );
+        }
+
         // fileLoader_saveDesignTreeState ------------------------------------------------------------------------------------------
         struct Tag_fileLoader_saveDesignTreeState {};
 
@@ -2466,6 +2523,10 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
             cInstances.fileLoader.events.removeChildren.addFun(ex_fileLoader_removeChildren
             (
                 cInstances.mainWindow.actions.removeChildren
+            ));
+            cInstances.fileLoader.events.removeAllChildren.addFun(ex_fileLoader_removeAllChildren
+            (
+                cInstances.mainWindow.actions.removeAllChildren
             ));
             cInstances.fileLoader.events.saveDesignTreeState.addFun(ex_fileLoader_saveDesignTreeState
             (

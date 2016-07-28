@@ -39,7 +39,7 @@
     <actions>
 
         <group name="launcher" description="">
-            <action name="start" arguments="" description="Starts the module" events="launcher:started, flowNodesRequired, actionListRequired, saveRequest, flowNodeSelected, checkNodes,                                                         expandFlowNode, moveUpRequest, moveDownRequest"/>
+            <action name="start" arguments="" description="Starts the module" events="launcher:started, flowNodesRequired, actionListRequired, saveRequest, flowNodeSelected, checkNodes, expandFlowNode, moveUpRequest, moveDownRequest, undoRequest, redoRequest"/>
             <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated"/>
             <action name="finish" arguments="" description="Finishes the module" events="launcher:finished"/>
         </group>
@@ -59,6 +59,8 @@
         <action name="removeNode" arguments="nodePath" description="Remove a node"/>
 
         <action name="removeChildren" arguments="nodePath" description="Remove all children of a node"/>
+
+        <action name="removeAllChildren" arguments="" description="Removes design childrens"/>
 
         <action name="selectNode" arguments="nodePath, openNode" description="Selects a node"/>
 

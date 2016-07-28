@@ -16,7 +16,7 @@ MY_NSP_START
     boost::iterator_range<Iterator> getParentAndChildren(const Iterator &begin, const Iterator &end, const decltype(begin->first) &val)
     {
         return clMisc::getChildren(boost::make_iterator_range(begin, end),
-                    [&](const decltype(*begin) &vt) { return !vt.first.startsWith(val); });
+                    [&](const typename std::remove_reference<decltype(*begin)>::type &vt) { return !vt.first.startsWith(val); });
     }
 }
 MY_NSP_END

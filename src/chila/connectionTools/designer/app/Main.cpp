@@ -28,12 +28,12 @@ MY_NSP_START
     (
         boost::asio::io_service &ioService,
         const clMisc::XMLAccessor &projectAccessor,
-        const boost::filesystem::path &gladeFile,
+        const boost::filesystem::path &designerHome,
         bool showFunEvents
     ) :
         ioService(ioService),
         logger(app::impl::connection::Logger::create()),
-        mainWindow(app::impl::connection::MainWindow::create(ioService, gladeFile, showFunEvents)),
+        mainWindow(app::impl::connection::MainWindow::create(ioService, designerHome / "mainWindow-v2.glade", showFunEvents)),
         fileLoader(app::impl::connection::FileLoader::create(ioService,
             loadPaths<ClmPathVec>
             (
@@ -76,15 +76,7 @@ MY_NSP_START
 
     void Main::started()
     {
-        for (const auto &connPath : connFiles)
-        {
-            ioService.post([=](){ cast_cprovider(FileLoader, fileLoader)->getConnector().actions.loadConnector(connPath); });
-        }
-
-        for (const auto &cpFile : cpFiles)
-        {
-            ioService.post([=](){ cast_cprovider(FileLoader, fileLoader)->getConnector().actions.loadCPerformer(cpFile); });
-        }
+        ioService.post([=](){ cast_cprovider(FileLoader, fileLoader)->getConnector().actions.loadFiles({cpFiles, connFiles}); });
 
         ioService.post(boost::bind(boost::ref(cast_cprovider(FileLoader, fileLoader)->getConnector().actions.refreshTree)));
     }

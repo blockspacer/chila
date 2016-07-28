@@ -21,7 +21,6 @@
 MY_NSP_START
 {
     using PathVec = std::vector<boost::filesystem::path>;
-    using PathSet = std::set<boost::filesystem::path>;
     using chila::connectionTools::lib::codegen::ConnectorMap;
     namespace cclOther = chila::connectionTools::lib::other;
 
@@ -32,7 +31,7 @@ MY_NSP_START
             (
                 boost::asio::io_service &ioService,
                 const clMisc::XMLAccessor &projectAccessor,
-                const boost::filesystem::path &gladeFile,
+                const boost::filesystem::path &designerHome,
                 bool showFunEvents
             );
 
@@ -49,8 +48,6 @@ MY_NSP_START
 
             ConnectorMap cMap;
             cclOther::Launcher launcher;
-
-
 
             using WorkSPtr = std::shared_ptr<boost::asio::io_service::work>;
             WorkSPtr work;

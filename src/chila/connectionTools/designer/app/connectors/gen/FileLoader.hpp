@@ -34,7 +34,7 @@
 // Arguments defines
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ARGS_FileLoader \
     (moduleName) \
-    (filePath) \
+    (filesData) \
     (nodePath) \
     (nodeId) \
     (value) \
@@ -66,6 +66,7 @@
     (nodeRemoved) \
     (nodeSelected) \
     (removeChildren) \
+    (removeAllChildren) \
     (actionListFound) \
     (nodeRenamed) \
     (flowNodeFound) \
@@ -107,6 +108,8 @@
     (nodePath)(openNode)
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FileLoader_removeChildren \
     (nodePath)
+#define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FileLoader_removeAllChildren \
+
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FileLoader_actionListFound \
     (nodePath)(actionList)
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_EVENT_ARGS_FileLoader_nodeRenamed \
@@ -125,8 +128,7 @@
     (launcher_start) \
     (launcher_deactivate) \
     (launcher_finish) \
-    (loadCPerformer) \
-    (loadConnector) \
+    (loadFiles) \
     (performAction) \
     (undo) \
     (redo) \
@@ -147,10 +149,8 @@
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FileLoader_launcher_finish \
 
-#define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FileLoader_loadCPerformer \
-    (filePath)
-#define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FileLoader_loadConnector \
-    (filePath)
+#define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FileLoader_loadFiles \
+    (filesData)
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FileLoader_performAction \
     (nodePath)(action)(value)
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_ARGS_FileLoader_undo \
@@ -188,35 +188,32 @@
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_launcher_finish \
     (launcher_finished)
 
-#define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_loadCPerformer \
-
-
-#define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_loadConnector \
+#define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_loadFiles \
 
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_performAction \
-    (saveDesignTreeState)(restoreDesignTreeState)(clearOutput)(outputText)(nodeFound)(nodeSelected)(nodeRemoved)(removeChildren)(actionNotPerformed)(valueFound)
+    (saveDesignTreeState)(restoreDesignTreeState)(removeAllChildren)(clearOutput)(outputText)(nodeFound)(nodeSelected)(nodeRemoved)(removeChildren)(actionNotPerformed)(valueFound)
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_undo \
-
+    (nodeFound)(valueFound)(clearOutput)(outputText)(removeAllChildren)(saveDesignTreeState)(restoreDesignTreeState)
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_redo \
-
+    (nodeFound)(valueFound)(clearOutput)(outputText)(removeAllChildren)(saveDesignTreeState)(restoreDesignTreeState)
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_save \
-
+    (clearOutput)(outputText)
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_moveUp \
-    (saveDesignTreeState)(restoreDesignTreeState)(nodeFound)(nodeRemoved)(removeChildren)(valueFound)(nodeSelected)(clearOutput)(outputText)
+    (saveDesignTreeState)(restoreDesignTreeState)(removeAllChildren)(nodeFound)(nodeRemoved)(removeChildren)(valueFound)(nodeSelected)(clearOutput)(outputText)
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_moveDown \
-    (saveDesignTreeState)(restoreDesignTreeState)(nodeFound)(nodeRemoved)(removeChildren)(valueFound)(nodeSelected)(clearOutput)(outputText)
+    (saveDesignTreeState)(restoreDesignTreeState)(removeAllChildren)(nodeFound)(nodeRemoved)(removeChildren)(valueFound)(nodeSelected)(clearOutput)(outputText)
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_giveActionList \
     (actionListFound)
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_refreshTree \
-    (nodeFound)(valueFound)(clearOutput)(outputText)
+    (nodeFound)(valueFound)(clearOutput)(outputText)(removeAllChildren)(saveDesignTreeState)(restoreDesignTreeState)
 
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN__CONNECTOR_ACTION_EVCALLED_FileLoader_requestFlowNodes \
     (flowNodeFound)(noMoreFlowNodes)
@@ -249,9 +246,11 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
         typedef _ArgTypes ArgTypes;
 
         // Arguments
-        CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ARGUMENTS( \
-            CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN, FileLoader)
-
+        struct Arguments
+        {
+            CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ARGUMENTS( \
+                CHILA_CONNECTIONTOOLS_DESIGNER_APP_CONNECTORS_GEN, FileLoader)
+        };
         // Events
         struct Events
         {
@@ -286,8 +285,7 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,designer,app,connectors,
             MY_BIND_ACTION(launcher_start);
             MY_BIND_ACTION(launcher_deactivate);
             MY_BIND_ACTION(launcher_finish);
-            MY_BIND_ACTION(loadCPerformer);
-            MY_BIND_ACTION(loadConnector);
+            MY_BIND_ACTION(loadFiles);
             MY_BIND_ACTION(performAction);
             MY_BIND_ACTION(undo);
             MY_BIND_ACTION(redo);
