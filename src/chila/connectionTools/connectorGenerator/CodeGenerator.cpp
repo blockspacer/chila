@@ -234,8 +234,11 @@ MY_NSP_START
 
         // Generates the argument metadata
         out <<     "        // Arguments\n"
-            <<     "        CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ARGUMENTS( \\\n"
-            <<     "            " << cclTree::NspInserter(modNspPath) << ", " << connector.name() << ")\n\n";
+            <<     "        struct Arguments\n"
+            <<     "        {\n"
+            <<     "            CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ARGUMENTS( \\\n"
+            <<     "                " << cclTree::NspInserter(modNspPath) << ", " << connector.name() << ")\n"
+            <<     "        };\n";
 
         generateStrFunSeqs("Event", false);
 
