@@ -1,5 +1,20 @@
-/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
+/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra
  * (C.I.: 1.439.390 - Paraguay)
+ *
+ * This file is part of 'chila.lib'
+ *
+ * 'chila.lib' is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
+ *
+ * 'chila.lib' is distributed in the hope that
+ * it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with 'chila.lib'. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef CHILA_LIB_MISC__PATH_HPP
@@ -33,6 +48,7 @@ MY_NSP_START
 
             Path() {}
             Path(const_iterator begin, const_iterator end) : names(begin, end) {}
+
             Path(const char *path, const std::string &sep = ".") { load(path, sep); }
             Path(const std::string &path, const std::string &sep = ".") { load(path, sep); }
             Path(const Path &rhs) = default;
@@ -56,7 +72,9 @@ MY_NSP_START
 
             Path &add(const std::string &name)
             {
-                names.push_back(name);
+                if (!name.empty())
+                    names.push_back(name);
+
                 return *this;
             }
 
@@ -67,7 +85,10 @@ MY_NSP_START
             Path parent() const
             {
                 Path ret = *this;
-                ret.pop();
+
+                if (!ret.empty())
+                    ret.pop();
+
                 return ret;
             }
 
@@ -76,6 +97,8 @@ MY_NSP_START
             std::string getStringRep(const std::string &delim = ".") const;
 
             Path relative(const Path &to) const;
+
+            Path commonParent(const Path &to) const;
 
             bool operator<(const Path &rhs) const { return names < rhs.names; }
             bool operator==(const Path &rhs) const { return names == rhs.names; }
@@ -89,7 +112,9 @@ MY_NSP_START
 
             bool startsWith(const Path &rhs) const;
 
-            unsigned size() const { return names.size(); }
+            std::size_t size() const { return names.size(); }
+
+            void clear() { names.clear(); }
     };
 
     inline Path operator+(Path lhs, const char *name)

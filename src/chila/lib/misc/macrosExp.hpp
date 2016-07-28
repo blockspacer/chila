@@ -45,8 +45,8 @@
 #define CHILA_LIB_MISC__FWDEC_SPTR(Type) \
     typedef std::shared_ptr<Type> Type##SPtr; \
     typedef std::shared_ptr<const Type> Type##SCPtr; \
-    typedef boost::weak_ptr<Type> Type##WPtr; \
-    typedef boost::weak_ptr<const Type> Type##WCPtr; \
+    typedef std::weak_ptr<Type> Type##WPtr; \
+    typedef std::weak_ptr<const Type> Type##WCPtr; \
     typedef std::unique_ptr<Type> Type##UPtr; \
     typedef std::unique_ptr<const Type> Type##UCPtr; \
     typedef chila::lib::misc::SmartSUPtr<Type> Type##SUPtr; \

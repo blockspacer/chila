@@ -1,5 +1,20 @@
-/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
+/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra
  * (C.I.: 1.439.390 - Paraguay)
+ *
+ * This file is part of 'chila.lib'
+ *
+ * 'chila.lib' is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
+ *
+ * 'chila.lib' is distributed in the hope that
+ * it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with 'chila.lib'. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef CHILA_LIB_MISC__SINKINSERTER_HPP
@@ -7,11 +22,11 @@
 
 #include <iostream>
 
-#define CHILA_LIB_MISC__FSI_METHOD_BIND(method, owner) \
-    chila::lib::misc::funSinkInserter(boost::bind(&method, owner, _1))
+#define CHILA_LIB_MISC__FSI_METHOD_BIND(method) \
+    chila::lib::misc::funSinkInserter([&](std::ostream &out) { method(out); })
 
-#define CHILA_LIB_MISC__FSI_METHOD_BIND_WA(method, owner, ...) \
-    chila::lib::misc::funSinkInserter(boost::bind(&method, owner, _1, __VA_ARGS__))
+#define CHILA_LIB_MISC__FSI_METHOD_BIND_WA(method, ...) \
+    chila::lib::misc::funSinkInserter([&](std::ostream &out) { method(out, __VA_ARGS__); })
 
 #include "macros.fgen.hpp"
 

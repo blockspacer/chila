@@ -1,5 +1,20 @@
-/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
+/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra
  * (C.I.: 1.439.390 - Paraguay)
+ *
+ * This file is part of 'chila.lib'
+ *
+ * 'chila.lib' is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
+ *
+ * 'chila.lib' is distributed in the hope that
+ * it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with 'chila.lib'. If not, see <http://www.gnu.org/licenses/>.
  */
 
 //#warning Not tested
@@ -42,9 +57,9 @@ MY_NSP_START
                     BOOST_PP_IF(n, template <,) \
                         BOOST_PP_ENUM_PARAMS(n, typename Arg) \
                     BOOST_PP_IF(n, >,) \
-                    void operator()(BOOST_PP_ENUM_BINARY_PARAMS(n, Arg, &&arg)) \
+                    void operator()(BOOST_PP_ENUM_BINARY_PARAMS(n, const Arg, &arg)) \
                     { \
-                        getQueue().post([&]{ fun(BOOST_PP_ENUM_PARAMS(n, arg)); }); \
+                        getQueue().post([=]{ fun(BOOST_PP_ENUM_PARAMS(n, arg)); }); \
                     }
 
             BOOST_PP_REPEAT_FROM_TO(0, 49, CHILA_LIB_MISC__DEF_OPER,)

@@ -118,6 +118,30 @@ MY_NSP_START
         return std::static_pointer_cast<Target>(ptr);
     }
 
+    template <typename Target, typename Base>
+    inline const Target *dcast(const Base *object)
+    {
+        return dynamic_cast<const Target*>(object);
+    }
+
+    template <typename Target, typename Base>
+    inline Target *dcast(Base *object)
+    {
+        return dynamic_cast<Target*>(object);
+    }
+
+    template <typename Target, typename Base>
+    inline const Target &dcast(const Base &object)
+    {
+        return dynamic_cast<const Target&>(object);
+    }
+
+    template <typename Target, typename Base>
+    inline Target &dcast(Base &object)
+    {
+        return dynamic_cast<Target&>(object);
+    }
+
     template <typename Fun>
     inline void lockMutexWhile(boost::mutex &mutex, const Fun &fun)
     {
@@ -154,6 +178,13 @@ MY_NSP_START
     inline Type &deref(Type *data)
     {
         my_assert(data);
+        return *data;
+    }
+
+    template <typename Type>
+    inline Type &deref(const std::shared_ptr<Type> &data)
+    {
+        my_assert(bool(data));
         return *data;
     }
 
@@ -268,32 +299,6 @@ MY_NSP_START
     {
         void operator()(void const *) const {}
     };
-
-    template <typename Type>
-    Type getProgramOption(boost::program_options::variables_map &vm, const std::string &name)
-    {
-        if (vm.count(name))
-        {
-            return vm[name].as<Type>();
-        }
-        else
-        {
-            BOOST_THROW_EXCEPTION(ApplicationError("error: '" + name + "' argument is missing."));
-        }
-    }
-
-    template <typename Type>
-    Type getProgramOption(boost::program_options::variables_map &vm, const std::string &name, const Type &defVal)
-    {
-        if (vm.count(name))
-        {
-            return vm[name].as<Type>();
-        }
-        else
-        {
-            return defVal;
-        }
-    }
 
     template <typename Type>
     void showErrorInfo(std::ostream &out, const std::exception &ex, const std::string &name, bool extended = false)
@@ -510,6 +515,22 @@ MY_NSP_START
         return typename RefValHolder<Type>::type(val);
     }
 
+    template <typename Type>
+    inline const std::string &getNonEmpty(const Type &arg)
+    {
+        return arg;
+    }
+
+    template <typename Type, typename... Types>
+    inline const std::string &getNonEmpty(const Type &arg, const Types& ...args)
+    {
+        if (arg.empty())
+            return getNonEmpty(args...);
+        else
+            return arg;
+    }
+
+
     std::string escapeText(const std::string &text);
     std::string unescapeText(const std::string &text);
 
@@ -598,21 +619,9 @@ MY_NSP_START
         }
     }
 
-    template <typename Type>
-    inline const std::string &getNonEmpty(const Type &arg)
-    {
-        return arg;
-    }
+    void writeParagraph(const std::string &text, unsigned lineSize, const std::function<void(const std::string &line)> &fun);
 
-    template <typename Type, typename... Types>
-    inline const std::string &getNonEmpty(const Type &arg, const Types& ...args)
-    {
-        if (arg.empty())
-            return getNonEmpty(args...);
-        else
-            return arg;
-    }
-
+    bool filesAreEqual(const boost::filesystem::path &file0, const boost::filesystem::path &file1);
 
 }
 MY_NSP_END

@@ -7,6 +7,8 @@
 #include <boost/algorithm/string.hpp>
 #include <sstream>
 #include <boost/range/algorithm.hpp>
+#include <fstream>
+    #include <boost/filesystem/operations.hpp>
 #include "macros.fgen.hpp"
 
 MY_NSP_START
@@ -155,6 +157,51 @@ MY_NSP_START
        } /* endwhile */
        while (*pat == '*') ++pat;
        return !*pat;
+    }
+
+    void writeParagraph(const std::string &text, unsigned lineSize, const std::function<void(const std::string &line)> &fun)
+    {
+        auto range = boost::make_iterator_range(text);
+        while(range.size())
+        {
+            unsigned count = 0;
+            auto end = boost::find_if(range, [&](int c)
+            {
+                ++count;
+                return c == '\n' || (c == ' ' && count > lineSize);
+            });
+
+            fun(std::string(range.begin(), end));
+
+            if (end != range.end())
+                ++end;
+
+            range = boost::make_iterator_range(end, range.end());
+        };
+    }
+
+    bool filesAreEqual(const boost::filesystem::path &file0, const boost::filesystem::path &file1)
+    {
+        auto size0 = boost::filesystem::file_size(file0);
+        auto size1 = boost::filesystem::file_size(file1);
+
+        if (size0 != size1)
+            return false;
+
+        std::ifstream str0, str1;
+        str0.exceptions(std::ios::badbit | std::ios::failbit);
+        str1.exceptions(std::ios::badbit | std::ios::failbit);
+
+        str0.open(file0.c_str());
+        str1.open(file1.c_str());
+
+        for (unsigned i = 0; i < size0; ++i)
+        {
+            if (str0.get() != str1.get())
+                return false;
+        }
+
+        return true;
     }
 }
 MY_NSP_END

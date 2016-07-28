@@ -53,6 +53,7 @@ MY_NSP_START
         ((TypeFrom)(boost::typeindex::type_index)("type from"))
         ((TypeTo)(boost::typeindex::type_index)("type to"))
         ((ActualType)(boost::typeindex::type_index)("actual type"))
+        ((Type)(boost::typeindex::type_index)("type"))
     )
 
     struct AssertionFailed: public chila::lib::misc::Exception
