@@ -13,15 +13,10 @@
 #define BOOST_MPL_LIMIT_VECTOR_SIZE 50
 #include <boost/call_traits.hpp>
 #include <boost/function.hpp>
-#include <boost/mpl/vector.hpp>
-#include <boost/fusion/container/vector.hpp>
-#include <boost/fusion/container/generation/make_vector.hpp>
 #include <chila/lib/misc/MemFnExecuter.hpp>
 #include <chila/lib/misc/Path.hpp>
 #include <string>
 
-#include <boost/mpl/set.hpp>
-#include <chila/connectionTools/lib/codegen/ActionImplExecuter.hpp>
 #include <chila/connectionTools/lib/codegen/FunctionSigCreator.hpp>
 #include <chila/connectionTools/lib/codegen/EventExecuter.hpp>
 #include <chila/connectionTools/lib/codegen/Connector.hpp>
