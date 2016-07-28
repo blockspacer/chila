@@ -37,6 +37,7 @@
         <in>ConnectorCreator.cpp</in>
         <in>CreatorBase.cpp</in>
         <in>InsertProxy.cpp</in>
+        <in>ParseText.cpp</in>
         <in>types.cpp</in>
         <in>util.cpp</in>
       </df>
@@ -1029,6 +1030,22 @@
           </incDir>
           <undefinedList>
             <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
             <Elem>__NO_INLINE__</Elem>
           </undefinedList>
         </ccTool>
@@ -1067,6 +1084,22 @@
           </incDir>
           <undefinedList>
             <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
             <Elem>__NO_INLINE__</Elem>
           </undefinedList>
         </ccTool>
@@ -1077,10 +1110,12 @@
             flavor2="11">
         <ccTool flags="1">
           <incDir>
+            <pElem>..</pElem>
+            <pElem>/applib/boost/include/1.55</pElem>
             <pElem>../../../build/release/src</pElem>
             <pElem>../../../../../src</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
             <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
@@ -1101,6 +1136,20 @@
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
+          <undefinedList>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+          </undefinedList>
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/other/common/impl/Forwarder.cpp"
@@ -1165,10 +1214,12 @@
             flavor2="11">
         <ccTool flags="1">
           <incDir>
+            <pElem>..</pElem>
+            <pElem>/applib/boost/include/1.55</pElem>
             <pElem>../../../build/release/src</pElem>
             <pElem>../../../../../src</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
             <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
@@ -1189,6 +1240,22 @@
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
+          <undefinedList>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+            <Elem>__NO_INLINE__</Elem>
+          </undefinedList>
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/tree/CPerformerCreator.cpp"
@@ -1213,6 +1280,13 @@
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/tree/InsertProxy.cpp"
+            ex="false"
+            tool="1"
+            flavor2="11">
+        <ccTool flags="1">
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/lib/tree/ParseText.cpp"
             ex="false"
             tool="1"
             flavor2="11">
@@ -1295,8 +1369,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1331,8 +1405,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1367,8 +1441,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1403,8 +1477,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1439,8 +1513,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1511,8 +1585,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1587,8 +1661,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1630,8 +1704,8 @@
           <incDir>
             <pElem>../../../build/release/src</pElem>
             <pElem>../../../../../src</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
             <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
@@ -1708,8 +1782,8 @@
           <incDir>
             <pElem>../../../build/release/src</pElem>
             <pElem>../../../../../src</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
             <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
@@ -1737,8 +1811,8 @@
           <incDir>
             <pElem>../../../build/release/src</pElem>
             <pElem>../../../../../src</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
             <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
@@ -1766,8 +1840,8 @@
           <incDir>
             <pElem>../../../build/release/src</pElem>
             <pElem>../../../../../src</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../../../../../../usr/include/libxml2</pElem>
             <pElem>/usr/include/libxml2</pElem>
             <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
@@ -1795,8 +1869,8 @@
           <incDir>
             <pElem>../../../build/release/src</pElem>
             <pElem>../../../../../src</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1828,8 +1902,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
