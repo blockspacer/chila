@@ -32,7 +32,7 @@ MY_NSP_START
 
         DEF_CPROVIDER(Forwarder);
 
-        using ExecuterFun = boost::function<void(
+        using ExecuterFun = std::function<void(
                 const CProvider::Connector::Actions::MData_take::EventExecuter &eventExecuter,
                 const ObjectSCPtr &object)>;
 

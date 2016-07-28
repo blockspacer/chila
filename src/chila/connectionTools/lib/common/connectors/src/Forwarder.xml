@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<connector name="chila.connectionTools.lib.common.connectors.gen.Forwarder" description="Forwards an 'object', useful for converging actions, or to post to queues">
+<connector name="chila.connectionTools.lib.common.connectors.gen.Forwarder" description="Forwards an 'arguments.object', useful for converging actions, or to post to queues.">
     <!-- Arguments -->
     <arguments>
         <arg name="object" description=""/>
         <arg name="errorMsg" description=""/>
     </arguments>
-
     <!--  Events  -->
     <events>
-        <group name="launcher">
+        <group name="launcher" description="">
             <event name="starting" arguments="" description=""/>
             <event name="started" arguments="" description=""/>
             <event name="deactivating" arguments="" description=""/>
@@ -16,11 +15,9 @@
             <event name="finishing" arguments="" description=""/>
             <event name="finished" arguments="" description=""/>
         </group>
-
         <event name="fatalError" arguments="errorMsg" description=""/>
-        <event name="forwarded" arguments="object" description="Forwards the 'object'"/>
+        <event name="forwarded" arguments="object" description="Forwards the 'arguments.object'."/>
     </events>
-
     <!--  Actions  -->
     <actions>
         <group name="launcher" description="">
@@ -28,6 +25,6 @@
             <action name="deactivate" arguments="" description="Deactivates the module" events="launcher:deactivated, fatalError"/>
             <action name="finish" arguments="" description="" events="launcher:finished, fatalError"/>
         </group>
-        <action name="take" arguments="object" description="Takes the 'object'" events="forwarded, fatalError"/>
+        <action name="take" arguments="object" description="Takes the data to be forwarded to the action group." events="forwarded, fatalError"/>
     </actions>
 </connector>

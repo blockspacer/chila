@@ -13,10 +13,15 @@
 #define BOOST_MPL_LIMIT_VECTOR_SIZE 50
 #include <boost/call_traits.hpp>
 #include <boost/function.hpp>
+#include <boost/mpl/vector.hpp>
+#include <boost/fusion/container/vector.hpp>
+#include <boost/fusion/container/generation/make_vector.hpp>
 #include <chila/lib/misc/MemFnExecuter.hpp>
 #include <chila/lib/misc/Path.hpp>
 #include <string>
 
+#include <boost/mpl/set.hpp>
+#include <chila/connectionTools/lib/codegen/ActionImplExecuter.hpp>
 #include <chila/connectionTools/lib/codegen/FunctionSigCreator.hpp>
 #include <chila/connectionTools/lib/codegen/EventExecuter.hpp>
 #include <chila/connectionTools/lib/codegen/Connector.hpp>
@@ -111,9 +116,11 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,connectionTools,lib,common,connectors,ge
         typedef _ArgTypes ArgTypes;
 
         // Arguments
-        CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ARGUMENTS( \
-            CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN, FunDynXMLParser)
-
+        struct Arguments
+        {
+            CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ARGUMENTS( \
+                CHILA_CONNECTIONTOOLS_LIB_COMMON_CONNECTORS_GEN, FunDynXMLParser)
+        };
         // Events
         struct Events
         {

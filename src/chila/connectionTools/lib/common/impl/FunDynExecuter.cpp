@@ -22,7 +22,7 @@ MY_NSP_START
     connection::FunDynExecuter::CProviderUPtr connection::FunDynExecuter::create(
         const std::string &instanceName, const lib::other::dynFunExecuter::ExecuterMap &executerMap)
     {
-        return std::make_unique<impl::FunDynExecuter>(instanceName, executerMap);
+        return boost::make_unique<impl::FunDynExecuter>(instanceName, executerMap);
     }
 }
 MY_NSP_END

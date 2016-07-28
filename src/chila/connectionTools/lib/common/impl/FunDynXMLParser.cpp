@@ -30,7 +30,7 @@ MY_NSP_START
 
     connection::FunDynXMLParser::CProviderUPtr connection::FunDynXMLParser::create(const std::string &instanceName)
     {
-        return std::make_unique<impl::FunDynXMLParser>(instanceName);
+        return boost::make_unique<impl::FunDynXMLParser>(instanceName);
     }
 }
 MY_NSP_END
