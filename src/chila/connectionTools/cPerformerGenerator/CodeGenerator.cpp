@@ -174,7 +174,7 @@ MY_NSP_START
         printVec(headerOut, namePrinter, appNsp, "CONN_ALIAS_SEQ", cPerformer.connectorAliases());
         for (const auto &alias : cPerformer.connectorAliases())
         {
-            printVec(headerOut, caArgAliasPrinter, appNsp, "CONN_ALIAS_AALINK_SEQ_" + alias.name(), alias.argAliases(), 1);
+            printVec(headerOut, caArgAliasPrinter, appNsp, "CONN_ALIAS_AALINK_SEQ_" + alias.name(), alias.arguments(), 1);
         }
         headerOut << "\n";
 
@@ -486,7 +486,7 @@ MY_NSP_START
             switch (gen)
             {
                 case AAGE_TEMPLATE:         headerOut << INDENT << "typename " << typeName; break;
-                case AAGE_FIELD:            
+                case AAGE_FIELD:
                 case AAGE_ARG:              headerOut << INDENT << "const " << typeName << " &" << varName; break;
                 case AAGE_INIT_LIST:        headerOut << INDENT << varName << "(" << varName << ")"; break;
                 case AAGE_PASS_ARG_TYPE:    headerOut << INDENT << typeName; break;
@@ -648,8 +648,8 @@ MY_NSP_START
             << INDENT << "(\n"
             << INDENT << "    " << cInsFullId << ", " << action.action().value.getStringRep("_") << ",\n";
 
-        const auto &argAliases =
-            action.connInstance().referenced().connAlias().referenced().argAliases();
+        const auto &arguments =
+            action.connInstance().referenced().connAlias().referenced().arguments();
 
         bool first = true;
         for (const auto &fArg : action.action().referenced().arguments())
@@ -657,7 +657,7 @@ MY_NSP_START
             if (first) first = false;
             else out << ",\n";
 
-            auto &cpArg = argAliases.get(fArg.name()).cpRef().value;
+            auto &cpArg = arguments.get(fArg.name()).cpRef().value;
 
             out << INDENT << "    PASS_ARG(" << cInsFullId << ", " << action.action().value.getStringRep("_") << ", "
                     << chila::lib::misc::Path(fArg.name(), ":").getStringRep("_") << ", " << getArgText(aProvRange, cpArg.getStringRep(":")) << ")";
@@ -674,7 +674,7 @@ MY_NSP_START
 
         const auto &evCAArgAliases =
             eventCall.parent<cclTree::cPerformer::EventCallMap>()
-                     .parent<cclTree::cPerformer::ConnectorInstance>().connAlias().referenced().argAliases();
+                     .parent<cclTree::cPerformer::ConnectorInstance>().connAlias().referenced().arguments();
 
 
         for (const auto &arg : eventCall.referenced().arguments())
@@ -697,7 +697,7 @@ MY_NSP_START
         for (auto &action : eventCall.actions())
         {
             const auto &acCAArgAliases =
-                action.connInstance().referenced().connAlias().referenced().argAliases();
+                action.connInstance().referenced().connAlias().referenced().arguments();
 
             for (auto &arg : action.action().referenced().arguments())
             {
@@ -716,7 +716,7 @@ MY_NSP_START
     {
 //        const auto &caArgAliases =
 //            eventCall.parent<cclTree::cPerformer::EventCallMap>()
-//                     .parent<cclTree::cPerformer::ConnectorInstance>().connAlias().referenced().argAliases();
+//                     .parent<cclTree::cPerformer::ConnectorInstance>().connAlias().referenced().arguments();
 
         headerOut << INDENT << "// Arguments -----------------------------------------------------------------\n";
         auto neededArgs = getNeededCPArgs(eventCall);

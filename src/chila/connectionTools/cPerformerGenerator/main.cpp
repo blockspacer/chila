@@ -173,12 +173,12 @@ catch (const chila::lib::node::CheckExceptionList &ex)
     }
     return EXIT_FAILURE;
 }
-catch (const chila::lib::node::Exception &ex)
+catch (const chila::connectionTools::lib::tree::Exception &ex)
 {
     showException(ex);
     return EXIT_FAILURE;
 }
-catch (const chila::connectionTools::lib::tree::Exception &ex)
+catch (const chila::lib::node::Exception &ex)
 {
     showException(ex);
     return EXIT_FAILURE;
