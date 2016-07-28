@@ -130,9 +130,11 @@ CHILA_LIB_MISC__DEF_NAMESPACE(6, (chila,codex,base,app,connectors,gen))
         typedef _ArgTypes ArgTypes;
 
         // Arguments
-        CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ARGUMENTS( \
-            CHILA_CODEX_BASE_APP_CONNECTORS_GEN, ActionExecuter)
-
+        struct Arguments
+        {
+            CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ARGUMENTS( \
+                CHILA_CODEX_BASE_APP_CONNECTORS_GEN, ActionExecuter)
+        };
         // Events
         struct Events
         {
