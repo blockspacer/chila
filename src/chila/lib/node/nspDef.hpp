@@ -16,3 +16,25 @@
         exx << Type(*info);
 
 #define ADD_CONST_IF(InType, Type)  CHILA_LIB_MISC__ADD_CONST_IF_TN(Type, boost::is_const<InType>::value)
+
+#define CHILA_LIB_NODE__FRIEND_MAKE_SHARED_DEC(Name) \
+    std::shared_ptr<class Name> make##Name(); \
+    std::shared_ptr<class Name> make##Name(const Name &name); \
+
+#define CHILA_LIB_NODE__FRIEND_MAKE_SHARED_DEF(Name) \
+    namespace \
+    { \
+        struct concrete_##Name: public Name \
+        { \
+            concrete_##Name() = default; \
+            concrete_##Name(const Name &name) : Name(name) {} \
+        }; \
+    } \
+    inline std::shared_ptr<Name> make##Name() \
+    { \
+        return std::make_shared<concrete_##Name>(); \
+    } \
+    inline std::shared_ptr<Name> make##Name(const Name &name) \
+    { \
+        return std::make_shared<concrete_##Name>(); \
+    }

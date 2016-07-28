@@ -22,7 +22,7 @@ MY_NSP_START
 
 
 
-    class NodeWithChildren: public Node
+    class NodeWithChildren : public Node
     {
         public:
             typedef Node            value_type;
@@ -40,8 +40,8 @@ MY_NSP_START
                 }
             };
 
-            typedef node_iterator<NodeUPtrItVec::iterator, Node, DerefFun> iterator;
-            typedef node_iterator<NodeUPtrItVec::const_iterator, const Node, DerefFun> const_iterator;
+            typedef node_iterator<NodeSPtrItVec::iterator, Node, DerefFun> iterator;
+            typedef node_iterator<NodeSPtrItVec::const_iterator, const Node, DerefFun> const_iterator;
 
             /** Streams the node. */
             virtual void stream(std::ostream &out, unsigned indent = 0) const override;
@@ -95,43 +95,58 @@ MY_NSP_START
 
             unsigned size() const { return children.size(); }
 
-            std::string moveUp(const std::string &name, bool keepNames);
-            std::string moveDown(const std::string &name, bool keepNames);
+            Node &moveUp(const std::string &name, bool keepNames);
+            Node &moveDown(const std::string &name, bool keepNames);
 
             virtual void remove(const std::string &name) { removeNode(name); }
 
+            std::pair<NodeWithChildrenSPtr, Node&> cloneChild(const std::string &name) const;
+
+            void updateParents();
+
+            bool compare(const Node &node) const override;
+
+            void takeSimilar(const NodeWithChildren &rhs);
+
         protected:
-            template <typename Derived>
-            Derived &add(std::unique_ptr<Derived> node);
+            NodeWithChildren() = default;
+            NodeWithChildren(const NodeWithChildren &rhs);
+            NodeWithChildren(NodeWithChildren&&) = delete;
 
             template <typename Derived>
-            Derived &add(std::string name, std::unique_ptr<Derived> node)
+            Derived &add(std::shared_ptr<Derived> node);
+
+            template <typename Derived>
+            Derived &replace(std::shared_ptr<Derived> node);
+
+            template <typename Derived>
+            Derived &add(std::string name, std::shared_ptr<Derived> node)
             {
                 node->_name = rvalue_cast(name);
                 return add(rvalue_cast(node));
             }
 
-            NodeUPtr removeNode(const std::string &name);
+            NodeSPtr removeNode(const std::string &name);
 
-            std::vector<NodeUPtr> removeAll();
+            std::vector<NodeSPtr> removeAll();
 
         private:
-            NodeUPtrMap children;
-            NodeUPtrItVec itChildren;
+            NodeSPtrMap children;
+            NodeSPtrItVec itChildren;
 
-            NodeUPtrItVec::iterator findIt(const std::string &name);
+            NodeSPtrItVec::iterator findIt(const std::string &name);
 
-            void swapNodes(const NodeUPtrItVec::iterator &nodeIt1, const NodeUPtrItVec::iterator &nodeIt2, bool keepNames);
+            void swapNodes(const NodeSPtrItVec::iterator &nodeIt1, const NodeSPtrItVec::iterator &nodeIt2, bool keepNames);
     };
 
     /** Adds a node. */
     template <typename Derived>
-    Derived &NodeWithChildren::add(std::unique_ptr<Derived> node)
+    Derived &NodeWithChildren::add(std::shared_ptr<Derived> node)
     {
         std::string nodeName = node->name();
         Derived *ret = node.get();
 
-        auto insRet = children.insert(NodeUPtrMap::value_type(nodeName, rvalue_cast(node)));
+        auto insRet = children.insert(NodeSPtrMap::value_type(nodeName, node));
         if (!insRet.second)
             BOOST_THROW_EXCEPTION(ChildAlreadyExists(nodeName));
 
@@ -140,6 +155,22 @@ MY_NSP_START
         itChildren.push_back(insRet.first);
 
         return *ret;
+    }
+
+    /** Adds a node. */
+    template <typename Derived>
+    Derived &NodeWithChildren::replace(std::shared_ptr<Derived> node)
+    {
+        std::string nodeName = node->name();
+
+        auto it = children.find(nodeName);
+        if (it == children.end())
+            BOOST_THROW_EXCEPTION(ChildDoesNotExists(nodeName));
+
+        node->_parent = this;
+        it->second = node;
+
+        return *node;
     }
 
 
@@ -170,6 +201,7 @@ MY_NSP_START
 
         return nullptr;
     }
+
 }
 MY_NSP_END
 

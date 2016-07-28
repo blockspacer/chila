@@ -17,13 +17,11 @@
 
 MY_NSP_START
 {
-    class Node : boost::noncopyable
+    class Node
     {
         friend struct NodeWithChildren;
 
         public:
-            Node() : _parent(nullptr) {}
-
             /** Returns the full path to the node */
             chila::lib::misc::Path path() const;
 
@@ -65,11 +63,11 @@ MY_NSP_START
             template <typename Type>
             const Type *toTypePtr() const { return dynamic_cast<const Type*>(this); }
 
-            /** Returns the base node, iterating through all the parents. */
-            NodeWithChildren *base();
-
-            /** Returns the base node, iterating through all the parents. */
-            const NodeWithChildren *base() const;
+//            /** Returns the base node, iterating through all the parents. */
+//            NodeWithChildren *base();
+//
+//            /** Returns the base node, iterating through all the parents. */
+//            const NodeWithChildren *base() const;
 
             /** Finds a node. */
             virtual Node *findPtr(const chila::lib::misc::Path &path);
@@ -86,19 +84,25 @@ MY_NSP_START
             /** Checks the node. If fails, throws an exception. */
             virtual void check(CheckData *data = nullptr) const {} // { std::cout << "node check of '" << path() << "'" << std::endl; }
 
+            /** Clones the node all the way to the parent. */
+            std::pair<NodeWithChildrenSPtr, Node&> cloneAll() const;
+
+            /** Compares two nodes. */
+            virtual bool compare(const Node &node) const = 0;
+
+            /** Returns true if both nodes are of the same type. */
+            virtual bool isSameType(const Node &rhs) const = 0;
+
         protected:
             std::string _name;
             NodeWithChildren *_parent;
 
-            /** Creates a Type (which should be a Node) and sets it's name. */
-            template <typename Type>
-            static std::unique_ptr<Type> createNamed(std::string name)
-            {
-                std::unique_ptr<Type> ret(new Type()); // can't be friends with std::make_unique
+            Node() : _parent(nullptr) {}
+            Node(const Node &rhs) : _parent(nullptr), _name(rhs._name) {}
+            Node(const Node &&) = delete;
 
-                ret->_name = rvalue_cast(name);
-                return ret;
-            }
+            /** Clones the node */
+            virtual NodeSPtr clone() const = 0;
 
         public:
             virtual ~Node() {}

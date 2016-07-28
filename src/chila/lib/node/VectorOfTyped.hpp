@@ -15,13 +15,23 @@
 #define FWDEC_SPTR  CHILA_LIB_MISC__FWDEC_SPTR
 
 #define CHILA_META_NODE__DEF_VECTOR_OF_TYPED(Name, Type) \
-    struct Name: public chila::lib::node::VectorOfTyped<Type> \
+    class Name: public chila::lib::node::VectorOfTyped<Type> \
     { \
         friend chila::lib::node::Node; \
         public: \
-            static std::unique_ptr<Name> create(std::string name) \
+            static std::shared_ptr<Name> create(std::string name) \
             { \
-                return Node::createNamed<Name>(rvalue_cast(name)); \
+                auto ret = std::make_shared<Name>(); \
+                ret->_name = name; \
+                return ret; \
+            } \
+            chila::lib::node::NodeSPtr clone() const override \
+            { \
+                return std::make_shared<Name>(*this); \
+            } \
+            virtual bool isSameType(const chila::lib::node::Node &rhs) const override \
+            { \
+                return dynamic_cast<const Name*>(&rhs); \
             } \
     }; \
 
@@ -69,20 +79,23 @@ MY_NSP_START
         private:
             unsigned nextId;
 
-            std::unique_ptr<Type> removeNode(const std::string &name);
+            std::shared_ptr<Type> removeNode(const std::string &name);
     };
 
     template <typename Type>
-    std::unique_ptr<Type> VectorOfTyped<Type>::removeNode(const std::string &name)
+    std::shared_ptr<Type> VectorOfTyped<Type>::removeNode(const std::string &name)
     {
         auto nodes = removeAll();
-        std::unique_ptr<Type> ret;
+        std::shared_ptr<Type> ret;
 
         nextId = 0;
         for (auto &node : nodes)
         {
             if (node->name() == name)
-                ret = std::unique_ptr<Type>(chila::lib::misc::checkNotNull(dynamic_cast<Type*>(node.release())));
+            {
+                ret = std::dynamic_pointer_cast<Type>(node);
+                my_assert(bool(ret));
+            }
             else
                 NodeWithChildren::add(boost::lexical_cast<std::string>(nextId++), rvalue_cast(node));
         }

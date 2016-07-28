@@ -21,9 +21,19 @@
     { \
         friend chila::lib::node::Node; \
         public: \
-            static std::unique_ptr<Name> create(std::string name) \
+            static std::shared_ptr<Name> create(std::string name) \
             { \
-                return Node::createNamed<Name>(rvalue_cast(name)); \
+                auto ret = std::make_shared<Name>(); \
+                ret->_name = name; \
+                return ret; \
+            } \
+            chila::lib::node::NodeSPtr clone() const override \
+            { \
+                return std::make_shared<Name>(*this); \
+            } \
+            virtual bool isSameType(const chila::lib::node::Node &rhs) const override \
+            { \
+                return dynamic_cast<const Name*>(&rhs); \
             } \
     };
 

@@ -25,13 +25,24 @@
     { \
         public: \
             using This = Name; \
+            Name() = default; \
+            Name(const Name&) = default; \
+            Name(Name&&) = default; \
             \
-            static std::unique_ptr<Name> create(std::string name) \
+            static std::shared_ptr<Name> create(std::string name) \
             {\
-                std::unique_ptr<Name> ret = Node::createNamed<Name>(rvalue_cast(name)); \
+                std::shared_ptr<Name> ret = std::make_shared<Name>(); \
+                ret->_name = name; \
                 return ret; \
             } \
             BOOST_PP_SEQ_CAT(Methods) \
+            std::pair<chila::lib::node::NodeWithChildrenSPtr, Name&> cloneAll() const \
+            { \
+                auto ret = Node::cloneAll(); \
+                return {ret.first, ret.second.toType<Name>()}; \
+            } \
+        protected: \
+            chila::lib::node::NodeSPtr clone() const override { return std::make_shared<Name>(*this); } \
     }
 
 #include "nspDef.hpp"
@@ -42,8 +53,8 @@ MY_NSP_START
     FWDEC_TYPE(NodeWithChildren);
     FWDEC_TYPE(CheckData);
 
-    typedef std::map<std::string, NodeUPtr> NodeUPtrMap;
-    typedef std::vector<NodeUPtrMap::iterator> NodeUPtrItVec;
+    typedef std::map<std::string, NodeSPtr> NodeSPtrMap;
+    typedef std::vector<NodeSPtrMap::iterator> NodeSPtrItVec;
 
     template <typename Type>
     struct TypedNode;

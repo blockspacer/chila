@@ -4,6 +4,9 @@
 
 #include "Node.hpp"
 #include "NodeWithChildren.hpp"
+#include <boost/range/algorithm/remove_if.hpp>
+#include <boost/range/algorithm/find_if.hpp>
+#include <boost/range/adaptor/reversed.hpp>
 
 #define INDENT chila::lib::misc::repeatText(indent, "    ")
 
@@ -25,28 +28,6 @@ MY_NSP_START
 
         return ret;
     }
-
-    NodeWithChildren *Node::base()
-    {
-        if (!_parent) return nullptr;
-
-        NodeWithChildren *cur;
-
-        for (cur = _parent; cur->parentPtr(); cur = cur->parentPtr());
-
-        return cur;
-    };
-
-    const NodeWithChildren *Node::base() const
-    {
-        if (!_parent) return nullptr;
-
-        const NodeWithChildren *cur;
-
-        for (cur = _parent; cur->parentPtr(); cur = cur->parentPtr());
-
-        return cur;
-    };
 
     /** Finds a node. */
     Node *Node::findPtr(const chila::lib::misc::Path &path)
@@ -70,14 +51,24 @@ MY_NSP_START
      }
 
      /** Finds a node. */
-     const Node &Node::find(const chila::lib::misc::Path &path) const
-     {
-         if (parentPtr())
-             return parentPtr()->find(path);
-         else
-             BOOST_THROW_EXCEPTION(NodeNotFound());
-     }
+    const Node &Node::find(const chila::lib::misc::Path &path) const
+    {
+        if (parentPtr())
+            return parentPtr()->find(path);
+        else
+            BOOST_THROW_EXCEPTION(NodeNotFound());
+    }
 
+    /** Clones the node all the way to the parent. */
+    std::pair<NodeWithChildrenSPtr, Node&> Node::cloneAll() const
+    {
+        auto p = parentPtr();
+        if (p)
+            return p->cloneChild(_name);
+        else
+            BOOST_THROW_EXCEPTION(NodeNotCloneable()
+                << chila::lib::misc::ExceptionInfo::Type(boost::typeindex::type_id_runtime(*this)));
+    }
 }
 MY_NSP_END
 

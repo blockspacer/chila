@@ -31,8 +31,8 @@ MY_NSP_START
         typedef Type*           pointer;
         typedef const Type*     const_pointer;
 
-        typedef node_iterator<NodeUPtrItVec::iterator, Type, NodeWithChildren::DerefFun> iterator;
-        typedef node_iterator<NodeUPtrItVec::const_iterator, const Type, NodeWithChildren::DerefFun> const_iterator;
+        typedef node_iterator<NodeSPtrItVec::iterator, Type, NodeWithChildren::DerefFun> iterator;
+        typedef node_iterator<NodeSPtrItVec::const_iterator, const Type, NodeWithChildren::DerefFun> const_iterator;
 
         FWDEC_SPTR(Type);
 

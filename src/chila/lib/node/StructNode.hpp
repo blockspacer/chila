@@ -45,15 +45,26 @@
             { \
                 BOOST_PP_SEQ_FOR_EACH(CHILA_META_NODE__STRUCT_LOAD_ELEM,, memberSeq) \
             } \
+            Name(const Name&) = default; \
             \
             BOOST_PP_SEQ_FOR_EACH(CHILA_META_NODE__STRUCT_GETTER_ELEM,, memberSeq) \
             \
-            static std::unique_ptr<Name> create(std::string name) \
+            static std::shared_ptr<Name> create(std::string name) \
             {\
-                std::unique_ptr<Name> ret = Node::createNamed<Name>(rvalue_cast(name)); \
+                auto ret = std::make_shared<Name>(); \
+                ret->_name = name; \
                 return ret; \
             } \
             BOOST_PP_SEQ_CAT(Methods) \
-    }
+            \
+            chila::lib::node::NodeSPtr clone() const override \
+            { \
+                return std::make_shared<Name>(*this); \
+            } \
+            virtual bool isSameType(const chila::lib::node::Node &rhs) const override \
+            { \
+                return dynamic_cast<const Name*>(&rhs); \
+            } \
+    };
 
 #endif

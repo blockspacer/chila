@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <chila/lib/misc/RepeatText.hpp>
 #include "util.hpp"
+#include <boost/range/combine.hpp>
 
 #define INDENT chila::lib::misc::repeatText(indent, "    ")
 #define my_assert   CHILA_LIB_MISC__ASSERT
@@ -18,7 +19,7 @@ MY_NSP_START
     /** Returns a child. */
     Node &NodeWithChildren::child(const std::string &name)
     {
-        NodeUPtrMap::iterator it = children.find(name);
+        NodeSPtrMap::iterator it = children.find(name);
 
         if (it == children.end())
             BOOST_THROW_EXCEPTION(ChildDoesNotExists(name) << chila::lib::misc::ExceptionInfo::Path(path()));
@@ -31,7 +32,7 @@ MY_NSP_START
      */
     const Node &NodeWithChildren::child(const std::string &name) const
     {
-        NodeUPtrMap::const_iterator it = children.find(name);
+        NodeSPtrMap::const_iterator it = children.find(name);
 
         if (it == children.end())
             BOOST_THROW_EXCEPTION(ChildDoesNotExists(name) << chila::lib::misc::ExceptionInfo::Path(path()));
@@ -42,7 +43,7 @@ MY_NSP_START
     /** Returns a child. */
     Node *NodeWithChildren::childPtr(const std::string &name)
     {
-        NodeUPtrMap::iterator it = children.find(name);
+        NodeSPtrMap::iterator it = children.find(name);
 
         return it == children.end() ? nullptr : it->second.get();
     }
@@ -50,7 +51,7 @@ MY_NSP_START
     /** Returns a child. */
     const Node *NodeWithChildren::childPtr(const std::string &name) const
     {
-        NodeUPtrMap::const_iterator it = children.find(name);
+        NodeSPtrMap::const_iterator it = children.find(name);
 
         return it == children.end() ? nullptr : it->second.get();
     }
@@ -104,18 +105,20 @@ MY_NSP_START
     Node &NodeWithChildren::find(const chila::lib::misc::Path &path)
     {
         Node *ret = findPtr(path);
-        if (!ret) BOOST_THROW_EXCEPTION(NodeNotFound());
+        if (!ret)
+            BOOST_THROW_EXCEPTION(NodeNotFound());
         return *ret;
     }
 
     const Node &NodeWithChildren::find(const chila::lib::misc::Path &path) const
     {
         const Node *ret = findPtr(path);
-        if (!ret) BOOST_THROW_EXCEPTION(NodeNotFound());
+        if (!ret)
+            BOOST_THROW_EXCEPTION(NodeNotFound());
         return *ret;
     }
 
-    NodeUPtr NodeWithChildren::removeNode(const std::string &name)
+    NodeSPtr NodeWithChildren::removeNode(const std::string &name)
     {
         auto it = children.find(name);
         if (it == children.end())
@@ -145,10 +148,10 @@ MY_NSP_START
             throw list;
     }
 
-    NodeUPtrItVec::iterator NodeWithChildren::findIt(const std::string &name)
+    NodeSPtrItVec::iterator NodeWithChildren::findIt(const std::string &name)
     {
         auto ret = std::find_if(itChildren.begin(), itChildren.end(),
-                [&](const NodeUPtrMap::iterator &it){ return it->first == name; });
+                [&](const NodeSPtrMap::iterator &it){ return it->first == name; });
 
         if (ret == itChildren.end())
             BOOST_THROW_EXCEPTION(ChildDoesNotExists(name));
@@ -156,33 +159,33 @@ MY_NSP_START
         return ret;
     }
 
-    std::string NodeWithChildren::moveUp(const std::string &name, bool keepNames)
+    Node &NodeWithChildren::moveUp(const std::string &name, bool keepNames)
     {
         auto it1 = findIt(name), it2 = it1;
         if (it1 != itChildren.begin())
         {
             swapNodes(it1, --it2, keepNames);
-            return (*it2)->second->name();
+            return *((*it2)->second);
         }
 
-        return (*it1)->second->name();
+        return *((*it1)->second);
     }
 
-    std::string NodeWithChildren::moveDown(const std::string &name, bool keepNames)
+    Node &NodeWithChildren::moveDown(const std::string &name, bool keepNames)
     {
         auto it1 = findIt(name), it2 = it1;
         if (++it2 != itChildren.end())
         {
             swapNodes(it1, it2, keepNames);
-            return (*it2)->second->name();
+            return *((*it2)->second);
         }
 
-        return (*it1)->second->name();
+        return *((*it1)->second);
     }
 
     void NodeWithChildren::swapNodes(
-        const NodeUPtrItVec::iterator &nodeIt1,
-        const NodeUPtrItVec::iterator &nodeIt2,
+        const NodeSPtrItVec::iterator &nodeIt1,
+        const NodeSPtrItVec::iterator &nodeIt2,
         bool keepNames)
     {
         if (keepNames)
@@ -199,9 +202,9 @@ MY_NSP_START
         }
     }
 
-    std::vector<NodeUPtr> NodeWithChildren::removeAll()
+    std::vector<NodeSPtr> NodeWithChildren::removeAll()
     {
-        std::vector<NodeUPtr> ret;
+        std::vector<NodeSPtr> ret;
 
         for (auto &it : itChildren)
             ret.push_back(rvalue_cast(it->second));
@@ -211,6 +214,96 @@ MY_NSP_START
 
         return ret;
     }
+
+    NodeWithChildren::NodeWithChildren(const NodeWithChildren &rhs) : Node(rhs)
+    {
+        for (auto &it : rhs.itChildren)
+            add(it->second);
+    }
+
+    /** Clones the child, an all its parents. */
+    std::pair<NodeWithChildrenSPtr, Node&> NodeWithChildren::cloneChild(const std::string &name) const
+    {
+        auto p = parentPtr();
+        if (p)
+        {
+            auto ret = p->cloneChild(_name);
+            auto &newParent = ret.first;
+            auto &myClone = ret.second.toType<NodeWithChildren>();
+            auto &node = myClone.replace(child(name).clone());
+
+            return {newParent, node};
+        }
+        else
+        {
+            auto newParent = chila::lib::misc::polymorphic_pointer_downcast<NodeWithChildren>(clone());
+            auto &node = newParent->replace(child(name).clone());
+
+            return {newParent, node};
+        }
+    }
+
+    void NodeWithChildren::updateParents()
+    {
+        for (auto &node : *this)
+        {
+            node._parent = this;
+            if (auto *typed = chila::lib::misc::dcast<NodeWithChildren>(&node))
+            {
+                typed->updateParents();
+            }
+        }
+    }
+
+    bool NodeWithChildren::compare(const Node &node) const
+    {
+        if (name() != node.name())
+            return false;
+
+        if (!node.isSameType(*this))
+            return false;
+
+        if (auto *typed = chila::lib::misc::dcast<NodeWithChildren>(&node))
+        {
+            if (typed->size() != size())
+                return false;
+
+            for (auto p : boost::combine(*typed, *this))
+            {
+                if (!p.get<0>().compare(p.get<1>()))
+                    return false;
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    void NodeWithChildren::takeSimilar(const NodeWithChildren &rhs)
+    {
+        auto lhsIt = itChildren.begin();
+        auto rhsIt = rhs.itChildren.begin();
+
+        for (; lhsIt != itChildren.end() && rhsIt != rhs.itChildren.end(); ++lhsIt, ++rhsIt)
+        {
+            auto lhsNode = (*lhsIt)->second;
+            auto rhsNode = (*rhsIt)->second;
+
+            if (lhsNode->compare(*rhsNode))
+            {
+                replace(rhsNode);
+            }
+            else if (lhsNode->isSameType(*rhsNode))
+            {
+                if (auto *lhsTyped = lhsNode->toTypePtr<NodeWithChildren>())
+                {
+                    lhsTyped->takeSimilar(rhsNode->toType<NodeWithChildren>());
+                }
+            }
+        }
+    }
+
 
 }
 MY_NSP_END

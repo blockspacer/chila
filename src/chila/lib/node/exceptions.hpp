@@ -8,6 +8,7 @@
 #include "fwd.hpp"
 #include <type_traits>
 #include <chila/lib/misc/exceptions.hpp>
+#include <boost/make_shared.hpp>
 
 #define DEF_RUNTIME_ERROR_WT            CHILA_LIB_MISC__DEF_RUNTIME_ERROR_WT
 #define DEF_RUNTIME_ERROR_FROM_BASE     CHILA_LIB_MISC__DEF_RUNTIME_ERROR_FROM_BASE
@@ -23,6 +24,7 @@ MY_NSP_START
     DEF_RUNTIME_ERROR_FROM_BASE(Exception, NodeNotFound, "node not found");
     DEF_RUNTIME_ERROR_FROM_BASE(Exception, InvalidChildType, "invalid child type");
     DEF_RUNTIME_ERROR_FROM_BASE(Exception, InvalidNode, "invalid node");
+    DEF_RUNTIME_ERROR_FROM_BASE(Exception, NodeNotCloneable, "node not cloneable");
 
     struct ExceptionWrapper: public Exception
     {

@@ -15,20 +15,37 @@
 #define CHILA_META_NODE__DEF_TYPED_NODE_BASE(r, data, elem) , public elem
 
 #define CHILA_META_NODE__DEF_TYPED_NODE(Name, Type, Bases, Methods) \
-    struct Name: public chila::lib::node::TypedNode<Type> BOOST_PP_SEQ_FOR_EACH(CHILA_META_NODE__DEF_TYPED_NODE_BASE,, Bases) \
+    class Name: public chila::lib::node::TypedNode<Type> BOOST_PP_SEQ_FOR_EACH(CHILA_META_NODE__DEF_TYPED_NODE_BASE,, Bases) \
     { \
         friend chila::lib::node::Node; \
         public: \
             using This = Name; \
             explicit Name(const Type &value = Type()) : TypedNode(value) {} \
             void operator=(const Type &rhs) { TypedNode::operator=(rhs); } \
-            static std::unique_ptr<Name> create(std::string name) \
+            static std::shared_ptr<Name> create(std::string name) \
             {\
-                return Node::createNamed<Name>(rvalue_cast(name)); \
+                auto ret = std::make_shared<Name>(); \
+                ret->_name = name; \
+                return ret; \
             } \
             BOOST_PP_SEQ_CAT(Methods) \
-    }
-
+            chila::lib::node::NodeSPtr clone() const override \
+            { \
+                return std::make_shared<Name>(*this); \
+            } \
+            bool compare(const Node &node) const override \
+            { \
+                if (auto *typed = chila::lib::misc::dcast<Name>(&node)) \
+                { \
+                    return typed->value == value; \
+                } \
+                return false; \
+            } \
+            virtual bool isSameType(const chila::lib::node::Node &rhs) const override \
+            { \
+                return dynamic_cast<const Name*>(&rhs); \
+            } \
+    };
 
 #include "nspDef.hpp"
 

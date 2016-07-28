@@ -98,6 +98,7 @@ MY_NSP_START
         BOOST_THROW_EXCEPTION(exx);
     }
 
+    NodeWithChildren &mainParent(NodeWithChildren &node);
 
 
 }
