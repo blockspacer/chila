@@ -55,8 +55,12 @@
         typename BOOST_PP_CAT(MData_, name)::Arguments{}, boost::hana::integral_constant<int, i>)::type::ParamType
 
 
+#define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ACTION__VEC_ARGS_ELEM(r, data, i, elem) \
+        BOOST_PP_COMMA_IF(i) typename Arguments::elem
+
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ACTION(NSP, Connector, name, args) \
-        struct MData_##name final: public chila::connectionTools::lib::codegen::FunMData<MData_##name, Connector, decltype(boost::hana::tuple_t<BOOST_PP_SEQ_ENUM(args)>)> \
+        struct MData_##name final: public chila::connectionTools::lib::codegen::FunMData<MData_##name, Connector, \
+            decltype(boost::hana::tuple_t<BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ACTION__VEC_ARGS_ELEM,, args)>)> \
         { \
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_TYPE( \
                 CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONNECTOR_ACTION_EVCALLED_NAME(NSP, Connector, name)); \
@@ -78,7 +82,8 @@
         } name
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_EVENT(NSP, Connector, name, args) \
-        class MData_##name final: public chila::connectionTools::lib::codegen::FunMData<MData_##name, Connector, decltype(boost::hana::tuple_t<BOOST_PP_SEQ_ENUM(args)>)> \
+        class MData_##name final: public chila::connectionTools::lib::codegen::FunMData<MData_##name, Connector, \
+            decltype(boost::hana::tuple_t<BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ACTION__VEC_ARGS_ELEM,, args)>)> \
         { \
             public: \
                 template <typename EventHMap> \
@@ -177,7 +182,7 @@
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_PASS_ARG(connector, action, argName, data) \
         chila::connectionTools::lib::codegen::convert<typename std::remove_reference<decltype(\
-            BOOST_PP_CAT(act_, BOOST_PP_CAT(connector, BOOST_PP_CAT(_, action))))>::type::ConnectorType::argName::Type>(data)
+            BOOST_PP_CAT(act_, BOOST_PP_CAT(connector, BOOST_PP_CAT(_, action))))>::type::ConnectorType::Arguments::argName::Type>(data)
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_EXECUTE_ACTION(connector, action, ...) \
         BOOST_PP_CAT(act_, BOOST_PP_CAT(connector, BOOST_PP_CAT(_, action)))(__VA_ARGS__)

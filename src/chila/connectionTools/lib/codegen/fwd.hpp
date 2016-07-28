@@ -21,6 +21,12 @@ MY_NSP_START
 
     FWDEC_TYPE(Connector);
     FWDEC_TYPE(ConnectorMap);
+
+    template <typename Action>
+    struct ConnectorTypeOf
+    {
+        typedef typename Action::type::ConnectorType type;
+    };
 }
 MY_NSP_END
 
