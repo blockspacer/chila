@@ -27,44 +27,29 @@ std::shared_ptr<QApplication> qApplication;
 
 boost::filesystem::path initApp(int &argc, char** argv, cclOther::DataMap &dataMap)
 {
-//    qApplication = std::make_shared<QApplication>(argc, argv);
-//
-//    po::options_description opDesc("Allowed options");
-//    po::positional_options_description popDesc;
-//
-//    opDesc.add_options()
-//        ("base-lib", po::value<std::string>(), "base library")
-//        ("loader-config", po::value<std::string>(), "application configuration file (defaults to 'loaderConfig.xml')")
-//        ("install-dir,i", po::value<std::string>(), "Instalation directory")
-//        ("help,h", "produce help message");
-//
-//    popDesc.add("base-lib", 1);
-//
-//    try
-//    {
-//        po::store(po::command_line_parser(argc, argv).options(opDesc).positional(popDesc).run(), vm);
-//        po::notify(vm);
-//    }
-//    catch(const std::exception &ex)
-//    {
-//        std::cout << "error: " << ex.what() << std::endl;
-//        exit(EXIT_FAILURE);
-//    }
-//
-//    if (vm.count("help"))
-//    {
-//        std::cout << opDesc << std::endl;
-//        exit(EXIT_SUCCESS);
-//    }
-//
-//    std::cout << "Loading base data..." << std::endl;
-//
-//    auto installDir = clMisc::getProgramOption<std::string>(vm, "install-dir", ".");
-//    app = std::make_shared<ccBase::app::App>(installDir, dataMap, *qApplication);
-//
-//    boost::filesystem::path loaderConfig = clMisc::getProgramOption<std::string>(vm, "loader-config", "loaderConfig.xml");
-//
-//    return loaderConfig.is_relative() ? installDir / loaderConfig : loaderConfig;
+    qApplication = std::make_shared<QApplication>(argc, argv);
+
+    chila::lib::misc::ProgramOptions pOptions;
+
+    pOptions.opDesc.add_options()
+        ("base-lib", po::value<std::string>(), "base library")
+        ("loader-config", po::value<std::string>(), "application configuration file (defaults to 'loaderConfig.xml')")
+        ("install-dir,i", po::value<std::string>(), "Instalation directory")
+        ("help,h", "produce help message");
+
+    pOptions.popDesc.add("base-lib", 1);
+
+    if (!pOptions.parse(argc, argv))
+        exit(EXIT_FAILURE);
+
+    std::cout << "Loading base data..." << std::endl;
+
+    auto installDir = pOptions.get<std::string>("install-dir", ".");
+    app = std::make_shared<ccBase::app::App>(installDir, dataMap, *qApplication);
+
+    boost::filesystem::path loaderConfig = pOptions.get<std::string>("loader-config", "loaderConfig.xml");
+
+    return loaderConfig.is_relative() ? installDir / loaderConfig : loaderConfig;
 }
 
 void loadConnectors(ccLoader::ConnectorMap &cMap, const cclOther::DataMap &dataMap, cclOther::Launcher &launcher, bool preLoaderConnect)
