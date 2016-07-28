@@ -19,6 +19,7 @@
 #include <libxml++/libxml++.h>
 #include <chila/lib/misc/InPlaceStrStream.hpp>
 #include <chila/lib/xmlppUtils/util.hpp>
+#include "ParseText.hpp"
 
 #define ins_first(what) \
         if (first) first = false; \
@@ -304,9 +305,9 @@ MY_NSP_START
                     cAliasElem.set_attribute("connectorPath", alias.connector().value.getStringRep());
                     cAliasElem.set_attribute("description", my_ipss_exp(xmlEscape(alias.description().value)));
 
-                    printAliases<long>(cAliasElem, alias.argAliases(), "arguments", "argument", indent);
-                    printAliases<int>(cAliasElem, alias.eventAliases(), "events", "event", indent);
-                    printAliases<int>(cAliasElem, alias.actionAliases(), "actions", "action", indent);
+                    printAliases<long>(cAliasElem, alias.arguments(), "arguments", "argument", indent);
+                    printAliases<int>(cAliasElem, alias.events(), "events", "event", indent);
+                    printAliases<int>(cAliasElem, alias.actions(), "actions", "action", indent);
                 });
             }
         });
@@ -622,8 +623,6 @@ MY_NSP_START
                 .parent<cPerformer::ConnectorInstance>()
                 .parent<cPerformer::ConnectorInstanceMap>());
 
-        CHILA_LIB_MISC__SHOW(40, cInsMap.path());
-
         return ciMapPos<cPerformer::ConnectorInstanceGroup>(cInsMap,
             [&](ValueEntry &entry, const chila::lib::node::Node &node)
             {
@@ -762,12 +761,8 @@ MY_NSP_START
         auto it = reqData.find(cInstance);
         my_assert(it != reqData.end());
 
-//        CHILA_LIB_MISC__SHOW(40, cInstance->path());
-
         for (auto *reqAIns : it->second)
         {
-//            CHILA_LIB_MISC__SHOW(40, reqAIns->path());
-
             auto *reqCIns = &reqAIns->connInstance().referenced();
             bool found = std::find_if(stack.begin(), stack.end(),
                     [&, reqCIns](const cPerformer::ActionInstance *lhs)
@@ -888,7 +883,7 @@ MY_NSP_START
 
         auto &connAlias = cInstance.connAlias().referenced();
         auto gfPath = getGroupedPath(eventCall.referenced());
-        return connAlias.eventAliases().getPtr(gfPath.getStringRep(":"));
+        return connAlias.events().getPtr(gfPath.getStringRep(":"));
     }
 
     const cPerformer::EventAlias *getEventAlias(const cPerformer::ConnectorInstance &cInstance,
@@ -896,14 +891,14 @@ MY_NSP_START
     {
         auto &connAlias = cInstance.connAlias().referenced();
         auto gfPath = getGroupedPath(eventCall.referenced());
-        return connAlias.eventAliases().getPtr(gfPath.getStringRep(":"));
+        return connAlias.events().getPtr(gfPath.getStringRep(":"));
     }
 
     const cPerformer::ActionAlias *getActionAlias(const cPerformer::ActionInstance &actionIns)
     {
         auto &connAlias = actionIns.connInstance().referenced().connAlias().referenced();
         auto gfPath = getGroupedPath(actionIns.action().referenced());
-        return connAlias.actionAliases().getPtr(gfPath.getStringRep(":"));
+        return connAlias.actions().getPtr(gfPath.getStringRep(":"));
     }
 
     const cPerformer::ActionAlias *getActionAlias(const cPerformer::ConnectorInstance &cInstance,
@@ -911,7 +906,67 @@ MY_NSP_START
     {
         auto &connAlias = cInstance.connAlias().referenced();
         auto gfPath = getGroupedPath(actionIns.action().referenced());
-        return connAlias.actionAliases().getPtr(gfPath.getStringRep(":"));
+        return connAlias.actions().getPtr(gfPath.getStringRep(":"));
     }
+
+    void checkDesc(const chila::lib::node::Node &node)
+    {
+        auto desc = dynamic_cast<const Element&>(node).description().value;
+        ParseText parseText(desc, node);
+
+        while(true) try
+        {
+            if (!parseText.parse())
+                break;
+        }
+        catch (const Exception &ex)
+        {
+            BOOST_THROW_EXCEPTION(ex << chila::lib::misc::ExceptionInfo::Path(node.path()));
+        }
+    }
+
+    std::string getEnhancedDesc(const chila::lib::node::Node &node, const CAliasVec &cAliasVec, const std::string &finalDesc)
+    {
+        std::string ret;
+        ParseText parseText(finalDesc, node);
+
+        while(true) try
+        {
+            if (!parseText.parse())
+                break;
+
+            if (auto *foundNode = parseText.foundNode())
+            {
+//                CHILA_LIB_MISC__SHOW(40, parseText.tokenStr() << ": " << boost::typeindex::type_id_runtime(*foundNode));
+
+                // TODO: must give all alternatives, using 'cAliasVec'
+                if (auto *typedFNode = dynamic_cast<const cPerformer::CAArgAlias*>(foundNode))
+                {
+                    auto &ref = typedFNode->cpRef().referenced();
+                    ret += "\'arguments." + getGroupedPath(ref).getStringRep(":") + "\'";
+                }
+                else
+                {
+                    ret += "\'" + parseText.tokenStr() + "\'";
+                }
+            }
+            else
+            {
+                ret += parseText.tokenStr();
+            }
+
+        }
+        catch (const DescriptionParseError &ex)
+        {
+            ret += parseText.tokenStr();
+        }
+        catch (const DescriptionParseInvalidReference &ex)
+        {
+            ret += "(\'" + parseText.tokenStr() + "\')!";
+        }
+
+        return ret;
+    }
+
 }
 MY_NSP_END

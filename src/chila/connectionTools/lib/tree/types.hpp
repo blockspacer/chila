@@ -39,6 +39,8 @@
                 using ElementType = Name; \
                 using MapType = Name##Map; \
                 \
+                CHILA_META_NODE__DEF_CHECK_BASES((Element)(BOOST_PP_CAT(Name, Base)), 0) \
+                \
                 bool canTakeChildFrom(chila::lib::node::IContainerOfTyped &from) const override { return elements().canTakeChildFrom(from); } \
                 chila::lib::node::Node &takeChild(chila::lib::node::IContainerOfTyped &from, const std::string &name) override \
                 { \
@@ -58,7 +60,7 @@ MY_NSP_START
 
     CHILA_META_NODE__DEF_NODE(Description, (String), ());
 
-    CHILA_META_NODE__DEF_STRUCT_NODE(Element,, (),
+    CHILA_META_NODE__DEF_STRUCT_NODE(Element,, (CHILA_META_NODE__DEF_CHECK),
         ((Description)(description))
     );
 
@@ -74,7 +76,10 @@ MY_NSP_START
 
         DEF_BASE_MAP_GROUP(Argument);
 
-        CHILA_META_NODE__DEF_STRUCT_NODE(Argument, (Element)(ArgumentBase), (),
+        CHILA_META_NODE__DEF_STRUCT_NODE(Argument, (Element)(ArgumentBase),
+            (
+                CHILA_META_NODE__DEF_CHECK_BASES((Element)(NodeWithChildren), 0)
+            ),
         );
 
 
@@ -84,7 +89,10 @@ MY_NSP_START
         DEF_BASE_MAP_GROUP(Event)
         DEF_BASE_MAP_GROUP(Action)
 
-        CHILA_META_NODE__DEF_STRUCT_NODE(Function, (Element), (),
+        CHILA_META_NODE__DEF_STRUCT_NODE(Function, (Element),
+            (
+                CHILA_META_NODE__DEF_CHECK_BASES((Element)(NodeWithChildren), 0)
+            ),
             ((ArgRefMap)(arguments))
         );
 
@@ -97,7 +105,10 @@ MY_NSP_START
 
         CHILA_META_NODE__DEF_REFERENCE_VNODE(EventRef, Event, EventMap);
 
-        CHILA_META_NODE__DEF_STRUCT_NODE(Connector, (Element)(NspElement), (),
+        CHILA_META_NODE__DEF_STRUCT_NODE(Connector, (Element)(NspElement),
+            (
+                CHILA_META_NODE__DEF_CHECK_BASES((Element)(NodeWithChildren), 0)
+            ),
             ((ArgumentMap)(arguments))
             ((EventMap)(events))
             ((ActionMap)(actions))
@@ -117,7 +128,10 @@ MY_NSP_START
         CHILA_META_NODE__DEF_MAP_OF_TYPED(EventAliasMap, EventAlias,);
         CHILA_META_NODE__DEF_MAP_OF_TYPED(ActionAliasMap, ActionAlias,);
 
-        CHILA_META_NODE__DEF_STRUCT_NODE(Argument, (ArgumentBase)(Element), (),
+        CHILA_META_NODE__DEF_STRUCT_NODE(Argument, (Element)(ArgumentBase),
+            (
+                CHILA_META_NODE__DEF_CHECK_BASES((Element)(ArgumentBase), 0)
+            ),
             ((Boolean)(unique))
         );
 
@@ -127,7 +141,7 @@ MY_NSP_START
         CHILA_META_NODE__DEF_STRUCT_NODE(CAArgAlias, (Element)(Reference<connector::Argument>),
             (
                 REF_METHODS(connector::ArgumentMap)
-                CHILA_META_NODE__DEF_CHECK_BASES((Reference<connector::Argument>)(NodeWithChildren), 0)
+                CHILA_META_NODE__DEF_CHECK_BASES((Element)(Reference<connector::Argument>)(NodeWithChildren), 0)
             ),
             ((ArgRefT)(cpRef))
         );
@@ -135,14 +149,14 @@ MY_NSP_START
         CHILA_META_NODE__DEF_STRUCT_NODE(EventAlias, (Element)(Reference<connector::Event>),
             (
                 REF_METHODS(connector::EventMap)
-                CHILA_META_NODE__DEF_CHECK_BASES((Reference<connector::Event>)(NodeWithChildren), 1)
+                CHILA_META_NODE__DEF_CHECK_BASES((Element)(Reference<connector::Event>)(NodeWithChildren), 1)
             ),
         );
 
         CHILA_META_NODE__DEF_STRUCT_NODE(ActionAlias, (Element)(Reference<connector::Action>),
             (
                 REF_METHODS(connector::ActionMap)
-                CHILA_META_NODE__DEF_CHECK_BASES((Reference<connector::Action>)(NodeWithChildren), 1)
+                CHILA_META_NODE__DEF_CHECK_BASES((Element)(Reference<connector::Action>)(NodeWithChildren), 1)
             ),
         );
 
@@ -150,11 +164,14 @@ MY_NSP_START
         CHILA_META_NODE__DEF_REFERENCE_TNODE(ConnectorRef, chila::lib::misc::Path, connector::Connector, Namespace);
 
 
-        CHILA_META_NODE__DEF_STRUCT_NODE(ConnectorAlias, (Element), (),
+        CHILA_META_NODE__DEF_STRUCT_NODE(ConnectorAlias, (Element),
+            (
+                CHILA_META_NODE__DEF_CHECK_BASES((Element)(NodeWithChildren), 0)
+            ),
             ((ConnectorRef)(connector))
-            ((CAArgAliasMap)(argAliases))
-            ((EventAliasMap)(eventAliases))
-            ((ActionAliasMap)(actionAliases))
+            ((CAArgAliasMap)(arguments))
+            ((EventAliasMap)(events))
+            ((ActionAliasMap)(actions))
         );
 
 
@@ -162,7 +179,10 @@ MY_NSP_START
 
         DEF_BASE_MAP_GROUP(AProviderCreator)
 
-        CHILA_META_NODE__DEF_STRUCT_NODE(AProviderCreator, (AProviderCreatorBase)(Element), (),
+        CHILA_META_NODE__DEF_STRUCT_NODE(AProviderCreator, (Element)(AProviderCreatorBase),
+            (
+                CHILA_META_NODE__DEF_CHECK_BASES((Element)(AProviderCreatorBase), 0)
+            ),
             ((ArgRefVMap)(requires))
             ((ArgRefVMap)(provides))
         );
@@ -185,7 +205,7 @@ MY_NSP_START
         CHILA_META_NODE__DEF_STRUCT_NODE(EventCall, (Element)(Reference<connector::Event>),
                 (
                     REF_METHODS(connector::EventMap)
-                    CHILA_META_NODE__DEF_CHECK_BASES((Reference<connector::Event>)(NodeWithChildren), 1)
+                    CHILA_META_NODE__DEF_CHECK_BASES((Element)(Reference<connector::Event>)(NodeWithChildren), 1)
                 ),
             ((APCRefMap)(aProvCreators))
             ((ActionInstanceVec)(actions))
@@ -193,7 +213,11 @@ MY_NSP_START
 
         DEF_BASE_MAP_GROUP(ConnectorInstance)
 
-        CHILA_META_NODE__DEF_STRUCT_NODE(ConnectorInstance, (ConnectorInstanceBase)(Element), (),
+        CHILA_META_NODE__DEF_STRUCT_NODE(ConnectorInstance, (ConnectorInstanceBase)(Element),
+            (
+                CHILA_META_NODE__DEF_CHECK_BASES((Element)(ConnectorInstanceBase), 0)
+            ),
+
             ((ConnectorAliasRef)(connAlias))
             ((EventCallMap)(events))
         );

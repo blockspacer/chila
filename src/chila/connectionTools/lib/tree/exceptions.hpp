@@ -14,6 +14,7 @@
 #include <chila/lib/misc/exceptions.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/foreach.hpp>
+#include <chila/lib/node/exceptions.hpp>
 
 #define DEF_RUNTIME_ERROR       CHILA_LIB_MISC__DEF_RUNTIME_ERROR
 #define DEF_EXCEPTION           CHILA_LIB_MISC__DEF_EXCEPTION
@@ -24,7 +25,7 @@
 
 MY_NSP_START
 {
-    CHILA_LIB_MISC__DEF_RUNTIME_ERROR(Exception);
+    DEF_RUNTIME_ERROR_FROM_BASE(chila::lib::node::Exception, Exception, "error");
 
     DEF_RUNTIME_ERROR_FROM_BASE(Exception, ConnectorNotFound, "connector not found");
     DEF_RUNTIME_ERROR_FROM_BASE(Exception, ConnectorInstanceNotFound, "connector instance not found");
@@ -36,6 +37,8 @@ MY_NSP_START
     DEF_RUNTIME_ERROR_FROM_BASE(Exception, UniqueArgumentRequiredMoreThanOnce, "unique argument required more than once");
     DEF_RUNTIME_ERROR_FROM_BASE(Exception, CInstanceReqCycle, "connector instance init requirement cycle");
     DEF_RUNTIME_ERROR_FROM_BASE(Exception, DescriptionIsEmpty, "description is empty");
+    DEF_RUNTIME_ERROR_FROM_BASE(Exception, DescriptionParseError, "description parse error");
+    DEF_RUNTIME_ERROR_FROM_BASE(Exception, DescriptionParseInvalidReference, "invalid reference in description parse");
 
     struct ErrorInfo
     {
@@ -43,6 +46,7 @@ MY_NSP_START
         using ReferencePath = boost::error_info<struct tag_reference_path, chila::lib::misc::Path>;
         using ReqProvVec = boost::error_info<struct tag_req_prov_vec, ReqProvVector>;
         using AInsVecInfo = boost::error_info<struct tag_req_data, AInsVec>;
+        using DescToken = boost::error_info<struct tag_desc_range, std::string>;
     };
 
     struct RequiredArgumentNotFound final: public Exception
@@ -59,6 +63,14 @@ MY_NSP_START
         RequiredArgumentProvidedManyTimes(chila::lib::misc::Path arg) :
             Exception("required argument provided many times: " + arg.getStringRep(":")), arg(rvalue_cast(arg)) {}
         ~RequiredArgumentProvidedManyTimes() throw() {}
+    };
+
+    struct ArgumentProvidedManyTimes final: public Exception
+    {
+        chila::lib::misc::Path arg;
+        ArgumentProvidedManyTimes(chila::lib::misc::Path arg) :
+            Exception("argument provided many times: " + arg.getStringRep(":")), arg(rvalue_cast(arg)) {}
+        ~ArgumentProvidedManyTimes() throw() {}
     };
 
 

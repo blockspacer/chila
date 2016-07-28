@@ -133,7 +133,7 @@ MY_NSP_START
 //                    out.printIndent(); out << connAlias.name()  << "\n";
 //
 //                    START_SCOPE
-//                        for (const auto &caArgAlias : connAlias.argAliases())
+//                        for (const auto &caArgAlias : connAlias.arguments())
 //                        {
 //                            out.printIndent(); out << "arg: " << caArgAlias.name() << " --> alias: "
 //                                    << caArgAlias.argRef().value << "\n";

@@ -15,11 +15,11 @@
 #define my_assert           CHILA_LIB_MISC__ASSERT
 
 #define catch_add_refpath \
-        catch (chila::lib::node::Exception &ex) \
+        catch (Exception &ex) \
         { \
             throw ex << ErrorInfo::ReferencePath(path()); \
         } \
-        catch (Exception &ex) \
+        catch (chila::lib::node::Exception &ex) \
         { \
             throw ex << ErrorInfo::ReferencePath(path()); \
         }
@@ -56,6 +56,11 @@ MY_NSP_START
             return typed->template parent<Container>();
         }
         else abort();
+    }
+
+    void Element::check(chila::lib::node::CheckData *data) const
+    {
+        checkDesc(*this);
     }
 
     namespace connector
@@ -353,7 +358,7 @@ MY_NSP_START
         // ActionInstance --------------------------------------------------------------------------------------------------------
         const cPerformer::Argument &aliasOf(const ConnectorInstance &instance, const std::string &arg)
         {
-            return instance.connAlias().referenced().argAliases().get(arg).cpRef().referenced();
+            return instance.connAlias().referenced().arguments().get(arg).cpRef().referenced();
         }
 
         void loadSet(const ConnectorInstance &instance, PathSet &set, const connector::Function &fun)
@@ -362,7 +367,7 @@ MY_NSP_START
 
             for (const auto &arg : fun.arguments()) chila::lib::node::checkAndAdd(eList, [&]
             {
-                auto &alias = instance.connAlias().referenced().argAliases().get(arg).cpRef().value;
+                auto &alias = instance.connAlias().referenced().arguments().get(arg).cpRef().value;
                 set.insert(alias); // TODO Test if putting 2 argRef pointing to the same cp-arg is catched as a 2 provided args
             });
 
@@ -421,7 +426,7 @@ MY_NSP_START
 
         chila::lib::node::CheckDataUPtr EventAlias::createCheckData(chila::lib::node::CheckData *data) const
         {
-            return std::make_unique<chila::lib::node::CheckData>(*data);
+            return boost::make_unique<chila::lib::node::CheckData>(*data);
         }
 
         void EventAlias::myCheck(chila::lib::node::CheckData *data) const
@@ -433,7 +438,7 @@ MY_NSP_START
 
         chila::lib::node::CheckDataUPtr ActionAlias::createCheckData(chila::lib::node::CheckData *data) const
         {
-            return std::make_unique<chila::lib::node::CheckData>(*data);
+            return boost::make_unique<chila::lib::node::CheckData>(*data);
         }
 
         void ActionAlias::myCheck(chila::lib::node::CheckData *data) const
@@ -454,7 +459,7 @@ MY_NSP_START
 
         chila::lib::node::CheckDataUPtr EventCall::createCheckData(chila::lib::node::CheckData *data) const
         {
-            auto ret = std::make_unique<EventCallCheckData>();
+            auto ret = boost::make_unique<EventCallCheckData>();
             for (auto &apcRef : aProvCreators())
                 my_assert(ret->apcs.insert(clMisc::Path(apcRef.name(), ":")).second);
 
@@ -511,8 +516,31 @@ MY_NSP_START
             chila::lib::node::checkAndAdd(eList, [&]
             {
                 NodeWithChildren::check();
+            });
+
+            chila::lib::node::checkAndAdd(eList, [&]
+            {
+                Element::check();
+            });
+
+            chila::lib::node::checkAndAdd(eList, [&]
+            {
                 load(*this, rpVec);
             });
+
+            std::set<clMisc::Path> provArgs;
+            for (auto &reqProv : rpVec)
+            {
+                for (auto &provArg : reqProv.provides)
+                {
+                    if (!provArgs.insert(provArg).second) chila::lib::node::checkAndAdd(eList, [&]
+                    {
+                        throw chila::lib::node::ExceptionWrapper(ArgumentProvidedManyTimes(provArg)
+                            << chila::lib::misc::ExceptionInfo::Path(path())
+                            << ErrorInfo::ReqProvVec(rpVec));
+                    });
+                }
+            }
 
             for (unsigned reqIndex = 1; reqIndex < rpVec.size(); ++reqIndex)
             {
@@ -531,7 +559,7 @@ MY_NSP_START
                         {
                             if (found)
                             {
-                                throw chila::lib::node::ExceptionWrapper(RequiredArgumentProvidedManyTimes(reqArg)
+                                throw chila::lib::node::ExceptionWrapper(RequiredArgumentProvidedManyTimes(reqArg) // <-- this is redundant
                                     << chila::lib::misc::ExceptionInfo::Path(path())
                                     << ErrorInfo::ReqProvVec(rpVec));
                             }
@@ -563,16 +591,12 @@ MY_NSP_START
 
             chila::lib::node::checkAndAdd(eList, [&]
             {
-                chila::lib::node::NodeWithChildren::check(data);
+                Element::check(data);
+            });
 
-                auto insVec = getInitCInstances(*this);
-
-//                std::cout << "---------------------------------------------------------" << std::endl;
-//                for (auto *cIns : insVec)
-//                {
-//                    my_assert(cIns);
-//                    CHILA_LIB_MISC__SHOW(30, cIns->path());
-//                }
+            chila::lib::node::checkAndAdd(eList, [&]
+            {
+                NodeWithChildren::check(data);
             });
 
             if (!eList.exceptions.empty()) throw eList;

@@ -21,7 +21,7 @@ MY_NSP_START
     class ConnectorCreator final: public CreatorBase
     {
         private:
-            using AddFunction = boost::function<void(const std::string &name, const StringVec &argNames,
+            using AddFunction = std::function<void(const std::string &name, const StringVec &argNames,
                     const std::string &description)>;
 
             void getSignature(const xmlpp::Element &root, StringVec &argNames);

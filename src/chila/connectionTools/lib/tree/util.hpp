@@ -14,11 +14,14 @@
 #include <chila/lib/xmlppUtils/util.hpp>
 #include <string>
 #include <chila/lib/misc/macrosExp.hpp>
+#include "types.hpp"
 
 #include "nspDef.hpp"
 
 MY_NSP_START
 {
+    using CAliasVec = std::vector<boost::reference_wrapper<const cPerformer::ConnectorAlias>>;
+
     void sendXMLToStream(std::ostream &out, const connector::Connector &connector, unsigned index = 0);
     void sendXMLToStream(std::ostream &out, const cPerformer::ConnectionPerformer &cPerformer, unsigned index = 0);
 //
@@ -97,22 +100,43 @@ MY_NSP_START
     const cPerformer::AProviderCreator &getAPC(const cPerformer::ConnectionPerformer &cPerformer, const clMisc::Path &path);
 
     template <typename Group, typename Element, typename Map>
-    Element &getGroupedElement(Map &map, clMisc::Path path)
+    Element *getGroupedElementPtr(Map &map, clMisc::Path path)
     {
         auto *lastNode = &map;
 
         if (path.empty())
-            BOOST_THROW_EXCEPTION(chila::lib::node::NodeNotFound());
+            return nullptr;
 
         auto name = path.top();
         path.pop();
 
         for (auto &gName : path)
         {
-            lastNode = &(lastNode->get(gName).template toType<Group>().elements());
+            auto node = lastNode->getPtr(gName);
+            if (!node)
+                return nullptr;
+
+            auto group = node->template toTypePtr<Group>();
+            if (!group)
+                return nullptr;
+
+            lastNode = &group->elements();
         }
 
-        return lastNode->get(name).template toType<Element>();
+        auto node = lastNode->getPtr(name);
+        if (!node)
+            return nullptr;
+
+        return node->template toTypePtr<Element>();
+    }
+
+    template <typename Group, typename Element, typename Map>
+    Element &getGroupedElement(Map &map, clMisc::Path path)
+    {
+        if (auto ret = getGroupedElementPtr<Group, Element>(map, path))
+            return *ret;
+
+        BOOST_THROW_EXCEPTION(chila::lib::node::NodeNotFound());
     }
 
     clMisc::Path getGroupedFullPath(const chila::lib::node::Node &element);
@@ -242,6 +266,28 @@ MY_NSP_START
     const cPerformer::ActionAlias *getActionAlias(const cPerformer::ActionInstance &actionIns);
     const cPerformer::ActionAlias *getActionAlias(const cPerformer::ConnectorInstance &cInstance,
                                                   const cPerformer::ActionInstance &actionIns);
+
+    using NodeFoundFun = std::function<void(const std::string &token, const chila::lib::node::Node *nodeFound)>;
+
+
+    template <typename Type>
+    inline const Element &getNonEmptyDesc(const Type &arg)
+    {
+        return arg;
+    }
+
+    template <typename Type, typename... Types>
+    inline const Element &getNonEmptyDesc(const Type &arg, const Types& ...args)
+    {
+        if (arg.description().value.empty())
+            return getNonEmptyDesc(args...);
+        else
+            return arg;
+    }
+
+    void checkDesc(const chila::lib::node::Node &node);
+
+    std::string getEnhancedDesc(const chila::lib::node::Node &node, const CAliasVec &cAliasVec, const std::string &finalDesc);
 }
 MY_NSP_END
 
