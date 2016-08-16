@@ -42,6 +42,21 @@
         catch_add_refpath
 
 
+#define def_val_create_with_ref(Name) \
+        chila::lib::node::NodeSPtr Name::createWithRef(const chila::lib::node::Node &newReferenced) const \
+        { \
+            auto ret = std::dynamic_pointer_cast<Name>(clone(name())); \
+            ret->value = getGroupedPath(newReferenced.toType<Name::Type>()); \
+            return ret; \
+        }
+
+#define def_void_create_with_ref(Name) \
+        chila::lib::node::NodeSPtr Name::createWithRef(const chila::lib::node::Node &newReferenced) const \
+        { \
+            return clone(getGroupedPath(newReferenced.toType<Name::Type>()).getStringRep(":")); \
+        }
+
+
 MY_NSP_START
 {
     template <typename Container, typename Element, typename InType>
@@ -96,6 +111,8 @@ MY_NSP_START
             else abort();
         }
 
+        def_void_create_with_ref(ArgRef)
+
         def_referenced_grouped(ArgRef, parent<ArgRefMap>(), ArgumentGroup, clMisc::Path(name(), ":"))
 
         // EventRef --------------------------------------------------------------------------------------------------------
@@ -113,6 +130,7 @@ MY_NSP_START
                       .parent<ActionMap>()).events();
         }
 
+        def_void_create_with_ref(EventRef)
 
         def_referenced_grouped(EventRef, parent<EventRefMap>(), EventGroup, clMisc::Path(name(), ":"))
     }
@@ -121,23 +139,25 @@ MY_NSP_START
 
     namespace cPerformer
     {
-        // ArgRefV --------------------------------------------------------------------------------------------------------
-        ArgumentMap &ArgRefV::base(Node &ref)
+        // ArgVRef --------------------------------------------------------------------------------------------------------
+        ArgumentMap &ArgVRef::base(Node &ref)
         {
             return getGroupParent<ConnectionPerformer, AProviderCreatorGroup>(ref.parent<AProviderCreator>()
                                                            .parent<AProviderCreatorMap>()).arguments();
         }
 
-        const ArgumentMap &ArgRefV::base(const Node &ref)
+        const ArgumentMap &ArgVRef::base(const Node &ref)
         {
             return getGroupParent<ConnectionPerformer, AProviderCreatorGroup>(ref.parent<AProviderCreator>()
                                                            .parent<AProviderCreatorMap>()).arguments();
         }
 
-        def_referenced_grouped(ArgRefV, parent<ArgRefVMap>(), ArgumentGroup, clMisc::Path(name(), ":"))
+        def_void_create_with_ref(ArgVRef)
 
-        // ArgRefT --------------------------------------------------------------------------------------------------------
-        ArgumentMap &ArgRefT::base(Node &ref)
+        def_referenced_grouped(ArgVRef, parent<ArgVRefMap>(), ArgumentGroup, clMisc::Path(name(), ":"))
+
+        // ArgTRef --------------------------------------------------------------------------------------------------------
+        ArgumentMap &ArgTRef::base(Node &ref)
         {
             return ref.parent<CAArgAlias>()
                       .parent<CAArgAliasMap>()
@@ -146,7 +166,7 @@ MY_NSP_START
                       .parent<ConnectionPerformer>().arguments();
         }
 
-        const ArgumentMap &ArgRefT::base(const Node &ref)
+        const ArgumentMap &ArgTRef::base(const Node &ref)
         {
             return ref.parent<CAArgAlias>()
                       .parent<CAArgAliasMap>()
@@ -155,7 +175,9 @@ MY_NSP_START
                       .parent<ConnectionPerformer>().arguments();
         }
 
-        def_referenced_grouped(ArgRefT, *this, ArgumentGroup, value)
+        def_val_create_with_ref(ArgTRef)
+
+        def_referenced_grouped(ArgTRef, *this, ArgumentGroup, value)
 
         // CAArgAlias --------------------------------------------------------------------------------------------------------
         connector::ArgumentMap &CAArgAlias::base(Node &ref)
@@ -163,11 +185,12 @@ MY_NSP_START
             return ref.parent<ConnectorAlias>().connector().referenced().arguments();
         }
 
-
         const connector::ArgumentMap &CAArgAlias::base(const Node &ref)
         {
             return ref.parent<ConnectorAlias>().connector().referenced().arguments();
         }
+
+        def_void_create_with_ref(CAArgAlias)
 
         def_referenced_grouped(CAArgAlias, parent<CAArgAliasMap>(), connector::ArgumentGroup, clMisc::Path(name(), ":"))
 
@@ -185,6 +208,8 @@ MY_NSP_START
                       .connector().referenced().events();
         }
 
+        def_void_create_with_ref(EventAlias)
+
         def_referenced_grouped(EventAlias, parent<EventAliasMap>(), connector::EventGroup, clMisc::Path(name(), ":"))
 
         // ActionAlias --------------------------------------------------------------------------------------------------------
@@ -200,6 +225,8 @@ MY_NSP_START
             return ref.parent<ConnectorAlias>()
                       .connector().referenced().actions();
         }
+
+        def_void_create_with_ref(ActionAlias)
 
         def_referenced_grouped(ActionAlias, parent<ActionAliasMap>(), connector::ActionGroup, clMisc::Path(name(), ":"))
 
@@ -217,6 +244,8 @@ MY_NSP_START
                       .parent<ConnectionPerformer>()
                       .parent<Namespace>();
         }
+
+        def_val_create_with_ref(ConnectorRef)
 
         connector::Connector &ConnectorRef::referenced() try
         {
@@ -251,6 +280,8 @@ MY_NSP_START
                                                             .parent<ConnectorInstanceMap>()).connectorAliases();
         }
 
+        def_val_create_with_ref(ConnectorAliasRef)
+
         def_referenced(ConnectorAliasRef, *this, value)
 
         // APCRef --------------------------------------------------------------------------------------------------------
@@ -272,6 +303,9 @@ MY_NSP_START
                                                         .parent<ConnectorInstanceMap>()).aProvCreators();
         }
 
+        def_void_create_with_ref(APCRef)
+
+
         def_referenced_grouped(APCRef, *this, AProviderCreatorGroup, clMisc::Path(name(), ":"))
 
         // ActionRef --------------------------------------------------------------------------------------------------------
@@ -291,6 +325,8 @@ MY_NSP_START
                       .connector().referenced().actions();
         }
 
+        def_val_create_with_ref(ActionRef)
+
         def_referenced_grouped(ActionRef, *this, connector::ActionGroup, value)
 
         // EventCall --------------------------------------------------------------------------------------------------------
@@ -304,6 +340,11 @@ MY_NSP_START
         {
             return ref.parent<ConnectorInstance>()
                       .connAlias().referenced().connector().referenced().events();
+        }
+
+        chila::lib::node::NodeSPtr EventCall::createWithRef(const chila::lib::node::Node &newReferenced) const
+        {
+            return clone(getGroupedPath(newReferenced.toType<EventCall::Type>()).getStringRep(":"));
         }
 
         def_referenced_grouped(EventCall, parent<EventCallMap>(), connector::EventGroup, clMisc::Path(name(), ":"))
@@ -328,6 +369,8 @@ MY_NSP_START
                                                             .parent<ConnectorInstance>()
                                                             .parent<ConnectorInstanceMap>()).connInstances();
         }
+
+        def_val_create_with_ref(ConnectorInstanceRef)
 
         template <typename InType> // ConnectorInstanceRef
         ADD_CONST_IF(ConnectorInstance) &ConnectorInstanceRef_referenced(InType &ciRef)
@@ -367,8 +410,17 @@ MY_NSP_START
 
             for (const auto &arg : fun.arguments()) chila::lib::node::checkAndAdd(eList, [&]
             {
-                auto &alias = instance.connAlias().referenced().arguments().get(arg).cpRef().value;
-                set.insert(alias); // TODO Test if putting 2 argRef pointing to the same cp-arg is catched as a 2 provided args
+                auto &args = instance.connAlias().referenced().arguments();
+                try
+                {
+                    auto &alias = args.get(arg).cpRef().value;
+                    set.insert(alias); // TODO Test if putting 2 argRef pointing to the same cp-arg is catched as a 2 provided args
+                }
+                catch (const boost::exception &ex)
+                {
+                    ex << ErrorInfo::ReferencePath(instance.path());
+                    throw;
+                }
             });
 
             if (!eList.exceptions.empty()) BOOST_THROW_EXCEPTION(eList);

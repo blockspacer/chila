@@ -119,7 +119,7 @@ MY_NSP_START
     {
         CHILA_META_NODE__DEF_MAP_OF_TYPED(ConnectorAliasMap, ConnectorAlias,);
         CHILA_META_NODE__DEF_MAP_OF_TYPED(CAArgAliasMap, CAArgAlias,);
-        CHILA_META_NODE__DEF_MAP_OF_TYPED(ArgRefVMap, ArgRefV,);
+        CHILA_META_NODE__DEF_MAP_OF_TYPED(ArgVRefMap, ArgVRef,);
         CHILA_META_NODE__DEF_MAP_OF_TYPED(EventCallMap, EventCall,);
         CHILA_META_NODE__DEF_MAP_OF_TYPED(APCRefMap, APCRef,);
         CHILA_META_NODE__DEF_VECTOR_OF_TYPED(ActionInstanceVec, ActionInstance);
@@ -135,15 +135,15 @@ MY_NSP_START
             ((Boolean)(unique))
         );
 
-        CHILA_META_NODE__DEF_REFERENCE_VNODE(ArgRefV, Argument, ArgumentMap);
-        CHILA_META_NODE__DEF_REFERENCE_TNODE(ArgRefT, chila::lib::misc::Path, Argument, ArgumentMap);
+        CHILA_META_NODE__DEF_REFERENCE_VNODE(ArgVRef, Argument, ArgumentMap);
+        CHILA_META_NODE__DEF_REFERENCE_TNODE(ArgTRef, chila::lib::misc::Path, Argument, ArgumentMap);
 
         CHILA_META_NODE__DEF_STRUCT_NODE(CAArgAlias, (Element)(Reference<connector::Argument>),
             (
                 REF_METHODS(connector::ArgumentMap)
                 CHILA_META_NODE__DEF_CHECK_BASES((Element)(Reference<connector::Argument>)(NodeWithChildren), 0)
             ),
-            ((ArgRefT)(cpRef))
+            ((ArgTRef)(cpRef))
         );
 
         CHILA_META_NODE__DEF_STRUCT_NODE(EventAlias, (Element)(Reference<connector::Event>),
@@ -183,8 +183,8 @@ MY_NSP_START
             (
                 CHILA_META_NODE__DEF_CHECK_BASES((Element)(AProviderCreatorBase), 0)
             ),
-            ((ArgRefVMap)(requires))
-            ((ArgRefVMap)(provides))
+            ((ArgVRefMap)(requires))
+            ((ArgVRefMap)(provides))
         );
 
 

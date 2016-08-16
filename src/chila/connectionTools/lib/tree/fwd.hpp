@@ -113,16 +113,16 @@ MY_NSP_START
         FWDEC_TYPE(ArgumentMap);
 
         FWDEC_TYPE(CArgRef);
-        FWDEC_TYPE(ArgRefV);
-        FWDEC_TYPE(ArgRefT);
+        FWDEC_TYPE(ArgVRef);
+        FWDEC_TYPE(ArgTRef);
         FWDEC_TYPE(CAArgAlias);
         FWDEC_TYPE(ConnectorRef);
         FWDEC_TYPE(CAArgAliasMap);
         FWDEC_TYPE(ConnectorAlias);
         FWDEC_TYPE(ConnectorAliasRef);
         FWDEC_TYPE(ConnectorAliasMap);
-        FWDEC_TYPE(ArgRefTMap);
-        FWDEC_TYPE(ArgRefVMap);
+        FWDEC_TYPE(ArgTRefMap);
+        FWDEC_TYPE(ArgVRefMap);
         FWDEC_TYPE(AProviderCreatorBase);
         FWDEC_TYPE(AProviderCreator);
         FWDEC_TYPE(AProviderCreatorGroup);

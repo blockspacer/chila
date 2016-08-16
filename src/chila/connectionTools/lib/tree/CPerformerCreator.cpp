@@ -126,7 +126,7 @@ MY_NSP_START
         });
     }
 
-    void loadAPCArgs(cPerformer::ArgRefVMap &args, const StringVec &vec)
+    void loadAPCArgs(cPerformer::ArgVRefMap &args, const StringVec &vec)
     {
         for (const auto &arg : vec)
         {

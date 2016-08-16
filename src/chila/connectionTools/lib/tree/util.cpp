@@ -213,7 +213,7 @@ MY_NSP_START
             return out;
         }
 
-        std::ostream &operator<<(std::ostream &out, const cPerformer::ArgRefVMap &apcArgAliasRefs)
+        std::ostream &operator<<(std::ostream &out, const cPerformer::ArgVRefMap &apcArgAliasRefs)
         {
             bool first = true;
             for (const auto &apcArgAliasRef : apcArgAliasRefs)
@@ -590,14 +590,14 @@ MY_NSP_START
         return ciMapPos<connector::ActionGroup>(cPerformer::ActionAlias::base(node), noLeafFun);
     }
 
-    ValueVec posibilities(const cPerformer::ArgRefVMap &node)
+    ValueVec posibilities(const cPerformer::ArgVRefMap &node)
     {
-        return ciMapPos<cPerformer::ArgumentGroup>(cPerformer::ArgRefV::base(node), noLeafFun);
+        return ciMapPos<cPerformer::ArgumentGroup>(cPerformer::ArgVRef::base(node), noLeafFun);
     }
 
     ValueVec posibilities(const cPerformer::CAArgAlias &node)
     {
-        return ciMapPos<cPerformer::ArgumentGroup>(cPerformer::ArgRefT::base(node.cpRef()), noLeafFun);
+        return ciMapPos<cPerformer::ArgumentGroup>(cPerformer::ArgTRef::base(node.cpRef()), noLeafFun);
     }
 
     ValueVec posibilities(const cPerformer::APCRefMap &node)
@@ -667,7 +667,7 @@ MY_NSP_START
         ret_posibilites(cPerformer::CAArgAlias)
         ret_posibilites(cPerformer::EventAliasMap)
         ret_posibilites(cPerformer::ActionAliasMap)
-        ret_posibilites(cPerformer::ArgRefVMap)
+        ret_posibilites(cPerformer::ArgVRefMap)
         ret_posibilites(cPerformer::APCRef)
         ret_posibilites(cPerformer::APCRefMap)
         ret_posibilites(cPerformer::ConnectorInstanceRef)
