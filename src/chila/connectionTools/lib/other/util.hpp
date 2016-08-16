@@ -10,6 +10,7 @@
 #include "Launcher.hpp"
 #include <boost/asio.hpp>
 #include "exceptions.hpp"
+#include <chila/lib/misc/util.hpp>
 #include "../codegen/fwd.hpp"
 
 #include "macros.fgen.hpp"
