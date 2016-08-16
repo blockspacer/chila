@@ -57,6 +57,7 @@
       <in>AnyPrinter.cpp</in>
       <in>DynamicLibrary.cpp</in>
       <in>Path.cpp</in>
+      <in>ProgramOptions.cpp</in>
       <in>ThreadPool.cpp</in>
       <in>Version.cpp</in>
       <in>Watch.cpp</in>
@@ -1002,116 +1003,6 @@
             flavor2="11">
         <ccTool flags="1">
           <incDir>
-            <pElem>..</pElem>
-            <pElem>/applib/boost/include/1.55</pElem>
-            <pElem>../../../build/release/src</pElem>
-            <pElem>../../../../../src</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../usr/include/libxml2</pElem>
-            <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
-            <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
-            <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
-            <pElem>/usr/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
-            <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../build/release</pElem>
-          </incDir>
-          <undefinedList>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-          </undefinedList>
-        </ccTool>
-      </item>
-      <item path="../../../../../src/chila/connectionTools/lib/other/CompletionScanner.cpp"
-            ex="false"
-            tool="1"
-            flavor2="11">
-        <ccTool flags="1">
-          <incDir>
-            <pElem>..</pElem>
-            <pElem>/applib/boost/include/1.55</pElem>
-            <pElem>../../../build/release/src</pElem>
-            <pElem>../../../../../src</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../usr/include/libxml2</pElem>
-            <pElem>/usr/include/libxml2</pElem>
-            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
-            <pElem>/usr/include/glibmm-2.4</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
-            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
-            <pElem>/usr/include/sigc++-2.0</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
-            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
-            <pElem>/usr/include/glib-2.0</pElem>
-            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
-            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
-            <pElem>/usr/include/libxml++-2.6</pElem>
-            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
-            <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../build/release</pElem>
-          </incDir>
-          <undefinedList>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-          </undefinedList>
-        </ccTool>
-      </item>
-      <item path="../../../../../src/chila/connectionTools/lib/other/Launcher.cpp"
-            ex="false"
-            tool="1"
-            flavor2="11">
-        <ccTool flags="1">
-          <incDir>
-            <pElem>..</pElem>
-            <pElem>/applib/boost/include/1.55</pElem>
             <pElem>../../../build/release/src</pElem>
             <pElem>../../../../../src</pElem>
             <pElem>../../../../../../applib/boost/include/1.61</pElem>
@@ -1136,20 +1027,70 @@
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
-          <undefinedList>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-          </undefinedList>
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/lib/other/CompletionScanner.cpp"
+            ex="false"
+            tool="1"
+            flavor2="11">
+        <ccTool flags="1">
+          <incDir>
+            <pElem>../../../build/release/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../build/release</pElem>
+          </incDir>
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/connectionTools/lib/other/Launcher.cpp"
+            ex="false"
+            tool="1"
+            flavor2="11">
+        <ccTool flags="1">
+          <incDir>
+            <pElem>../../../build/release/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../build/release</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/other/common/impl/Forwarder.cpp"
@@ -1214,8 +1155,6 @@
             flavor2="11">
         <ccTool flags="1">
           <incDir>
-            <pElem>..</pElem>
-            <pElem>/applib/boost/include/1.55</pElem>
             <pElem>../../../build/release/src</pElem>
             <pElem>../../../../../src</pElem>
             <pElem>../../../../../../applib/boost/include/1.61</pElem>
@@ -1240,22 +1179,6 @@
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
-          <undefinedList>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-            <Elem>__NO_INLINE__</Elem>
-          </undefinedList>
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/tree/CPerformerCreator.cpp"
@@ -1333,8 +1256,8 @@
             <pElem>/usr/include/libxml++-2.6</pElem>
             <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
-            <pElem>../../../../../../applib/boost/include/1.60</pElem>
-            <pElem>../../../../../../../../../../applib/boost/include/1.60</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
           <preprocessorList>
@@ -1416,6 +1339,42 @@
         </ccTool>
       </item>
       <item path="../../../../../src/chila/lib/misc/Path.cpp"
+            ex="false"
+            tool="1"
+            flavor2="11">
+        <ccTool flags="1">
+          <incDir>
+            <pElem>../../../build/release/src</pElem>
+            <pElem>../../../../../src</pElem>
+            <pElem>../../../../../../../../usr/include/libxml2</pElem>
+            <pElem>/usr/include/libxml2</pElem>
+            <pElem>../../../../../../../../usr/include/glibmm-2.4</pElem>
+            <pElem>/usr/include/glibmm-2.4</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glibmm-2.4/include</pElem>
+            <pElem>../../../../../../../../usr/include/sigc++-2.0</pElem>
+            <pElem>/usr/include/sigc++-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/sigc++-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/glib-2.0</pElem>
+            <pElem>/usr/include/glib-2.0</pElem>
+            <pElem>../../../../../../../../usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
+            <pElem>../../../../../../../../usr/include/libxml++-2.6</pElem>
+            <pElem>/usr/include/libxml++-2.6</pElem>
+            <pElem>../../../../../../../../usr/lib/libxml++-2.6/include</pElem>
+            <pElem>/usr/lib/libxml++-2.6/include</pElem>
+            <pElem>../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../../../../../../../../applib/boost/include/1.61</pElem>
+            <pElem>../../../build/release</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>BOOST_PP_VARIADICS=1</Elem>
+            <Elem>NDEBUG</Elem>
+          </preprocessorList>
+        </ccTool>
+      </item>
+      <item path="../../../../../src/chila/lib/misc/ProgramOptions.cpp"
             ex="false"
             tool="1"
             flavor2="11">

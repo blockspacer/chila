@@ -592,7 +592,7 @@ MY_NSP_START
             if (boost::range::find_if
                 (
                     aaRefMap,
-                    [&cpArg](const cclTree::cPerformer::ArgRefV &argRef) { return argRef.name() == cpArg; }
+                    [&cpArg](const cclTree::cPerformer::ArgVRef &argRef) { return argRef.name() == cpArg; }
                 ) != aaRefMap.end())
                 return &apcRef;
         }
