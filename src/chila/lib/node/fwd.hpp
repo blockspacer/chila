@@ -42,7 +42,12 @@
                 return {ret.first, ret.second.toType<Name>()}; \
             } \
         protected: \
-            chila::lib::node::NodeSPtr clone() const override { return std::make_shared<Name>(*this); } \
+            chila::lib::node::NodeSPtr clone(const std::string &newName = "") const override \
+            { \
+                auto ret = std::make_shared<Name>(*this); \
+                if (!newName.empty()) ret->_name = newName; \
+                return ret; \
+            } \
     }
 
 #include "nspDef.hpp"
@@ -72,6 +77,9 @@ MY_NSP_START
     {
         virtual ~CheckData() {}
     };
+
+    using PathVec = std::vector<chila::lib::misc::Path>;
+
 
 }
 MY_NSP_END

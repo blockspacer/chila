@@ -25,6 +25,7 @@ MY_NSP_START
     DEF_RUNTIME_ERROR_FROM_BASE(Exception, InvalidChildType, "invalid child type");
     DEF_RUNTIME_ERROR_FROM_BASE(Exception, InvalidNode, "invalid node");
     DEF_RUNTIME_ERROR_FROM_BASE(Exception, NodeNotCloneable, "node not cloneable");
+    DEF_RUNTIME_ERROR_FROM_BASE(Exception, NodeIsOfDifferentType, "node is of different type");
 
     struct ExceptionWrapper: public Exception
     {

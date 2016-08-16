@@ -69,6 +69,17 @@ MY_NSP_START
             BOOST_THROW_EXCEPTION(NodeNotCloneable()
                 << chila::lib::misc::ExceptionInfo::Type(boost::typeindex::type_id_runtime(*this)));
     }
+
+    void Node::visit(const VisitFun &fun)
+    {
+        fun(*this);
+
+        if (auto *typed = toTypePtr<NodeWithChildren>())
+        {
+            for (auto &child : *typed)
+                child.visit(fun);
+        }
+    }
 }
 MY_NSP_END
 

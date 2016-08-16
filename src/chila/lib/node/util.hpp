@@ -100,6 +100,11 @@ MY_NSP_START
 
     NodeWithChildren &mainParent(NodeWithChildren &node);
 
+    PathVec getReferences(
+        NodeWithChildren &node,
+        const chila::lib::misc::Path &path);
+
+    void replaceReferences(NodeWithChildren &node, const PathVec &paths, const Node &newRefNode);
 
 }
 MY_NSP_END

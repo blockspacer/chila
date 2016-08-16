@@ -29,9 +29,12 @@
                 return ret; \
             } \
             BOOST_PP_SEQ_CAT(Methods) \
-            chila::lib::node::NodeSPtr clone() const override \
+            \
+            chila::lib::node::NodeSPtr clone(const std::string &newName = "") const override \
             { \
-                return std::make_shared<Name>(*this); \
+                auto ret = std::make_shared<Name>(*this); \
+                if (!newName.empty()) ret->_name = newName; \
+                return ret; \
             } \
             bool compare(const Node &node) const override \
             { \

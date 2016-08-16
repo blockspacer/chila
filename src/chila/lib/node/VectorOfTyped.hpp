@@ -25,9 +25,11 @@
                 ret->_name = name; \
                 return ret; \
             } \
-            chila::lib::node::NodeSPtr clone() const override \
+            chila::lib::node::NodeSPtr clone(const std::string &newName = "") const override \
             { \
-                return std::make_shared<Name>(*this); \
+                auto ret = std::make_shared<Name>(*this); \
+                if (!newName.empty()) ret->_name = newName; \
+                return ret; \
             } \
             virtual bool isSameType(const chila::lib::node::Node &rhs) const override \
             { \

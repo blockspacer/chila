@@ -10,6 +10,7 @@
 #include "fwd.hpp"
 #include "exceptions.hpp"
 #include <chila/lib/misc/iter_iterator.hpp>
+#include <boost/type_traits.hpp>
 
 #include "nspDef.hpp"
 
@@ -108,6 +109,15 @@ MY_NSP_START
 
             void takeSimilar(const NodeWithChildren &rhs);
 
+            template <typename Derived>
+            Derived &replace(std::shared_ptr<Derived> node, const std::string &nodeName);
+
+            template <typename Derived>
+            Derived &replace(std::shared_ptr<Derived> node)
+            {
+                return replace(node, node->name());
+            }
+
         protected:
             NodeWithChildren() = default;
             NodeWithChildren(const NodeWithChildren &rhs);
@@ -115,9 +125,6 @@ MY_NSP_START
 
             template <typename Derived>
             Derived &add(std::shared_ptr<Derived> node);
-
-            template <typename Derived>
-            Derived &replace(std::shared_ptr<Derived> node);
 
             template <typename Derived>
             Derived &add(std::string name, std::shared_ptr<Derived> node)
@@ -129,6 +136,8 @@ MY_NSP_START
             NodeSPtr removeNode(const std::string &name);
 
             std::vector<NodeSPtr> removeAll();
+
+            Node &renameChild(const std::string &childName, const std::string &newName);
 
         private:
             NodeSPtrMap children;
@@ -159,16 +168,37 @@ MY_NSP_START
 
     /** Adds a node. */
     template <typename Derived>
-    Derived &NodeWithChildren::replace(std::shared_ptr<Derived> node)
+    Derived &NodeWithChildren::replace(std::shared_ptr<Derived> node, const std::string &nodeName)
     {
-        std::string nodeName = node->name();
-
         auto it = children.find(nodeName);
         if (it == children.end())
             BOOST_THROW_EXCEPTION(ChildDoesNotExists(nodeName));
 
+        if (!it->second->isSameType(*node))
+        {
+            BOOST_THROW_EXCEPTION(NodeIsOfDifferentType()
+                << chila::lib::misc::ExceptionInfo::TypeFrom(boost::typeindex::type_id_runtime(*(it->second)))
+                << chila::lib::misc::ExceptionInfo::TypeTo(boost::typeindex::type_id_runtime(node)));
+        }
+
+        auto itc = itChildren.begin();
+        while (true)
+        {
+            my_assert(itc != itChildren.end());
+
+            if ((*itc)->second->name() == nodeName)
+                break;
+
+            ++itc;
+        }
+
         node->_parent = this;
-        it->second = node;
+
+        children.erase(it);
+        auto insRet = children.insert({node->name(), node});
+        my_assert(insRet.second);
+
+        (*itc) = insRet.first;
 
         return *node;
     }

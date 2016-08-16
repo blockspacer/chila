@@ -27,9 +27,11 @@
                 ret->_name = name; \
                 return ret; \
             } \
-            chila::lib::node::NodeSPtr clone() const override \
+            chila::lib::node::NodeSPtr clone(const std::string &newName = "") const override \
             { \
-                return std::make_shared<Name>(*this); \
+                auto ret = std::make_shared<Name>(*this); \
+                if (!newName.empty()) ret->_name = newName; \
+                return ret; \
             } \
             virtual bool isSameType(const chila::lib::node::Node &rhs) const override \
             { \
@@ -43,7 +45,7 @@ MY_NSP_START
 {
     struct NodeMap: public virtual NodeWithChildren
     {
-
+        virtual Node &renameChild(const std::string &childName, const std::string &newName) = 0;
     };
 
     template <typename _Type>
@@ -66,6 +68,11 @@ MY_NSP_START
             }
 
             return NodeWithChildren::add(from.removeNode(name));
+        }
+
+        Node &renameChild(const std::string &childName, const std::string &newName) override
+        {
+            return NodeWithChildren::renameChild(childName, newName);
         }
 
         Node &takeChild(IContainerOfTyped &from, const std::string &name) override

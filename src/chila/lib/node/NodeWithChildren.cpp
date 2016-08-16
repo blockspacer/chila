@@ -37,6 +37,7 @@ MY_NSP_START
         if (it == children.end())
             BOOST_THROW_EXCEPTION(ChildDoesNotExists(name) << chila::lib::misc::ExceptionInfo::Path(path()));
 
+
         return *(it->second);
     }
 
@@ -302,6 +303,20 @@ MY_NSP_START
                 }
             }
         }
+    }
+
+    Node &NodeWithChildren::renameChild(const std::string &childName, const std::string &newName)
+    {
+        auto it = children.find(childName);
+        if (it == children.end())
+            BOOST_THROW_EXCEPTION(NodeNotFound());
+
+        auto node = it->second->clone();
+        node->_name = newName;
+
+        replace(node, childName);
+
+        return *node;
     }
 
 

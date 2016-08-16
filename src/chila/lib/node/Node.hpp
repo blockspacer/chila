@@ -22,6 +22,8 @@ MY_NSP_START
         friend struct NodeWithChildren;
 
         public:
+            using VisitFun = std::function<void(const Node &node)>;
+            
             /** Returns the full path to the node */
             chila::lib::misc::Path path() const;
 
@@ -93,6 +95,8 @@ MY_NSP_START
             /** Returns true if both nodes are of the same type. */
             virtual bool isSameType(const Node &rhs) const = 0;
 
+            void visit(const VisitFun &fun);
+
         protected:
             std::string _name;
             NodeWithChildren *_parent;
@@ -102,7 +106,7 @@ MY_NSP_START
             Node(const Node &&) = delete;
 
             /** Clones the node */
-            virtual NodeSPtr clone() const = 0;
+            virtual NodeSPtr clone(const std::string &newName = "") const = 0;
 
         public:
             virtual ~Node() {}

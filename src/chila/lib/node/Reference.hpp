@@ -29,7 +29,8 @@
         Type &referenced() override; \
         const Type &referenced() const override; \
         static Container &base(Node &ref); \
-        static const Container &base(const Node &ref);
+        static const Container &base(const Node &ref); \
+        chila::lib::node::NodeSPtr createWithRef(const chila::lib::node::Node &newReferenced) const override;
 
 #include "nspDef.hpp"
 
@@ -38,6 +39,7 @@ MY_NSP_START
     struct IReference
     {
         virtual chila::lib::misc::Path refPath() const = 0;
+        virtual chila::lib::node::NodeSPtr createWithRef(const chila::lib::node::Node &newReferenced) const = 0;
         virtual ~IReference() {}
     };
 
@@ -50,7 +52,6 @@ MY_NSP_START
         virtual const Type &referenced() const = 0;
 
         chila::lib::misc::Path refPath() const override { return referenced().path(); }
-
 
         void check(chila::lib::node::CheckData *data = nullptr) const
         {
