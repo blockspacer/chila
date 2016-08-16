@@ -56,7 +56,7 @@ MY_NSP_START
         def_action(SetValueWPos,        ActionWithPos,      (SetValue),     "set value");
         def_action(SetValueWVal,        ActionWithValue,    (SetValue),     "set value");
         def_action(Remove,              Action,             ,               "remove");
-        def_action(Rename,              Action,             ,               "rename");
+        def_action(Rename,              ActionWithValue,    ,               "rename");
         def_action(Add,                 Action,             (AddElement),   "add element");
         def_action(AddWPos,             ActionWithPos,      (AddElement),   "add element");
         def_action(AddWVal,             ActionWithValue,    (AddElement),   "add element");
