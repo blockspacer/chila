@@ -19,6 +19,7 @@
 
 #include "Path.hpp"
 #include <boost/range/algorithm/reverse.hpp>
+#include "exceptions.hpp"
 #include "macros.fgen.hpp"
 
 MY_NSP_START

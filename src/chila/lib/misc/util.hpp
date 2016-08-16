@@ -626,8 +626,6 @@ MY_NSP_START
 }
 MY_NSP_END
 
-using chila::lib::misc::rvalue_cast;
-
 #include "macros.fgen.hpp"
 
 #endif

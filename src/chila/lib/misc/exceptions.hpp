@@ -6,6 +6,7 @@
 #define CHILA_LIB_MISC__EXCEPTIONS_HPP
 
 #include <chila/lib/misc/fwd.hpp>
+#include <chila/lib/misc/Path.hpp>
 #include <boost/exception/all.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/type_index.hpp>
