@@ -24,7 +24,7 @@ MY_NSP_START
             using result_type = void;
             using Arguments = _Arguments;
             using Signature = typename chila::connectionTools::lib::codegen::FunctionSigCreator<Arguments>::Type;
-            using Function = boost::function<Signature>;
+            using Function = std::function<Signature>;
 
             template <typename Fun>
             void passFunAndSet(const Fun &fun)
@@ -44,7 +44,7 @@ MY_NSP_START
                     assign(fun);
             }
 
-            operator bool() const { return function; }
+            operator bool() const { return bool(function); }
 
         protected:
             Function function;
