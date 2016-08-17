@@ -623,6 +623,26 @@ MY_NSP_START
 
     bool filesAreEqual(const boost::filesystem::path &file0, const boost::filesystem::path &file1);
 
+
+    template <typename Fun0, typename Fun1>
+    inline auto funExecSequence(const Fun0 &fun0, const Fun1 &fun1)
+    {
+        return [fun0, fun1](auto&&... args)
+        {
+            boost::unwrap_ref(fun0)(std::forward<decltype(args)>(args)...);
+            boost::unwrap_ref(fun1)(std::forward<decltype(args)>(args)...);
+        };
+    }
+
+    template <typename FunFrom, typename FunTo>
+    void composeFun(FunFrom &from, const FunTo &to)
+    {
+        if (from)
+            from = funExecSequence(from, to);
+        else
+            from = to;
+    }
+
 }
 MY_NSP_END
 
