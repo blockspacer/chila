@@ -10,7 +10,8 @@
 #include <iostream>
 #include <chila/lib/misc/Path.hpp>
 #include <boost/function.hpp>
-#include <chila/connectionTools/lib/other/FunExecSequence.hpp>
+#include <chila/connectionTools/lib/other/util.hpp>
+
 #include <vector>
 
 #include <chila/lib/misc/macrosExp.hpp>
@@ -87,6 +88,17 @@ MY_NSP_START
             void allDeactivated();
 
     };
+
+    template <typename Connector>
+    void addToMapAndLauncher(
+        codegen::ConnectorMap &cMap,
+        Launcher &launcher,
+        const std::string &name,
+        Connector &connector)
+    {
+        cMap.add(name, connector);
+        launcher.add(connector);
+    }
 }
 MY_NSP_END
 

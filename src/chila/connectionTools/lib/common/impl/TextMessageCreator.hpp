@@ -9,7 +9,7 @@
 #include "fwd.hpp"
 #include <map>
 #include <boost/assign.hpp>
-#include <chila/connectionTools/lib/other/FunExecSequence.hpp>
+
 #include <chila/connectionTools/lib/other/util.hpp>
 
 

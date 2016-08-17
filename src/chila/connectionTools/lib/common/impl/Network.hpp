@@ -11,7 +11,7 @@
 #include <boost/assign.hpp>
 #include <chila/lib/misc/NetResolver.hpp>
 #include <chila/lib/misc/AddressFilter.hpp>
-#include <chila/connectionTools/lib/other/FunExecSequence.hpp>
+
 #include <chila/connectionTools/lib/other/util.hpp>
 
 #include <chila/connectionTools/lib/other/macrosExp.hpp>

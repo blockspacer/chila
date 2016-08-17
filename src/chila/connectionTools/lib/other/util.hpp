@@ -7,25 +7,23 @@
 
 #include "fwd.hpp"
 #include <chila/connectionTools/lib/codegen/ConnectorMap.hpp>
-#include "Launcher.hpp"
 #include <boost/asio.hpp>
 #include "exceptions.hpp"
 #include <chila/lib/misc/util.hpp>
+#include "macrosExp.hpp"
 #include "../codegen/fwd.hpp"
 
 #include "macros.fgen.hpp"
 
 MY_NSP_START
 {
-    template <typename Connector>
-    void addToMapAndLauncher(
-        codegen::ConnectorMap &cMap,
-        Launcher &launcher,
-        const std::string &name,
-        Connector &connector)
+    template <typename Fun1>
+    inline auto funExecSequence(const Fun1 &fun1)
     {
-        cMap.add(name, connector);
-        launcher.add(connector);
+        return [fun1](const auto &fun0)
+        {
+            return chila::lib::misc::funExecSequence(fun0, fun1);
+        };
     }
 
     template <typename ConnFun, typename Fun>

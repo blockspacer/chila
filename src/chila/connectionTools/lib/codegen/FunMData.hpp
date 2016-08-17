@@ -6,9 +6,10 @@
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__FUNMDATA_HPP
 
 #include "exceptions.hpp"
+#include <chila/connectionTools/lib/other/util.hpp>
 #include <chila/lib/misc/exceptions.hpp>
 #include "FunctionSigCreator.hpp"
-#include <chila/connectionTools/lib/other/FunExecSequence.hpp>
+
 
 #include "macros.fgen.hpp"
 
