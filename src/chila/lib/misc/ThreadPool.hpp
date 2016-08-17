@@ -17,9 +17,9 @@ MY_NSP_START
     class ThreadPool
     {
         public:
-            typedef boost::function<void()> Fun;
-            typedef boost::function<void(const std::string&)> ItFun;
-            typedef boost::function<void(const std::string&)> StartedFinishedFun;
+            typedef std::function<void()> Fun;
+            typedef std::function<void(const std::string&)> ItFun;
+            typedef std::function<void(const std::string&)> StartedFinishedFun;
 
             StartedFinishedFun startedFun, finishedFun;
 

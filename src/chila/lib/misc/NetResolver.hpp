@@ -23,7 +23,7 @@ MY_NSP_START
         public:
             typedef _ResolverType ResolverType;
 
-            typedef boost::function<void(const std::string &error, typename ResolverType::iterator it)> ResolverHandlerFun;
+            typedef std::function<void(const std::string &error, typename ResolverType::iterator it)> ResolverHandlerFun;
 
             NetResolver(boost::asio::io_service &ioService, const boost::posix_time::time_duration &timeOut) :
                 resolver(ioService), timeOut(timeOut) {}

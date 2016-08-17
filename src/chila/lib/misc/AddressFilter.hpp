@@ -22,7 +22,7 @@ MY_NSP_START
             typedef std::set<std::string> StringSet;
             typedef std::set<boost::asio::ip::address> AddressSet;
 
-            typedef boost::function<void(const std::string &error)> HandlerFun;
+            typedef std::function<void(const std::string &error)> HandlerFun;
 
             HandlerFun handler;
 
