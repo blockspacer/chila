@@ -9,6 +9,7 @@
 #define FWDEC_TYPE CHILA_LIB_MISC__FWDEC_TYPE
 
 #include "macros.fgen.hpp"
+#include <boost/filesystem/path.hpp>
 
 MY_NSP_START
 {
