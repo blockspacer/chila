@@ -29,7 +29,7 @@ MY_NSP_START
             void execute(const chila::lib::misc::Path &path, const ArgumentStrMap &arguments) const;
 
         private:
-            using ExecuterFun = boost::function<void(const ArgumentStrMap &arguments)>;
+            using ExecuterFun = std::function<void(const ArgumentStrMap &arguments)>;
             using FunMap = std::map<chila::lib::misc::Path, ExecuterFun>;
             FunMap funMap;
     };

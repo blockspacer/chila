@@ -24,7 +24,7 @@ MY_NSP_START
         public:
             Launcher() : lastStarted(NULL) {}
 
-            boost::function<void()> startedFun, finishedFun;
+            std::function<void()> startedFun, finishedFun;
 
             template <typename ConnType>
             void add(ConnType &conn)
@@ -36,7 +36,7 @@ MY_NSP_START
             void start();
             void finish();
         private:
-            using Function = boost::function<void()>;
+            using Function = std::function<void()>;
 
             struct Connector
             {
