@@ -7,7 +7,7 @@
 #include <chila/lib/xmlppUtils/util.hpp>
 #include <boost/bind.hpp>
 #include <chila/connectionTools/lib/other/util.hpp>
-#include <chila/connectionTools/lib/other/FunExecSequence.hpp>
+
 
 #include <boost/filesystem/path.hpp>
 
