@@ -478,7 +478,7 @@ MY_NSP_START
 
         chila::lib::node::CheckDataUPtr EventAlias::createCheckData(chila::lib::node::CheckData *data) const
         {
-            return boost::make_unique<chila::lib::node::CheckData>(*data);
+            return std::make_unique<chila::lib::node::CheckData>(*data);
         }
 
         void EventAlias::myCheck(chila::lib::node::CheckData *data) const
@@ -490,7 +490,7 @@ MY_NSP_START
 
         chila::lib::node::CheckDataUPtr ActionAlias::createCheckData(chila::lib::node::CheckData *data) const
         {
-            return boost::make_unique<chila::lib::node::CheckData>(*data);
+            return std::make_unique<chila::lib::node::CheckData>(*data);
         }
 
         void ActionAlias::myCheck(chila::lib::node::CheckData *data) const
@@ -511,7 +511,7 @@ MY_NSP_START
 
         chila::lib::node::CheckDataUPtr EventCall::createCheckData(chila::lib::node::CheckData *data) const
         {
-            auto ret = boost::make_unique<EventCallCheckData>();
+            auto ret = std::make_unique<EventCallCheckData>();
             for (auto &apcRef : aProvCreators())
                 my_assert(ret->apcs.insert(clMisc::Path(apcRef.name(), ":")).second);
 

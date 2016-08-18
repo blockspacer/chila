@@ -242,7 +242,7 @@ MY_NSP_START
         unsigned bufferSize
     )
     {
-        return boost::make_unique<impl::Network>(
+        return std::make_unique<impl::Network>(
             instanceName,
             boost::ref(ioserv),
             host,

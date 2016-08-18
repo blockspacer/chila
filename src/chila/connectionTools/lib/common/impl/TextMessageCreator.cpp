@@ -106,7 +106,7 @@ MY_NSP_START
         unsigned criteriaValue,
         unsigned bufferSize)
     {
-        return boost::make_unique<impl::TextMessageCreator>(instanceName, criteria, criteriaValue, bufferSize);
+        return std::make_unique<impl::TextMessageCreator>(instanceName, criteria, criteriaValue, bufferSize);
     }
 
 
