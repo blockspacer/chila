@@ -596,6 +596,23 @@ MY_NSP_START
         }
     };
 
+    struct fracSecInserter final: public chila::lib::misc::SinkInserter<fracSecInserter>
+    {
+        boost::posix_time::time_duration td;
+
+        fracSecInserter(const boost::posix_time::time_duration &td) : td(td) {}
+
+        template <typename Sink>
+        void write(Sink &out) const
+        {
+            auto frac = td.fractional_seconds();
+            auto totalFrac = td.num_fractional_digits();
+
+            out << std::setfill('0') << std::setw(totalFrac) << frac;
+        }
+    };
+
+
     bool wildMatch(const char *pat, const char *str);
 
     template <typename Range>
