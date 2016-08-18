@@ -1,68 +1,129 @@
-/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
+/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra
  * (C.I.: 1.439.390 - Paraguay)
+ *
+ * This file is part of 'chila.connectionTools.lib.codegen'
+ *
+ * 'chila.connectionTools.lib.codegen' is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
+ *
+ * 'chila.connectionTools.lib.codegen' is distributed in the hope that
+ * it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with 'chila.connectionTools.lib.codegen'. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONVERT_HPP
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONVERT_HPP
 
 #include <boost/utility.hpp>
-#include <type_traits>
+#include <boost/type_traits.hpp>
 #include <boost/ref.hpp>
-#include <memory>
+#include <boost/shared_ptr.hpp>
 #include <boost/call_traits.hpp>
+#include <boost/mpl/or.hpp>
 #include <boost/cast.hpp>
 #include <chila/lib/misc/util.hpp>
 
+#define RESULT_OF_CONVERT(opN) typename ResultOfConvert<Target, Type>::convert##opN##_type
+
+#define CONVERT_TMPL_ARG(r, data, i, elem) , typename elem
+
+#define RESULT_OF_CONVERT_IMPL(opN, Ret, sptrTypeBaseOfTarget, isConvertible, typeBaseOfTarget, targetBaseOfType, isSame, opSeq) \
+    template <typename Target BOOST_PP_SEQ_FOR_EACH_I(CONVERT_TMPL_ARG,, opSeq)> \
+    struct ResultOfConvertImpl \
+    < \
+        Target, \
+        sptrTypeBaseOfTarget, \
+        isConvertible, \
+        typeBaseOfTarget, \
+        targetBaseOfType, \
+        isSame \
+    > \
+    { \
+        typedef Ret type; \
+        typedef Ret convert##opN##_type; \
+    };
+
 #define ENABLE_IF_DUMMY(Type) \
-    typename boost::enable_if<std::is_same<Type, DummyType>, Target>::type
+    typename boost::enable_if<boost::is_same<Type, DummyType>, Target>::type
 
 #define DISABLE_IF_DUMMY(Type) \
-    typename boost::disable_if<std::is_same<Type, DummyType>, Target>::type
+    typename boost::disable_if<boost::is_same<Type, DummyType>, Target>::type
 
-#define ENABLE_IF(num, ReturnType) \
-    std::enable_if_t<decltype(enableIf##num(hana::type_c<Target>, hana::type_c<Type>))::value, ReturnType>
-
-#define DEF_CONVERT_ELEM(r, data, i, cond) \
-    BOOST_PP_IF(i, &&,) cond
-
-#define DEF_CONVERT(num, conds, ReturnType) \
-    auto enableIf##num = [](auto target, auto type) \
-    { \
-        return BOOST_PP_SEQ_FOR_EACH_I(DEF_CONVERT_ELEM,, conds); \
-    }; \
-    template <typename Target, typename Type> \
-    inline ENABLE_IF(num, ReturnType) convert(const Type &arg)
+#define DISABLE_IF_SMARTSUPTR(Type) \
+    typename boost::disable_if<boost::is_same<Type, DummyType>, Target>::type
 
 #include "macros.fgen.hpp"
 
 MY_NSP_START
 {
     struct DummyType {};
-    namespace hana = boost::hana;
 
 
     /* SPtrTypeBaseOfTarget **********************************************************************************************************************/
     template <typename Target, typename Type>
     struct SPtrTypeBaseOfTarget
     {
-        typedef std::false_type type;
+        typedef boost::false_type type;
     };
 
     template <typename Target, typename Type>
     struct SPtrTypeBaseOfTarget< std::shared_ptr<Target>, std::shared_ptr<Type> >
     {
-        typedef typename std::is_base_of
+        typedef typename boost::is_base_of
         <
-            typename std::remove_const<Type>::type,
-            typename std::remove_const<Target>::type
+            typename boost::remove_const<Type>::type,
+            typename boost::remove_const<Target>::type
         >::type type;
     };
 
+//    /* IsSharedSUPtr **********************************************************************************************************************/
+//    template <typename Target, typename Type>
+//    struct IsSharedUPtr
+//    {
+//        typedef boost::false_type type;
+//    };
+//
+//    template <typename Target, typename Type>
+//    struct IsSharedUPtr< std::shared_ptr<Target> >
+//    {
+//        typedef typename boost::is_base_of
+//        <
+//            typename boost::remove_const<Type>::type,
+//            typename boost::remove_const<Target>::type
+//        >::type type;
+//    };
+
+
+    /* ResultOf *************************************************************************************************************************/
+    template
+    <
+        typename Target,
+        typename sptrTypeBaseOfTarget,
+        typename isConvertible,
+        typename typeBaseOfTarget,
+        typename targetBaseOfType,
+        typename isSame
+    >
+    struct ResultOfConvertImpl {};
+
     template <typename Target, typename Type>
-    constexpr auto hSPtrTypeBaseOfTarget(Target target, Type type)
+    struct ResultOfConvert final: public ResultOfConvertImpl
+    <
+        Target,
+        typename SPtrTypeBaseOfTarget<Target, Type>::type,
+        typename boost::is_convertible<Type, Target>::type,
+        typename boost::is_base_of<Type, Target>::type,
+        typename boost::is_base_of<Target, Type>::type,
+        typename boost::is_same<Target, Type>::type
+    >
     {
-        return hana::int_c<SPtrTypeBaseOfTarget<typename Target::type, typename Type::type>::type::value>;
-    }
+    };
 
     /* DummyType *************************************************************************************************************************/
     template <typename Target, typename Type>
@@ -92,46 +153,96 @@ MY_NSP_START
         return std::static_pointer_cast<TargetType>(chila::lib::misc::removeConst(arg));
     }
 
-    /* convert0 *************************************************************************************************************************/
-    DEF_CONVERT(0,
-        (hSPtrTypeBaseOfTarget(target, type))
-        (hana::traits::is_base_of(type, target))
-        (!hana::traits::is_base_of(target, type))
-        (!hana::traits::is_same(target, type)),
-        const Target&)
+//    /* chila::lib::misc::SmartSUPtr *****************************************************************************************************************/
+//    template <typename Target, typename Type>
+//    inline DISABLE_IF_DUMMY(Target) convert(const chila::lib::misc::SmartSUPtr<Type> &arg)
+//    {
+////        typedef typename Target::element_type TargetType;
+////
+////        assert(dynamic_cast<TargetType*>(arg.get()) == arg.get());
+////
+////        return std::static_pointer_cast<TargetType>(arg);
+//        return Target();
+//    }
+//
+//    template <typename Target, typename Type>
+//    inline DISABLE_IF_DUMMY(Target) convert(const chila::lib::misc::SmartSUPtr<const Type> &arg)
+//    {
+////        typedef typename Target::element_type TargetType;
+////
+////        assert(dynamic_cast<TargetType*>(chila::lib::misc::removeConst(arg.get())) == arg.get());
+////
+////        return std::static_pointer_cast<TargetType>(chila::lib::misc::removeConst(arg));
+//        return Target();
+//    }
+
+    /* convert1 *************************************************************************************************************************/
+    RESULT_OF_CONVERT_IMPL
+    (
+        1,
+        const Target&,
+        boost::false_type,  // Type is base of Target and Target is shared_ptr
+        op0,                // Type can be converted to Target
+        boost::true_type,   // Type is base of Target
+        boost::false_type,  // Target is base of Type
+        boost::false_type,  // Target = Type
+        (op0)
+    )
+    template <typename Target, typename Type>
+    inline RESULT_OF_CONVERT(5) convert(const Type &arg)
     {
         return *boost::polymorphic_downcast<const Target*>(&arg);
     }
 
-    /* convert1 *************************************************************************************************************************/
-    DEF_CONVERT(1,
-        (!hSPtrTypeBaseOfTarget(target, type))
-        (hana::traits::is_convertible(target, type))
-        (!hana::traits::is_base_of(type, target))
-        (!hana::traits::is_base_of(target, type))
-        (!hana::traits::is_same(target, type)),
-        Target)
-    {
-        std::cout << enableIf1(hana::type_c<Target>, hana::type_c<Type>) << std::endl;
-
-        return arg;
-    }
-
     /* convert2 *************************************************************************************************************************/
-    DEF_CONVERT(2,
-        (hana::traits::is_same(target, type)),
-        typename boost::call_traits<Target>::param_type)
+    RESULT_OF_CONVERT_IMPL
+    (
+        2,
+        Target,
+        boost::false_type,  // Target is shared_ptr
+        boost::true_type,   // Type can be converted to Target
+        boost::false_type,  // Type is base of Target
+        boost::false_type,  // Target is base of Type
+        boost::false_type,  // Target = Type
+    )
+    template <typename Target, typename Type>
+    inline RESULT_OF_CONVERT(2) convert(const Type &arg)
     {
         return arg;
     }
 
     /* convert3 *************************************************************************************************************************/
-    DEF_CONVERT(3,
-        (!hSPtrTypeBaseOfTarget(target, type))
-        (!hana::traits::is_base_of(type, target))
-        (hana::traits::is_base_of(target, type))
-        (!hana::traits::is_same(target, type)),
-        typename boost::call_traits<Target>::param_type)
+    RESULT_OF_CONVERT_IMPL
+    (
+        3,
+        typename boost::call_traits<Target>::param_type,
+        op0,                // Type is base of Target and Target is shared_ptr
+        op1,                // Type can be converted to Target
+        op2,                // Type is base of Target
+        op3,                // Target is base of Type
+        boost::true_type,   // Target = Type
+        (op0)(op1)(op2)(op3)
+    )
+    template <typename Target, typename Type>
+    inline RESULT_OF_CONVERT(3) convert(const Type &arg)
+    {
+        return arg;
+    }
+
+    /* convert4 *************************************************************************************************************************/
+    RESULT_OF_CONVERT_IMPL
+    (
+        4,
+        typename boost::call_traits<Target>::param_type,
+        boost::false_type,  // Type is base of Target and Target is shared_ptr
+        op0,                // Type can be converted to Target
+        boost::false_type,  // Type is base of Target
+        boost::true_type,   // Target is base of Type
+        boost::false_type,  // Target = Type
+        (op0)
+    )
+    template <typename Target, typename Type>
+    inline RESULT_OF_CONVERT(4) convert(const Type &arg)
     {
         return arg;
     }
@@ -141,10 +252,10 @@ MY_NSP_END
 
 #include "macros.fgen.hpp"
 
+#undef RESULT_OF_CONVERT
+#undef RESULT_OF_CONVERT_IMPL
+#undef CONVERT_TMPL_ARG
 #undef ENABLE_IF_DUMMY
 #undef DISABLE_IF_DUMMY
-#undef ENABLE_IF
-#undef DEF_CONVERT_ELEM
-#undef DEF_CONVERT
 
 #endif

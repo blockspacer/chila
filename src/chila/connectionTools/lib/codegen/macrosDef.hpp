@@ -1,8 +1,24 @@
-/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
+/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra
  * (C.I.: 1.439.390 - Paraguay)
+ *
+ * This file is part of 'chila.connectionTools.lib.codegen'
+ *
+ * 'chila.connectionTools.lib.codegen' is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
+ *
+ * 'chila.connectionTools.lib.codegen' is distributed in the hope that
+ * it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with 'chila.connectionTools.lib.codegen'. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <boost/type_traits/add_reference.hpp>
+#include <boost/mpl/push_back.hpp>
 #include <boost/bind.hpp>
 #include "FunMData.hpp"
 
@@ -51,22 +67,20 @@
     typename boost::call_traits<typename ArgTypes::elem>::param_type elem
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ACTION_SIG_ARG(r, name, i, elem) \
-    BOOST_PP_COMMA_IF(i) typename decltype(typename boost::hana::at(\
-        typename BOOST_PP_CAT(MData_, name)::Arguments{}, boost::hana::integral_constant<int, i>)::type::ParamType
-
+    BOOST_PP_COMMA_IF(i) typename boost::mpl::at_c<typename BOOST_PP_CAT(MData_, name)::Arguments, i>::type::ParamType
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ACTION__VEC_ARGS_ELEM(r, data, i, elem) \
         BOOST_PP_COMMA_IF(i) typename Arguments::elem
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ACTION(NSP, Connector, name, args) \
-        struct MData_##name final: public chila::connectionTools::lib::codegen::FunMData<MData_##name, Connector, \
-            decltype(boost::hana::tuple_t<BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ACTION__VEC_ARGS_ELEM,, args)>)> \
+        struct MData_##name final: public chila::connectionTools::lib::codegen::FunMData<MData_##name, \
+            Connector, boost::mpl::vector<BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ACTION__VEC_ARGS_ELEM,, args)>> \
         { \
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_TYPE( \
                 CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONNECTOR_ACTION_EVCALLED_NAME(NSP, Connector, name)); \
-            typename EventExecuter::EventHMap eventHMap; \
+            typename EventExecuter::EventFSeq eventFSeq; \
             \
-            MData_##name(Connector &connector) : eventHMap(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_INIT( \
+            MData_##name(Connector &connector) : eventFSeq(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_INIT( \
                 CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONNECTOR_ACTION_EVCALLED_NAME(NSP, Connector, name))) {} \
             \
             template <typename Fun> \
@@ -82,11 +96,11 @@
         } name
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_EVENT(NSP, Connector, name, args) \
-        class MData_##name final: public chila::connectionTools::lib::codegen::FunMData<MData_##name, Connector, \
-            decltype(boost::hana::tuple_t<BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ACTION__VEC_ARGS_ELEM,, args)>)> \
+        class MData_##name final: public chila::connectionTools::lib::codegen::FunMData<MData_##name, \
+            Connector, boost::mpl::vector<BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_ACTION__VEC_ARGS_ELEM,, args)>> \
         { \
             public: \
-                template <typename EventHMap> \
+                template <typename EventFSeq> \
                 friend class chila::connectionTools::lib::codegen::EventExecuter; \
                 \
                 public: \
@@ -148,16 +162,16 @@
     BOOST_PP_COMMA_IF(i) ref(function)
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUN_FUSIONSEQ(NSP, FNAME, Connector) \
-    typedef boost::hana::tuple< \
+    typedef boost::fusion::vector< \
     BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUN_FUSIONSEQ_TYPE_ELEM,, \
         CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONNECTOR_FUNCTIONS_NAME(NSP, FNAME, Connector)) > List; \
-    typedef boost::hana::tuple< \
+    typedef boost::fusion::vector< \
     BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUN_FUSIONSEQ_TYPE_ELEM, const, \
         CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONNECTOR_FUNCTIONS_NAME(NSP, FNAME, Connector)) > CList; \
-    List list() { return boost::hana::make_tuple(\
+    List list() { return boost::fusion::make_vector(\
         BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUN_FUSIONSEQ_RET_ELEM, boost::ref, \
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONNECTOR_FUNCTIONS_NAME(NSP, FNAME, Connector))); } \
-    CList list() const { return boost::hana::make_tuple(\
+    CList list() const { return boost::fusion::make_vector(\
         BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__DEF_CONNECTOR_FUN_FUSIONSEQ_RET_ELEM, boost::cref, \
             CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CONNECTOR_FUNCTIONS_NAME(NSP, FNAME, Connector))); }
 
@@ -166,11 +180,11 @@
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__BIND_ACTION_ARG(z, n, data) , BOOST_PP_CAT(_, BOOST_PP_INC(n))
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__BIND_ACTION(Target, target, name) \
-        this->actions.name = [this, &target](auto&& ...arg) { target.name(std::forward<decltype(arg)>(arg)..., this->actions.name.eventHMap); };
+        this->actions.name = actionImplExecuter(std::mem_fn(&Target::name), target, this->actions.name.eventFSeq)
 
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_CREATE_APROVIDER(name, ...) \
-        const auto &name##Prov = apc##_##name(__VA_ARGS__)
+        const typename APC##_##name::result_type &name##Prov = apc##_##name(__VA_ARGS__)
 
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_CREATE_ARG(connArgName, aliasName) \
@@ -181,8 +195,9 @@
         provider##Prov.getArgument(typename ArgAliases::aliasName())
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_PASS_ARG(connector, action, argName, data) \
-        chila::connectionTools::lib::codegen::convert<typename std::remove_reference<decltype(\
-            BOOST_PP_CAT(act_, BOOST_PP_CAT(connector, BOOST_PP_CAT(_, action))))>::type::ConnectorType::Arguments::argName::Type>(data)
+        chila::connectionTools::lib::codegen::convert<typename \
+            chila::connectionTools::lib::codegen::ConnectorTypeOf<\
+                BOOST_PP_CAT(Action_, BOOST_PP_CAT(connector, BOOST_PP_CAT(_, action)))>::type::Arguments::argName::Type>(data)
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_EXECUTE_ACTION(connector, action, ...) \
         BOOST_PP_CAT(act_, BOOST_PP_CAT(connector, BOOST_PP_CAT(_, action)))(__VA_ARGS__)
@@ -191,12 +206,12 @@
 // CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER --------------------------------------------------------------------------------
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_TYPE_EV(r, data, i, elem) \
-        BOOST_PP_COMMA_IF(i) typename boost::reference_wrapper<BOOST_PP_CAT(typename Events::MData_, elem)>
+        BOOST_PP_COMMA_IF(i) typename boost::add_reference<BOOST_PP_CAT(typename Events::MData_, elem)>::type
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_TYPE(eventList) \
         typedef chila::connectionTools::lib::codegen::EventExecuter \
         < \
-            chila::lib::misc::HTypeMap<BOOST_PP_SEQ_FOR_EACH_I( \
+            boost::fusion::set<BOOST_PP_SEQ_FOR_EACH_I( \
                 CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_TYPE_EV,, eventList)> \
         > EventExecuter\
 
@@ -204,7 +219,7 @@
         BOOST_PP_COMMA_IF(i) boost::ref(connector.events.elem)
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_INIT(eventList) \
-        chila::lib::misc::makeHTypeMap(BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_INIT_EV,, eventList))
+        boost::fusion::make_set(BOOST_PP_SEQ_FOR_EACH_I(CHILA_CONNECTIONTOOLS_LIB_CODEGEN__EV_EXECUTER_EVENTEXECUTER_INIT_EV,, eventList))
 
 
 
