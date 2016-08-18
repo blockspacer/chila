@@ -1,18 +1,14 @@
-/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
- * (C.I.: 1.439.390 - Paraguay)
- */
-
 #ifndef BOOST_PP_IS_ITERATING
 
     #ifndef CHILA_CONNECTIONTOOLS_LIB_OTHER_DYNFUNEXECUTER__EXECUTERFUN_HPP
     #define CHILA_CONNECTIONTOOLS_LIB_OTHER_DYNFUNEXECUTER__EXECUTERFUN_HPP
 
 
+    #include <boost/mpl/size.hpp>
     #include <boost/lexical_cast.hpp>
     #include <chila/lib/misc/exceptions.hpp>
-    #include <boost/hana.hpp>
 
-    #define EX_SIZE decltype(boost::hana::length(typename FunctionMData::Arguments{}))::value
+    #define EX_SIZE boost::mpl::size<typename FunctionMData::Arguments>::value
     #include "macros.fgen.hpp"
 
     MY_NSP_START
@@ -51,7 +47,7 @@
 
     #define argCount BOOST_PP_ITERATION()
 
-    #define ARG_AT(pos) decltype(boost::hana::at(typename FunctionMData::Arguments{}, boost::hana::integral_constant<int, pos>{}))::type
+    #define ARG_AT(pos) boost::mpl::at_c<typename FunctionMData::Arguments, pos>::type
     #define ARG_AT_ELEM(z, n, data) BOOST_PP_COMMA_IF(n) getArg<typename ARG_AT(n)>(arguments)
 
     #include "macros.fgen.hpp"

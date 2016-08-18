@@ -1,18 +1,13 @@
-/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
- * (C.I.: 1.439.390 - Paraguay)
- */
-
 #ifndef BOOST_PP_IS_ITERATING
 
     #ifndef CHILA_CONNECTIONTOOLS_LIB_OTHER__FUNDYNDATACREATOR_HPP
     #define CHILA_CONNECTIONTOOLS_LIB_OTHER__FUNDYNDATACREATOR_HPP
 
     #include "FunDynData.hpp"
-    #include <boost/hana.hpp>
 
     #include "macrosExp.hpp"
 
-    #define EX_SIZE decltype(boost::hana::length(typename FunctionMData::Arguments{}))::value
+    #define EX_SIZE boost::mpl::size<typename FunctionMData::Arguments>::value
 
     #include "macros.fgen.hpp"
 
@@ -49,10 +44,10 @@
 
     #include <chila/lib/misc/macrosExp.hpp>
 
-    #define ARG_AT(pos) decltype(+boost::hana::at(typename FunctionMData::Arguments{}, boost::hana::int_c<pos>))::type
+    #define ARG_AT(pos) boost::mpl::at_c<typename FunctionMData::Arguments, pos>::type
     #define ARG_AT_ELEM(z, n, data) BOOST_PP_COMMA_IF(n) typename ARG_AT(n)::ParamType BOOST_PP_CAT(arg, n)
     #define ADD_TO_MAP(z, n, data) \
-        ret.push(ARG_AT(n)::getName(), chila::lib::misc::refValHolder<typename ARG_AT(n)::ParamType>(BOOST_PP_CAT(arg, n)));
+        ret.push(ARG_AT(n)::getName(), chila::lib::misc::refValHolder<typename ARG_AT(n)::ParamType>(BOOST_PP_CAT(arg, n))); 
 
     #define argCount BOOST_PP_ITERATION()
 

@@ -5,6 +5,7 @@
 #ifndef CHILA_CONNECTIONTOOLS_COMMON_IMPL__FWD_HPP
 #define CHILA_CONNECTIONTOOLS_COMMON_IMPL__FWD_HPP
 
+#include "../fwd.hpp"
 #include <chila/lib/misc/fwd.hpp>
 #include <boost/make_unique.hpp>
 

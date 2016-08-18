@@ -1,5 +1,20 @@
-/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
+/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra
  * (C.I.: 1.439.390 - Paraguay)
+ *
+ * This file is part of 'chila.lib'
+ *
+ * 'chila.lib' is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version.
+ *
+ * 'chila.lib' is distributed in the hope that
+ * it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with 'chila.lib'. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef CHILA_CONNECTIONTOOLS_LIB_OTHER__DATAMAP_HPP
@@ -7,7 +22,6 @@
 
 #include "fwd.hpp"
 #include <map>
-#include "exceptions.hpp"
 #include <boost/any.hpp>
 #include <chila/lib/misc/util.hpp>
 
@@ -24,17 +38,7 @@ MY_NSP_START
                 auto it = map.find(name);
                 my_assert(it != map.end());
 
-                auto source = it->second;
-                try
-                {
-                    return boost::any_cast<Type>(source);
-                }
-                catch (const boost::bad_any_cast &ex)
-                {
-                    throw DataMapElementNotFound() << ErrorInfo::SourceType(source.type().name())
-                                                   << ErrorInfo::DestType(boost::typeindex::type_id<boost::reference_wrapper<Type>>().pretty_name())
-                                                   << ErrorInfo::DataMapValueName(name);
-                }
+                return boost::any_cast<Type>(it->second);
             }
 
             template <typename Type>
@@ -49,17 +53,7 @@ MY_NSP_START
                 auto it = map.find(name);
                 my_assert(it != map.end());
 
-                auto source = it->second;
-                try
-                {
-                    return boost::unwrap_ref(boost::any_cast<boost::reference_wrapper<Type>&>(const_cast<boost::any&>(source)));
-                }
-                catch (const boost::bad_any_cast &ex)
-                {
-                    throw DataMapElementNotFound() << ErrorInfo::SourceType(source.type().name())
-                                                   << ErrorInfo::DestType(boost::typeindex::type_id<boost::reference_wrapper<Type>>().pretty_name())
-                                                   << ErrorInfo::DataMapValueName(name);
-                }
+                return boost::unwrap_ref(boost::any_cast<boost::reference_wrapper<Type>&>(const_cast<boost::any&>(it->second)));
             }
 
             template <typename Type>

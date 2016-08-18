@@ -1,14 +1,9 @@
-/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
- * (C.I.: 1.439.390 - Paraguay)
- */
-
 #include "LogFile.hpp"
 #include <boost/foreach.hpp>
 #include <chila/lib/misc/SinkInserter.hpp>
+#include <py.com.personal/lib/misc/util.hpp>
 #include <chila/lib/misc/exceptions.hpp>
-#include <boost/filesystem.hpp>
 #include <chila/lib/misc/ThreadPool.hpp>
-#include <chila/lib/misc/util.hpp>
 
 #define SHOW          CHILA_LIB_MISC__SHOW
 #define THREAD_NAME_SIZE 10
@@ -46,6 +41,27 @@ MY_NSP_START
         }
     };
 
+    struct WritePrefix final: public chila::lib::misc::SinkInserter<WritePrefix>
+    {
+        std::string threadName;
+        unsigned indent, tNameMaxSize;
+        unsigned pid;
+
+        WritePrefix(unsigned pid, const std::string &threadName, unsigned indent, unsigned tNameMaxSize) :
+            pid(pid), indent(indent), tNameMaxSize(tNameMaxSize),
+            threadName(threadName.size() > tNameMaxSize ? threadName.substr(0, tNameMaxSize) : threadName)
+        {
+        }
+
+        template <typename Sink>
+        void write(Sink &out) const
+        {
+            out << "[" << pid << "][" << boost::posix_time::microsec_clock::local_time() << "][thread='"
+                << threadName << "'" << chila::lib::misc::repeatText(tNameMaxSize - threadName.size(), " ")
+                << "] " << chila::lib::misc::repeatText(indent - 1, "  |");
+        }
+    };
+
     LogFile::LogFile(const boost::filesystem::path &path, unsigned tNameMaxSize, unsigned maxOldFiles, unsigned maxFileSizeKB, bool append) :
         path(path),
         tNameMaxSize(tNameMaxSize),
@@ -77,39 +93,8 @@ MY_NSP_START
         LogFile::Indent indent(*this);
         WritePrefix prefix(pid, threadName, indent.value, tNameMaxSize);
 
-        FileLock lock(fileMutex);
         file << prefix << "---> " << text << std::endl;
-
-        if (fun)
-        {
-            lock.unlock();
-            fun();
-        }
-    }
-
-    void LogFile::writeFunEx(const Function &fun, const ContFun &contFun)
-    {
-        const std::string *tName = chila::lib::misc::ThreadPool::getThreadNamePtr();
-        const std::string &threadName = tName ? *tName : std::string("unknown");
-
-        LogFile::Indent indent(*this);
-        WritePrefix prefix(pid, threadName, indent.value, tNameMaxSize);
-
-        FileLock lock(fileMutex);
-        contFun(file, prefix);
-
-        if (!fun)
-        {
-            file << prefix << "  |---> (no function)" << std::endl;
-            checkFile();
-        }
-        else
-        {
-            checkFile();
-
-            lock.unlock();
-            fun();
-        }
+        fun();
     }
 
     void LogFile::writeFunction(const std::string &name, const ArgMap &args, bool showArguments,

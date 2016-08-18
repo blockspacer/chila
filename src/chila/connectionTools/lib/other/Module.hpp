@@ -1,7 +1,3 @@
-/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
- * (C.I.: 1.439.390 - Paraguay)
- */
-
 #ifndef CHILA_CONNECTIONTOOLS_LIB_OTHER__MODULE_HPP
 #define CHILA_CONNECTIONTOOLS_LIB_OTHER__MODULE_HPP
 
@@ -85,14 +81,12 @@ MY_NSP_START
 
         void nullEvents() override
         {
-            abort();
-//            chila::connectionTools::lib::other::nullFunctions(connector.events.list());
+            chila::connectionTools::lib::other::nullFunctions(connector.events.list());
         }
 
         void nullActions() override
         {
-            abort();
-//            chila::connectionTools::lib::other::nullFunctions(connector.actions.list());
+            chila::connectionTools::lib::other::nullFunctions(connector.actions.list());
         }
 
         void checkState(const std::initializer_list<ModuleState> &states, const char *function, const char *file, unsigned line) const override

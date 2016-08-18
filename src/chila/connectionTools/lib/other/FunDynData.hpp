@@ -1,7 +1,3 @@
-/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
- * (C.I.: 1.439.390 - Paraguay)
- */
-
 #ifndef CHILA_CONNECTIONTOOLS_LIB_OTHER__FUNDYNDATA_HPP
 #define CHILA_CONNECTIONTOOLS_LIB_OTHER__FUNDYNDATA_HPP
 

@@ -1,18 +1,14 @@
-/* Copyright 2011-2015 Roberto Daniel Gimenez Gamarra (chilabot@gmail.com)
- * (C.I.: 1.439.390 - Paraguay)
- */
-
 #ifndef CHILA_CONNECTIONTOOLS_LIB_OTHER__DEBUGFILEFUN_HPP
 #define CHILA_CONNECTIONTOOLS_LIB_OTHER__DEBUGFILEFUN_HPP
 
 #include "fwd.hpp"
+#include <boost/fusion/algorithm/iteration/for_each.hpp>
 #include "FunDynDataCreator.hpp"
 #include <chila/connectionTools/lib/other/fileDebug/LogFile.hpp>
 #include <chila/lib/misc/QueuePoster.hpp>
-#include <chila/lib/misc/ValueStreamer.hpp>
+#include <chila/lib/misc/AnyPrinter.hpp>
 #include <chila/lib/misc/InPlaceStrStream.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/hana.hpp>
 #include <chila/lib/misc/SinkInserter.hpp>
 
 #include "macros.fgen.hpp"
@@ -31,12 +27,12 @@ MY_NSP_START
         std::string comments;
         typename FunctionMData::Function function;
         FunDynDataCreator<FunctionMData> creator;
-        const chila::lib::misc::ValueStreamer &valueStreamer;
+        const chila::lib::misc::AnyPrinter &anyPrinter;
 
         DebugFileFun
         (
             fileDebug::LogFile &logFile,
-            const chila::lib::misc::ValueStreamer &valueStreamer,
+            const chila::lib::misc::AnyPrinter &anyPrinter,
             const std::string &connInstanceName,
             const std::string &funType,
             const typename FunctionMData::Function &fun,
@@ -44,43 +40,72 @@ MY_NSP_START
             const std::string &comments
         ) :
             logFile(logFile),
-            valueStreamer(valueStreamer),
+            anyPrinter(anyPrinter),
             function(fun),
             funType(funType),
             connInstanceName(connInstanceName),
             showArguments(showArguments),
             comments(comments) {}
 
-            template <unsigned argIndex>
-            void streamParam(std::ofstream &file, const fileDebug::LogFile::WritePrefix &prefix)
+        #ifdef __clang__
+            template <typename... Arg>
+            void operator()(const Arg& ...arg) const
             {
-            }
+                const auto dynData = creator(arg...);
 
-            template <unsigned argIndex, typename Arg, typename ...Args>
-            void streamParam(std::ofstream &file, const fileDebug::LogFile::WritePrefix &prefix, const Arg &arg, const Args&... args)
-            {
-                using ArgType = typename decltype(+boost::hana::at(typename FunctionMData::Arguments{}, boost::hana::int_c<argIndex>))::type;
+                fileDebug::LogFile::ArgMap argMap;
 
-                file << prefix << "  |--- " << ArgType::getName() << ": [" << valueStreamer.inserter(arg) << "]" << std::endl;
-
-                streamParam<argIndex + 1>(file, prefix, args...);
-            }
-
-            template <typename ...Args>
-            void operator()(const Args&... args)
-            {
-                logFile.writeFunEx(function ? ([&] { function(args...); }) : fileDebug::LogFile::Function(),
-                    [&](std::ofstream &file, const fileDebug::LogFile::WritePrefix &prefix)
+                for (auto &arg : dynData.argVec)
+                {
+                    auto argInserter = chila::lib::misc::funSinkInserter([&](std::ostream &out)
                     {
-                        file << prefix << "---> " << "<" << funType + "> " << connInstanceName << "." << FunctionMData::getName();
-
-                        if (!comments.empty()) file << " (" << comments << ")";
-
-                        file << std::endl;
-
-                        streamParam<0>(file, prefix, args...);
+                        anyPrinter.stream(out, arg.value);
                     });
+
+                    argMap.insert({arg.name, ipss(1024) << argInserter << ipss_end});
+                }
+
+                logFile.writeFunction
+                (
+                    "<" + funType + "> " + connInstanceName + "." + FunctionMData::getName(),
+                    argMap, showArguments, comments,
+                    function ? ([&] { function(arg...); }) : fileDebug::LogFile::Function()
+                );
             }
+
+        #else
+            #define DEF_OPER(z, n, data) \
+                    BOOST_PP_IF(n, template <,) \
+                    BOOST_PP_ENUM_PARAMS(n, typename Arg) \
+                    BOOST_PP_IF(n, >,) \
+                    void operator()(BOOST_PP_ENUM_BINARY_PARAMS(n, const Arg, &arg)) \
+                    { \
+                        const auto dynData = creator(BOOST_PP_ENUM_PARAMS(n, arg)); \
+                        \
+                        fileDebug::LogFile::ArgMap argMap; \
+                        \
+                        for (auto &arg : dynData.argVec) \
+                        { \
+                            auto argInserter = chila::lib::misc::funSinkInserter([&](std::ostream &out) \
+                            { \
+                                anyPrinter.stream(out, arg.value); \
+                            }); \
+                            \
+                            argMap.insert({arg.name, ipss(1024) << argInserter << ipss_end}); \
+                        } \
+                        \
+                        logFile.writeFunction \
+                        ( \
+                            "<" + funType + "> " + connInstanceName + "." + FunctionMData::getName(), \
+                            argMap, showArguments, comments, \
+                            function ? ([&] { function(BOOST_PP_ENUM_PARAMS(n, arg)); }) : fileDebug::LogFile::Function() \
+                        ); \
+                    }
+
+            BOOST_PP_REPEAT_FROM_TO(0, 49, DEF_OPER,)
+
+            #undef DEF_OPER
+        #endif
     };
 
     template <typename FunctionMData>
@@ -92,19 +117,19 @@ MY_NSP_START
         const std::string connInstanceName, funType;
         bool showArguments;
         std::string comments;
-        const chila::lib::misc::ValueStreamer &valueStreamer;
+        const chila::lib::misc::AnyPrinter &anyPrinter;
 
         DebugFileFunPFS
         (
             fileDebug::LogFile &logFile,
-            const chila::lib::misc::ValueStreamer &valueStreamer,
+            const chila::lib::misc::AnyPrinter &anyPrinter,
             const std::string &connInstanceName,
             const std::string &funType,
             bool showArguments,
             const std::string &comments
         ) :
             logFile(logFile),
-            valueStreamer(valueStreamer),
+            anyPrinter(anyPrinter),
             connInstanceName(connInstanceName),
             funType(funType),
             showArguments(showArguments),
@@ -112,7 +137,7 @@ MY_NSP_START
 
         result_type operator()(const typename FunctionMData::Function &fun) const
         {
-            return result_type(logFile, valueStreamer, connInstanceName, funType, fun, showArguments, comments);
+            return result_type(logFile, anyPrinter, connInstanceName, funType, fun, showArguments, comments);
         }
     };
 }
