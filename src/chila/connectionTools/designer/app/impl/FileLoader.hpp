@@ -5,6 +5,9 @@
 #ifndef CHILA_CONNECTIONTOOLS_DESIGNER_APP_IMPL__FILELOADER_HPP
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP_IMPL__FILELOADER_HPP
 
+#include <chila/connectionTools/lib/codegen/ActionExecuter.hpp>
+#include <chila/connectionTools/lib/codegen/ActionImplExecuter.hpp>
+#include <boost/fusion/include/make_vector.hpp>
 #include <chila/connectionTools/lib/tree/ConnectorCreator.hpp>
 #include <chila/connectionTools/lib/tree/CPerformerCreator.hpp>
 #include <chila/connectionTools/lib/tree/types.hpp>
