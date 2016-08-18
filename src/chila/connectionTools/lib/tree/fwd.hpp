@@ -57,14 +57,14 @@ MY_NSP_START
     using StringVec =  std::vector<std::string>;
     using PathSet =  std::set<chila::lib::misc::Path>;
 
-    boost::uint32_t crc(boost::uint32_t val1, boost::uint32_t val2);
-
-    boost::uint32_t crc(const std::string &value);
-
-    inline boost::uint32_t crc(const chila::lib::misc::Path &value)
-    {
-        return crc(value.getStringRep());
-    }
+//    boost::uint32_t crc(boost::uint32_t val1, boost::uint32_t val2);
+//
+//    boost::uint32_t crc(const std::string &value);
+//
+//    inline boost::uint32_t crc(const chila::lib::misc::Path &value)
+//    {
+//        return crc(value.getStringRep());
+//    }
 
     struct ReqProv
     {
