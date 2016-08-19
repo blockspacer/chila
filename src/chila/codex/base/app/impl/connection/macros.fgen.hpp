@@ -18,6 +18,9 @@
     #define call_ev_fatal \
         CHILA_CONNECTIONTOOLS_LIB_OTHER__CALL_EV_FATAL
 
+    #define call_ev_fatal_tn \
+        CHILA_CONNECTIONTOOLS_LIB_OTHER__CALL_EV_FATAL_TN
+
     #define ct_assert \
         CHILA_CONNECTIONTOOLS_LIB_OTHER__ASSERT
 
@@ -109,6 +112,7 @@
     #undef execute_event
     #undef execute_event_tn
     #undef call_ev_fatal
+    #undef call_ev_fatal_tn
     #undef ct_assert
     #undef ct_assert_tn
     #undef ev_executer_arg

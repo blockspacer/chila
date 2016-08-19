@@ -5,6 +5,8 @@
 #ifndef CHILA_CODEX_BASE__FWD_HPP
 #define CHILA_CODEX_BASE__FWD_HPP
 
+#include <chila/connectionTools/lib/codegen/ActionImplExecuter.hpp>
+#include <chila/connectionTools/lib/codegen/ActionExecuter.hpp>
 #include "../common/fwd.hpp"
 
 #include "macros.fgen.hpp"

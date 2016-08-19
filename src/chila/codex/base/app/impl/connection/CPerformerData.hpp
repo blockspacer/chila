@@ -5,6 +5,7 @@
 #ifndef CHILA_CODEX_BASE_APP_IMPL_CONNECTION__CPERFORMERDATA_HPP
 #define CHILA_CODEX_BASE_APP_IMPL_CONNECTION__CPERFORMERDATA_HPP
 
+#include "fwd.hpp"
 #include "../../connectors/gen/ConnectionPerformer.hpp"
 #include <chila/connectionTools/lib/common/impl/connection/Forwarder.hpp>
 #include <chila/connectionTools/lib/common/impl/connection/FunDynExecuter.hpp>

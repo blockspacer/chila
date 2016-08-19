@@ -33,7 +33,7 @@ MY_NSP_START
     {
     }
 
-    void App::connect(ccLoader::ConnectorMap &cMap, const cclOther::DataMap &dataMap, cclOther::Launcher &launcher, bool preLoaderConnect) try
+    void App::connect(ccLoader::ConnectorMap &cMap, const cclOther::DataMap &dataMap, cclOther::Launcher &launcher, bool preLoaderConnect) //try
     {
         auto &ioService = dataMap.getRef<boost::asio::io_service>("queues.event");
         auto debugLogFile = dataMap.getVal<cclOther::fileDebug::LogFile*>("debugLogFile");
@@ -130,14 +130,14 @@ MY_NSP_START
 
         }
     }
-    catch (const cclOther::DataMapElementNotFound &ex)
-    {
-        auto &srcType = clMisc::deref(boost::get_error_info<cclOther::ErrorInfo::SourceType>(ex));
-        auto &destType = clMisc::deref(boost::get_error_info<cclOther::ErrorInfo::DestType>(ex));
-        auto &name = clMisc::deref(boost::get_error_info<cclOther::ErrorInfo::DataMapValueName>(ex));
-
-        throw clMisc::ApplicationError("Error getting '" + name + "' from data-map, could not cast '" + srcType + "' to '" + destType + "'");
-    }
+//    catch (const cclOther::DataMapElementNotFound &ex)
+//    {
+//        auto &srcType = clMisc::deref(boost::get_error_info<cclOther::ErrorInfo::SourceType>(ex));
+//        auto &destType = clMisc::deref(boost::get_error_info<cclOther::ErrorInfo::DestType>(ex));
+//        auto &name = clMisc::deref(boost::get_error_info<cclOther::ErrorInfo::DataMapValueName>(ex));
+//
+//        throw clMisc::ApplicationError("Error getting '" + name + "' from data-map, could not cast '" + srcType + "' to '" + destType + "'");
+//    }
 
     template <typename Provider>
     void App::addConnectorFunctions(Provider &provider)

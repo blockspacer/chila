@@ -5,6 +5,7 @@
 #ifndef CHILA_CODEX_TEXT_APP_IMPL_CONNECTION__CPERFORMERDATA_HPP
 #define CHILA_CODEX_TEXT_APP_IMPL_CONNECTION__CPERFORMERDATA_HPP
 
+#include "fwd.hpp"
 #include "../../connectors/gen/ConnectionPerformer.hpp"
 #include "CPDataTypes.hpp"
 #include <chila/lib/misc/Construct.hpp>

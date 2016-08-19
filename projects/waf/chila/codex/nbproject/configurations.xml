@@ -1193,8 +1193,10 @@
           </incDir>
           <preprocessorList>
             <Elem>QT_CORE_LIB</Elem>
+            <Elem>QT_DECLARATIVE_DEBUG</Elem>
             <Elem>QT_GUI_LIB</Elem>
             <Elem>QT_NETWORK_LIB</Elem>
+            <Elem>QT_QML_DEBUG</Elem>
             <Elem>QT_QML_LIB</Elem>
             <Elem>QT_QUICK_LIB</Elem>
             <Elem>QT_WIDGETS_LIB</Elem>
@@ -1258,10 +1260,6 @@
             <pElem>../../../../../../../../../applib/Qt/5.5/gcc_64/include/QtNetwork</pElem>
             <pElem>../../build/debug</pElem>
           </incDir>
-          <preprocessorList>
-            <Elem>QT_DECLARATIVE_DEBUG</Elem>
-            <Elem>QT_QML_DEBUG</Elem>
-          </preprocessorList>
         </ccTool>
       </folder>
       <folder path="0/text">
