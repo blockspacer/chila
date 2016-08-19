@@ -6,7 +6,7 @@
 #include "FunDynDataCreator.hpp"
 #include <chila/connectionTools/lib/other/fileDebug/LogFile.hpp>
 #include <chila/lib/misc/QueuePoster.hpp>
-#include <chila/lib/misc/AnyPrinter.hpp>
+#include <chila/lib/misc/ValueStreamer.hpp>
 #include <chila/lib/misc/InPlaceStrStream.hpp>
 #include <boost/lexical_cast.hpp>
 #include <chila/lib/misc/SinkInserter.hpp>
@@ -27,12 +27,12 @@ MY_NSP_START
         std::string comments;
         typename FunctionMData::Function function;
         FunDynDataCreator<FunctionMData> creator;
-        const chila::lib::misc::AnyPrinter &anyPrinter;
+        const chila::lib::misc::ValueStreamer &valueStreamer;
 
         DebugFileFun
         (
             fileDebug::LogFile &logFile,
-            const chila::lib::misc::AnyPrinter &anyPrinter,
+            const chila::lib::misc::ValueStreamer &valueStreamer,
             const std::string &connInstanceName,
             const std::string &funType,
             const typename FunctionMData::Function &fun,
@@ -40,7 +40,7 @@ MY_NSP_START
             const std::string &comments
         ) :
             logFile(logFile),
-            anyPrinter(anyPrinter),
+            valueStreamer(valueStreamer),
             function(fun),
             funType(funType),
             connInstanceName(connInstanceName),
@@ -59,7 +59,7 @@ MY_NSP_START
                 {
                     auto argInserter = chila::lib::misc::funSinkInserter([&](std::ostream &out)
                     {
-                        anyPrinter.stream(out, arg.value);
+                        valueStreamer.stream(out, arg.value);
                     });
 
                     argMap.insert({arg.name, ipss(1024) << argInserter << ipss_end});
@@ -88,7 +88,7 @@ MY_NSP_START
                         { \
                             auto argInserter = chila::lib::misc::funSinkInserter([&](std::ostream &out) \
                             { \
-                                anyPrinter.stream(out, arg.value); \
+                                valueStreamer.stream(out, arg.value); \
                             }); \
                             \
                             argMap.insert({arg.name, ipss(1024) << argInserter << ipss_end}); \
@@ -117,19 +117,19 @@ MY_NSP_START
         const std::string connInstanceName, funType;
         bool showArguments;
         std::string comments;
-        const chila::lib::misc::AnyPrinter &anyPrinter;
+        const chila::lib::misc::ValueStreamer &valueStreamer;
 
         DebugFileFunPFS
         (
             fileDebug::LogFile &logFile,
-            const chila::lib::misc::AnyPrinter &anyPrinter,
+            const chila::lib::misc::ValueStreamer &valueStreamer,
             const std::string &connInstanceName,
             const std::string &funType,
             bool showArguments,
             const std::string &comments
         ) :
             logFile(logFile),
-            anyPrinter(anyPrinter),
+            valueStreamer(valueStreamer),
             connInstanceName(connInstanceName),
             funType(funType),
             showArguments(showArguments),
@@ -137,7 +137,7 @@ MY_NSP_START
 
         result_type operator()(const typename FunctionMData::Function &fun) const
         {
-            return result_type(logFile, anyPrinter, connInstanceName, funType, fun, showArguments, comments);
+            return result_type(logFile, valueStreamer, connInstanceName, funType, fun, showArguments, comments);
         }
     };
 }

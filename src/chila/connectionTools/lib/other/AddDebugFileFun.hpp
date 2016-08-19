@@ -16,12 +16,12 @@ MY_NSP_START
         fileDebug::LogFile &logFile;
         const std::string &connInstanceName;
         const std::string &funType;
-        const chila::lib::misc::AnyPrinter &anyPrinter;
+        const chila::lib::misc::ValueStreamer &anyPrinter;
         bool showArguments;
 
         AddDebugFileFun(
                 fileDebug::LogFile &logFile,
-                const chila::lib::misc::AnyPrinter &anyPrinter,
+                const chila::lib::misc::ValueStreamer &anyPrinter,
                 const std::string &connInstanceName,
                 const std::string &funType,
                 bool showArguments) :
@@ -46,13 +46,13 @@ MY_NSP_START
     template <typename FunctionsFSeq>
     void addDebugFileFunToFunctions(
         fileDebug::LogFile &logFile,
-        const chila::lib::misc::AnyPrinter &anyPrinter,
+        const chila::lib::misc::ValueStreamer &valueStreamer,
         const std::string &connInstanceName,
         const std::string &funType,
         const FunctionsFSeq &functions,
         bool showArguments)
     {
-        boost::fusion::for_each(functions, AddDebugFileFun(logFile, anyPrinter, connInstanceName, funType, showArguments));
+        boost::fusion::for_each(functions, AddDebugFileFun(logFile, valueStreamer, connInstanceName, funType, showArguments));
     }
 
 }

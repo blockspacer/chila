@@ -8,55 +8,56 @@ def getVarName(conn):
 def getGroupedName(conn):
     return conn.replace('.', ':')
 
-def addDFF(indent, anyPrinter, provsOwner, object, objectName, type, function, msg):
+def addDFF(indent, valueStreamer, provsOwner, object, objectName, type, function, msg):
     ind = clmUtil.indent(indent)
     fun = provsOwner + '.' + getVarName(object) + '->connector.{type}##s.{function}'.format(**locals())
 
     return(\
-        '{ind}{fun}.passFunAndSet \n'
-        '{ind}( \n'
-        '{ind}    chila::connectionTools::lib::other::DebugFileFunPFS<decltype({fun})> \n'
-        '{ind}    ( \n'
-        '{ind}        *debugLogFile, anyPrinter, "{objectName}", "{type}", showArguments, {msg} \n'
-        '{ind}    ) \n'
-        '{ind}); \n'
+        '{ind}{fun}.passFunAndSet\n'
+        '{ind}(\n'
+        '{ind}    chila::connectionTools::lib::other::DebugFileFunPFS<decltype({fun})>\n'
+        '{ind}    (\n'
+        '{ind}        *debugLogFile, valueStreamer, "{objectName}", "{type}", showArguments, {msg}\n'
+        '{ind}    )\n'
+        '{ind});\n'
         ).format(**locals())
 
-def setPostFunction(indent, anyPrinter, provsOwner, object, objectName, type, function, queue, queueName):
+def setPostFunction(indent, valueStreamer, provsOwner, object, objectName, type, function, queue, queueName):
     ind = clmUtil.indent(indent)
 
     return (
-        '{ind}' + provsOwner + '.' + getVarName(object) + '->connector.{type}##s.{function}.passFunAndSet(chila::lib::misc::SetPostFun({queue})); \n'
-        '{ind}if (debugLogFile) \n'
-        '{ind}{{ \n'
-                  + addDFF(indent + 1, anyPrinter, provsOwner, object, objectName, type, function, '"posted in \'{queueName}\'"') +
-        '{ind}}} \n'
+        '{ind}' + provsOwner + '.' + getVarName(object) + '->connector.{type}##s.{function}.passFunAndSet(chila::lib::misc::SetPostFun({queue}));\n'
+        '{ind}if (debugLogFile)\n'
+        '{ind}{{\n'
+                  + addDFF(indent + 1, valueStreamer, provsOwner, object, objectName, type, function, '"posted in \'{queueName}\'"') +
+        '{ind}}}\n'
         ).format(**locals())
 
 
-def addDebugFFToConnector(indent, anyPrinter, provsOwner, object, objectName):
+def addDebugFFToConnector(indent, valueStreamer, provsOwner, object, objectName):
     ind = clmUtil.indent(indent)
     return (\
-        '{ind}if (debugLogFile) \n'
-        '{ind}{{ \n'
-        '{ind}    chila::connectionTools::lib::other::addDebugFileFunToFunctions( \n'
-        '{ind}        *debugLogFile, anyPrinter, "{objectName}", "action", \n'
-        '{ind}        ' + provsOwner + '.' + getVarName(object) + '->connector.actions.list(), showArguments); \n'
-        '{ind}    chila::connectionTools::lib::other::addDebugFileFunToFunctions( \n'
-        '{ind}        *debugLogFile, anyPrinter, "{objectName}", "event", \n'
-        '{ind}        ' + provsOwner + '.' + getVarName(object) + '->connector.events.list(), showArguments); \n'
-        '{ind}}} \n').format(**locals())
+        '{ind}if (debugLogFile)\n'
+        '{ind}{{\n'
+        '{ind}    chila::connectionTools::lib::other::addDebugFileFunToFunctions(\n'
+        '{ind}        *debugLogFile, valueStreamer, "{objectName}", "action",\n'
+        '{ind}        ' + provsOwner + '.' + getVarName(object) + '->connector.actions.list(), showArguments);\n'
+        '{ind}    chila::connectionTools::lib::other::addDebugFileFunToFunctions(\n'
+        '{ind}        *debugLogFile, valueStreamer, "{objectName}", "event",\n'
+        '{ind}        ' + provsOwner + '.' + getVarName(object) + '->connector.events.list(), showArguments);\n'
+        '{ind}}}\n').format(**locals())
 
-def postInitFinishFunsToConnector(indent, anyPrinter, provsOwner, object, objectName, queue, queueName):
+def postInitFinishFunsToConnector(indent, valueStreamer, provsOwner, object, objectName, queue, queueName):
     ind = clmUtil.indent(indent)
-    return setPostFunction(indent, anyPrinter, provsOwner, object, objectName, 'action', 'launcher_start', queue, queueName) + \
-           setPostFunction(indent, anyPrinter, provsOwner, object, objectName, 'action', 'launcher_deactivate', queue, queueName) + \
-           setPostFunction(indent, anyPrinter, provsOwner, object, objectName, 'action', 'launcher_finish', queue, queueName)
+    return setPostFunction(indent, valueStreamer, provsOwner, object, objectName, 'action', 'launcher_start', queue, queueName) + \
+           setPostFunction(indent, valueStreamer, provsOwner, object, objectName, 'action', 'launcher_deactivate', queue, queueName) + \
+           setPostFunction(indent, valueStreamer, provsOwner, object, objectName, 'action', 'launcher_finish', queue, queueName)
 
 def getCToolsMacros(genNsp):
     return [['execute_event',                                       'CHILA_CONNECTIONTOOLS_LIB_OTHER__EXECUTE_EVENT'],
             ['execute_event_tn',                                    'CHILA_CONNECTIONTOOLS_LIB_OTHER__EXECUTE_EVENT_TN'],
             ['call_ev_fatal',                                       'CHILA_CONNECTIONTOOLS_LIB_OTHER__CALL_EV_FATAL'],
+            ['call_ev_fatal_tn',                                    'CHILA_CONNECTIONTOOLS_LIB_OTHER__CALL_EV_FATAL_TN'],
             ['ct_assert',                                           'CHILA_CONNECTIONTOOLS_LIB_OTHER__ASSERT'],
             ['ct_assert_tn',                                        'CHILA_CONNECTIONTOOLS_LIB_OTHER__ASSERT_TN'],
             ['ev_executer_arg',                                     'CHILA_CONNECTIONTOOLS_LIB_OTHER__EV_EXECUTER_ARG'],
@@ -77,11 +78,11 @@ def getCToolsMacros(genNsp):
             ['DEF_APC_ENCAPSULATOR_CR(creatorName, readerName, EncType)',   'CHILA_CONNECTIONTOOLS_LIB_OTHER__DEF_APC_ENCAPSULATOR_CR(' + genNsp + ', creatorName, readerName, EncType)'],
             ['APROVIDER_DEC_EX(prov, customArgs)',                          'CHILA_CONNECTIONTOOLS_LIB_OTHER__APROVIDER_DEC_EX(' + genNsp + ', prov, customArgs)']]
 
-def addDFFToConnectorsAndPostDefEv(connInstanceSeq, provsOwner, anyPrinter, queue, queueName):
+def addDFFToConnectorsAndPostDefEv(connInstanceSeq, provsOwner, valueStreamer, queue, queueName):
     ret = ''
 
     for Type,conn in connInstanceSeq:
-        ret += addDebugFFToConnector(1, anyPrinter, provsOwner, conn, getGroupedName(conn)) + \
-               postInitFinishFunsToConnector(1, anyPrinter, provsOwner, conn, getGroupedName(conn), queue, queueName)
+        ret += addDebugFFToConnector(1, valueStreamer, provsOwner, conn, getGroupedName(conn)) + \
+               postInitFinishFunsToConnector(1, valueStreamer, provsOwner, conn, getGroupedName(conn), queue, queueName)
 
     return ret
