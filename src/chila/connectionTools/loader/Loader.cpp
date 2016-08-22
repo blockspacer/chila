@@ -14,10 +14,10 @@ MY_NSP_START
         return dLibrary->getSymbol<FunType>(symbol.c_str());
     }
 
-    boost::filesystem::path  Loader::loadInitProvider(const boost::filesystem::path &path, int argc, char** argv)
+    boost::filesystem::path Loader::loadInitProvider(const boost::filesystem::path &path, int &argc, char** argv)
     {
         auto initApp = loadLibrary<InitAppFun>(path,
-            "_Z7initAppiPPcRN5chila15connectionTools3lib5other7DataMapE");
+            "_Z7initAppRiPPcRN5chila15connectionTools3lib5other7DataMapE");
 
         return (*initApp)(argc, argv, dataMap);
     }

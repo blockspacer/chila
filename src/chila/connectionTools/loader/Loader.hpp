@@ -15,7 +15,7 @@ MY_NSP_START
     class Loader
     {
         public:
-            boost::filesystem::path loadInitProvider(const boost::filesystem::path &path, int argc, char** argv);
+            boost::filesystem::path loadInitProvider(const boost::filesystem::path &path, int &argc, char** argv);
             void loadConnectorsProvider(const boost::filesystem::path &path, bool preLoaderConnect);
             void loadRunnerAndRun(const boost::filesystem::path &path);
             void connectLauncher() { launcher.connect(); }
@@ -24,7 +24,7 @@ MY_NSP_START
             using Launcher = cclOther::Launcher;
 
             using DLibrarySet = std::set<clMisc::DynamicLibrarySPtr>;
-            using InitAppFun = boost::filesystem::path(int argc, char** argv, cclOther::DataMap &dataMap);
+            using InitAppFun = boost::filesystem::path(int &argc, char** argv, cclOther::DataMap &dataMap);
             using LoadConnectorsFun = void(ConnectorMap &cMap, const cclOther::DataMap &dataMap, cclOther::Launcher &launcher, bool preLoaderConnect);
             using StartAppFun = void(const cclOther::DataMap &dataMap);
 
