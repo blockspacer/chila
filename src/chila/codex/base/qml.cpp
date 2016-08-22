@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 static const unsigned char qt_resource_data[] = {
-  // /home/robert/Documents/Private/gitRepos/wt/src/src/chila/codex/base/main.qml
+  // /home/robert/Documents/Private/gitRepos/wt/src/subtrees/chila/src/chila/codex/base/main.qml
   0x0,0x0,0x9,0xb0,
   0x0,
   0x0,0x2a,0xd9,0x78,0x9c,0xd5,0x1a,0x6b,0x73,0xdb,0x38,0xee,0x7b,0x7e,0x5,0x57,

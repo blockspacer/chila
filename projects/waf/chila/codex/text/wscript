@@ -36,6 +36,7 @@ def build(ctx):
     project.archiveLib("chila/codex/common")
     project.archiveLib("chila/lib/qt")
     project.archiveLib("chila/lib/misc")
+    project.targetArg("-z defs")
 
     project.pkgConfigVars("libxml++-2.6")
 

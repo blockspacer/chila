@@ -46,6 +46,7 @@ def build(ctx):
     project.pkgConfigVars("Qt5Gui")
     project.pkgConfigVars("Qt5Qml")
 
+    project.targetArg("-z defs")
     project.targetArg("{qt5.lib}")
     project.libPath("{boost.lib}")
     project.lib("boost_program_options")
