@@ -54,34 +54,20 @@ MY_NSP_START
     }
 
     template <typename FunctionMData>
-    struct DebugFileFunPFS
+    auto debugFileFunPFS
+    (
+        fileDebug::LogFile &logFile,
+        const chila::lib::misc::ValueStreamer &valueStreamer,
+        const std::string &connInstanceName,
+        const std::string &funType,
+        bool showArguments,
+        const std::string &comments
+    )
     {
-        fileDebug::LogFile &logFile;
-        const std::string connInstanceName, funType;
-        bool showArguments;
-        std::string comments;
-        const chila::lib::misc::ValueStreamer &valueStreamer;
-
-        DebugFileFunPFS
-        (
-            fileDebug::LogFile &logFile,
-            const chila::lib::misc::ValueStreamer &valueStreamer,
-            const std::string &connInstanceName,
-            const std::string &funType,
-            bool showArguments,
-            const std::string &comments
-        ) :
-            logFile(logFile),
-            valueStreamer(valueStreamer),
-            connInstanceName(connInstanceName),
-            funType(funType),
-            showArguments(showArguments),
-            comments(comments) {}
-
-        auto operator()(const typename FunctionMData::Function &fun) const
+        return [&logFile, &valueStreamer, connInstanceName, funType, showArguments, comments](const typename FunctionMData::Function &fun)
         {
             return debugFileFun<FunctionMData>(logFile, valueStreamer, connInstanceName, funType, fun, showArguments, comments);
-        }
+        };
     };
 }
 MY_NSP_END

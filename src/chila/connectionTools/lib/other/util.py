@@ -15,7 +15,7 @@ def addDFF(indent, valueStreamer, provsOwner, object, objectName, type, function
     return(\
         '{ind}{fun}.passFunAndSet\n'
         '{ind}(\n'
-        '{ind}    chila::connectionTools::lib::other::DebugFileFunPFS<decltype({fun})>\n'
+        '{ind}    chila::connectionTools::lib::other::debugFileFunPFS<decltype({fun})>\n'
         '{ind}    (\n'
         '{ind}        *debugLogFile, valueStreamer, "{objectName}", "{type}", showArguments, {msg}\n'
         '{ind}    )\n'

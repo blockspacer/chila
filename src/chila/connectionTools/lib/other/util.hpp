@@ -8,6 +8,7 @@
 #include <chila/lib/misc/util.hpp>
 #include "macrosExp.hpp"
 #include "../codegen/fwd.hpp"
+#include <boost/fusion/algorithm/iteration/for_each.hpp>
 
 #include "macros.fgen.hpp"
 
@@ -69,6 +70,15 @@ MY_NSP_START
 
     template <>
     chila::lib::misc::StringVec toString(const chila::lib::misc::StringSet &set);
+
+    template <typename FunctionsFSeq>
+    void nullFunctions(const FunctionsFSeq &functions)
+    {
+        boost::fusion::for_each(functions, [](auto &funMData)
+        {
+            funMData = [](const auto&... args) {};
+        });
+    }
 }
 MY_NSP_END
 

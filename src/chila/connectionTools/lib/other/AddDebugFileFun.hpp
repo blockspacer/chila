@@ -11,37 +11,25 @@
 
 MY_NSP_START
 {
-    struct AddDebugFileFun
+    auto addDebugFileFun
+    (
+        fileDebug::LogFile &logFile,
+        const chila::lib::misc::ValueStreamer &valueStreamer,
+        const std::string &connInstanceName,
+        const std::string &funType,
+        bool showArguments
+    )
     {
-        fileDebug::LogFile &logFile;
-        const std::string &connInstanceName;
-        const std::string &funType;
-        const chila::lib::misc::ValueStreamer &anyPrinter;
-        bool showArguments;
-
-        AddDebugFileFun(
-                fileDebug::LogFile &logFile,
-                const chila::lib::misc::ValueStreamer &anyPrinter,
-                const std::string &connInstanceName,
-                const std::string &funType,
-                bool showArguments) :
-            connInstanceName(connInstanceName),
-            anyPrinter(anyPrinter),
-            funType(funType),
-            logFile(logFile),
-            showArguments(showArguments)
+        return [&logFile, &valueStreamer, connInstanceName, funType, showArguments](auto &funMData)
         {
-        }
+            using FunctionMData = typename std::remove_reference<decltype(funMData)>::type;
 
-        template <typename FunctionMData>
-        void operator()(FunctionMData &funMData) const
-        {
             if (funMData)
-                funMData.passFunAndSet(DebugFileFunPFS<FunctionMData>(logFile, anyPrinter, connInstanceName, funType, showArguments, ""));
+                funMData.passFunAndSet(debugFileFunPFS<FunctionMData>(logFile, valueStreamer, connInstanceName, funType, showArguments, ""));
             else
-                funMData = debugFileFun<FunctionMData>(logFile, anyPrinter, connInstanceName, funType, typename FunctionMData::Function(), showArguments, "");
-        }
-    };
+                funMData = debugFileFun<FunctionMData>(logFile, valueStreamer, connInstanceName, funType, typename FunctionMData::Function(), showArguments, "");
+        };
+    }
 
     template <typename FunctionsFSeq>
     void addDebugFileFunToFunctions(
@@ -52,7 +40,7 @@ MY_NSP_START
         const FunctionsFSeq &functions,
         bool showArguments)
     {
-        boost::fusion::for_each(functions, AddDebugFileFun(logFile, valueStreamer, connInstanceName, funType, showArguments));
+        boost::fusion::for_each(functions, addDebugFileFun(logFile, valueStreamer, connInstanceName, funType, showArguments));
     }
 
 }

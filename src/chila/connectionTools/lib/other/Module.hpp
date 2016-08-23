@@ -4,11 +4,11 @@
 #include "fwd.hpp"
 #include <boost/cast.hpp>
 #include <initializer_list>
-#include "nullFunctions.hpp"
 #include <boost/thread/mutex.hpp>
 #include "exceptions.hpp"
 #include <chila/connectionTools/lib/other/exceptions.hpp>
 #include <boost/range/algorithm/find.hpp>
+#include <chila/connectionTools/lib/other/util.hpp>
 
 #include "macros.fgen.hpp"
 
