@@ -35,6 +35,15 @@ MY_NSP_START
 
     FWDEC_TYPE(Connector);
     FWDEC_TYPE(ConnectorMap);
+
+    template <typename MemFn, typename Object, typename EventFSeq>
+    inline auto actionImplExecuter(const MemFn &fun, Object &object, const EventFSeq &eventFSeq)
+    {
+        return [fun, &object, &eventFSeq](const auto&... arg)
+        {
+            fun(object, arg..., eventExecuter(eventFSeq));
+        };
+    }
 }
 MY_NSP_END
 

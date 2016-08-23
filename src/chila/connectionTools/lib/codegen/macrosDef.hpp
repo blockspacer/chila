@@ -177,10 +177,11 @@
 
 // BIND_ACTION ----------------------------------------------------------------------------------------------------------------------------
 
-#define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__BIND_ACTION_ARG(z, n, data) , BOOST_PP_CAT(_, BOOST_PP_INC(n))
+#define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__BIND_ACTION(target, name) \
+        this->actions.name = [this, &target](const auto&... arg){ target.name(arg..., \
+            chila::connectionTools::lib::codegen::eventExecuter(actions.name.eventFSeq)); };
 
-#define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__BIND_ACTION(Target, target, name) \
-        this->actions.name = actionImplExecuter(std::mem_fn(&Target::name), target, this->actions.name.eventFSeq)
+//actionImplExecuter(std::mem_fn(&Target::name), target, this->actions.name.eventFSeq)
 
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_CREATE_APROVIDER(name, ...) \
@@ -195,9 +196,7 @@
         provider##Prov.getArgument(typename ArgAliases::aliasName())
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_PASS_ARG(connector, action, argName, data) \
-        chila::connectionTools::lib::codegen::convert<typename \
-            chila::connectionTools::lib::codegen::ConnectorTypeOf<\
-                BOOST_PP_CAT(Action_, BOOST_PP_CAT(connector, BOOST_PP_CAT(_, action)))>::type::Arguments::argName::Type>(data)
+        chila::connectionTools::lib::codegen::convert<typename Action_##connector##_##action::ConnectorType::Arguments::argName::Type>(data)
 
 #define CHILA_CONNECTIONTOOLS_LIB_CODEGEN__CPERF_EXECUTE_ACTION(connector, action, ...) \
         BOOST_PP_CAT(act_, BOOST_PP_CAT(connector, BOOST_PP_CAT(_, action)))(__VA_ARGS__)
