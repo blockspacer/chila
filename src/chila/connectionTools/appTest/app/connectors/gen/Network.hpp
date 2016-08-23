@@ -25,7 +25,7 @@
 #include <string>
 
 #include <boost/mpl/set.hpp>
-#include <chila/connectionTools/lib/codegen/ActionImplExecuter.hpp>
+
 #include <chila/connectionTools/lib/codegen/FunctionSigCreator.hpp>
 #include <chila/connectionTools/lib/codegen/EventExecuter.hpp>
 #include <chila/connectionTools/lib/codegen/Connector.hpp>
