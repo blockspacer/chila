@@ -39,7 +39,7 @@
             { \
                 provsOwner.base_application->connector.action##s.launcher_start.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_application->connector.action##s.launcher_start)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_application->connector.action##s.launcher_start)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:application", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -50,7 +50,7 @@
             { \
                 provsOwner.base_application->connector.action##s.launcher_deactivate.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_application->connector.action##s.launcher_deactivate)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_application->connector.action##s.launcher_deactivate)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:application", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -61,7 +61,7 @@
             { \
                 provsOwner.base_application->connector.action##s.launcher_finish.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_application->connector.action##s.launcher_finish)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_application->connector.action##s.launcher_finish)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:application", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -81,7 +81,7 @@
             { \
                 provsOwner.base_mainWindow->connector.action##s.launcher_start.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_mainWindow->connector.action##s.launcher_start)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_mainWindow->connector.action##s.launcher_start)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:mainWindow", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -92,7 +92,7 @@
             { \
                 provsOwner.base_mainWindow->connector.action##s.launcher_deactivate.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_mainWindow->connector.action##s.launcher_deactivate)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_mainWindow->connector.action##s.launcher_deactivate)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:mainWindow", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -103,7 +103,7 @@
             { \
                 provsOwner.base_mainWindow->connector.action##s.launcher_finish.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_mainWindow->connector.action##s.launcher_finish)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_mainWindow->connector.action##s.launcher_finish)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:mainWindow", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -123,7 +123,7 @@
             { \
                 provsOwner.base_fileChooser_open->connector.action##s.launcher_start.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_open->connector.action##s.launcher_start)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_fileChooser_open->connector.action##s.launcher_start)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:fileChooser:open", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -134,7 +134,7 @@
             { \
                 provsOwner.base_fileChooser_open->connector.action##s.launcher_deactivate.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_open->connector.action##s.launcher_deactivate)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_fileChooser_open->connector.action##s.launcher_deactivate)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:fileChooser:open", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -145,7 +145,7 @@
             { \
                 provsOwner.base_fileChooser_open->connector.action##s.launcher_finish.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_open->connector.action##s.launcher_finish)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_fileChooser_open->connector.action##s.launcher_finish)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:fileChooser:open", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -165,7 +165,7 @@
             { \
                 provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_start.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_start)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_start)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:fileChooser:saveAs", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -176,7 +176,7 @@
             { \
                 provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_deactivate.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_deactivate)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_deactivate)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:fileChooser:saveAs", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -187,7 +187,7 @@
             { \
                 provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_finish.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_finish)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_fileChooser_saveAs->connector.action##s.launcher_finish)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:fileChooser:saveAs", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -207,7 +207,7 @@
             { \
                 provsOwner.base_actionExecuter->connector.action##s.launcher_start.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_actionExecuter->connector.action##s.launcher_start)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_actionExecuter->connector.action##s.launcher_start)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:actionExecuter", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -218,7 +218,7 @@
             { \
                 provsOwner.base_actionExecuter->connector.action##s.launcher_deactivate.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_actionExecuter->connector.action##s.launcher_deactivate)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_actionExecuter->connector.action##s.launcher_deactivate)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:actionExecuter", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -229,7 +229,7 @@
             { \
                 provsOwner.base_actionExecuter->connector.action##s.launcher_finish.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_actionExecuter->connector.action##s.launcher_finish)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_actionExecuter->connector.action##s.launcher_finish)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:actionExecuter", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -249,7 +249,7 @@
             { \
                 provsOwner.base_appCommand_netServer->connector.action##s.launcher_start.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_netServer->connector.action##s.launcher_start)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_appCommand_netServer->connector.action##s.launcher_start)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:appCommand:netServer", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -260,7 +260,7 @@
             { \
                 provsOwner.base_appCommand_netServer->connector.action##s.launcher_deactivate.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_netServer->connector.action##s.launcher_deactivate)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_appCommand_netServer->connector.action##s.launcher_deactivate)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:appCommand:netServer", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -271,7 +271,7 @@
             { \
                 provsOwner.base_appCommand_netServer->connector.action##s.launcher_finish.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_netServer->connector.action##s.launcher_finish)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_appCommand_netServer->connector.action##s.launcher_finish)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:appCommand:netServer", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -291,7 +291,7 @@
             { \
                 provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_start.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_start)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_start)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:appCommand:funDynExecuter", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -302,7 +302,7 @@
             { \
                 provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_deactivate.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_deactivate)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_deactivate)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:appCommand:funDynExecuter", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -313,7 +313,7 @@
             { \
                 provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_finish.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_finish)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_appCommand_funDynExecuter->connector.action##s.launcher_finish)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:appCommand:funDynExecuter", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -333,7 +333,7 @@
             { \
                 provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_start.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_start)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_start)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:appCommand:funDynXMLParser", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -344,7 +344,7 @@
             { \
                 provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_deactivate.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_deactivate)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_deactivate)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:appCommand:funDynXMLParser", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -355,7 +355,7 @@
             { \
                 provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_finish.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_finish)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_appCommand_funDynXMLParser->connector.action##s.launcher_finish)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:appCommand:funDynXMLParser", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -375,7 +375,7 @@
             { \
                 provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_start.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_start)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_start)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:appCommand:msgCreator", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -386,7 +386,7 @@
             { \
                 provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_deactivate.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_deactivate)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_deactivate)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:appCommand:msgCreator", "action", showArguments, "posted in 'events'" \
                     ) \
@@ -397,7 +397,7 @@
             { \
                 provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_finish.passFunAndSet \
                 ( \
-                    chila::connectionTools::lib::other::DebugFileFunPFS<decltype(provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_finish)> \
+                    chila::connectionTools::lib::other::debugFileFunPFS<decltype(provsOwner.base_appCommand_msgCreator->connector.action##s.launcher_finish)> \
                     ( \
                         *debugLogFile, valueStreamer, "base:appCommand:msgCreator", "action", showArguments, "posted in 'events'" \
                     ) \
