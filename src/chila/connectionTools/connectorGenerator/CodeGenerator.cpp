@@ -185,7 +185,7 @@ MY_NSP_START
             << "#include <chila/connectionTools/lib/codegen/macrosDef.hpp>\n"
             << "#include <chila/lib/misc/macrosExp.hpp>\n\n"
             << "#define MY_BIND_ACTION(name) \\\n"
-               "        CHILA_CONNECTIONTOOLS_LIB_CODEGEN__BIND_ACTION(Target, target, name)\n"
+               "        CHILA_CONNECTIONTOOLS_LIB_CODEGEN__BIND_ACTION(target, name)\n"
             << INS_DEF_ALIAS("DEF_CONNECTOR_ARGUMENT")
             << INS_DEF_ALIAS("DEF_CONNECTOR_FUNCTION")
             << INS_DEF_ALIAS("DEF_ARG_ALIAS")
