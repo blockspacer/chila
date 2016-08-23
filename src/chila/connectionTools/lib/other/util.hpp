@@ -76,7 +76,10 @@ MY_NSP_START
     {
         boost::fusion::for_each(functions, [](auto &funMData)
         {
-            funMData = [](const auto&... args) {};
+            funMData.passFunAndSet([](const auto &fun)
+            {
+                return [](const auto&... args) {};
+            });
         });
     }
 }
