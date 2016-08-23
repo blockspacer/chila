@@ -22,57 +22,48 @@
 
 #include <chila/lib/misc/macrosExp.hpp>
 #include <boost/ref.hpp>
+#include "EventExecuter.hpp"
 #include "macros.fgen.hpp"
 
 MY_NSP_START
 {
-
     template <typename EventTag, unsigned ActionIndex, typename Action>
-    struct ActionExecuterBase
+    struct ActionExecuter final
     {
         typedef Action type;
         typedef void result_type;
 
         const Action &action;
 
-        ActionExecuterBase(const Action &action) : action(action) {}
-    };
+        ActionExecuter(const Action &action) {}
 
-    template <typename EventTag, unsigned ActionIndex, typename Action>
-    struct ActionExecuter final: public ActionExecuterBase<EventTag, ActionIndex, Action>
-    {
-        ActionExecuter(const Action &action) :
-            ActionExecuterBase<EventTag, ActionIndex, Action>(action) {}
-
-        void operator()() const
+        template <typename... Arg>
+        void operator()(const Arg&... arg) const
         {
-            return boost::unwrap_ref(this->action)();
+            return boost::unwrap_ref(this->action)(arg...);
         }
-
-        #define DEF_OPERATOR(z, argCount, data) \
-            template <BOOST_PP_ENUM_PARAMS(argCount, typename Arg)> \
-            void operator()(BOOST_PP_ENUM_BINARY_PARAMS(argCount, const Arg, &arg)) const \
-            { \
-                return boost::unwrap_ref(this->action)(BOOST_PP_ENUM_PARAMS(argCount, arg)); \
-            }
-
-        BOOST_PP_REPEAT_FROM_TO(1, 19, DEF_OPERATOR,)
-
-        #undef DEF_OPERATOR
     };
-
-
-    template <typename EventTag, unsigned ActionIndex, typename Action>
-    inline ActionExecuter<EventTag, ActionIndex, Action> actionExecuter(const Action &action)
-    {
-        return ActionExecuter<EventTag, ActionIndex, Action>(action);
-    }
 
     template <typename Action>
     struct ConnectorTypeOf
     {
         typedef typename Action::ConnectorType type;
     };
+
+    template <typename EventTag, unsigned ActionIndex, typename Action>
+    inline auto actionExecuter(const Action &action)
+    {
+        return ActionExecuter<EventTag, ActionIndex, Action>(action);
+    }
+
+    template <typename MemFn, typename Object, typename EventFSeq>
+    inline auto actionImplExecuter(const MemFn &fun, Object &object, const EventFSeq &eventFSeq)
+    {
+        return [fun, &object, &eventFSeq](const auto&... arg)
+        {
+            fun(object, arg..., eventExecuter(eventFSeq));
+        };
+    }
 
 }
 MY_NSP_END
