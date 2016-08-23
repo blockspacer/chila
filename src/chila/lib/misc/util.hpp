@@ -530,7 +530,6 @@ MY_NSP_START
             return arg;
     }
 
-
     std::string escapeText(const std::string &text);
     std::string unescapeText(const std::string &text);
 

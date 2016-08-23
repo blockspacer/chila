@@ -46,26 +46,11 @@ MY_NSP_START
         UnwrapedQueue &getQueue() { return boost::unwrap_ref(queue); }
         UnwrapedFun &getFun()     { return boost::unwrap_ref(fun); }
 
-        #ifdef __clang__
-            template <typename... Arg>
-            void operator()(const Arg&... arg)
-            {
-                getQueue().post([=]{ getFun()(arg...); });
-            }
-        #else
-            #define CHILA_LIB_MISC__DEF_OPER(z, n, data) \
-                    BOOST_PP_IF(n, template <,) \
-                        BOOST_PP_ENUM_PARAMS(n, typename Arg) \
-                    BOOST_PP_IF(n, >,) \
-                    void operator()(BOOST_PP_ENUM_BINARY_PARAMS(n, const Arg, &arg)) \
-                    { \
-                        getQueue().post([=]{ fun(BOOST_PP_ENUM_PARAMS(n, arg)); }); \
-                    }
-
-            BOOST_PP_REPEAT_FROM_TO(0, 49, CHILA_LIB_MISC__DEF_OPER,)
-
-            #undef CHILA_LIB_MISC__DEF_OPER
-        #endif
+        template <typename... Arg>
+        void operator()(const Arg&... arg)
+        {
+            getQueue().post([=]{ getFun()(arg...); });
+        }
     };
 
     template <typename Queue, typename Fun>
