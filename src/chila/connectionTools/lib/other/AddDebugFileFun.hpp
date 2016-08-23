@@ -39,7 +39,7 @@ MY_NSP_START
             if (funMData)
                 funMData.passFunAndSet(DebugFileFunPFS<FunctionMData>(logFile, anyPrinter, connInstanceName, funType, showArguments, ""));
             else
-                funMData = DebugFileFun<FunctionMData>(logFile, anyPrinter, connInstanceName, funType, typename FunctionMData::Function(), showArguments, "");
+                funMData = debugFileFun<FunctionMData>(logFile, anyPrinter, connInstanceName, funType, typename FunctionMData::Function(), showArguments, "");
         }
     };
 
