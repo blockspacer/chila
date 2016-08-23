@@ -6,7 +6,7 @@
 #define CHILA_CONNECTIONTOOLS_DESIGNER_APP__MAIN_HPP
 
 #include <chila/connectionTools/lib/codegen/ActionExecuter.hpp>
-#include <chila/connectionTools/lib/codegen/ActionImplExecuter.hpp>
+
 #include <boost/fusion/include/make_vector.hpp>
 #include <chila/connectionTools/lib/codegen/ActionExecuter.hpp>
 #include "fwd.hpp"
