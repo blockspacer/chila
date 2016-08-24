@@ -1003,6 +1003,8 @@
             flavor2="11">
         <ccTool flags="1">
           <incDir>
+            <pElem>..</pElem>
+            <pElem>/applib/boost/include/1.55</pElem>
             <pElem>../../../build/release/src</pElem>
             <pElem>../../../../../src</pElem>
             <pElem>../../../../../../applib/boost/include/1.61</pElem>
@@ -1027,6 +1029,10 @@
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
+          <undefinedList>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__NO_INLINE__</Elem>
+          </undefinedList>
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/other/CompletionScanner.cpp"
@@ -1035,6 +1041,8 @@
             flavor2="11">
         <ccTool flags="1">
           <incDir>
+            <pElem>..</pElem>
+            <pElem>/applib/boost/include/1.55</pElem>
             <pElem>../../../build/release/src</pElem>
             <pElem>../../../../../src</pElem>
             <pElem>../../../../../../applib/boost/include/1.61</pElem>
@@ -1059,6 +1067,10 @@
             <pElem>/usr/lib/libxml++-2.6/include</pElem>
             <pElem>../../../build/release</pElem>
           </incDir>
+          <undefinedList>
+            <Elem>__GCC_HAVE_DWARF2_CFI_ASM=1</Elem>
+            <Elem>__NO_INLINE__</Elem>
+          </undefinedList>
         </ccTool>
       </item>
       <item path="../../../../../src/chila/connectionTools/lib/other/Launcher.cpp"
