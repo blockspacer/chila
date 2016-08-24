@@ -7,16 +7,12 @@ import os.path
 import getopt
 import re
 
-def getHeader(path):
-    replacedPath = path.replace('/', '.')
+def getHeader(path, prefixes):
+    for prefix in prefixes:
+        if path.startswith(prefix):
+            return path[prefix.size():].replace('/', '.')
 
-    if replacedPath.startswith('projects'):
-        start = replacedPath.find('.', 10)
-        return replacedPath[start + 1:]
-    elif replacedPath.startswith('src'):
-        return replacedPath[4:]
-    else:
-        return path
+    return None
 
 class AppError(Exception):
     def __init__(self, value):
@@ -24,14 +20,17 @@ class AppError(Exception):
     def __str__(self):
         return repr(self.value)
 
-def getProjectList(repo, projectsExclude):
+def getProjectList(repo, projectsExclude, prefixes):
     diff = repo.diff(flags = pygit2.GIT_DIFF_INCLUDE_UNTRACKED)
 
     fileDataMap = dict()
 
     for patch in diff:
         filePath = patch.new_file_path
-        header = getHeader(os.path.dirname(filePath))
+        header = getHeader(os.path.dirname(filePath), prefixes)
+
+        if header is None:
+            raise Exception(filePath + ' does not contain a valid prefix')
 
         include = True
         for pEx in projectsExclude:
@@ -63,6 +62,7 @@ try:
     execfile(sys.argv[1], globals)    
 
     projectsExclude = globals['projectsExclude']
+    prefixes = globals['prefixes']
     simulate = globals['simulate']
 
     repo = pygit2.Repository('.')
